@@ -4,7 +4,10 @@ from guitarpractice.models import GuitarShape, FretPosition
 
 
 def strum(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    return [GuitarShape.positions]
+    validate_length(length)
+
+    repeats = 1 if length is None else length
+    return [shape.positions] * repeats
 
 
 def pick_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
@@ -63,9 +66,14 @@ def alternate_patterns(patterns: List[Callable]) -> List[List[FretPosition]]:
     pass
 
 
-def sequential_patterns(patterns: List[Callable]) -> List[List[FretPosition]]:
+def sequential_patterns(patterns: List[Callable], strip_end_positions=False) -> List[List[FretPosition]]:
     """
     Sequences multiple pick patterns to be applied to the same shape sequentially.
     For example strum a chord shape and then pick it as an arpeggio.
     """
     pass
+
+
+def validate_length(length):
+    if length is not None and length < 1:
+        raise ValueError(f'Length of {length} is not allowed. Must be greater than 0.')

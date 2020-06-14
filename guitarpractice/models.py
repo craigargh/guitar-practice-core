@@ -24,11 +24,16 @@ class GuitarShape:
 
 
 @dataclass()
-class Note:
-    position: FretPosition
-    start_beat: float
+class Beat:
     duration: float
     division: int = None
+
+
+@dataclass()
+class Note:
+    start_beat: float
+    position: FretPosition
+    beat: Beat
 
 
 @dataclass()
@@ -41,5 +46,5 @@ class Annotation:
 @dataclass()
 class Sequence:
     notes: List[Note]
-    annotations: List[Annotation]
     shapes: List[GuitarShape]
+    annotations: List[Annotation] = None

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from guitarpractice.models import FretPosition, GuitarShape, Note
+from guitarpractice.models import FretPosition, GuitarShape, Note, Beat
 from guitarpractice.sequencer import make_sequence
 
 
@@ -16,11 +16,12 @@ class TestSequencer(TestCase):
 
         sequence = make_sequence([shape])
 
+        beat = Beat(duration=1)
         expected_notes = [
-            Note(start_beat=1, position=positions[0], duration=1),
-            Note(start_beat=2, position=positions[1], duration=1),
-            Note(start_beat=3, position=positions[2], duration=1),
-            Note(start_beat=4, position=positions[3], duration=1),
+            Note(start_beat=1, position=positions[0], beat=beat),
+            Note(start_beat=2, position=positions[1], beat=beat),
+            Note(start_beat=3, position=positions[2], beat=beat),
+            Note(start_beat=4, position=positions[3], beat=beat),
         ]
         self.assertEqual(expected_notes, sequence.notes)
         self.assertEqual([shape], sequence.shapes)
@@ -40,11 +41,12 @@ class TestSequencer(TestCase):
 
         sequence = make_sequence([shape_1, shape_2])
 
+        beat = Beat(duration=1.0)
         expected_notes = [
-            Note(start_beat=1, position=positions_1[0], duration=1),
-            Note(start_beat=2, position=positions_1[1], duration=1),
-            Note(start_beat=3, position=positions_2[0], duration=1),
-            Note(start_beat=4, position=positions_2[1], duration=1),
+            Note(start_beat=1, position=positions_1[0], beat=beat),
+            Note(start_beat=2, position=positions_1[1], beat=beat),
+            Note(start_beat=3, position=positions_2[0], beat=beat),
+            Note(start_beat=4, position=positions_2[1], beat=beat),
         ]
 
         self.assertEqual(expected_notes, sequence.notes)
