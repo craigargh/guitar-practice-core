@@ -35,10 +35,18 @@ class Beat:
         total_division = self.division * other.division
 
         common_divisible = gcd(total_duration, total_division)
-        duration = int(total_duration/common_divisible)
-        division = int(total_division/common_divisible)
+        duration = int(total_duration / common_divisible)
+        division = int(total_division / common_divisible)
 
         return Beat(duration=duration, division=division)
+
+    @property
+    def whole_beats(self):
+        return self.duration // self.division
+
+    @property
+    def subdivision_offset(self):
+        return Beat(self.duration % self.division, self.division)
 
 
 @dataclass()
@@ -51,8 +59,8 @@ class Note:
 @dataclass()
 class Annotation:
     category: str
-    start_beat: float
-    duration: float
+    start_beat: Beat
+    duration: Beat
 
 
 @dataclass()

@@ -71,3 +71,11 @@ class TestBeat(TestCase):
         result = beat1 + beat2
 
         self.assertEqual(Beat(duration=1, division=1), result)
+
+    def test_whole_beats_returns_number_of_full_beats(self):
+        beat = Beat(duration=11, division=2)
+        self.assertEqual(5, beat.whole_beats)
+
+    def test_subdivision_offset_returns_beat_subtracting_whole_beats(self):
+        beat = Beat(duration=11, division=2)
+        self.assertEqual(Beat(1, 2), beat.subdivision_offset)
