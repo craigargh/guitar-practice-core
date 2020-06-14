@@ -1,5 +1,4 @@
 from itertools import cycle
-from math import floor
 from typing import List, Callable
 
 from .models import GuitarShape, Sequence, Note, FretPosition, Beat
