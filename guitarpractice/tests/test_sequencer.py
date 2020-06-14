@@ -53,7 +53,31 @@ class TestSequencer(TestCase):
         self.assertEqual([shape_1, shape_2], sequence.shapes)
 
     def test_can_set_rhythm_for_sequence(self):
-        self.fail('Write the test')
+        rhythm = [
+            Beat(duration=1, division=1),
+            Beat(duration=1, division=2),
+            Beat(duration=1, division=2),
+            Beat(duration=1, division=1),
+        ]
+
+        positions = [
+            FretPosition(string=1, fret=1),
+            FretPosition(string=1, fret=2),
+            FretPosition(string=1, fret=3),
+            FretPosition(string=1, fret=4),
+        ]
+        shape = GuitarShape(name='shape1', positions=positions, category='scale')
+
+        sequence = make_sequence([shape], rhythm=rhythm)
+
+        expected_notes = [
+            Note(start_beat=Beat(1), position=positions[0], duration=Beat(1)),
+            Note(start_beat=Beat(2), position=positions[1], duration=Beat(1, 2)),
+            Note(start_beat=Beat(5, 2), position=positions[2], duration=Beat(1, 2)),
+            Note(start_beat=Beat(3, 1), position=positions[3], duration=Beat(1)),
+        ]
+        self.assertEqual(expected_notes, sequence.notes)
+        self.assertEqual([shape], sequence.shapes)
 
 
 def make_single_position_pattern(length: int):
