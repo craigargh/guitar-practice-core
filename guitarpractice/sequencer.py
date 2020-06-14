@@ -9,6 +9,7 @@ def make_sequence(
         shape_shifters: List[Callable] = None,
         pick_pattern: Callable = None,
         rhythm: List[Beat] = None,
+        add_final_rest=False,
 ) -> Sequence:
     pattern = [
         [position]
@@ -18,7 +19,7 @@ def make_sequence(
     if rhythm is None:
         rhythm = [Beat(duration=1)] * len(pattern)
 
-    notes = apply_rhythm(pattern, rhythm)
+    notes = apply_rhythm(pattern, rhythm, add_final_rest=add_final_rest)
     return Sequence(notes=notes, shapes=shapes)
 
 
@@ -28,7 +29,7 @@ def positions_generator(shapes: List[GuitarShape]) -> List[FretPosition]:
             yield position
 
 
-def apply_rhythm(pattern: List[List[FretPosition]], rhythm: List[Beat]) -> List[Note]:
+def apply_rhythm(pattern: List[List[FretPosition]], rhythm: List[Beat], add_final_rest=False) -> List[Note]:
     notes = []
     elapsed_beats = Beat(0)
 

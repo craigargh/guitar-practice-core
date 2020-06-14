@@ -53,21 +53,24 @@ class TestSequencer(TestCase):
         self.assertEqual([shape_1, shape_2], sequence.shapes)
 
     def test_can_set_rhythm_for_sequence(self):
-        pass
+        self.fail('Write the test')
 
 
 class TestApplyRhythm(TestCase):
     def test_start_beat_increases_based_on_rhythm(self):
-        pass
+        self.fail('Write the test')
 
     def test_can_apply_half_notes(self):
-        pass
+        self.fail('Write the test')
 
     def test_can_apply_triplets(self):
-        pass
+        self.fail('Write the test')
 
     def test_can_apply_sixteenth_notes(self):
-        pass
+        self.fail('Write the test')
 
     def test_rest_beats_are_added_to_sequence_and_ignored_by_pick_pattern(self):
+        self.fail('Write the test')
+
+    def test_rest_beat_is_added_to_end_of_sequence_if_bar_not_full(self):
         pass
