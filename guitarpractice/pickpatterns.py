@@ -10,51 +10,71 @@ def strum(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     return [shape.positions] * repeats
 
 
-def pick_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     return [[]]
 
 
-def pick_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     return [[]]
 
 
-def pick_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def pick_bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def pick_bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def pick_bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def pick_alternating_bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def alternating_bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def pick_alternating_bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def alternating_bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def pick_alternating_bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def alternating_bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def pick_each_once_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def stepped_asc(shape: GuitarShape, step: int = 2, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def pick_stepped_asc(shape: GuitarShape, step: int = 2, length: int = None) -> List[List[FretPosition]]:
+def stepped_desc(shape: GuitarShape, step: int = 2, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def pick_stepped_desc(shape: GuitarShape, step: int = 2, length: int = None) -> List[List[FretPosition]]:
+def randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    pass
+
+
+def root_and_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    pass
+
+
+def alternating_root_and_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    pass
+
+
+def each_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    pass
+
+
+def root_and_each_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    pass
+
+
+def alternating_root_and_each_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 

@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from math import gcd
 from typing import List, Optional
 
 
@@ -25,15 +26,26 @@ class GuitarShape:
 
 @dataclass()
 class Beat:
-    duration: float
-    division: int = None
+    duration: int
+    division: int = 1
+    rest: bool = False
+
+    def __add__(self, other):
+        total_duration = (self.duration * other.division) + (other.duration * self.division)
+        total_division = self.division * other.division
+
+        common_divisible = gcd(total_duration, total_division)
+        duration = int(total_duration/common_divisible)
+        division = int(total_division/common_divisible)
+
+        return Beat(duration=duration, division=division)
 
 
 @dataclass()
 class Note:
-    start_beat: float
     position: FretPosition
-    beat: Beat
+    duration: Beat
+    start_beat: Beat
 
 
 @dataclass()

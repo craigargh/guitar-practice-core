@@ -40,3 +40,11 @@ class TestStrum(TestCase):
 
         with self.assertRaises(ValueError):
             pickpatterns.strum(chord, length=0)
+
+
+class TestAsc(TestCase):
+    pass
+
+
+class TestDesc(TestCase):
+    pass

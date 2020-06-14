@@ -16,12 +16,12 @@ class TestSequencer(TestCase):
 
         sequence = make_sequence([shape])
 
-        beat = Beat(duration=1)
+        duration = Beat(duration=1)
         expected_notes = [
-            Note(start_beat=1, position=positions[0], beat=beat),
-            Note(start_beat=2, position=positions[1], beat=beat),
-            Note(start_beat=3, position=positions[2], beat=beat),
-            Note(start_beat=4, position=positions[3], beat=beat),
+            Note(start_beat=Beat(duration=1), position=positions[0], duration=duration),
+            Note(start_beat=Beat(duration=2), position=positions[1], duration=duration),
+            Note(start_beat=Beat(duration=3), position=positions[2], duration=duration),
+            Note(start_beat=Beat(duration=4), position=positions[3], duration=duration),
         ]
         self.assertEqual(expected_notes, sequence.notes)
         self.assertEqual([shape], sequence.shapes)
@@ -41,13 +41,33 @@ class TestSequencer(TestCase):
 
         sequence = make_sequence([shape_1, shape_2])
 
-        beat = Beat(duration=1.0)
+        duration = Beat(duration=1)
         expected_notes = [
-            Note(start_beat=1, position=positions_1[0], beat=beat),
-            Note(start_beat=2, position=positions_1[1], beat=beat),
-            Note(start_beat=3, position=positions_2[0], beat=beat),
-            Note(start_beat=4, position=positions_2[1], beat=beat),
+            Note(start_beat=Beat(duration=1), position=positions_1[0], duration=duration),
+            Note(start_beat=Beat(duration=2), position=positions_1[1], duration=duration),
+            Note(start_beat=Beat(duration=3), position=positions_2[0], duration=duration),
+            Note(start_beat=Beat(duration=4), position=positions_2[1], duration=duration),
         ]
 
         self.assertEqual(expected_notes, sequence.notes)
         self.assertEqual([shape_1, shape_2], sequence.shapes)
+
+    def test_can_set_rhythm_for_sequence(self):
+        pass
+
+
+class TestApplyRhythm(TestCase):
+    def test_start_beat_increases_based_on_rhythm(self):
+        pass
+
+    def test_can_apply_half_notes(self):
+        pass
+
+    def test_can_apply_triplets(self):
+        pass
+
+    def test_can_apply_sixteenth_notes(self):
+        pass
+
+    def test_rest_beats_are_added_to_sequence_and_ignored_by_pick_pattern(self):
+        pass
