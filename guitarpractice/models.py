@@ -45,7 +45,7 @@ class Beat:
         return self.duration // self.division
 
     @property
-    def subdivision_offset(self):
+    def sub_beats(self):
         return Beat(self.duration % self.division, self.division)
 
 

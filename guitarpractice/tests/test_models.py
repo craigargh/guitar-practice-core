@@ -78,4 +78,4 @@ class TestBeat(TestCase):
 
     def test_subdivision_offset_returns_beat_subtracting_whole_beats(self):
         beat = Beat(duration=11, division=2)
-        self.assertEqual(Beat(1, 2), beat.subdivision_offset)
+        self.assertEqual(Beat(1, 2), beat.sub_beats)
