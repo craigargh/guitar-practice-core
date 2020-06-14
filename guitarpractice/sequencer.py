@@ -10,7 +10,6 @@ def make_sequence(
         shape_shifters: List[Callable] = None,
         pick_pattern: Callable = None,
         rhythm: List[Beat] = None,
-        add_final_rest=False,
 ) -> Sequence:
     pattern = [
         [position]
