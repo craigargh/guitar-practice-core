@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from guitarpractice.models import FretPosition, GuitarShape, Note, Beat
-from guitarpractice.sequencer import make_sequence
+from guitarpractice.sequencer import make_sequence, apply_rhythm
 
 
 class TestSequencer(TestCase):
@@ -56,21 +56,219 @@ class TestSequencer(TestCase):
         self.fail('Write the test')
 
 
+def make_single_position_pattern(length: int):
+    pattern = [
+        [FretPosition(string=6, fret=3)],
+        [FretPosition(string=6, fret=5)],
+        [FretPosition(string=5, fret=2)],
+        [FretPosition(string=5, fret=3)],
+        [FretPosition(string=5, fret=5)],
+        [FretPosition(string=4, fret=2)],
+        [FretPosition(string=4, fret=4)],
+        [FretPosition(string=4, fret=5)],
+    ]
+    return pattern[:length]
+
+
 class TestApplyRhythm(TestCase):
     def test_start_beat_increases_based_on_rhythm(self):
-        self.fail('Write the test')
+        rhythm = [
+            Beat(duration=1),
+            Beat(duration=1),
+            Beat(duration=1),
+            Beat(duration=1),
+        ]
+        pattern = make_single_position_pattern(length=4)
 
-    def test_can_apply_half_notes(self):
-        self.fail('Write the test')
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(4, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(2)), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1), start_beat=Beat(3)), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(4)), notes[3])
+
+    def test_can_apply_four_beats(self):
+        rhythm = [
+            Beat(duration=4),
+            Beat(duration=1),
+            Beat(duration=1),
+            Beat(duration=1),
+        ]
+        pattern = make_single_position_pattern(length=4)
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(4, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(4), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(5)), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1), start_beat=Beat(6)), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(7)), notes[3])
+
+    def test_can_can_apply_two_beats(self):
+        rhythm = [
+            Beat(duration=2),
+            Beat(duration=1),
+        ]
+        pattern = make_single_position_pattern(length=2)
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(2, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(2), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(3)), notes[1])
+
+    def test_can_apply_half_beats(self):
+        rhythm = [
+            Beat(duration=1, division=2),
+            Beat(duration=1),
+            Beat(duration=1, division=2),
+            Beat(duration=1),
+        ]
+        pattern = make_single_position_pattern(length=4)
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(4, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1, 2), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(3, 2)), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1, 2), start_beat=Beat(5, 2)), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(3)), notes[3])
 
     def test_can_apply_triplets(self):
-        self.fail('Write the test')
+        rhythm = [
+            Beat(duration=1, division=3),
+            Beat(duration=1, division=3),
+            Beat(duration=1, division=3),
+            Beat(duration=1),
+            Beat(duration=1, division=3),
+            Beat(duration=2, division=3),
+            Beat(duration=1),
+        ]
+        pattern = make_single_position_pattern(length=7)
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(7, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1, 3), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1, 3), start_beat=Beat(4, 3)), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1, 3), start_beat=Beat(5, 3)), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(2)), notes[3])
+        self.assertEqual(Note(position=pattern[4][0], duration=Beat(1, 3), start_beat=Beat(3)), notes[4])
+        self.assertEqual(Note(position=pattern[5][0], duration=Beat(2, 3), start_beat=Beat(10, 3)), notes[5])
+        self.assertEqual(Note(position=pattern[6][0], duration=Beat(1), start_beat=Beat(4)), notes[6])
 
     def test_can_apply_sixteenth_notes(self):
-        self.fail('Write the test')
+        rhythm = [
+            Beat(duration=1, division=4),
+            Beat(duration=1, division=4),
+            Beat(duration=1, division=4),
+            Beat(duration=1, division=4),
+            Beat(duration=1),
+        ]
+        pattern = make_single_position_pattern(length=5)
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(5, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1, 4), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1, 4), start_beat=Beat(5, 4)), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1, 4), start_beat=Beat(3, 2)), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1, 4), start_beat=Beat(7, 4)), notes[3])
+        self.assertEqual(Note(position=pattern[4][0], duration=Beat(1), start_beat=Beat(2)), notes[4])
 
     def test_rest_beats_are_added_to_sequence_and_ignored_by_pick_pattern(self):
-        self.fail('Write the test')
+        rhythm = [
+            Beat(duration=1),
+            Beat(duration=1, rest=True),
+            Beat(duration=1),
+        ]
+        pattern = make_single_position_pattern(length=2)
 
-    def test_rest_beat_is_added_to_end_of_sequence_if_bar_not_full(self):
-        pass
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(3, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=None, duration=Beat(1, rest=True), start_beat=Beat(2)), notes[1])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(3)), notes[2])
+
+    def test_can_apply_rhythm_to_chords_and_individual_notes(self):
+        pattern = [
+            [
+                FretPosition(string=6, fret=1),
+                FretPosition(string=5, fret=3),
+            ],
+            [FretPosition(string=6, fret=0)],
+        ]
+
+        rhythm = [
+            Beat(duration=1),
+            Beat(duration=1),
+        ]
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(3, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=pattern[0][1], duration=Beat(1), start_beat=Beat(1)), notes[1])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(2)), notes[2])
+
+    def test_rhythm_is_repeated_when_shorter_than_pattern(self):
+        rhythm = [
+            Beat(duration=1),
+        ]
+        pattern = make_single_position_pattern(length=4)
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(4, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(2)), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1), start_beat=Beat(3)), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(4)), notes[3])
+
+    def test_rhythm_is_shortened_when_longer_than_pattern(self):
+        rhythm = [
+            Beat(duration=1),
+            Beat(duration=1),
+            Beat(duration=1),
+            Beat(duration=1),
+        ]
+        pattern = make_single_position_pattern(length=1)
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(1, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
+
+    def test_single_rest_returned_if_all_beats_are_rests(self):
+        rhythm = [
+            Beat(duration=1, rest=True),
+            Beat(duration=1000, rest=True),
+            Beat(duration=1, rest=True),
+        ]
+
+        pattern = make_single_position_pattern(length=4)
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(1, len(notes))
+        self.assertEqual(Note(position=None, duration=Beat(4, rest=True), start_beat=Beat(1)), notes[0])
+
+    def test_can_handle_multiple_rests_in_sequence(self):
+        rhythm = [
+            Beat(duration=1),
+            Beat(duration=1, rest=True),
+            Beat(duration=1, rest=True),
+            Beat(duration=1),
+        ]
+
+        pattern = make_single_position_pattern(length=2)
+
+        notes = apply_rhythm(pattern, rhythm)
+
+        self.assertEqual(4, len(notes))
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=None, duration=Beat(1, rest=True), start_beat=Beat(2)), notes[1])
+        self.assertEqual(Note(position=None, duration=Beat(1, rest=True), start_beat=Beat(3)), notes[2])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(4)), notes[3])
