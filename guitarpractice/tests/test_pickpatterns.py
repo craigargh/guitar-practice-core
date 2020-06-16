@@ -1,4 +1,4 @@
-from unittest import TestCase, skip
+from unittest import TestCase
 
 from guitarpractice import pickpatterns
 from guitarpractice.models import FretPosition, GuitarShape
@@ -318,3 +318,55 @@ class TestBassAndAsc(TestCase):
         self.assertEqual([positions[0]], pattern[0])
         self.assertEqual([positions[2]], pattern[1])
         self.assertEqual([positions[3]], pattern[2])
+
+
+class TestBassAndDesc(TestCase):
+    pass
+
+
+class TestBassAscAndDesc(TestCase):
+    pass
+
+
+class TestAlternatingBassAndAsc(TestCase):
+    pass
+
+
+class TestAlternatingBassAndDesc(TestCase):
+    pass
+
+
+class TestAlternatingBassAscAndDesc(TestCase):
+    pass
+
+
+class TestSteppedAsc(TestCase):
+    pass
+
+
+class TestSteppedDesc(TestCase):
+    pass
+
+
+class TestRandomly(TestCase):
+    pass
+
+
+class TestBassAndRandomly(TestCase):
+    pass
+
+
+class TestAlternatingBassAndRandomly(TestCase):
+    pass
+
+
+class TestEachRandomly(TestCase):
+    pass
+
+
+class TestBassAndEachRandomly(TestCase):
+    pass
+
+
+class TestAlternatingBassAndEachRandomly(TestCase):
+    pass

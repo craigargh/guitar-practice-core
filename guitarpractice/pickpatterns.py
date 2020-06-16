@@ -1,5 +1,5 @@
 import math
-from typing import List, Callable
+from typing import List, Callable, Tuple
 
 from guitarpractice.models import GuitarShape, FretPosition
 
@@ -39,8 +39,7 @@ def asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPositi
 
 
 def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    positions = sorted(shape.positions)
-    bass_note = positions.pop(0)
+    bass_note, positions = split_bass_note(shape)
 
     if length is not None:
         length -= 1
@@ -83,11 +82,11 @@ def randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]
     pass
 
 
-def root_and_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def bass_and_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def alternating_root_and_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def alternating_bass_and_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
@@ -95,12 +94,18 @@ def each_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosit
     pass
 
 
-def root_and_each_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def bass_and_each_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
-def alternating_root_and_each_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def alternating_bass_and_each_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
+
+
+def split_bass_note(shape: GuitarShape) -> Tuple[FretPosition, List[FretPosition]]:
+    positions = sorted(shape.positions)
+    bass_note = positions.pop(0)
+    return bass_note, positions
 
 
 def sequential_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_pattern_2: Callable, length: int = None) \
