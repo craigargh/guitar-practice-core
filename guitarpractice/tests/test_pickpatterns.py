@@ -99,6 +99,14 @@ class TestAsc(TestCase):
         with self.assertRaises(ValueError):
             pickpatterns.asc(chord, length=0)
 
+    def test_lowest_note_returned_for_length_of_1(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.asc(chord, length=1)
+
+        self.assertEqual(1, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+
 
 class TestDesc(TestCase):
     def test_positions_are_returned_is_descending_order(self):
@@ -155,6 +163,14 @@ class TestDesc(TestCase):
 
         with self.assertRaises(ValueError):
             pickpatterns.desc(chord, length=0)
+
+    def test_highest_note_returned_for_length_of_1(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.desc(chord, length=1)
+
+        self.assertEqual(1, len(pattern))
+        self.assertEqual([positions[3]], pattern[0])
 
 
 class TestAscAndDesc(TestCase):
@@ -258,6 +274,14 @@ class TestAscAndDesc(TestCase):
         self.assertEqual([FretPosition(string=3, fret=2)], pattern[7])
         self.assertEqual([FretPosition(string=4, fret=0)], pattern[8])
 
+    def test_length_of_one_returns_first_position(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.asc_and_desc(chord, length=1)
+
+        self.assertEqual(1, len(pattern))
+        self.assertEqual([FretPosition(string=4, fret=0)], pattern[0])
+
 
 class TestBassAndAsc(TestCase):
     def test_positions_are_returned_in_ascending_order(self):
@@ -319,12 +343,24 @@ class TestBassAndAsc(TestCase):
         self.assertEqual([positions[2]], pattern[1])
         self.assertEqual([positions[3]], pattern[2])
 
+    def test_only_bass_note_is_returned_for_length_of_1(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_and_asc(chord, length=1)
+
+        self.assertEqual(1, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+
 
 class TestBassAndDesc(TestCase):
     pass
 
 
 class TestBassAscAndDesc(TestCase):
+    pass
+
+
+class TestBassAndStrum(TestCase):
     pass
 
 

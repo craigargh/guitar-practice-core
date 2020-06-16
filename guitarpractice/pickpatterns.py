@@ -39,7 +39,10 @@ def asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPositi
 
 
 def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    bass_note, positions = split_bass_note(shape)
+    bass_position, positions = split_bass_position(shape)
+
+    if length == 1:
+        return [[bass_position]]
 
     if length is not None:
         length -= 1
@@ -47,7 +50,7 @@ def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPositi
     placeholder_shape = GuitarShape(positions=positions, category=None, name=None)
     ascending_pattern = asc(placeholder_shape, length=length, shorten_from_end=True)
 
-    return [[bass_note]] + ascending_pattern
+    return [[bass_position]] + ascending_pattern
 
 
 def bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
@@ -55,6 +58,10 @@ def bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosit
 
 
 def bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    pass
+
+
+def bass_and_strum(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     pass
 
 
@@ -102,7 +109,7 @@ def alternating_bass_and_each_randomly(shape: GuitarShape, length: int = None) -
     pass
 
 
-def split_bass_note(shape: GuitarShape) -> Tuple[FretPosition, List[FretPosition]]:
+def split_bass_position(shape: GuitarShape) -> Tuple[FretPosition, List[FretPosition]]:
     positions = sorted(shape.positions)
     bass_note = positions.pop(0)
     return bass_note, positions
@@ -114,6 +121,9 @@ def sequential_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_patte
     Sequences multiple pick patterns to be applied to the same shape sequentially.
     For example strum a chord shape and then pick it as an arpeggio.
     """
+    if length == 1:
+        return pick_pattern_1(shape, length=1)
+
     pattern_1_length, pattern_2_length = calculate_divided_pattern_length(length, len(shape.positions))
     return pick_pattern_1(shape, length=pattern_1_length) + pick_pattern_2(shape, length=pattern_2_length)
 
