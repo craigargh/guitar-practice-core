@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 
 from guitarpractice import pickpatterns
 from guitarpractice.models import FretPosition, GuitarShape
@@ -213,7 +213,7 @@ class TestAscAndDesc(TestCase):
         self.assertEqual([FretPosition(string=1, fret=2)], pattern[2])
         self.assertEqual([FretPosition(string=2, fret=3)], pattern[3])
 
-    def test_even_lengthened_pattern_uses_last_notes_from_asc_and_last_notes_from_desc(self):
+    def test_uneven_shortened_pattern_uses_first_notes_from_asc_and_desc(self):
         chord, positions = get_chord_and_positions()
 
         pattern = pickpatterns.asc_and_desc(chord, length=5)
@@ -225,7 +225,7 @@ class TestAscAndDesc(TestCase):
         self.assertEqual([FretPosition(string=1, fret=2)], pattern[3])
         self.assertEqual([FretPosition(string=2, fret=3)], pattern[4])
 
-    def test_uneven_shortened_pattern_uses_first_notes_from_asc_and_first_notes_from_desc(self):
+    def test_even_lengthened_pattern_repeats_end_notes_on_asc_and_desc(self):
         chord, positions = get_chord_and_positions()
 
         pattern = pickpatterns.asc_and_desc(chord, length=10)
@@ -242,7 +242,7 @@ class TestAscAndDesc(TestCase):
         self.assertEqual([FretPosition(string=4, fret=0)], pattern[8])
         self.assertEqual([FretPosition(string=4, fret=0)], pattern[9])
 
-    def test_uneven_lengthened_pattern_uses_last_notes_from_asc_and_last_notes_from_desc(self):
+    def test_uneven_lengthened_pattern_uses_last_notes_from_asc_and_desc(self):
         chord, positions = get_chord_and_positions()
 
         pattern = pickpatterns.asc_and_desc(chord, length=9)
@@ -257,3 +257,64 @@ class TestAscAndDesc(TestCase):
         self.assertEqual([FretPosition(string=2, fret=3)], pattern[6])
         self.assertEqual([FretPosition(string=3, fret=2)], pattern[7])
         self.assertEqual([FretPosition(string=4, fret=0)], pattern[8])
+
+
+class TestBassAndAsc(TestCase):
+    def test_positions_are_returned_in_ascending_order(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_and_asc(chord)
+
+        self.assertEqual(4, len(pattern))
+        self.assertEqual([FretPosition(string=4, fret=0)], pattern[0])
+        self.assertEqual([FretPosition(string=3, fret=2)], pattern[1])
+        self.assertEqual([FretPosition(string=2, fret=3)], pattern[2])
+        self.assertEqual([FretPosition(string=1, fret=2)], pattern[3])
+
+    def test_last_notes_are_repeated_when_length_is_greater_than_positions_length(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_and_asc(chord, length=6)
+
+        self.assertEqual(6, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[1]], pattern[1])
+        self.assertEqual([positions[2]], pattern[2])
+        self.assertEqual([positions[3]], pattern[3])
+        self.assertEqual([positions[2]], pattern[4])
+        self.assertEqual([positions[3]], pattern[5])
+
+    def test_bass_notes_are_not_repeated_when_length_is_more_than_double_positions_length(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_and_asc(chord, length=10)
+
+        self.assertEqual(10, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[1]], pattern[1])
+        self.assertEqual([positions[2]], pattern[2])
+        self.assertEqual([positions[3]], pattern[3])
+        self.assertEqual([positions[1]], pattern[4])
+        self.assertEqual([positions[2]], pattern[5])
+        self.assertEqual([positions[3]], pattern[6])
+        self.assertEqual([positions[1]], pattern[7])
+        self.assertEqual([positions[2]], pattern[8])
+        self.assertEqual([positions[3]], pattern[9])
+
+    def test_bass_note_is_played_when_pattern_is_shortened(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_and_asc(chord, length=3)
+
+        self.assertEqual(3, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+
+    def test_pattern_is_shortened_from_last_positions_not_first_positions(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_and_asc(chord, length=3)
+
+        self.assertEqual(3, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[2]], pattern[1])
+        self.assertEqual([positions[3]], pattern[2])

@@ -11,9 +11,9 @@ def strum(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     return [shape.positions] * repeats
 
 
-def asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+def asc(shape: GuitarShape, length: int = None, shorten_from_end=False) -> List[List[FretPosition]]:
     positions = sorted(shape.positions)
-    positions = adjust_length(positions, length)
+    positions = adjust_length(positions, length, shorten_from_end)
 
     pattern = [
         [position]
@@ -35,11 +35,20 @@ def desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
 
 
 def asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    return alternate_patterns(shape, asc, desc, length=length)
+    return sequential_patterns(shape, asc, desc, length=length)
 
 
 def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    positions = sorted(shape.positions)
+    bass_note = positions.pop(0)
+
+    if length is not None:
+        length -= 1
+
+    placeholder_shape = GuitarShape(positions=positions, category=None, name=None)
+    ascending_pattern = asc(placeholder_shape, length=length, shorten_from_end=True)
+
+    return [[bass_note]] + ascending_pattern
 
 
 def bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
@@ -94,35 +103,40 @@ def alternating_root_and_each_randomly(shape: GuitarShape, length: int = None) -
     pass
 
 
-def alternate_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_pattern_2: Callable, length: int = None) \
+def sequential_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_pattern_2: Callable, length: int = None) \
         -> List[List[FretPosition]]:
     """
-    Sequences multiple pick patterns to be applied to shapes alternatively.
-    For example strum the first shape, then pick the second shape.
+    Sequences multiple pick patterns to be applied to the same shape sequentially.
+    For example strum a chord shape and then pick it as an arpeggio.
     """
-    if length is not None:
-        half_length = math.ceil(length / 2)
+    pattern_1_length, pattern_2_length = calculate_divided_pattern_length(length, len(shape.positions))
+    return pick_pattern_1(shape, length=pattern_1_length) + pick_pattern_2(shape, length=pattern_2_length)
+
+
+def calculate_divided_pattern_length(total_length, positions_length):
+    if total_length is not None:
+        half_length = math.ceil(total_length / 2)
     else:
-        half_length = length
+        half_length = total_length
 
     pattern_1_length = half_length
     pattern_2_length = half_length
 
-    is_odd_length = length is not None and length % 2 != 0
-    pattern_completes_once_fully = half_length is not None and len(shape.positions) % half_length == 0
+    is_odd_length = total_length is not None and total_length % 2 != 0
+    pattern_completes_once_fully = half_length is not None and positions_length % half_length == 0
 
     if is_odd_length and pattern_completes_once_fully:
         pattern_1_length -= 1
     elif is_odd_length and not pattern_completes_once_fully:
         pattern_2_length -= 1
 
-    return pick_pattern_1(shape, length=pattern_1_length) + pick_pattern_2(shape, length=pattern_2_length)
+    return pattern_1_length, pattern_2_length
 
 
-def sequential_patterns(pick_patterns: List[Callable], strip_end_positions=False) -> List[List[FretPosition]]:
+def alternate_patterns(pick_patterns: List[Callable], strip_end_positions=False) -> List[List[FretPosition]]:
     """
-    Sequences multiple pick patterns to be applied to the same shape sequentially.
-    For example strum a chord shape and then pick it as an arpeggio.
+    Sequences multiple pick patterns to be applied to shapes alternatively.
+    For example strum the first shape, then pick the second shape.
     """
     pass
 
@@ -132,17 +146,31 @@ def validate_length(length: int):
         raise ValueError(f'Length of {length} is not allowed. Must be greater than 0.')
 
 
-def adjust_length(positions: List[FretPosition], length: int) -> List[FretPosition]:
+def adjust_length(positions: List[FretPosition], length: int, shorten_from_end=False) -> List[FretPosition]:
     validate_length(length)
 
     if length is not None and len(positions) > length:
-        positions = positions[:length]
+        positions = shorten(positions, length, shorten_from_end)
 
     elif length is not None and len(positions) < length:
-        number_of_full_repeats = length // len(positions)
-        partial_repeat_positions = length % len(positions)
+        positions = lengthen(positions, length)
 
-        positions *= number_of_full_repeats
+    return positions
+
+
+def shorten(positions, length, shorten_from_end):
+    if shorten_from_end:
+        return positions[length - 1:]
+    else:
+        return positions[:length]
+
+
+def lengthen(positions, length):
+    number_of_full_repeats = length // len(positions)
+    partial_repeat_positions = length % len(positions)
+
+    positions *= number_of_full_repeats
+    if partial_repeat_positions != 0:
         extra_positions = positions[-partial_repeat_positions:]
         positions.extend(extra_positions)
 
