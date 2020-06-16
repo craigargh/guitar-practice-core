@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from math import gcd
-from typing import List, Optional
+from typing import List
 
 
 @dataclass()
