@@ -1,3 +1,4 @@
+import math
 from typing import List, Callable
 
 from guitarpractice.models import GuitarShape, FretPosition
@@ -11,15 +12,30 @@ def strum(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
 
 
 def asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    return [[]]
+    positions = sorted(shape.positions)
+    positions = adjust_length(positions, length)
+
+    pattern = [
+        [position]
+        for position in positions
+    ]
+
+    return pattern
 
 
 def desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    return [[]]
+    positions = sorted(shape.positions, reverse=True)
+    positions = adjust_length(positions, length)
+
+    pattern = [
+        [position]
+        for position in positions
+    ]
+    return pattern
 
 
 def asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    return alternate_patterns(shape, asc, desc, length=length)
 
 
 def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
@@ -78,15 +94,32 @@ def alternating_root_and_each_randomly(shape: GuitarShape, length: int = None) -
     pass
 
 
-def alternate_patterns(patterns: List[Callable]) -> List[List[FretPosition]]:
+def alternate_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_pattern_2: Callable, length: int = None) \
+        -> List[List[FretPosition]]:
     """
     Sequences multiple pick patterns to be applied to shapes alternatively.
     For example strum the first shape, then pick the second shape.
     """
-    pass
+    if length is not None:
+        half_length = math.ceil(length / 2)
+    else:
+        half_length = length
+
+    pattern_1_length = half_length
+    pattern_2_length = half_length
+
+    is_odd_length = length is not None and length % 2 != 0
+    pattern_completes_once_fully = half_length is not None and len(shape.positions) % half_length == 0
+
+    if is_odd_length and pattern_completes_once_fully:
+        pattern_1_length -= 1
+    elif is_odd_length and not pattern_completes_once_fully:
+        pattern_2_length -= 1
+
+    return pick_pattern_1(shape, length=pattern_1_length) + pick_pattern_2(shape, length=pattern_2_length)
 
 
-def sequential_patterns(patterns: List[Callable], strip_end_positions=False) -> List[List[FretPosition]]:
+def sequential_patterns(pick_patterns: List[Callable], strip_end_positions=False) -> List[List[FretPosition]]:
     """
     Sequences multiple pick patterns to be applied to the same shape sequentially.
     For example strum a chord shape and then pick it as an arpeggio.
@@ -94,6 +127,23 @@ def sequential_patterns(patterns: List[Callable], strip_end_positions=False) -> 
     pass
 
 
-def validate_length(length):
+def validate_length(length: int):
     if length is not None and length < 1:
         raise ValueError(f'Length of {length} is not allowed. Must be greater than 0.')
+
+
+def adjust_length(positions: List[FretPosition], length: int) -> List[FretPosition]:
+    validate_length(length)
+
+    if length is not None and len(positions) > length:
+        positions = positions[:length]
+
+    elif length is not None and len(positions) < length:
+        number_of_full_repeats = length // len(positions)
+        partial_repeat_positions = length % len(positions)
+
+        positions *= number_of_full_repeats
+        extra_positions = positions[-partial_repeat_positions:]
+        positions.extend(extra_positions)
+
+    return positions
