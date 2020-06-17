@@ -21,7 +21,8 @@ class GuitarShape:
     name: str
     category: str
     positions: List[FretPosition]
-    movable: bool = False
+    frets_movable: bool = False
+    strings_movable: bool = False
 
 
 @dataclass()

@@ -8,6 +8,7 @@ def make_sequence(
         shapes: List[GuitarShape],
         shape_shifters: List[Callable] = None,
         pick_pattern: Callable = None,
+        annotators: List[Callable] = None,
         rhythm: List[Beat] = None,
 ) -> Sequence:
     pattern = [
