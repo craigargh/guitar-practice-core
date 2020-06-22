@@ -54,7 +54,18 @@ def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPositi
 
 
 def bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    bass_position, positions = split_bass_position(shape)
+
+    if length == 1:
+        return [[bass_position]]
+
+    if length is not None:
+        length -= 1
+
+    placeholder_shape = GuitarShape(positions=positions, category=None, name=None)
+    descending_pattern = desc(placeholder_shape, length=length)
+
+    return [[bass_position]] + descending_pattern
 
 
 def bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
