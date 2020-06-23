@@ -97,6 +97,10 @@ def alternating_bass_asc_and_desc(shape: GuitarShape, length: int = None) -> Lis
     pass
 
 
+def alternating_bass_asc_and_desc_top_strings(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    pass
+
+
 def stepped_asc(shape: GuitarShape, step: int = 2, length: int = None) -> List[List[FretPosition]]:
     pass
 

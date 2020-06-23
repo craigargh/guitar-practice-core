@@ -485,6 +485,10 @@ class TestAlternatingBassAscAndDesc(TestCase):
     pass
 
 
+class TestAlternatingBassAscAndDescTopStrings(TestCase):
+    pass
+
+
 class TestSteppedAsc(TestCase):
     pass
 
