@@ -1,4 +1,5 @@
 import math
+from functools import partial
 from typing import List, Callable, Tuple
 
 from guitarpractice.models import GuitarShape, FretPosition
@@ -38,22 +39,25 @@ def asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPositi
     return sequential_patterns(shape, asc, desc, length=length)
 
 
+def asc_and_desc_top_strings(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    asc_func = partial(asc, shorten_from_end=True)
+    return sequential_patterns(shape, asc_func, desc, length=length, cut_pattern_2_top_note=True)
+
+
 def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    bass_position, positions = split_bass_position(shape)
-
-    if length == 1:
-        return [[bass_position]]
-
-    if length is not None:
-        length -= 1
-
-    placeholder_shape = GuitarShape(positions=positions, category=None, name=None)
-    ascending_pattern = asc(placeholder_shape, length=length, shorten_from_end=True)
-
-    return [[bass_position]] + ascending_pattern
+    asc_func = partial(asc, shorten_from_end=True)
+    return bass_and_pattern(shape, length, asc_func)
 
 
 def bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    return bass_and_pattern(shape, length, desc)
+
+
+def bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    return bass_and_pattern(shape, length, asc_and_desc_top_strings)
+
+
+def bass_and_pattern(shape: GuitarShape, length: int, pick_pattern: Callable):
     bass_position, positions = split_bass_position(shape)
 
     if length == 1:
@@ -63,17 +67,22 @@ def bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosit
         length -= 1
 
     placeholder_shape = GuitarShape(positions=positions, category=None, name=None)
-    descending_pattern = desc(placeholder_shape, length=length)
+    pattern = pick_pattern(placeholder_shape, length=length)
 
-    return [[bass_position]] + descending_pattern
-
-
-def bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    return [[bass_position]] + pattern
 
 
 def bass_and_strum(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    bass_position, _ = split_bass_position(shape)
+    if length == 1:
+        return [[bass_position]]
+
+    if length is not None:
+        length -= 1
+
+    strum_pattern = strum(shape, length=length)
+
+    return [[bass_position]] + strum_pattern
 
 
 def alternating_bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
@@ -126,8 +135,8 @@ def split_bass_position(shape: GuitarShape) -> Tuple[FretPosition, List[FretPosi
     return bass_note, positions
 
 
-def sequential_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_pattern_2: Callable, length: int = None) \
-        -> List[List[FretPosition]]:
+def sequential_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_pattern_2: Callable, length: int = None,
+                        cut_pattern_2_top_note: bool = False) -> List[List[FretPosition]]:
     """
     Sequences multiple pick patterns to be applied to the same shape sequentially.
     For example strum a chord shape and then pick it as an arpeggio.
@@ -135,8 +144,13 @@ def sequential_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_patte
     if length == 1:
         return pick_pattern_1(shape, length=1)
 
+    if cut_pattern_2_top_note and length is not None and length % 2 != 0:
+        shape_2 = GuitarShape(category=None, name=None, positions=shape.positions[:-1])
+    else:
+        shape_2 = shape
+
     pattern_1_length, pattern_2_length = calculate_divided_pattern_length(length, len(shape.positions))
-    return pick_pattern_1(shape, length=pattern_1_length) + pick_pattern_2(shape, length=pattern_2_length)
+    return pick_pattern_1(shape, length=pattern_1_length) + pick_pattern_2(shape_2, length=pattern_2_length)
 
 
 def calculate_divided_pattern_length(total_length, positions_length):

@@ -397,11 +397,80 @@ class TestBassAndDesc(TestCase):
 
 
 class TestBassAscAndDesc(TestCase):
-    pass
+    def test_pattern_is_returned_bass_note_then_asc_and_desc_order(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_asc_and_desc(chord)
+
+        self.assertEqual(7, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[1]], pattern[1])
+        self.assertEqual([positions[2]], pattern[2])
+        self.assertEqual([positions[3]], pattern[3])
+        self.assertEqual([positions[3]], pattern[4])
+        self.assertEqual([positions[2]], pattern[5])
+        self.assertEqual([positions[1]], pattern[6])
+
+    def test_shortening_even_pattern_returns_final_notes_of_asc(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_asc_and_desc(chord, length=4)
+
+        self.assertEqual(4, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[2]], pattern[1])
+        self.assertEqual([positions[3]], pattern[2])
+        self.assertEqual([positions[2]], pattern[3])
+
+    def test_shortening_odd_pattern_repeats_top_note(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_asc_and_desc(chord, length=5)
+
+        self.assertEqual(5, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[2]], pattern[1])
+        self.assertEqual([positions[3]], pattern[2])
+        self.assertEqual([positions[3]], pattern[3])
+        self.assertEqual([positions[2]], pattern[4])
+
+    def test_only_bass_note_is_returned_for_length_of_1(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_asc_and_desc(chord, length=1)
+
+        self.assertEqual(1, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
 
 
 class TestBassAndStrum(TestCase):
-    pass
+    def test_bass_note_then_strummed_chord_is_returned(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_and_strum(chord)
+
+        self.assertEqual(2, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual(chord.positions, pattern[1])
+
+    def test_lengthen_repeats_strummed_chord(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_and_strum(chord, length=4)
+
+        self.assertEqual(4, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual(chord.positions, pattern[1])
+        self.assertEqual(chord.positions, pattern[2])
+        self.assertEqual(chord.positions, pattern[3])
+
+    def test_only_bass_note_is_returned_for_length_of_1(self):
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.bass_and_strum(chord, length=1)
+
+        self.assertEqual(1, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
 
 
 class TestAlternatingBassAndAsc(TestCase):
