@@ -450,6 +450,7 @@ class TestBassAndStrum(TestCase):
         pattern = pickpatterns.bass_and_strum(chord)
 
         self.assertEqual(2, len(pattern))
+        self.assertEqual(4, len(pattern[1]))
         self.assertEqual([positions[0]], pattern[0])
         self.assertEqual(chord.positions, pattern[1])
 
