@@ -57,8 +57,8 @@ def bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretP
     return bass_and_pattern(shape, length, asc_and_desc_top_strings)
 
 
-def bass_and_pattern(shape: GuitarShape, length: int, pick_pattern: Callable):
-    bass_position, positions = split_bass_position(shape)
+def bass_and_pattern(shape: GuitarShape, length: int, pick_pattern: Callable) -> List[List[FretPosition]]:
+    bass_position, split_shape = split_bass_position(shape)
 
     if length == 1:
         return [[bass_position]]
@@ -66,8 +66,7 @@ def bass_and_pattern(shape: GuitarShape, length: int, pick_pattern: Callable):
     if length is not None:
         length -= 1
 
-    placeholder_shape = GuitarShape(positions=positions, category=None, name=None)
-    pattern = pick_pattern(placeholder_shape, length=length)
+    pattern = pick_pattern(split_shape, length=length)
 
     return [[bass_position]] + pattern
 
@@ -86,19 +85,43 @@ def bass_and_strum(shape: GuitarShape, length: int = None) -> List[List[FretPosi
 
 
 def alternating_bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    return alternating_bass_and_pattern(shape, length, asc)
 
 
 def alternating_bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    return alternating_bass_and_pattern(shape, length, desc)
 
 
 def alternating_bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    return alternating_bass_and_pattern(shape, length, asc_and_desc)
 
 
 def alternating_bass_asc_and_desc_top_strings(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    return alternating_bass_and_pattern(shape, length, asc_and_desc_top_strings)
+
+
+def alternating_bass_and_pattern(shape: GuitarShape, length: int, pick_pattern: Callable) -> List[List[FretPosition]]:
+    bass_position, split_shape = split_bass_position(shape)
+
+    if length == 1:
+        return [[bass_position]]
+
+    if length is not None:
+        half_length = length // 2
+    else:
+        half_length = None
+
+    ordered_pattern = pick_pattern(split_shape, length=half_length)
+
+    pattern = []
+    for item in ordered_pattern:
+        pattern.append([bass_position])
+        pattern.append(item)
+
+    if length is not None and length % 2 != 0:
+        pattern.append([bass_position])
+
+    return pattern
 
 
 def stepped_asc(shape: GuitarShape, step: int = 2, length: int = None) -> List[List[FretPosition]]:
@@ -133,10 +156,12 @@ def alternating_bass_and_each_randomly(shape: GuitarShape, length: int = None) -
     pass
 
 
-def split_bass_position(shape: GuitarShape) -> Tuple[FretPosition, List[FretPosition]]:
+def split_bass_position(shape: GuitarShape) -> Tuple[FretPosition, GuitarShape]:
     positions = sorted(shape.positions)
     bass_note = positions.pop(0)
-    return bass_note, positions
+
+    split_shape = GuitarShape(positions=positions, name=None, category=None)
+    return bass_note, split_shape
 
 
 def sequential_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_pattern_2: Callable, length: int = None,
