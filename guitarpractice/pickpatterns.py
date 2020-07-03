@@ -125,11 +125,26 @@ def alternating_bass_and_pattern(shape: GuitarShape, length: int, pick_pattern: 
 
 
 def stepped_asc(shape: GuitarShape, step: int = 2, length: int = None) -> List[List[FretPosition]]:
-    pass
+    return stepped_pattern(shape, step, length, asc)
 
 
 def stepped_desc(shape: GuitarShape, step: int = 2, length: int = None) -> List[List[FretPosition]]:
-    pass
+    return stepped_pattern(shape, step, length, desc)
+
+
+def stepped_pattern(shape: GuitarShape, step: int, length: int, pick_pattern: Callable) -> List[List[FretPosition]]:
+    positions = pick_pattern(shape)
+
+    pattern = []
+    for index in range(len(positions) - step):
+        position_1 = positions[index]
+        position_2 = positions[index + step]
+        pattern.append(position_1)
+        pattern.append(position_2)
+
+    pattern = adjust_length(pattern, length=length)
+
+    return pattern
 
 
 def randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
@@ -215,7 +230,7 @@ def validate_length(length: int):
         raise ValueError(f'Length of {length} is not allowed. Must be greater than 0.')
 
 
-def adjust_length(positions: List[FretPosition], length: int, shorten_from_end=False) -> List[FretPosition]:
+def adjust_length(positions: List, length: int, shorten_from_end=False) -> List:
     validate_length(length)
 
     if length is not None and len(positions) > length:

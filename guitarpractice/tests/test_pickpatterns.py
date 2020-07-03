@@ -15,6 +15,19 @@ def get_chord_and_positions():
     return chord, positions
 
 
+def get_scale_and_positions():
+    positions = [
+        FretPosition(string=6, fret=3),
+        FretPosition(string=6, fret=6),
+        FretPosition(string=5, fret=3),
+        FretPosition(string=5, fret=5),
+        FretPosition(string=4, fret=3),
+        FretPosition(string=4, fret=5),
+    ]
+    scale = GuitarShape(name='C Major Pentatonic', positions=positions, category='scale')
+    return scale, positions
+
+
 class TestStrum(TestCase):
     def test_positions_are_returned_in_single_list(self):
         chord, positions = get_chord_and_positions()
@@ -823,11 +836,187 @@ class TestAlternatingBassAscAndDescTopStrings(TestCase):
 
 
 class TestSteppedAsc(TestCase):
-    pass
+    def test_notes_are_played_in_stepped_sequence(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_asc(scale)
+
+        self.assertEqual(8, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[2]], pattern[1])
+        self.assertEqual([positions[1]], pattern[2])
+        self.assertEqual([positions[3]], pattern[3])
+        self.assertEqual([positions[2]], pattern[4])
+        self.assertEqual([positions[4]], pattern[5])
+        self.assertEqual([positions[3]], pattern[6])
+        self.assertEqual([positions[5]], pattern[7])
+
+    def test_can_set_step_size(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_asc(scale, step=3)
+
+        self.assertEqual(6, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[3]], pattern[1])
+        self.assertEqual([positions[1]], pattern[2])
+        self.assertEqual([positions[4]], pattern[3])
+        self.assertEqual([positions[2]], pattern[4])
+        self.assertEqual([positions[5]], pattern[5])
+
+    def test_pattern_can_be_shortened(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_asc(scale, length=4)
+
+        self.assertEqual(4, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[2]], pattern[1])
+        self.assertEqual([positions[1]], pattern[2])
+        self.assertEqual([positions[3]], pattern[3])
+
+    def test_can_set_step_size_and_shorten(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_asc(scale, step=3, length=4)
+
+        self.assertEqual(4, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[3]], pattern[1])
+        self.assertEqual([positions[1]], pattern[2])
+        self.assertEqual([positions[4]], pattern[3])
+
+    def test_last_notes_are_repeated_for_lengthened_sequence(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_asc(scale, length=10)
+
+        self.assertEqual(10, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[2]], pattern[1])
+        self.assertEqual([positions[1]], pattern[2])
+        self.assertEqual([positions[3]], pattern[3])
+        self.assertEqual([positions[2]], pattern[4])
+        self.assertEqual([positions[4]], pattern[5])
+        self.assertEqual([positions[3]], pattern[6])
+        self.assertEqual([positions[5]], pattern[7])
+        self.assertEqual([positions[3]], pattern[8])
+        self.assertEqual([positions[5]], pattern[9])
+
+    def test_can_set_step_size_and_lengthen(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_asc(scale, step=3, length=8)
+
+        self.assertEqual(8, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
+        self.assertEqual([positions[3]], pattern[1])
+        self.assertEqual([positions[1]], pattern[2])
+        self.assertEqual([positions[4]], pattern[3])
+        self.assertEqual([positions[2]], pattern[4])
+        self.assertEqual([positions[5]], pattern[5])
+        self.assertEqual([positions[2]], pattern[6])
+        self.assertEqual([positions[5]], pattern[7])
+
+    def test_length_of_one_returns_single_note(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_asc(scale, length=1)
+
+        self.assertEqual(1, len(pattern))
+        self.assertEqual([positions[0]], pattern[0])
 
 
 class TestSteppedDesc(TestCase):
-    pass
+    def test_notes_are_played_in_stepped_sequence(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_desc(scale)
+
+        self.assertEqual(8, len(pattern))
+        self.assertEqual([positions[5]], pattern[0])
+        self.assertEqual([positions[3]], pattern[1])
+        self.assertEqual([positions[4]], pattern[2])
+        self.assertEqual([positions[2]], pattern[3])
+        self.assertEqual([positions[3]], pattern[4])
+        self.assertEqual([positions[1]], pattern[5])
+        self.assertEqual([positions[2]], pattern[6])
+        self.assertEqual([positions[0]], pattern[7])
+
+    def test_can_set_step_size(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_desc(scale, step=3)
+
+        self.assertEqual(6, len(pattern))
+        self.assertEqual([positions[5]], pattern[0])
+        self.assertEqual([positions[2]], pattern[1])
+        self.assertEqual([positions[4]], pattern[2])
+        self.assertEqual([positions[1]], pattern[3])
+        self.assertEqual([positions[3]], pattern[4])
+        self.assertEqual([positions[0]], pattern[5])
+
+    def test_pattern_can_be_shortened(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_desc(scale, length=4)
+
+        self.assertEqual(4, len(pattern))
+        self.assertEqual([positions[5]], pattern[0])
+        self.assertEqual([positions[3]], pattern[1])
+        self.assertEqual([positions[4]], pattern[2])
+        self.assertEqual([positions[2]], pattern[3])
+
+    def test_can_set_step_size_and_shorten(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_desc(scale, step=3, length=4)
+
+        self.assertEqual(4, len(pattern))
+        self.assertEqual([positions[5]], pattern[0])
+        self.assertEqual([positions[2]], pattern[1])
+        self.assertEqual([positions[4]], pattern[2])
+        self.assertEqual([positions[1]], pattern[3])
+
+    def test_last_notes_are_repeated_for_lengthened_sequence(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_desc(scale, length=10)
+
+        self.assertEqual(10, len(pattern))
+        self.assertEqual([positions[5]], pattern[0])
+        self.assertEqual([positions[3]], pattern[1])
+        self.assertEqual([positions[4]], pattern[2])
+        self.assertEqual([positions[2]], pattern[3])
+        self.assertEqual([positions[3]], pattern[4])
+        self.assertEqual([positions[1]], pattern[5])
+        self.assertEqual([positions[2]], pattern[6])
+        self.assertEqual([positions[0]], pattern[7])
+        self.assertEqual([positions[2]], pattern[8])
+        self.assertEqual([positions[0]], pattern[9])
+
+    def test_can_set_step_size_and_lengthen(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_desc(scale, step=3, length=8)
+
+        self.assertEqual(8, len(pattern))
+        self.assertEqual([positions[5]], pattern[0])
+        self.assertEqual([positions[2]], pattern[1])
+        self.assertEqual([positions[4]], pattern[2])
+        self.assertEqual([positions[1]], pattern[3])
+        self.assertEqual([positions[3]], pattern[4])
+        self.assertEqual([positions[0]], pattern[5])
+        self.assertEqual([positions[3]], pattern[6])
+        self.assertEqual([positions[0]], pattern[7])
+
+    def test_length_of_one_returns_single_note(self):
+        scale, positions = get_scale_and_positions()
+
+        pattern = pickpatterns.stepped_desc(scale, length=1)
+
+        self.assertEqual(1, len(pattern))
+        self.assertEqual([positions[5]], pattern[0])
 
 
 class TestRandomly(TestCase):
