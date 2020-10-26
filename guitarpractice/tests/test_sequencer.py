@@ -18,10 +18,10 @@ class TestSequencer(TestCase):
 
         duration = Beat(duration=1)
         expected_notes = [
-            Note(start_beat=Beat(duration=1), position=positions[0], duration=duration),
-            Note(start_beat=Beat(duration=2), position=positions[1], duration=duration),
-            Note(start_beat=Beat(duration=3), position=positions[2], duration=duration),
-            Note(start_beat=Beat(duration=4), position=positions[3], duration=duration),
+            Note(order=0, position=positions[0], duration=duration),
+            Note(order=1, position=positions[1], duration=duration),
+            Note(order=2, position=positions[2], duration=duration),
+            Note(order=3, position=positions[3], duration=duration),
         ]
         self.assertEqual(expected_notes, sequence.notes)
         self.assertEqual([shape], sequence.shapes)
@@ -43,10 +43,10 @@ class TestSequencer(TestCase):
 
         duration = Beat(duration=1)
         expected_notes = [
-            Note(start_beat=Beat(duration=1), position=positions_1[0], duration=duration),
-            Note(start_beat=Beat(duration=2), position=positions_1[1], duration=duration),
-            Note(start_beat=Beat(duration=3), position=positions_2[0], duration=duration),
-            Note(start_beat=Beat(duration=4), position=positions_2[1], duration=duration),
+            Note(order=0, position=positions_1[0], duration=duration),
+            Note(order=1, position=positions_1[1], duration=duration),
+            Note(order=2, position=positions_2[0], duration=duration),
+            Note(order=3, position=positions_2[1], duration=duration),
         ]
 
         self.assertEqual(expected_notes, sequence.notes)
@@ -71,10 +71,10 @@ class TestSequencer(TestCase):
         sequence = make_sequence([shape], rhythm=rhythm)
 
         expected_notes = [
-            Note(start_beat=Beat(1), position=positions[0], duration=Beat(1)),
-            Note(start_beat=Beat(2), position=positions[1], duration=Beat(1, 2)),
-            Note(start_beat=Beat(5, 2), position=positions[2], duration=Beat(1, 2)),
-            Note(start_beat=Beat(3, 1), position=positions[3], duration=Beat(1)),
+            Note(order=0, position=positions[0], duration=Beat(1)),
+            Note(order=1, position=positions[1], duration=Beat(1, 2)),
+            Note(order=2, position=positions[2], duration=Beat(1, 2)),
+            Note(order=3, position=positions[3], duration=Beat(1)),
         ]
         self.assertEqual(expected_notes, sequence.notes)
         self.assertEqual([shape], sequence.shapes)
@@ -95,7 +95,7 @@ def make_single_position_pattern(length: int):
 
 
 class TestApplyRhythm(TestCase):
-    def test_start_beat_increases_based_on_rhythm(self):
+    def test_order_increases_based_on_rhythm(self):
         rhythm = [
             Beat(duration=1),
             Beat(duration=1),
@@ -107,10 +107,10 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(4, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(2)), notes[1])
-        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1), start_beat=Beat(3)), notes[2])
-        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(4)), notes[3])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), order=0), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), order=1), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1), order=2), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), order=3), notes[3])
 
     def test_can_apply_four_beats(self):
         rhythm = [
@@ -124,10 +124,10 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(4, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(4), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(5)), notes[1])
-        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1), start_beat=Beat(6)), notes[2])
-        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(7)), notes[3])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(4), order=0), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), order=1), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1), order=2), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), order=3), notes[3])
 
     def test_can_can_apply_two_beats(self):
         rhythm = [
@@ -139,8 +139,8 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(2, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(2), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(3)), notes[1])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(2), order=0), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), order=1), notes[1])
 
     def test_can_apply_half_beats(self):
         rhythm = [
@@ -154,10 +154,10 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(4, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1, 2), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(3, 2)), notes[1])
-        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1, 2), start_beat=Beat(5, 2)), notes[2])
-        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(3)), notes[3])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1, 2), order=0), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), order=1), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1, 2), order=2), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), order=3), notes[3])
 
     def test_can_apply_triplets(self):
         rhythm = [
@@ -174,13 +174,13 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(7, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1, 3), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1, 3), start_beat=Beat(4, 3)), notes[1])
-        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1, 3), start_beat=Beat(5, 3)), notes[2])
-        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(2)), notes[3])
-        self.assertEqual(Note(position=pattern[4][0], duration=Beat(1, 3), start_beat=Beat(3)), notes[4])
-        self.assertEqual(Note(position=pattern[5][0], duration=Beat(2, 3), start_beat=Beat(10, 3)), notes[5])
-        self.assertEqual(Note(position=pattern[6][0], duration=Beat(1), start_beat=Beat(4)), notes[6])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1, 3), order=0), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1, 3), order=1), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1, 3), order=2), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), order=3), notes[3])
+        self.assertEqual(Note(position=pattern[4][0], duration=Beat(1, 3), order=4), notes[4])
+        self.assertEqual(Note(position=pattern[5][0], duration=Beat(2, 3), order=5), notes[5])
+        self.assertEqual(Note(position=pattern[6][0], duration=Beat(1), order=6), notes[6])
 
     def test_can_apply_sixteenth_notes(self):
         rhythm = [
@@ -195,11 +195,11 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(5, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1, 4), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1, 4), start_beat=Beat(5, 4)), notes[1])
-        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1, 4), start_beat=Beat(3, 2)), notes[2])
-        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1, 4), start_beat=Beat(7, 4)), notes[3])
-        self.assertEqual(Note(position=pattern[4][0], duration=Beat(1), start_beat=Beat(2)), notes[4])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1, 4), order=0), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1, 4), order=1), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1, 4), order=2), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1, 4), order=3), notes[3])
+        self.assertEqual(Note(position=pattern[4][0], duration=Beat(1), order=4), notes[4])
 
     def test_rest_beats_are_added_to_sequence_and_ignored_by_pick_pattern(self):
         rhythm = [
@@ -212,9 +212,9 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(3, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=None, duration=Beat(1, rest=True), start_beat=Beat(2)), notes[1])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(3)), notes[2])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), order=0), notes[0])
+        self.assertEqual(Note(position=None, duration=Beat(1, rest=True), order=1), notes[1])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), order=2), notes[2])
 
     def test_can_apply_rhythm_to_chords_and_individual_notes(self):
         pattern = [
@@ -233,9 +233,9 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(3, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=pattern[0][1], duration=Beat(1), start_beat=Beat(1)), notes[1])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(2)), notes[2])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), order=0), notes[0])
+        self.assertEqual(Note(position=pattern[0][1], duration=Beat(1), order=0), notes[1])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), order=1), notes[2])
 
     def test_rhythm_is_repeated_when_shorter_than_pattern(self):
         rhythm = [
@@ -246,10 +246,10 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(4, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(2)), notes[1])
-        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1), start_beat=Beat(3)), notes[2])
-        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), start_beat=Beat(4)), notes[3])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), order=0), notes[0])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), order=1), notes[1])
+        self.assertEqual(Note(position=pattern[2][0], duration=Beat(1), order=2), notes[2])
+        self.assertEqual(Note(position=pattern[3][0], duration=Beat(1), order=3), notes[3])
 
     def test_rhythm_is_shortened_when_longer_than_pattern(self):
         rhythm = [
@@ -263,7 +263,7 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(1, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), order=0), notes[0])
 
     def test_single_rest_returned_if_all_beats_are_rests(self):
         rhythm = [
@@ -277,7 +277,7 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(1, len(notes))
-        self.assertEqual(Note(position=None, duration=Beat(4, rest=True), start_beat=Beat(1)), notes[0])
+        self.assertEqual(Note(position=None, duration=Beat(4, rest=True), order=0), notes[0])
 
     def test_can_handle_multiple_rests_in_sequence(self):
         rhythm = [
@@ -292,7 +292,7 @@ class TestApplyRhythm(TestCase):
         notes = apply_rhythm(pattern, rhythm)
 
         self.assertEqual(4, len(notes))
-        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), start_beat=Beat(1)), notes[0])
-        self.assertEqual(Note(position=None, duration=Beat(1, rest=True), start_beat=Beat(2)), notes[1])
-        self.assertEqual(Note(position=None, duration=Beat(1, rest=True), start_beat=Beat(3)), notes[2])
-        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), start_beat=Beat(4)), notes[3])
+        self.assertEqual(Note(position=pattern[0][0], duration=Beat(1), order=0), notes[0])
+        self.assertEqual(Note(position=None, duration=Beat(1, rest=True), order=1), notes[1])
+        self.assertEqual(Note(position=None, duration=Beat(1, rest=True), order=2), notes[2])
+        self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), order=3), notes[3])

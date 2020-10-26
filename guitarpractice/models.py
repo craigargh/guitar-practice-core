@@ -32,6 +32,9 @@ class Beat:
     rest: bool = False
 
     def __add__(self, other):
+        if self.duration == 0 and self.division == 0:
+            return other
+
         total_duration = (self.duration * other.division) + (other.duration * self.division)
         total_division = self.division * other.division
 
@@ -54,13 +57,13 @@ class Beat:
 class Note:
     position: FretPosition
     duration: Beat
-    start_beat: Beat
+    order: int
 
 
 @dataclass()
 class Annotation:
     category: str
-    start_beat: Beat
+    order: int
     duration: Beat
 
 
