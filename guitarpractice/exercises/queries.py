@@ -9,7 +9,6 @@ def list_exercises() -> dict:
         del exercise['callable']
 
     return exercise_list
-    return {}
 
 
 def get_exercise(exercise_type: str, variation: str) -> Sequence:
