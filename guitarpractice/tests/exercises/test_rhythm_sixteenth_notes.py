@@ -8,7 +8,7 @@ from guitarpractice.models import Beat, FretPosition
 class TestRhythmSixteenthNotesLevelOne(TestCase):
     def test_sequence_has_16th_note_rhythm(self):
         random.seed(2)
-        sequence = rhythm_sixteenth_notes(level=1)
+        sequence = rhythm_sixteenth_notes(variation='level_1')
 
         sixteenth_beat = Beat(duration=1, division=16)
 
@@ -18,7 +18,7 @@ class TestRhythmSixteenthNotesLevelOne(TestCase):
 
     def test_single_fret_position_is_repeated(self):
         random.seed(2)
-        sequence = rhythm_sixteenth_notes(level=1)
+        sequence = rhythm_sixteenth_notes(variation='level_1')
 
         expected_position = FretPosition(fret=0, string=6)
 
@@ -28,14 +28,14 @@ class TestRhythmSixteenthNotesLevelOne(TestCase):
 
     def test_random_string_number_is_between_1_and_6(self):
         for _ in range(1000):
-            sequence = rhythm_sixteenth_notes(level=1)
+            sequence = rhythm_sixteenth_notes(variation='level_1')
 
             self.assertLessEqual(sequence.shapes[0].positions[0].string, 6)
             self.assertGreaterEqual(sequence.shapes[0].positions[0].string, 1)
 
     def test_random_fret_number_is_between_0_and_12(self):
         for _ in range(1000):
-            sequence = rhythm_sixteenth_notes(level=1)
+            sequence = rhythm_sixteenth_notes(variation='level_1')
 
             self.assertLessEqual(sequence.shapes[0].positions[0].fret, 12)
             self.assertGreaterEqual(sequence.shapes[0].positions[0].fret, 0)

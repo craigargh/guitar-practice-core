@@ -79,3 +79,9 @@ class TestBeat(TestCase):
     def test_subdivision_offset_returns_beat_subtracting_whole_beats(self):
         beat = Beat(duration=11, division=2)
         self.assertEqual(Beat(1, 2), beat.sub_beats)
+
+    def test_full_note_and_four_quarter_notes_are_equal(self):
+        full_beat = Beat(duration=1, division=1)
+        quarter_beat = Beat(duration=4, division=4)
+
+        self.assertEqual(full_beat, quarter_beat)

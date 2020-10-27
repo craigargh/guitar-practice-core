@@ -28,7 +28,7 @@ class GuitarShape:
 @dataclass()
 class Beat:
     duration: int
-    division: int = 1
+    division: int = 4
     rest: bool = False
 
     def __add__(self, other):
@@ -44,6 +44,14 @@ class Beat:
 
         return Beat(duration=duration, division=division)
 
+    def __eq__(self, other):
+        if self.division == other.division and self.duration == other.duration:
+            return True
+
+        return self.duration * other.division == other.duration * self.division
+
+
+
     @property
     def whole_beats(self):
         return self.duration // self.division
@@ -57,6 +65,7 @@ class Beat:
 class Note:
     position: FretPosition
     duration: Beat
+    elapsed_beats: Beat
     order: int
 
 

@@ -38,25 +38,28 @@ def positions_generator(shapes: List[GuitarShape]) -> List[FretPosition]:
 def apply_rhythm(pattern: List[List[FretPosition]], rhythm: List[Beat]) -> List[Note]:
     only_rests = all(beat.rest for beat in rhythm)
     if only_rests:
-        return [Note(position=None, duration=Beat(4, rest=True), order=0)]
+        return [Note(position=None, duration=Beat(4, rest=True), order=0, elapsed_beats=Beat(4))]
 
     rhythm_cycle = cycle(rhythm)
-    elapsed_beats = 0
+    elapsed_beats = Beat(0)
+    count = 0
     notes = []
 
     for position_group, beat in zip(pattern, rhythm_cycle):
+        elapsed_beats += beat
 
         while beat.rest:
-            rest = Note(position=None, duration=beat, order=elapsed_beats)
+            rest = Note(position=None, duration=beat, elapsed_beats=elapsed_beats, order=count)
             notes.append(rest)
 
             beat = next(rhythm_cycle)
-            elapsed_beats += 1
+            elapsed_beats += beat
+            count += 1
 
         for position in position_group:
-            note = Note(position=position, duration=beat, order=elapsed_beats)
+            note = Note(position=position, duration=beat, elapsed_beats=elapsed_beats, order=count)
             notes.append(note)
 
-        elapsed_beats += 1
+        count += 1
 
     return notes
