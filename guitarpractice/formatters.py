@@ -13,8 +13,8 @@ def to_vextab(exercise: Sequence) -> str:
         if note.elapsed_beats.division == 1:
             elements.append("|")
 
-    if elements[-1:] == '|':
-        elements[-1:] = '=:|'
+    if elements[-1] == '|':
+        elements[-1] = '=:|'
     else:
         elements.append('=:|')
 
