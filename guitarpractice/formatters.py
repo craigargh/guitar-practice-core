@@ -5,9 +5,12 @@ def to_vextab(exercise: Sequence) -> str:
     """
     http://vexflow.com/vextab/tutorial.html
     """
-    notes = [
-        f":{int(note.duration.division / note.duration.duration)} {note.position.fret}/{note.position.string}"
-        for note in exercise.notes
-    ]
+    elements = []
+    for note in exercise.notes:
+        note_el = f":{int(note.duration.division / note.duration.duration)} {note.position.fret}/{note.position.string}"
+        elements.append(note_el)
 
-    return " ".join(notes)
+        if note.elapsed_beats.division == 1:
+            elements.append("|")
+
+    return " ".join(elements)

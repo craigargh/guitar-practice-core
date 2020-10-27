@@ -85,3 +85,15 @@ class TestBeat(TestCase):
         quarter_beat = Beat(duration=4, division=4)
 
         self.assertEqual(full_beat, quarter_beat)
+
+    def test_one_fourth_and_four_sixteenths_are_equal(self):
+        quarter = Beat(duration=1, division=4)
+        sixteenth = Beat(duration=4, division=16)
+
+        self.assertEqual(quarter, sixteenth)
+
+    def test_three_triplets_and_one_fourth_are_equal(self):
+        quarter = Beat(duration=1, division=4)
+        triplet = Beat(duration=3, division=12)
+
+        self.assertEqual(quarter, triplet)

@@ -16,7 +16,7 @@ def level_one() -> Sequence:
 
     position = FretPosition(fret=fret_choice, string=string_choice)
     shape = GuitarShape('Fifth fret', 'note', positions=[position])
-    repeater = partial(repeat_each_position, repeats=16)
+    repeater = partial(repeat_each_position, repeats=32)
 
     rhythm = [Beat(duration=1, division=16)]
 
