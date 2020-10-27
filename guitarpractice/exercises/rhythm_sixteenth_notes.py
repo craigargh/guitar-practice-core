@@ -6,7 +6,7 @@ from guitarpractice.sequencer import make_sequence
 from guitarpractice.sequenceshifters import repeat_each_position
 
 
-def rhythm_sixteenth_notes(level: int) -> Sequence:
+def rhythm_sixteenth_notes(variation: str) -> Sequence:
     return level_one()
 
 

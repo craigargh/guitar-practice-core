@@ -7,8 +7,9 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Create domain models~~
 - ~~Create sequencer~~
 - ~~Implement 16th note exercise~~
-- Implement list_exercises and get_exercise
+- ~~Implement list_exercises and get_exercise~~
 - Implement vextab formatter
+- Convert sequenceshifters into pickpattern that can take another pickpattern as a frozen argument
 - Implement pick patterns
 - Add pick patterns to sequencer
 - Implement basic exercises
