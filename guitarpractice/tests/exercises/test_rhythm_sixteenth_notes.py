@@ -10,7 +10,7 @@ class TestRhythmSixteenthNotesLevelOne(TestCase):
         random.seed(2)
         sequence = rhythm_sixteenth_notes(level=1)
 
-        sixteenth_beat = Beat(duration=1, division=4)
+        sixteenth_beat = Beat(duration=1, division=16)
 
         self.assertEqual(16, len(sequence.notes))
         for beat in sequence.notes:

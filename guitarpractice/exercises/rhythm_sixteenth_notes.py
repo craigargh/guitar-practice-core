@@ -18,7 +18,7 @@ def level_one() -> Sequence:
     shape = GuitarShape('Fifth fret', 'note', positions=[position])
     repeater = partial(repeat_each_position, repeats=16)
 
-    rhythm = [Beat(duration=1, division=4)]
+    rhythm = [Beat(duration=1, division=16)]
 
     return make_sequence(
         shapes=[shape],
