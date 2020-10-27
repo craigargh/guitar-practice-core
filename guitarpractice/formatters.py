@@ -5,7 +5,7 @@ def to_vextab(exercise: Sequence) -> str:
     """
     http://vexflow.com/vextab/tutorial.html
     """
-    elements = ['|:']
+    elements = ['=|:']
     for note in exercise.notes:
         note_el = f":{int(note.duration.division / note.duration.duration)} {note.position.fret}/{note.position.string}"
         elements.append(note_el)
@@ -14,8 +14,8 @@ def to_vextab(exercise: Sequence) -> str:
             elements.append("|")
 
     if elements[-1:] == '|':
-        elements[-1:] = ':|'
+        elements[-1:] = '=:|'
     else:
-        elements.append(':|')
+        elements.append('=:|')
 
     return " ".join(elements)
