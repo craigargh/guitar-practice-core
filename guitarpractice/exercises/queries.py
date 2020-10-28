@@ -21,7 +21,7 @@ def _exercise_map():
         'exercises': {
             'rhythm-16th-notes': {
                 'variations': {
-                    'level_1': 'Level 1'
+                    'level-1': 'Level 1'
                 },
                 'callable': rhythm_sixteenth_notes
             }

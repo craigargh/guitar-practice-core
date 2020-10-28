@@ -12,7 +12,7 @@ class TestListExercises(TestCase):
             'exercises': {
                 'rhythm-16th-notes': {
                     'variations': {
-                        'level_1': 'Level 1'
+                        'level-1': 'Level 1'
                     },
                 }
             }
@@ -23,6 +23,6 @@ class TestListExercises(TestCase):
 
 class TestGetExercise(TestCase):
     def test_get_rhythm_16_notes_level_1_exercise_returns_sequence(self):
-        result = get_exercise('rhythm-16th-notes', 'level_1')
+        result = get_exercise('rhythm-16th-notes', 'level-1')
 
         self.assertEqual(Sequence, type(result))
