@@ -3,7 +3,7 @@ from functools import partial
 
 from guitarpractice.models import Sequence, FretPosition, GuitarShape, Beat
 from guitarpractice.sequencer import make_sequence
-from guitarpractice.sequenceshifters import repeat_each_position
+from guitarpractice.pickpatterns import repeat_each_position
 
 
 def rhythm_sixteenth_notes(variation: str) -> Sequence:
@@ -23,7 +23,7 @@ def level_one() -> Sequence:
     return make_sequence(
         shapes=[shape],
         rhythm=rhythm,
-        sequence_shifters=[repeater],
+        pick_pattern=repeater,
     )
 
 

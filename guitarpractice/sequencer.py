@@ -10,16 +10,11 @@ def make_sequence(
         shape_shifters: List[Callable] = None,
         pick_pattern: Callable = asc,
         annotators: List[Callable] = None,
-        sequence_shifters: List[Callable] = None,
         rhythm: List[Beat] = None,
 ) -> Sequence:
     pattern = []
     for shape in shapes:
         pattern.extend(pick_pattern(shape))
-
-    if sequence_shifters is not None:
-        for sequence_shifters in sequence_shifters:
-            pattern = sequence_shifters(pattern)
 
     if rhythm is None:
         rhythm = [Beat(duration=1)] * len(pattern)

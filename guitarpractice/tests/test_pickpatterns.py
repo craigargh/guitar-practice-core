@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from guitarpractice import pickpatterns
 from guitarpractice.models import FretPosition, GuitarShape
+from guitarpractice.pickpatterns import desc
 
 
 def get_chord_and_positions():
@@ -1041,3 +1042,113 @@ class TestBassAndEachRandomly(TestCase):
 
 class TestAlternatingBassAndEachRandomly(TestCase):
     pass
+
+
+class TestRepeatEachPosition(TestCase):
+    def test_repeat_each_position_repeats_each_item_twice_by_default(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.repeat_each_position(scale)
+
+        expected_sequence = [
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=3, string=5, finger=None)],
+            [FretPosition(fret=3, string=5, finger=None)],
+            [FretPosition(fret=5, string=5, finger=None)],
+            [FretPosition(fret=5, string=5, finger=None)],
+            [FretPosition(fret=3, string=4, finger=None)],
+            [FretPosition(fret=3, string=4, finger=None)],
+            [FretPosition(fret=5, string=4, finger=None)],
+            [FretPosition(fret=5, string=4, finger=None)]
+        ]
+
+        self.assertEqual(expected_sequence, result)
+
+    def test_can_set_number_of_repeats(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.repeat_each_position(scale, repeats=3)
+
+        expected_sequence = [
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=3, string=5, finger=None)],
+            [FretPosition(fret=3, string=5, finger=None)],
+            [FretPosition(fret=3, string=5, finger=None)],
+            [FretPosition(fret=5, string=5, finger=None)],
+            [FretPosition(fret=5, string=5, finger=None)],
+            [FretPosition(fret=5, string=5, finger=None)],
+            [FretPosition(fret=3, string=4, finger=None)],
+            [FretPosition(fret=3, string=4, finger=None)],
+            [FretPosition(fret=3, string=4, finger=None)],
+            [FretPosition(fret=5, string=4, finger=None)],
+            [FretPosition(fret=5, string=4, finger=None)],
+            [FretPosition(fret=5, string=4, finger=None)]
+        ]
+
+        self.assertEqual(expected_sequence, result)
+
+    def test_can_set_length_to_multiple_of_repeats(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.repeat_each_position(scale, repeats=3, length=6)
+
+        expected_sequence = [
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+        ]
+
+        self.assertEqual(6, len(result))
+        self.assertEqual(expected_sequence, result)
+
+    def test_can_set_length_to_not_a_multiple_of_repeats(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.repeat_each_position(scale, repeats=3, length=8)
+
+        expected_sequence = [
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=3, string=5, finger=None)],
+            [FretPosition(fret=3, string=5, finger=None)],
+        ]
+
+        self.assertEqual(8, len(result))
+        self.assertEqual(expected_sequence, result)
+
+    def test_can_set_order_to_another_pickpattern(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.repeat_each_position(scale, order=desc)
+
+        expected_sequence = [
+            [FretPosition(fret=5, string=4, finger=None)],
+            [FretPosition(fret=5, string=4, finger=None)],
+            [FretPosition(fret=3, string=4, finger=None)],
+            [FretPosition(fret=3, string=4, finger=None)],
+            [FretPosition(fret=5, string=5, finger=None)],
+            [FretPosition(fret=5, string=5, finger=None)],
+            [FretPosition(fret=3, string=5, finger=None)],
+            [FretPosition(fret=3, string=5, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=6, string=6, finger=None)],
+            [FretPosition(fret=3, string=6, finger=None)],
+            [FretPosition(fret=3, string=6, finger=None)],
+        ]
+
+        self.assertEqual(expected_sequence, result)

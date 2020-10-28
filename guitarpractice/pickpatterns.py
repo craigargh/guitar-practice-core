@@ -171,6 +171,28 @@ def alternating_bass_and_each_randomly(shape: GuitarShape, length: int = None) -
     pass
 
 
+def repeat_each_position(shape: GuitarShape, length: int = None, repeats: int = 2, order: Callable = asc) -> List[
+    List[FretPosition]]:
+    """
+    Play each fret in the sequence two or more times
+    """
+    if length is not None:
+        div_length = math.ceil(length / repeats)
+    else:
+        div_length = length
+
+    pattern = order(shape, length=div_length)
+
+    new_positions = []
+    for positions in pattern:
+        new_positions.extend([positions] * repeats)
+
+    if length is not None and len(new_positions) != length:
+        new_positions = adjust_length(new_positions, length)
+
+    return new_positions
+
+
 def split_bass_position(shape: GuitarShape) -> Tuple[FretPosition, GuitarShape]:
     positions = sorted(shape.positions)
     bass_note = positions.pop(0)
