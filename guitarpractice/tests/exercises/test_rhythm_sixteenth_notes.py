@@ -39,3 +39,8 @@ class TestRhythmSixteenthNotesLevelOne(TestCase):
 
             self.assertLessEqual(sequence.shapes[0].positions[0].fret, 12)
             self.assertGreaterEqual(sequence.shapes[0].positions[0].fret, 0)
+
+
+class TestRhythmSixteenthNotesLevelTwo(TestCase):
+    def test_sequence_has_16th_note_rhythm(self):
+        self.fail('Write the tests')
