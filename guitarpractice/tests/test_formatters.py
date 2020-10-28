@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from ..formatters import to_vextab
-from ..models import Sequence, Note, FretPosition, Beat, GuitarShape
+from guitarpractice.formatters import to_vextab
+from guitarpractice.models import Sequence, Note, FretPosition, Beat, GuitarShape
 
 
 class TestVexTabFormatter(TestCase):
@@ -195,8 +195,8 @@ class TestVexTabFormatter(TestCase):
             Note(order=0, position=position, duration=Beat(1, 1), elapsed_beats=Beat(1, 1)),
             Note(order=1, position=position, duration=Beat(1, 1), elapsed_beats=Beat(2, 1)),
             Note(order=2, position=position, duration=Beat(1, 1), elapsed_beats=Beat(3, 1)),
-            Note(order=2, position=position, duration=Beat(1, 1), elapsed_beats=Beat(4, 1)),
-            Note(order=2, position=position, duration=Beat(1, 1), elapsed_beats=Beat(5, 1)),
+            Note(order=3, position=position, duration=Beat(1, 1), elapsed_beats=Beat(4, 1)),
+            Note(order=4, position=position, duration=Beat(1, 1), elapsed_beats=Beat(5, 1)),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[position], category='scale')
@@ -231,7 +231,29 @@ class TestVexTabFormatter(TestCase):
         self.assertEqual(expected, vextab)
 
     def test_chords_are_converted_to_tab(self):
-        pass
+        position = FretPosition(string=6, fret=0)
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=1, position=FretPosition(3, 6), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=FretPosition(5, 5), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=FretPosition(5, 4), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=2, position=position, duration=duration, elapsed_beats=Beat(2, 4)),
+            Note(order=3, position=FretPosition(5, 6), duration=duration, elapsed_beats=Beat(3, 4)),
+            Note(order=3, position=FretPosition(7, 5), duration=duration, elapsed_beats=Beat(3, 4)),
+            Note(order=3, position=FretPosition(7, 4), duration=duration, elapsed_beats=Beat(3, 4)),
+            Note(order=4, position=position, duration=duration, elapsed_beats=Beat(4, 4)),
+
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = '=|: :q (3/6.5/5.5/4) :q 0/6 :q (5/6.7/5.7/4) :q 0/6 =:|'
+        self.assertEqual(expected, vextab)
 
     def half_note_triplets_use_are_marked_in_the_tab(self):
         pass
