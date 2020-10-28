@@ -28,3 +28,11 @@ def _exercise_map():
             }
         }
     }
+
+
+"""
+Exercise ideas:
+- 16th notes
+- Gallops and reverse gallops
+- Power chords
+"""
