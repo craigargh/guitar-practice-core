@@ -9,11 +9,10 @@ def to_vextab(exercise: Sequence) -> str:
     """
     http://vexflow.com/vextab/tutorial.html
     """
-    elements = ['=|:']
+    elements = ['notes =|:']
 
     sorted_notes = sorted(exercise.notes, key=attrgetter('order'))
     note_groups = groupby(sorted_notes, key=attrgetter('order'))
-
     note_groups = {k: list(v) for k, v in note_groups}
 
     for group_key in sorted(note_groups.keys()):
@@ -30,7 +29,12 @@ def to_vextab(exercise: Sequence) -> str:
     else:
         elements.append('=:|')
 
-    return " ".join(elements)
+    tab = " ".join(elements)
+    tabstave = (
+        f'tabstave notation=false\n'
+        f'{tab}'
+    )
+    return tabstave
 
 
 def vextab_duration(note: Note) -> str:
