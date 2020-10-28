@@ -12,10 +12,9 @@ class TestListExercises(TestCase):
             'exercises': {
                 'rhythm-16th-notes': {
                     'title': 'Rhythm 16th Notes',
-                    'variations': {
-                        'id': 'level-1',
-                        'title': 'Level 1'
-                    },
+                    'variations': [
+                        {'id': 'level-1', 'title': 'Level 1'},
+                    ],
                 }
             }
         }
