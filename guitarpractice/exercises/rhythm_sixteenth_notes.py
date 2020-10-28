@@ -38,8 +38,11 @@ def level_two() -> Sequence:
     string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
 
     lowest_fret = random.choice(list(range(0, 6)))
+    fret_options = [0] + list(range(lowest_fret, lowest_fret + 8))
+    random.shuffle(fret_options)
+
     for _ in range(4):
-        fret_choice = random.choice([0] + list(range(lowest_fret, lowest_fret + 8)))
+        fret_choice = fret_options.pop()
         positions.append(FretPosition(fret=fret_choice, string=string_choice))
 
     shape = GuitarShape('Notes on a single string', 'scale', positions=positions)
