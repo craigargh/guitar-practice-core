@@ -231,7 +231,13 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :w 1/3 | :w 1/3 | :w 1/3 | :w 1/3 | :w 1/3 =:|'
+            'notes =|: :w 1/3 | :w 1/3 |\n'
+            '\n'
+            'tabstave notation=false\n'
+            '| :w 1/3 | :w 1/3 |\n'
+            '\n'
+            'tabstave notation=false\n'
+            '| :w 1/3 =:|'
         )
         self.assertEqual(expected, vextab)
 

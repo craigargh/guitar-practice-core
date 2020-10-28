@@ -29,12 +29,20 @@ def to_vextab(exercise: Sequence) -> str:
     else:
         elements.append('=:|')
 
-    tab = " ".join(elements)
-    tabstave = (
-        f'tabstave notation=false\n'
-        f'{tab}'
-    )
-    return tabstave
+    element_groups = split_staves(elements)
+
+    staves = []
+    for elements in element_groups:
+        tab = " ".join(elements)
+        tabstave = (
+            f'tabstave notation=false\n'
+            f'{tab}'
+        )
+        staves.append(tabstave)
+
+    # breakpoint()
+
+    return "\n\n".join(staves)
 
 
 def vextab_duration(note: Note) -> str:
@@ -68,3 +76,22 @@ def vextab_note_string(notes: List[Note]) -> str:
         note_el = f":{duration} ({chord_join})"
 
     return note_el
+
+
+def split_staves(elements: List[str]) -> List[List[str]]:
+    groups = [[]]
+    bar_count = 0
+    groups_count = 0
+
+    for element in elements:
+        if element == '|':
+            bar_count += 1
+
+        groups[groups_count].append(element)
+
+        if bar_count == 2:
+            groups.append(['|'])
+            groups_count += 1
+            bar_count = 0
+
+    return groups

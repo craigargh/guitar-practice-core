@@ -21,7 +21,7 @@ def level_one() -> Sequence:
     string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
 
     position = FretPosition(fret=fret_choice, string=string_choice)
-    shape = GuitarShape('Fifth fret', 'scale', positions=[position])
+    shape = GuitarShape('Single note', 'scale', positions=[position])
     repeater = partial(repeat_each_position, repeats=16)
 
     rhythm = [Beat(duration=1, division=16)]
@@ -42,7 +42,7 @@ def level_two() -> Sequence:
         fret_choice = random.choice([0] + list(range(lowest_fret, lowest_fret + 8)))
         positions.append(FretPosition(fret=fret_choice, string=string_choice))
 
-    shape = GuitarShape('Fifth fret', 'scale', positions=positions)
+    shape = GuitarShape('Notes on a single string', 'scale', positions=positions)
     repeater = partial(repeat_each_position, repeats=16)
 
     rhythm = [Beat(duration=1, division=16)]
