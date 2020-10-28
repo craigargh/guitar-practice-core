@@ -20,8 +20,10 @@ def _exercise_map():
     return {
         'exercises': {
             'rhythm-16th-notes': {
+                'title': 'Rhythm 16th Notes',
                 'variations': {
-                    'level-1': 'Level 1'
+                    'id': 'level-1',
+                    'title': 'Level 1'
                 },
                 'callable': rhythm_sixteenth_notes
             }
