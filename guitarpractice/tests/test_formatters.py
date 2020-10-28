@@ -212,7 +212,7 @@ class TestVexTabFormatter(TestCase):
         )
         self.assertEqual(expected, vextab)
 
-    def test_tab_bars_are_added_for_multiple_bars(self):
+    def test_tabs_are_split_into_mutliple_staves_every_two_bars(self):
         position = FretPosition(string=3, fret=1)
 
         notes = [
@@ -234,10 +234,10 @@ class TestVexTabFormatter(TestCase):
             'notes =|: :w 1/3 | :w 1/3 |\n'
             '\n'
             'tabstave notation=false\n'
-            '| :w 1/3 | :w 1/3 |\n'
+            'notes :w 1/3 | :w 1/3 |\n'
             '\n'
             'tabstave notation=false\n'
-            '| :w 1/3 =:|'
+            'notes :w 1/3 =:|'
         )
         self.assertEqual(expected, vextab)
 
@@ -330,7 +330,4 @@ class TestVexTabFormatter(TestCase):
         pass
 
     def test_notation_is_true_when_tuplets_are_included_as_a_workaround(self):
-        pass
-
-    def test_tab_is_split_onto_multiple_staves(self):
         pass

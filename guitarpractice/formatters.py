@@ -9,7 +9,7 @@ def to_vextab(exercise: Sequence) -> str:
     """
     http://vexflow.com/vextab/tutorial.html
     """
-    elements = ['notes =|:']
+    elements = ['=|:']
 
     sorted_notes = sorted(exercise.notes, key=attrgetter('order'))
     note_groups = groupby(sorted_notes, key=attrgetter('order'))
@@ -36,7 +36,7 @@ def to_vextab(exercise: Sequence) -> str:
         tab = " ".join(elements)
         tabstave = (
             f'tabstave notation=false\n'
-            f'{tab}'
+            f'notes {tab}'
         )
         staves.append(tabstave)
 
@@ -90,7 +90,7 @@ def split_staves(elements: List[str]) -> List[List[str]]:
         groups[groups_count].append(element)
 
         if bar_count == 2:
-            groups.append(['|'])
+            groups.append([])
             groups_count += 1
             bar_count = 0
 
