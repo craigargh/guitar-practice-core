@@ -7,7 +7,13 @@ from guitarpractice.pickpatterns import repeat_each_position
 
 
 def rhythm_sixteenth_notes(variation: str) -> Sequence:
-    return level_one()
+    variation_map = {
+        'level-1': level_one,
+        'level-2': level_two,
+    }
+    variation_function = variation_map[variation]
+
+    return variation_function()
 
 
 def level_one() -> Sequence:
@@ -15,7 +21,28 @@ def level_one() -> Sequence:
     string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
 
     position = FretPosition(fret=fret_choice, string=string_choice)
-    shape = GuitarShape('Fifth fret', 'note', positions=[position])
+    shape = GuitarShape('Fifth fret', 'scale', positions=[position])
+    repeater = partial(repeat_each_position, repeats=16)
+
+    rhythm = [Beat(duration=1, division=16)]
+
+    return make_sequence(
+        shapes=[shape],
+        rhythm=rhythm,
+        pick_pattern=repeater,
+    )
+
+
+def level_two() -> Sequence:
+    positions = []
+    string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
+
+    lowest_fret = random.choice(list(range(0, 6)))
+    for _ in range(4):
+        fret_choice = random.choice([0] + list(range(lowest_fret, lowest_fret + 8)))
+        positions.append(FretPosition(fret=fret_choice, string=string_choice))
+
+    shape = GuitarShape('Fifth fret', 'scale', positions=positions)
     repeater = partial(repeat_each_position, repeats=16)
 
     rhythm = [Beat(duration=1, division=16)]
