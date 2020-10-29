@@ -149,10 +149,15 @@ def stepped_pattern(shape: GuitarShape, step: int, length: int, pick_pattern: Ca
 
 
 def randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pattern = sorted(shape.positions)
-    random.shuffle(pattern)
+    positions = sorted(shape.positions)
+    random.shuffle(positions)
 
-    pattern = adjust_length(pattern, length=length)
+    positions = adjust_length(positions, length=length)
+
+    pattern = [
+        [position]
+        for position in positions
+    ]
 
     return pattern
 

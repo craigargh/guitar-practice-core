@@ -1028,10 +1028,10 @@ class TestRandomly(TestCase):
         pattern = pickpatterns.randomly(shape=chord)
 
         self.assertEqual(4, len(pattern))
-        self.assertEqual(positions[2], pattern[0])
-        self.assertEqual(positions[0], pattern[1])
-        self.assertEqual(positions[3], pattern[2])
-        self.assertEqual(positions[1], pattern[3])
+        self.assertEqual([positions[2]], pattern[0])
+        self.assertEqual([positions[0]], pattern[1])
+        self.assertEqual([positions[3]], pattern[2])
+        self.assertEqual([positions[1]], pattern[3])
 
     def test_can_set_length_to_shorten_pattern(self):
         random.seed(20)
@@ -1040,8 +1040,8 @@ class TestRandomly(TestCase):
         pattern = pickpatterns.randomly(shape=chord, length=2)
 
         self.assertEqual(2, len(pattern))
-        self.assertEqual(positions[2], pattern[0])
-        self.assertEqual(positions[0], pattern[1])
+        self.assertEqual([positions[2]], pattern[0])
+        self.assertEqual([positions[0]], pattern[1])
 
     def test_can_lengthen_pattern(self):
         random.seed(20)
@@ -1050,12 +1050,12 @@ class TestRandomly(TestCase):
         pattern = pickpatterns.randomly(shape=chord, length=6)
 
         self.assertEqual(6, len(pattern))
-        self.assertEqual(positions[2], pattern[0])
-        self.assertEqual(positions[0], pattern[1])
-        self.assertEqual(positions[3], pattern[2])
-        self.assertEqual(positions[1], pattern[3])
-        self.assertEqual(positions[3], pattern[2])
-        self.assertEqual(positions[1], pattern[3])
+        self.assertEqual([positions[2]], pattern[0])
+        self.assertEqual([positions[0]], pattern[1])
+        self.assertEqual([positions[3]], pattern[2])
+        self.assertEqual([positions[1]], pattern[3])
+        self.assertEqual([positions[3]], pattern[2])
+        self.assertEqual([positions[1]], pattern[3])
 
 
 class TestBassAndRandomly(TestCase):
