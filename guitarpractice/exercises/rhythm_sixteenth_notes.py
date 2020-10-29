@@ -18,10 +18,6 @@ def rhythm_sixteenth_notes(variation: str) -> Sequence:
 
 
 def level_one() -> Sequence:
-    # fret_choice = random.choice(list(range(0, 13)))
-    # string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
-    #
-    # position = FretPosition(fret=fret_choice, string=string_choice)
     shape = generate_single_string_shape(1)
     repeater = partial(repeat_each_position, repeats=16)
 
