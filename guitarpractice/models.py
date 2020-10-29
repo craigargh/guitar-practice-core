@@ -8,6 +8,7 @@ class FretPosition:
     fret: int
     string: int
     finger: int = None
+    highlighted: bool = False
 
     def __gt__(self, other):
         if self.string == other.string:
