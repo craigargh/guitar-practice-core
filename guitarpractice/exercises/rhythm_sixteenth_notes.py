@@ -1,6 +1,7 @@
 import random
 from functools import partial
 
+from guitarpractice import pickpatterns
 from guitarpractice.models import Sequence, FretPosition, GuitarShape, Beat
 from guitarpractice.sequencer import make_sequence
 from guitarpractice.pickpatterns import repeat_each_position
@@ -17,11 +18,11 @@ def rhythm_sixteenth_notes(variation: str) -> Sequence:
 
 
 def level_one() -> Sequence:
-    fret_choice = random.choice(list(range(0, 13)))
-    string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
-
-    position = FretPosition(fret=fret_choice, string=string_choice)
-    shape = GuitarShape('Single note', 'scale', positions=[position])
+    # fret_choice = random.choice(list(range(0, 13)))
+    # string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
+    #
+    # position = FretPosition(fret=fret_choice, string=string_choice)
+    shape = generate_single_string_shape(1)
     repeater = partial(repeat_each_position, repeats=16)
 
     rhythm = [Beat(duration=1, division=16)]
@@ -34,19 +35,10 @@ def level_one() -> Sequence:
 
 
 def level_two() -> Sequence:
-    positions = []
-    string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
+    shape = generate_single_string_shape(4)
 
-    lowest_fret = random.choice(list(range(0, 6)))
-    fret_options = [0] + list(range(lowest_fret, lowest_fret + 8))
-    random.shuffle(fret_options)
-
-    for _ in range(4):
-        fret_choice = random.pop(fret_options)
-        positions.append(FretPosition(fret=fret_choice, string=string_choice))
-
-    shape = GuitarShape('Notes on a single string', 'scale', positions=positions)
-    repeater = partial(repeat_each_position, repeats=16)
+    order = random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+    repeater = partial(repeat_each_position, repeats=16, order=order)
 
     rhythm = [Beat(duration=1, division=16)]
 
@@ -55,6 +47,22 @@ def level_two() -> Sequence:
         rhythm=rhythm,
         pick_pattern=repeater,
     )
+
+
+def generate_single_string_shape(positions_len: int) -> GuitarShape:
+    positions = []
+    string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
+
+    lowest_fret = random.choice(list(range(0, 6)))
+    fret_options = [0] + list(range(lowest_fret, lowest_fret + 8))
+    random.shuffle(fret_options)
+
+    for _ in range(positions_len):
+        fret_choice = fret_options.pop()
+        positions.append(FretPosition(fret=fret_choice, string=string_choice))
+
+    shape = GuitarShape('Notes on a single string', 'scale', positions=positions)
+    return shape
 
 
 """

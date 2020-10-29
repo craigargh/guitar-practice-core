@@ -1,8 +1,8 @@
+import random
 from unittest import TestCase
 
 from guitarpractice import pickpatterns
 from guitarpractice.models import FretPosition, GuitarShape
-from guitarpractice.pickpatterns import desc
 
 
 def get_chord_and_positions():
@@ -1021,7 +1021,41 @@ class TestSteppedDesc(TestCase):
 
 
 class TestRandomly(TestCase):
-    pass
+    def test_notes_are_returned_in_a_random_order(self):
+        random.seed(20)
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.randomly(shape=chord)
+
+        self.assertEqual(4, len(pattern))
+        self.assertEqual(positions[2], pattern[0])
+        self.assertEqual(positions[0], pattern[1])
+        self.assertEqual(positions[3], pattern[2])
+        self.assertEqual(positions[1], pattern[3])
+
+    def test_can_set_length_to_shorten_pattern(self):
+        random.seed(20)
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.randomly(shape=chord, length=2)
+
+        self.assertEqual(2, len(pattern))
+        self.assertEqual(positions[2], pattern[0])
+        self.assertEqual(positions[0], pattern[1])
+
+    def test_can_lengthen_pattern(self):
+        random.seed(20)
+        chord, positions = get_chord_and_positions()
+
+        pattern = pickpatterns.randomly(shape=chord, length=6)
+
+        self.assertEqual(6, len(pattern))
+        self.assertEqual(positions[2], pattern[0])
+        self.assertEqual(positions[0], pattern[1])
+        self.assertEqual(positions[3], pattern[2])
+        self.assertEqual(positions[1], pattern[3])
+        self.assertEqual(positions[3], pattern[2])
+        self.assertEqual(positions[1], pattern[3])
 
 
 class TestBassAndRandomly(TestCase):
@@ -1134,7 +1168,7 @@ class TestRepeatEachPosition(TestCase):
     def test_can_set_order_to_another_pickpattern(self):
         scale, positions = get_scale_and_positions()
 
-        result = pickpatterns.repeat_each_position(scale, order=desc)
+        result = pickpatterns.repeat_each_position(scale, order=pickpatterns.desc)
 
         expected_sequence = [
             [FretPosition(fret=5, string=4, finger=None)],

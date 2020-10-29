@@ -1,4 +1,5 @@
 import math
+import random
 from functools import partial
 from typing import List, Callable, Tuple
 
@@ -148,7 +149,12 @@ def stepped_pattern(shape: GuitarShape, step: int, length: int, pick_pattern: Ca
 
 
 def randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    pass
+    pattern = sorted(shape.positions)
+    random.shuffle(pattern)
+
+    pattern = adjust_length(pattern, length=length)
+
+    return pattern
 
 
 def bass_and_randomly(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
