@@ -23,6 +23,7 @@ def _exercise_map():
                 'title': 'Rhythm 16th Notes',
                 'variations': [
                     {'id': 'level-1', 'title': 'Level 1'},
+                    {'id': 'level-2', 'title': 'Level 2'},
                 ],
                 'callable': rhythm_sixteenth_notes
             }

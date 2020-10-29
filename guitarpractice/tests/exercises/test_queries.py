@@ -14,6 +14,7 @@ class TestListExercises(TestCase):
                     'title': 'Rhythm 16th Notes',
                     'variations': [
                         {'id': 'level-1', 'title': 'Level 1'},
+                        {'id': 'level-2', 'title': 'Level 2'},
                     ],
                 }
             }
@@ -25,5 +26,10 @@ class TestListExercises(TestCase):
 class TestGetExercise(TestCase):
     def test_get_rhythm_16_notes_level_1_exercise_returns_sequence(self):
         result = get_exercise('rhythm-16th-notes', 'level-1')
+
+        self.assertEqual(Sequence, type(result))
+
+    def test_get_rhythm_16_notes_level_2_exercise_returns_sequence(self):
+        result = get_exercise('rhythm-16th-notes', 'level-2')
 
         self.assertEqual(Sequence, type(result))
