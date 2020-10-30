@@ -13,7 +13,7 @@ def scale_shapes(variation: str):
         'c-major-pentatonic': c_major_pentatonic,
     }
     variation_function = variations[variation]
-    return variation_function
+    return variation_function()
 
 
 def c_major_pentatonic() -> Sequence:
