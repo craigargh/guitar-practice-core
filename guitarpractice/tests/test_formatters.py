@@ -317,7 +317,7 @@ class TestVexTabFormatter(TestCase):
             'tabstave notation=false\n'
             'notes =|: :h 5/6 :h 5/6 :h 5/6 ^3^ | :h 5/6 :h 5/6 :h 5/6 ^3^ =:|'
         )
-        breakpoint()
+
         self.assertEqual(expected, vextab)
 
     def test_quarter_note_triplets_are_marked_in_the_tab(self):
@@ -331,3 +331,24 @@ class TestVexTabFormatter(TestCase):
 
     def test_notation_is_true_when_tuplets_are_included_as_a_workaround(self):
         pass
+
+    def test_odd_length_quarter_notes_are_split_with_extension_bar(self):
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(3, 4)
+
+        notes = [
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(3, 4)),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :h 5/6 T:q:5/6 =:|'
+        )
+
+        self.assertEqual(expected, vextab)

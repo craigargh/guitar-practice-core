@@ -40,8 +40,6 @@ def to_vextab(exercise: Sequence) -> str:
         )
         staves.append(tabstave)
 
-    # breakpoint()
-
     return "\n\n".join(staves)
 
 
