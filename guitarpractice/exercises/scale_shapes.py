@@ -22,7 +22,7 @@ def c_major_pentatonic() -> Sequence:
         pickpatterns.asc,
         pickpatterns.desc,
         pickpatterns.asc_and_desc,
-        partial(pickpatterns.bass_and_asc, length=10)
+        partial(pickpatterns.alternating_bass_and_asc, length=10)
     ])
     rhythm = [Beat(duration=1, division=8)]
 
@@ -39,7 +39,7 @@ def c_major() -> Sequence:
         pickpatterns.asc,
         pickpatterns.desc,
         pickpatterns.asc_and_desc,
-        partial(pickpatterns.bass_and_asc, length=14)
+        partial(pickpatterns.alternating_bass_and_asc, length=14)
     ])
     rhythm = [Beat(duration=1, division=8)]
 
