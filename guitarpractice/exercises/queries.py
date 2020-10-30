@@ -1,5 +1,6 @@
 from guitarpractice.models import Sequence
 from .rhythm_sixteenth_notes import rhythm_sixteenth_notes
+from .scale_shapes import scale_shapes
 
 
 def list_exercises() -> dict:
@@ -33,7 +34,7 @@ def _exercise_map():
                     {'id': 'c-major-pentatonic', 'title': 'C Major Pentatonic'},
                     {'id': 'c-major', 'title': 'C Major'},
                 ],
-                'callable': rhythm_sixteenth_notes
+                'callable': scale_shapes
             },
         }
     }
