@@ -4,7 +4,7 @@ from functools import partial
 from guitarpractice import pickpatterns
 from guitarpractice.models import Sequence, Beat
 from guitarpractice.sequencer import make_sequence
-from guitarpractice.shapes.scale_collections import c_major_pentatonic_modes
+from guitarpractice.shapes.scale_collections import c_major_pentatonic_modes, c_major_modes
 
 
 def scale_shapes(variation: str):
@@ -34,7 +34,7 @@ def c_major_pentatonic() -> Sequence:
 
 
 def c_major() -> Sequence:
-    shape = random.choice(c_major_pentatonic_modes())
+    shape = random.choice(c_major_modes())
     pattern = random.choice([
         pickpatterns.asc,
         pickpatterns.desc,
