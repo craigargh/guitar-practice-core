@@ -20,7 +20,7 @@ def e_phrygian():
         FretPosition(string=1, fret=12, finger=1),
     ]
 
-    return GuitarShape('E Phrygian', positions)
+    return GuitarShape('E Phrygian', 'scale', positions)
 
 
 def f_lydian():
@@ -42,7 +42,7 @@ def f_lydian():
         FretPosition(string=1, fret=13, finger=2),
     ]
 
-    return GuitarShape('F Lydian', positions)
+    return GuitarShape('F Lydian', 'scale', positions)
 
 
 def g_mixolydian():
@@ -64,7 +64,7 @@ def g_mixolydian():
         FretPosition(string=1, fret=3, finger=1),
     ]
 
-    return GuitarShape('G Mixolydian', positions)
+    return GuitarShape('G Mixolydian', 'scale', positions)
 
 
 def a_aeolian():
@@ -86,7 +86,7 @@ def a_aeolian():
         FretPosition(string=1, fret=5, finger=1),
     ]
 
-    return GuitarShape('A Aeolian', positions)
+    return GuitarShape('A Aeolian', 'scale', positions)
 
 
 def b_locrian():
@@ -108,7 +108,7 @@ def b_locrian():
         FretPosition(string=1, fret=7, finger=1),
     ]
 
-    return GuitarShape('B Locrian', positions)
+    return GuitarShape('B Locrian', 'scale', positions)
 
 
 def c_ionian():
@@ -130,7 +130,7 @@ def c_ionian():
         FretPosition(string=1, fret=8, finger=2),
     ]
 
-    return GuitarShape('C Ionian', positions)
+    return GuitarShape('C Ionian', 'scale', positions)
 
 
 def d_dorian():
@@ -152,4 +152,4 @@ def d_dorian():
         FretPosition(string=1, fret=10, finger=1),
     ]
 
-    return GuitarShape('D Dorian', positions)
+    return GuitarShape('D Dorian', 'scale', positions)
