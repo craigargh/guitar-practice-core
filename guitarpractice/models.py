@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from math import gcd
+from fractions import Fraction
+from math import gcd, ceil
 from typing import List
 
 
@@ -32,18 +33,30 @@ class Beat:
     division: int = 4
     rest: bool = False
 
+    @classmethod
+    def from_fraction(cls, fraction):
+        return Beat(duration=fraction.numerator, division=fraction.denominator)
+
+    def to_fraction(self) -> Fraction:
+        return Fraction(self.duration, self.division)
+
     def __add__(self, other):
         if self.duration == 0 and self.division == 0:
             return other
 
-        total_duration = (self.duration * other.division) + (other.duration * self.division)
-        total_division = self.division * other.division
+        result = self.to_fraction() + other.to_fraction()
 
-        common_divisible = gcd(total_duration, total_division)
-        duration = int(total_duration / common_divisible)
-        division = int(total_division / common_divisible)
+        return Beat.from_fraction(result)
 
-        return Beat(duration=duration, division=division)
+    def __sub__(self, other):
+        as_fraction = self.to_fraction() - other.to_fraction()
+
+        result = Beat.from_fraction(as_fraction)
+
+        if result.duration < 0:
+            raise ValueError('Beat duration cannot be negative')
+
+        return result
 
     def __eq__(self, other):
         if self.division == other.division and self.duration == other.duration:
@@ -51,7 +64,21 @@ class Beat:
 
         return self.duration * other.division == other.duration * self.division
 
+    def __ceil__(self):
+        result = ceil(self.to_fraction())
+        return Beat.from_fraction(result)
 
+    def __gt__(self, other):
+        return self.to_fraction() > other.to_fraction()
+
+    def __lt__(self, other):
+        return self.to_fraction() < other.to_fraction()
+
+    def __ge__(self, other):
+        return self > other or self == other
+
+    def __le__(self, other):
+        return self < other or self == other
 
     @property
     def whole_beats(self):
@@ -60,6 +87,33 @@ class Beat:
     @property
     def sub_beats(self):
         return Beat(self.duration % self.division, self.division)
+
+    def tie_split(self) -> List:
+        splits = []
+
+        remainder = self
+        even_beats = [
+            Beat(1, 1),
+            Beat(1, 2),
+            Beat(1, 4),
+            Beat(1, 8),
+            Beat(1, 16),
+            Beat(1, 32),
+        ]
+
+        while remainder > Beat(1, 1):
+            remainder -= Beat(1, 1)
+            splits.append(Beat(1, 1))
+
+        for even_beat in even_beats:
+            if even_beat <= remainder:
+                splits.append(even_beat)
+                remainder -= even_beat
+
+            if remainder == Beat(0, 1):
+                break
+
+        return splits
 
 
 @dataclass()

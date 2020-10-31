@@ -1,3 +1,4 @@
+from math import ceil
 from unittest import TestCase
 from guitarpractice.models import FretPosition, Beat
 
@@ -97,3 +98,168 @@ class TestBeat(TestCase):
         triplet = Beat(duration=3, division=12)
 
         self.assertEqual(quarter, triplet)
+
+    def test_can_subtract_notes(self):
+        calculations = [
+            [Beat(duration=1, division=1), Beat(duration=1, division=1), Beat(duration=0, division=1)],
+            [Beat(duration=1, division=1), Beat(duration=1, division=2), Beat(duration=1, division=2)],
+            [Beat(duration=1, division=1), Beat(duration=1, division=4), Beat(duration=3, division=4)],
+            [Beat(duration=1, division=1), Beat(duration=1, division=8), Beat(duration=7, division=8)],
+            [Beat(duration=1, division=1), Beat(duration=1, division=16), Beat(duration=15, division=16)],
+            [Beat(duration=1, division=1), Beat(duration=1, division=32), Beat(duration=31, division=32)],
+            [Beat(duration=1, division=2), Beat(duration=1, division=2), Beat(duration=0, division=1)],
+            [Beat(duration=1, division=2), Beat(duration=1, division=4), Beat(duration=1, division=4)],
+            [Beat(duration=1, division=2), Beat(duration=1, division=8), Beat(duration=3, division=8)],
+            [Beat(duration=1, division=2), Beat(duration=1, division=16), Beat(duration=7, division=16)],
+            [Beat(duration=1, division=2), Beat(duration=1, division=32), Beat(duration=15, division=32)],
+            [Beat(duration=1, division=4), Beat(duration=1, division=4), Beat(duration=0, division=1)],
+            [Beat(duration=1, division=4), Beat(duration=1, division=8), Beat(duration=1, division=8)],
+            [Beat(duration=1, division=4), Beat(duration=1, division=16), Beat(duration=3, division=16)],
+            [Beat(duration=1, division=4), Beat(duration=1, division=32), Beat(duration=7, division=32)],
+            [Beat(duration=1, division=8), Beat(duration=1, division=8), Beat(duration=0, division=1)],
+            [Beat(duration=1, division=8), Beat(duration=1, division=16), Beat(duration=1, division=16)],
+            [Beat(duration=1, division=8), Beat(duration=1, division=32), Beat(duration=3, division=32)],
+            [Beat(duration=1, division=16), Beat(duration=1, division=16), Beat(duration=0, division=1)],
+            [Beat(duration=1, division=16), Beat(duration=1, division=32), Beat(duration=1, division=32)],
+            [Beat(duration=1, division=32), Beat(duration=1, division=32), Beat(duration=0, division=1)],
+        ]
+
+        for calculation in calculations:
+            result = calculation[0] - calculation[1]
+
+            self.assertEqual(calculation[2], result)
+
+    def test_subtracting_the_same_beat_returns_zero_beat(self):
+        result = Beat(1, 1) - Beat(1, 1)
+
+        self.assertEqual(Beat(0, 1), result)
+
+    def test_result_of_subtracting_notes_cannot_be_negative(self):
+        with self.assertRaises(ValueError):
+            Beat(duration=1, division=4) - Beat(duration=1, division=1)
+
+    def test_ceiling_round_beat_up_to_the_nearest_whole_beat(self):
+        calculations = [
+            [Beat(duration=1, division=1), Beat(duration=1, division=1)],
+            [Beat(duration=1, division=2), Beat(duration=1, division=1)],
+            [Beat(duration=3, division=4), Beat(duration=1, division=1)],
+            [Beat(duration=5, division=8), Beat(duration=1, division=1)],
+            [Beat(duration=8, division=16), Beat(duration=1, division=1)],
+            [Beat(duration=31, division=32), Beat(duration=1, division=1)],
+            [Beat(duration=2, division=1), Beat(duration=2, division=1)],
+            [Beat(duration=5, division=2), Beat(duration=3, division=1)],
+            [Beat(duration=12, division=4), Beat(duration=3, division=1)],
+            [Beat(duration=48, division=8), Beat(duration=6, division=1)],
+            [Beat(duration=160, division=16), Beat(duration=10, division=1)],
+            [Beat(duration=900, division=32), Beat(duration=29, division=1)],
+        ]
+
+        for calculation in calculations:
+            result = ceil(calculation[0])
+
+            self.assertEqual(calculation[1], result)
+
+    def test_larger_beats_are_greater_than_smaller_beats(self):
+        self.assertGreater(Beat(1, 1), Beat(1, 2))
+
+    def test_smaller_beats_are_not_greater_than_larger_beats(self):
+        result = Beat(1, 2) > Beat(1, 1)
+        self.assertFalse(result)
+
+    def test_larger_beats_are_greater_or_equal_to_smaller_beats(self):
+        self.assertGreaterEqual(Beat(1, 1), Beat(1, 2))
+
+    def test_smaller_beats_are_not_greater_or_equal_to_larger_beats(self):
+        result = Beat(1, 2) >= Beat(1, 1)
+        self.assertFalse(result)
+
+    def test_smaller_beats_are_lesser_than_bigger_beats(self):
+        self.assertLess(Beat(1, 2), Beat(1, 1))
+
+    def test_bigger_beats_are_not_lesser_than_smaller_beats(self):
+        result = Beat(1, 1) < Beat(1, 2)
+        self.assertFalse(result)
+
+    def test_smaller_beats_are_lesser_or_equal_to_bigger_beats(self):
+        self.assertLessEqual(Beat(1, 2), Beat(1, 1))
+
+    def test_bigger_beats_are_not_lesser_or_equal_to_smaller_beats(self):
+        result = Beat(1, 1) <= Beat(1, 2)
+        self.assertFalse(result)
+
+    def test_greater_than_or_equal_for_same_beats(self):
+        self.assertGreaterEqual(Beat(1, 1), Beat(1, 1))
+
+    def test_less_than_or_equal_for_same_beats(self):
+        self.assertLessEqual(Beat(1, 1), Beat(1, 1))
+
+    def test_tie_split_breaks_down_quarter_notes(self):
+        calculations = [
+            (Beat(1, 4), [Beat(1, 4)]),
+            (Beat(2, 4), [Beat(1, 2)]),
+            (Beat(3, 4), [Beat(1, 2), Beat(1, 4)]),
+            (Beat(4, 4), [Beat(1, 1)]),
+        ]
+
+        for calculation in calculations:
+            split = calculation[0].tie_split()
+            self.assertEqual(calculation[1], split)
+
+    def test_tie_split_breaks_down_eighth_notes(self):
+        calculations = [
+            (Beat(1, 8), [Beat(1, 8)]),
+            (Beat(2, 8), [Beat(1, 4)]),
+            (Beat(3, 8), [Beat(1, 4), Beat(1, 8)]),
+            (Beat(4, 8), [Beat(1, 2)]),
+            (Beat(5, 8), [Beat(1, 2), Beat(1, 8)]),
+            (Beat(6, 8), [Beat(1, 2), Beat(1, 4)]),
+            (Beat(7, 8), [Beat(1, 2), Beat(1, 4), Beat(1, 8)]),
+            (Beat(8, 8), [Beat(1, 1)]),
+        ]
+
+        for calculation in calculations:
+            split = calculation[0].tie_split()
+            self.assertEqual(calculation[1], split)
+
+    def test_tie_split_breaks_down_sixteenth_notes(self):
+        calculations = [
+            (Beat(1, 16), [Beat(1, 16)]),
+            (Beat(2, 16), [Beat(1, 8)]),
+            (Beat(3, 16), [Beat(1, 8), Beat(1, 16)]),
+            (Beat(4, 16), [Beat(1, 4)]),
+            (Beat(5, 16), [Beat(1, 4), Beat(1, 16)]),
+            (Beat(6, 16), [Beat(1, 4), Beat(1, 8)]),
+            (Beat(7, 16), [Beat(1, 4), Beat(1, 8), Beat(1, 16)]),
+            (Beat(8, 16), [Beat(1, 2)]),
+            (Beat(9, 16), [Beat(1, 2), Beat(1, 16)]),
+            (Beat(10, 16), [Beat(1, 2), Beat(1, 8)]),
+            (Beat(11, 16), [Beat(1, 2), Beat(1, 8), Beat(1, 16)]),
+            (Beat(12, 16), [Beat(1, 2), Beat(1, 4)]),
+            (Beat(13, 16), [Beat(1, 2), Beat(1, 4), Beat(1, 16)]),
+            (Beat(14, 16), [Beat(1, 2), Beat(1, 4), Beat(1, 8)]),
+            (Beat(15, 16), [Beat(1, 2), Beat(1, 4), Beat(1, 8), Beat(1, 16)]),
+            (Beat(16, 16), [Beat(1, 1)]),
+        ]
+
+        for calculation in calculations:
+            split = calculation[0].tie_split()
+            self.assertEqual(calculation[1], split)
+
+    def test_tie_split_breaks_down_thirty_second_notes(self):
+        calculations = [
+            (Beat(1, 32), [Beat(1, 32)]),
+            (Beat(5, 32), [Beat(1, 8), Beat(1, 32)]),
+            (Beat(19, 32), [Beat(1, 2), Beat(1, 16), Beat(1, 32)]),
+            (Beat(32, 32), [Beat(1, 1)]),
+        ]
+
+        for calculation in calculations:
+            split = calculation[0].tie_split()
+            self.assertEqual(calculation[1], split)
+
+    def test_multi_bar_beats_are_broken_down(self):
+        duration = Beat(5, 1) + Beat(1, 2)
+        result = duration.tie_split()
+
+        expected = [Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 2)]
+        self.assertEqual(expected, result)
