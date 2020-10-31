@@ -13,9 +13,11 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Implement __ceil__, __gt__, __lt__ and __sub__ in Beat~~
 - ~~Fill the end of exercises with rests~~
 - Allow ending to be filled with either last note or rests
+- Format odd beats for vextab using tie_split()
 - 16th note exercises
 - Split pickpatterns into smaller modules
 - Add metadata to sequences (e.g. tuning, exercise title, bpm, time) 
+- Add triplets to vextab and tie_split()
 - Implement pick patterns
 - Implement basic exercises
 - Import chord and scale shapes from legacy project
