@@ -113,9 +113,6 @@ class Beat:
             if remainder == Beat(0, 1):
                 break
 
-        if self.rest:
-            return sorted(splits)
-
         return splits
 
 

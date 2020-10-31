@@ -263,10 +263,3 @@ class TestBeat(TestCase):
 
         expected = [Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 2)]
         self.assertEqual(expected, result)
-
-    def test_beat_order_is_reversed_for_rests(self):
-        beat = Beat(3, 8, rest=True)
-        result = beat.tie_split()
-
-        expected = [Beat(1, 8), Beat(1, 4)]
-        self.assertEqual(expected, result)
