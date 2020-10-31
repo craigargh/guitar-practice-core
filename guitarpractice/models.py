@@ -64,10 +64,6 @@ class Beat:
 
         return self.duration * other.division == other.duration * self.division
 
-    def __ceil__(self):
-        result = ceil(self.to_fraction())
-        return Beat.from_fraction(result)
-
     def __gt__(self, other):
         return self.to_fraction() > other.to_fraction()
 
@@ -79,14 +75,6 @@ class Beat:
 
     def __le__(self, other):
         return self < other or self == other
-
-    @property
-    def whole_beats(self):
-        return self.duration // self.division
-
-    @property
-    def sub_beats(self):
-        return Beat(self.duration % self.division, self.division)
 
     def tie_split(self) -> List:
         splits = []
@@ -114,6 +102,10 @@ class Beat:
                 break
 
         return splits
+
+    def next_bar(self):
+        result = ceil(self.to_fraction())
+        return Beat.from_fraction(result)
 
 
 @dataclass()

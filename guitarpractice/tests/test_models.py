@@ -73,14 +73,6 @@ class TestBeat(TestCase):
 
         self.assertEqual(Beat(duration=1, division=1), result)
 
-    def test_whole_beats_returns_number_of_full_beats(self):
-        beat = Beat(duration=11, division=2)
-        self.assertEqual(5, beat.whole_beats)
-
-    def test_subdivision_offset_returns_beat_subtracting_whole_beats(self):
-        beat = Beat(duration=11, division=2)
-        self.assertEqual(Beat(1, 2), beat.sub_beats)
-
     def test_full_note_and_four_quarter_notes_are_equal(self):
         full_beat = Beat(duration=1, division=1)
         quarter_beat = Beat(duration=4, division=4)
@@ -138,7 +130,7 @@ class TestBeat(TestCase):
         with self.assertRaises(ValueError):
             Beat(duration=1, division=4) - Beat(duration=1, division=1)
 
-    def test_ceiling_round_beat_up_to_the_nearest_whole_beat(self):
+    def test_next_bar_rounds_beat_up_to_the_nearest_whole_beat(self):
         calculations = [
             [Beat(duration=1, division=1), Beat(duration=1, division=1)],
             [Beat(duration=1, division=2), Beat(duration=1, division=1)],
@@ -155,7 +147,7 @@ class TestBeat(TestCase):
         ]
 
         for calculation in calculations:
-            result = ceil(calculation[0])
+            result = calculation[0].next_bar()
 
             self.assertEqual(calculation[1], result)
 

@@ -64,8 +64,7 @@ def apply_rhythm(pattern: List[List[FretPosition]], rhythm: List[Beat]) -> List[
 
 def fill_remaining_bar_with_rests(notes: List[Note]) -> List[Note]:
     last_beat = notes[-1].elapsed_beats
-    next_bar = ceil(last_beat)
-    remaining_beat = next_bar - last_beat
+    remaining_beat = last_beat.next_bar() - last_beat
 
     if remaining_beat == Beat(0, 1):
         return notes
