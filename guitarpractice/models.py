@@ -119,7 +119,7 @@ class Note:
     duration: Beat
     elapsed_beats: Beat
     order: int
-    annotation: Annotation = None
+    annotations: List[Annotation] = None
 
 
 @dataclass()
