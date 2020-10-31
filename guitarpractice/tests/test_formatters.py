@@ -355,4 +355,10 @@ class TestVexTabFormatter(TestCase):
         self.assertEqual(expected, vextab)
 
     def test_odd_length_quarter_note_chords_are_split_with_tie(self):
+        beat = Beat(3, 8)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes (12/5.12/4) :8 T(12/5.12/4) '
+        )
         self.fail("Write the test")
