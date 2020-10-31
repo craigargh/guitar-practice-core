@@ -109,22 +109,20 @@ class Beat:
 
 
 @dataclass()
+class Annotation:
+    category: str
+
+
+@dataclass()
 class Note:
     position: Union[FretPosition, None]
     duration: Beat
     elapsed_beats: Beat
     order: int
-
-
-@dataclass()
-class Annotation:
-    category: str
-    order: int
-    duration: Beat
+    annotation: Annotation = None
 
 
 @dataclass()
 class Sequence:
     notes: List[Note]
     shapes: List[GuitarShape]
-    annotations: List[Annotation] = None

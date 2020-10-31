@@ -353,3 +353,6 @@ class TestVexTabFormatter(TestCase):
         )
 
         self.assertEqual(expected, vextab)
+
+    def test_odd_length_quarter_note_chords_are_split_with_tie(self):
+        self.fail("Write the test")
