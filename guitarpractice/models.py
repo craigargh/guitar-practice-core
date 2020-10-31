@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from fractions import Fraction
 from math import ceil
 from typing import List, Union
@@ -119,7 +119,7 @@ class Note:
     duration: Beat
     elapsed_beats: Beat
     order: int
-    annotations: List[Annotation] = None
+    annotations: List[Annotation] = field(default_factory=list)
 
 
 @dataclass()
