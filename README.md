@@ -10,7 +10,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Implement list_exercises and get_exercise~~
 - ~~Implement basic vextab formatter~~
 - ~~Convert sequenceshifters into pickpattern that can take another pickpattern as a frozen argument~~
-- Implement __ceil__, __gt__, __lt__ and __sub__ in Beat
+- ~~Implement __ceil__, __gt__, __lt__ and __sub__ in Beat~~
 - Fill the end of exercises with rests
 - 16th note exercises
 - Split pickpatterns into smaller modules

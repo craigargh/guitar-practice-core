@@ -16,7 +16,12 @@ class TestListExercises(TestCase):
                         {'id': 'level-1', 'title': 'Level 1'},
                         {'id': 'level-2', 'title': 'Level 2'},
                     ],
-                }
+                },
+                'scale-shapes': {
+                    'title': 'Scale Shapes',
+                    'variations': [
+                        {'id': 'c-major-pentatonic', 'title': 'C Major Pentatonic'},
+                        {'id': 'c-major', 'title': 'C Major'}]}
             }
         }
 

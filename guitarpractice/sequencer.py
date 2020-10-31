@@ -1,4 +1,5 @@
 from itertools import cycle
+from math import ceil
 from typing import List, Callable
 
 from .models import GuitarShape, Sequence, Note, FretPosition, Beat
@@ -20,6 +21,7 @@ def make_sequence(
         rhythm = [Beat(duration=1)] * len(pattern)
 
     notes = apply_rhythm(pattern, rhythm)
+    notes = fill_remaining_bar_with_rests(notes)
 
     return Sequence(notes=notes, shapes=shapes)
 
@@ -58,3 +60,25 @@ def apply_rhythm(pattern: List[List[FretPosition]], rhythm: List[Beat]) -> List[
         count += 1
 
     return notes
+
+
+def fill_remaining_bar_with_rests(notes: List[Note]) -> List[Note]:
+    last_beat = notes[-1].elapsed_beats
+    next_bar = ceil(last_beat)
+    difference = next_bar - last_beat
+    remaining_beats = difference.tie_split()
+
+    elapsed_beats = last_beat
+    order = notes[-1].order
+
+    fill_rests = []
+    for beat in remaining_beats:
+        beat.rest = True
+        elapsed_beats += beat
+        order += 1
+
+        rest_note = Note(position=None, duration=beat, elapsed_beats=elapsed_beats, order=order)
+
+        fill_rests.append(rest_note)
+
+    return notes + fill_rests
