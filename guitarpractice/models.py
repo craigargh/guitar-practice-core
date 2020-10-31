@@ -126,3 +126,6 @@ class Note:
 class Sequence:
     notes: List[Note]
     shapes: List[GuitarShape]
+
+    def normalised_note_durations(self) -> List[Note]:
+        return self.notes

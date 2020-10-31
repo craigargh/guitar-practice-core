@@ -255,3 +255,8 @@ class TestBeat(TestCase):
 
         expected = [Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 2)]
         self.assertEqual(expected, result)
+
+
+class TestSequence(TestCase):
+    def test_normalised_note_durations(self):
+        self.fail("Write some tests")
