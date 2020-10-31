@@ -65,22 +65,15 @@ def apply_rhythm(pattern: List[List[FretPosition]], rhythm: List[Beat]) -> List[
 def fill_remaining_bar_with_rests(notes: List[Note]) -> List[Note]:
     last_beat = notes[-1].elapsed_beats
     next_bar = ceil(last_beat)
-    difference = next_bar - last_beat
+    remaining_beat = next_bar - last_beat
 
-    remaining_beats = difference.tie_split()
-    remaining_beats = sorted(remaining_beats)
+    if remaining_beat == Beat(0, 1):
+        return notes
 
-    elapsed_beats = last_beat
-    order = notes[-1].order
+    remaining_beat.rest = True
+    order = notes[-1].order + 1
+    elapsed_beats = last_beat + remaining_beat
 
-    fill_rests = []
-    for beat in remaining_beats:
-        beat.rest = True
-        elapsed_beats += beat
-        order += 1
+    rest_note = Note(position=None, duration=remaining_beat, elapsed_beats=elapsed_beats, order=order)
 
-        rest_note = Note(position=None, duration=beat, elapsed_beats=elapsed_beats, order=order)
-
-        fill_rests.append(rest_note)
-
-    return notes + fill_rests
+    return notes + [rest_note]

@@ -93,9 +93,7 @@ class TestSequencer(TestCase):
         expected_notes = [
             Note(order=0, position=positions[0], duration=Beat(1, 1), elapsed_beats=Beat(1, 1)),
             Note(order=1, position=positions[1], duration=Beat(1, 4), elapsed_beats=Beat(5, 4)),
-            Note(order=2, position=None, duration=Beat(1, 4, rest=True), elapsed_beats=Beat(6, 4)),
-            Note(order=3, position=None, duration=Beat(1, 2, rest=True), elapsed_beats=Beat(2, 1)),
-
+            Note(order=2, position=None, duration=Beat(3, 4, rest=True), elapsed_beats=Beat(2, 1)),
         ]
         self.assertEqual(expected_notes, sequence.notes)
         self.assertEqual([shape], sequence.shapes)
