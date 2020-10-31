@@ -66,7 +66,9 @@ def fill_remaining_bar_with_rests(notes: List[Note]) -> List[Note]:
     last_beat = notes[-1].elapsed_beats
     next_bar = ceil(last_beat)
     difference = next_bar - last_beat
+
     remaining_beats = difference.tie_split()
+    remaining_beats = sorted(remaining_beats)
 
     elapsed_beats = last_beat
     order = notes[-1].order

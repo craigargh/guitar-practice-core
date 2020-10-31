@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from fractions import Fraction
-from math import gcd, ceil
-from typing import List
+from math import ceil
+from typing import List, Union
 
 
 @dataclass()
@@ -118,7 +118,7 @@ class Beat:
 
 @dataclass()
 class Note:
-    position: FretPosition
+    position: Union[FretPosition, None]
     duration: Beat
     elapsed_beats: Beat
     order: int
