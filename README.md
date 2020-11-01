@@ -14,21 +14,61 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Fill the end of exercises with rests~~
 - ~~Format odd beats for vextab using tie_split()~~
 - ~~Fix chords in normalise_note_durations()~~
+- ~~Import chord and scale shapes from legacy project~~
+- Make a plan of exercises 
 - Add tests for eq etc. for rest beats
 - Allow ending to be filled with either last note or rests
-- 16th note exercises
+- Ties and annotations (e.g. hammer-ons, pull-offs, palm muting, pick direction)
 - Split pickpatterns into smaller modules
 - Add metadata to sequences (e.g. tuning, exercise title, bpm, time) 
 - Add triplets to vextab and tie_split()
-- Implement pick patterns
-- Implement basic exercises
-- Import chord and scale shapes from legacy project
+- Implement remaining pick patterns
 - Implement rhythm generator
 - Add rhythm to sequencer
-- Exercises that use rhythm
 - Implement shape shifters
 - Add shape shifters to sequencer
-- Exercises that use shape shifters
+
+## Exercises
+
+This is the list of exercise types that are planned to be implemented:
+
+- Metal Rhythm
+  - Power chords and Palm muting
+  - Individual note rhythms (i.e. no power chords)
+  - Riffs (based on real songs)
+  - Time signatures
+- Rhythm
+  - Sixteenth notes
+  - Rhythm divisions
+- Lead
+  - Licks
+- Left-hand technique:
+  - Hammer-ons, pull-offs and trills
+  - Vibrato
+  - Slides
+  - Bends
+  - Harmonics
+  - Warm-ups
+  - Co-ordination
+  - Dexterity
+- Right-hand technique:
+  - Alternate picking and pick-slanting
+  - Sweep picking
+  - Tapping
+  - Pinched harmonics
+- Scales
+  - Scale mode shapes
+    - Major
+    - Pentatonic
+    - Blues
+    - Natural minor
+    - Harmonic minor
+    - Melodic minor
+    - etc.
+  - Arpeggios
+- Chords
+  - Chord progressions
+  - Chord Arpeggios
 
 
 ## Features
