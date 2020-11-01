@@ -79,12 +79,19 @@ def vextab_note_string(notes: List[Note]) -> str:
 
             note_el = f"{duration_string} {note.position.fret}/{note.position.string}"
     else:
+
         chord = [
             f'{note.position.fret}/{note.position.string}'
             for note in notes
         ]
         chord_join = ".".join(chord)
-        note_el = f":{duration} ({chord_join})"
+
+        if tie := notes[0].tie:
+            tie_element = tie_map[tie]
+        else:
+            tie_element = ""
+
+        note_el = f":{duration} {tie_element}({chord_join})"
 
     return note_el
 

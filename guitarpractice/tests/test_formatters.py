@@ -270,13 +270,13 @@ class TestVexTabFormatter(TestCase):
         duration = Beat(1, 4)
 
         notes = [
-            Note(order=1, position=FretPosition(3, 6), duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=FretPosition(5, 5), duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=FretPosition(5, 4), duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=2, position=position, duration=duration, elapsed_beats=Beat(2, 4)),
-            Note(order=3, position=FretPosition(5, 6), duration=duration, elapsed_beats=Beat(3, 4)),
-            Note(order=3, position=FretPosition(7, 5), duration=duration, elapsed_beats=Beat(3, 4)),
-            Note(order=3, position=FretPosition(7, 4), duration=duration, elapsed_beats=Beat(3, 4)),
+            Note(order=0, position=FretPosition(3, 6), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=0, position=FretPosition(5, 5), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=0, position=FretPosition(5, 4), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4)),
+            Note(order=2, position=FretPosition(5, 6), duration=duration, elapsed_beats=Beat(3, 4)),
+            Note(order=2, position=FretPosition(7, 5), duration=duration, elapsed_beats=Beat(3, 4)),
+            Note(order=2, position=FretPosition(7, 4), duration=duration, elapsed_beats=Beat(3, 4)),
             Note(order=4, position=position, duration=duration, elapsed_beats=Beat(4, 4)),
 
         ]
@@ -354,10 +354,22 @@ class TestVexTabFormatter(TestCase):
         self.assertEqual(expected, vextab)
 
     def test_odd_length_quarter_note_chords_are_split_with_tie(self):
-        beat = Beat(3, 8)
+        duration = Beat(3, 8)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(3, 8)),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(3, 8)),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
 
         expected = (
             'tabstave notation=false\n'
-            'notes (12/5.12/4) :8 T(12/5.12/4) '
+            'notes =|: :q (12/5.12/4) :8 T(12/5.12/4) =:|'
         )
-        self.fail("Write the test")
+
+        self.assertEqual(expected, vextab)
