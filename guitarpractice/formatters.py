@@ -61,39 +61,51 @@ def vextab_duration(note: Note) -> str:
 
 
 def vextab_note_string(notes: List[Note]) -> str:
-    tie_map = {
-        constants.TIE: 'T'
-    }
-
-    duration = vextab_duration(notes[0])
-
     if len(notes) == 1:
-        note = notes[0]
-
-        if note.duration.rest:
-            note_el = f':{duration} ##'
-        else:
-            duration_string = f':{duration}'
-            if note.tie:
-                duration_string = f'{tie_map[note.tie]}:{duration}:'
-
-            note_el = f"{duration_string} {note.position.fret}/{note.position.string}"
+        note_el = format_note_element(notes[0])
     else:
-
-        chord = [
-            f'{note.position.fret}/{note.position.string}'
-            for note in notes
-        ]
-        chord_join = ".".join(chord)
-
-        if tie := notes[0].tie:
-            tie_element = tie_map[tie]
-        else:
-            tie_element = ""
-
-        note_el = f":{duration} {tie_element}({chord_join})"
+        note_el = format_chord_elements(notes)
 
     return note_el
+
+
+def format_note_element(note: Note) -> str:
+    duration = vextab_duration(note)
+
+    if note.duration.rest:
+        note_el = f':{duration} ##'
+    else:
+        duration_string = f':{duration}'
+        if note.tie:
+            duration_string = f'{tie_map(note.tie)}:{duration}:'
+
+        note_el = f"{duration_string} {note.position.fret}/{note.position.string}"
+
+    return note_el
+
+
+def format_chord_elements(notes: List[Note]) -> str:
+    duration = vextab_duration(notes[0])
+
+    chord = [
+        f'{note.position.fret}/{note.position.string}'
+        for note in notes
+    ]
+    chord_join = ".".join(chord)
+
+    if tie := notes[0].tie:
+        tie_element = tie_map(tie)
+    else:
+        tie_element = ""
+
+    return f":{duration} {tie_element}({chord_join})"
+
+
+def tie_map(key: str) -> str:
+    tie_mapping = {
+        constants.TIE: 'T'
+    }
+    return tie_mapping.get(key)
 
 
 def split_staves(elements: List[str]) -> List[List[str]]:
