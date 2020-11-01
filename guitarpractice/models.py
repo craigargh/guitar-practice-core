@@ -42,7 +42,7 @@ class Beat:
 
     def __add__(self, other):
         if self.duration == 0 and self.division == 0:
-            return other
+            return Beat(other.duration, other.division)
 
         result = self.to_fraction() + other.to_fraction()
 
@@ -59,10 +59,10 @@ class Beat:
         return result
 
     def __eq__(self, other):
-        if self.division == other.division and self.duration == other.duration:
+        if self.division == other.division and self.duration == other.duration and self.rest == other.rest:
             return True
 
-        return self.duration * other.division == other.duration * self.division
+        return self.duration * other.division == other.duration * self.division and self.rest == other.rest
 
     def __gt__(self, other):
         return self.to_fraction() > other.to_fraction()
@@ -100,6 +100,10 @@ class Beat:
 
             if remainder == Beat(0, 1):
                 break
+
+        if self.rest:
+            for split in splits:
+                split.rest = True
 
         return splits
 

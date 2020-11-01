@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 
 from guitarpractice.models import Note, FretPosition, Beat
 from guitarpractice.note_utils import group_notes, normalise_note_durations
@@ -70,6 +70,24 @@ class TestNormaliseNoteDurations(TestCase):
 
         self.assertEqual(expected, result)
 
+    def test_ties_are_not_added_to_rests(self):
+        position = FretPosition(string=3, fret=1)
+        notes = [
+            Note(order=0, position=None, duration=Beat(3, rest=True), elapsed_beats=Beat(3)),
+            Note(order=1, position=position, duration=Beat(1), elapsed_beats=Beat(4)),
+        ]
+
+        result = normalise_note_durations(notes)
+
+        expected = [
+            Note(order=0, position=None, duration=Beat(1, 2, rest=True), elapsed_beats=Beat(1, 2)),
+            Note(order=1, position=None, duration=Beat(1, 4, rest=True), elapsed_beats=Beat(3, 4)),
+            Note(order=2, position=position, duration=Beat(1, 4), elapsed_beats=Beat(1, 1)),
+        ]
+
+        self.assertEqual(expected, result)
+
+    @skip
     def test_odd_length_quarter_note_chord_is_split(self):
         position = FretPosition(string=3, fret=1)
         notes = [

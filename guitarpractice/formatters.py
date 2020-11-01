@@ -1,7 +1,7 @@
 from typing import List
 
 from guitarpractice.models import Sequence, Beat, Note
-from guitarpractice.note_utils import group_notes
+from guitarpractice.note_utils import group_notes, normalise_note_durations
 
 
 def to_vextab(exercise: Sequence) -> str:
