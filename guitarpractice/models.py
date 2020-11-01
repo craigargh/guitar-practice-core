@@ -112,6 +112,9 @@ class Beat:
         result = ceil(self.to_fraction())
         return Beat.from_fraction(result)
 
+    def is_new_bar(self) -> bool:
+        return (self + Beat(1, 1)).division == 1
+
 
 @dataclass()
 class Annotation:

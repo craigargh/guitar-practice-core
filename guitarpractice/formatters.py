@@ -35,7 +35,7 @@ def make_elements(notes):
         note_el = vextab_note_string(note_group)
         elements.append(note_el)
 
-        if (note_group[0].elapsed_beats + Beat(1, 1)).division == 1:
+        if note_group[0].elapsed_beats.is_new_bar():
             elements.append("|")
 
     if elements[-1] == '|':

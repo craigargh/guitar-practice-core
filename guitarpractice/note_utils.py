@@ -20,11 +20,10 @@ def normalise_note_durations(notes: List[Note]) -> List[Note]:
     normalised_notes = []
 
     for note in notes:
-        new_bar = (elapsed_beats + Beat(1, 1)).division == 1
-
         first_note = True
         normalised_durations = note.duration.tie_split()
-        if not new_bar:
+
+        if not elapsed_beats.is_new_bar():
             normalised_durations.reverse()
 
         for duration in normalised_durations:

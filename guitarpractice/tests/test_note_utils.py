@@ -104,7 +104,6 @@ class TestNormaliseNoteDurations(TestCase):
 
         self.assertEqual(expected, result)
 
-    @skip
     def test_odd_length_quarter_note_chord_is_split(self):
         position = FretPosition(string=3, fret=1)
         notes = [

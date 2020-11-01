@@ -267,3 +267,12 @@ class TestBeat(TestCase):
         result = duration.tie_split()
 
         self.assertEqual([Beat(1, 4, rest=True)], result)
+
+    def test_new_bar_returns_true_when_division_is_1(self):
+        self.assertTrue(Beat(2, 1).is_new_bar())
+
+    def test_new_bar_returns_true_when_division_is_not_end_beat(self):
+        self.assertFalse(Beat(2, 4).is_new_bar())
+
+    def test_new_bar_returns_true_when_division_is_end_beat(self):
+        self.assertTrue(Beat(4, 4).is_new_bar())
