@@ -22,8 +22,14 @@ Level three:
 
 Level four:
 - Trills
+- Legato
 - Level three but faster
 - Chord hammer-ons/pull-offs (hammering on a single extra note while a chord is barred)
 - Double stop hammer-ons/pull-offs (hammer on two strings at one)
+
+
+Reference material:
+https://www.youtube.com/watch?v=Gtx8PGK4Aac
+
 
 '''

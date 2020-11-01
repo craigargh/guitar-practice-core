@@ -52,6 +52,7 @@ This is the list of exercise types that are planned to be implemented:
   - Dexterity
 - Right-hand technique:
   - Alternate picking and pick-slanting
+  - Legato
   - Sweep picking
   - Tapping
   - Pinched harmonics
