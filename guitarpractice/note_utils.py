@@ -1,3 +1,4 @@
+from copy import deepcopy
 from itertools import groupby
 from operator import attrgetter
 from typing import List, Dict
@@ -12,30 +13,56 @@ def group_notes(notes) -> Dict[str, List[Note]]:
 
 
 def normalise_note_durations(notes: List[Note]) -> List[Note]:
-    notes = sorted(notes, key=attrgetter('order'))
+    changes_to_apply = calculate_normalised_beats_per_chord(notes)
+    return apply_new_chord_rhythms(changes_to_apply)
+
+
+def calculate_normalised_beats_per_chord(notes):
+    chords = group_notes(notes)
+    groups_with_new_beats = {}
+
+    for chord_index in sorted(chords.keys()):
+        chord = chords[chord_index]
+
+        new_rhythm = chord[0].duration.tie_split()
+
+        groups_with_new_beats[chord_index] = {
+            'original_notes': chord,
+            'new_rhythm': new_rhythm,
+        }
+
+    return groups_with_new_beats
+
+
+def apply_new_chord_rhythms(normalised_beats_per_chord):
+    all_notes = []
 
     elapsed_beats = Beat(0, 1)
     count = 0
 
-    normalised_notes = []
-
-    for note in notes:
-        first_note = True
-        normalised_durations = note.duration.tie_split()
+    for chord_index in sorted(normalised_beats_per_chord.keys()):
+        chord = normalised_beats_per_chord[chord_index]['original_notes']
+        new_rhythm = normalised_beats_per_chord[chord_index]['new_rhythm']
 
         if not elapsed_beats.is_new_bar():
-            normalised_durations.reverse()
+            new_rhythm.reverse()
 
-        for duration in normalised_durations:
-            elapsed_beats += duration
+        first_beat_in_tie = True
+        for beat in new_rhythm:
+            elapsed_beats += beat
 
-            new_note = Note(position=note.position, duration=duration, elapsed_beats=elapsed_beats, order=count)
-            if not first_note and not note.duration.rest:
-                new_note.annotations.append('tie')
+            for note in chord:
+                new_note = Note(
+                    position=note.position, duration=beat, elapsed_beats=elapsed_beats, order=count,
+                    annotations=deepcopy(note.annotations)
+                )
 
-            normalised_notes.append(new_note)
-            first_note = False
+                if not first_beat_in_tie and not beat.rest:
+                    new_note.annotations.append('tie')
 
+                all_notes.append(new_note)
+
+            first_beat_in_tie = False
             count += 1
 
-    return normalised_notes
+    return all_notes

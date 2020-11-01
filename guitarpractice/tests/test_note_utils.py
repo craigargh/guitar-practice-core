@@ -107,19 +107,21 @@ class TestNormaliseNoteDurations(TestCase):
     def test_odd_length_quarter_note_chord_is_split(self):
         position = FretPosition(string=3, fret=1)
         notes = [
-            Note(order=0, position=position, duration=Beat(3), elapsed_beats=Beat(3)),
-            Note(order=0, position=position, duration=Beat(3), elapsed_beats=Beat(3)),
+            Note(order=0, position=FretPosition(string=3, fret=1), duration=Beat(3, 4), elapsed_beats=Beat(3)),
+            Note(order=0, position=FretPosition(string=2, fret=1), duration=Beat(3, 4), elapsed_beats=Beat(3)),
             Note(order=1, position=position, duration=Beat(1), elapsed_beats=Beat(4)),
         ]
 
         result = normalise_note_durations(notes)
 
         expected = [
-            Note(order=0, position=position, duration=Beat(1, 2), elapsed_beats=Beat(1, 2)),
-            Note(order=1, position=position, duration=Beat(1, 4), elapsed_beats=Beat(3, 4), annotations=['tie']),
-            Note(order=0, position=position, duration=Beat(1, 2), elapsed_beats=Beat(1, 2)),
-            Note(order=1, position=position, duration=Beat(1, 4), elapsed_beats=Beat(3, 4), annotations=['tie']),
-            Note(order=1, position=position, duration=Beat(1, 4), elapsed_beats=Beat(1, 1)),
+            Note(order=0, position=FretPosition(string=3, fret=1), duration=Beat(1, 2), elapsed_beats=Beat(1, 2)),
+            Note(order=0, position=FretPosition(string=2, fret=1), duration=Beat(1, 2), elapsed_beats=Beat(1, 2)),
+            Note(order=1, position=FretPosition(string=3, fret=1), duration=Beat(1, 4), elapsed_beats=Beat(3, 4),
+                 annotations=['tie']),
+            Note(order=1, position=FretPosition(string=2, fret=1), duration=Beat(1, 4), elapsed_beats=Beat(3, 4),
+                 annotations=['tie']),
+            Note(order=2, position=position, duration=Beat(1, 4), elapsed_beats=Beat(1, 1)),
         ]
 
         self.assertEqual(expected, result)
