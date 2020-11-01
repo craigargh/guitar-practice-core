@@ -1,5 +1,6 @@
 from unittest import TestCase, skip
 
+from guitarpractice import constants
 from guitarpractice.models import Note, FretPosition, Beat
 from guitarpractice.note_utils import group_notes, normalise_note_durations
 
@@ -64,7 +65,7 @@ class TestNormaliseNoteDurations(TestCase):
 
         expected = [
             Note(order=0, position=position, duration=Beat(1, 2), elapsed_beats=Beat(1, 2)),
-            Note(order=1, position=position, duration=Beat(1, 4), elapsed_beats=Beat(3, 4), annotations=['tie']),
+            Note(order=1, position=position, duration=Beat(1, 4), elapsed_beats=Beat(3, 4), tie=constants.TIE),
             Note(order=2, position=position, duration=Beat(1, 4), elapsed_beats=Beat(1, 1)),
         ]
 
@@ -99,7 +100,7 @@ class TestNormaliseNoteDurations(TestCase):
         expected = [
             Note(order=0, position=position, duration=Beat(1, 4), elapsed_beats=Beat(1, 4)),
             Note(order=1, position=position, duration=Beat(1, 4), elapsed_beats=Beat(2, 4)),
-            Note(order=2, position=position, duration=Beat(2, 4), elapsed_beats=Beat(1, 1), annotations=['tie']),
+            Note(order=2, position=position, duration=Beat(2, 4), elapsed_beats=Beat(1, 1), tie=constants.TIE),
         ]
 
         self.assertEqual(expected, result)
@@ -118,9 +119,9 @@ class TestNormaliseNoteDurations(TestCase):
             Note(order=0, position=FretPosition(string=3, fret=1), duration=Beat(1, 2), elapsed_beats=Beat(1, 2)),
             Note(order=0, position=FretPosition(string=2, fret=1), duration=Beat(1, 2), elapsed_beats=Beat(1, 2)),
             Note(order=1, position=FretPosition(string=3, fret=1), duration=Beat(1, 4), elapsed_beats=Beat(3, 4),
-                 annotations=['tie']),
+                 tie=constants.TIE),
             Note(order=1, position=FretPosition(string=2, fret=1), duration=Beat(1, 4), elapsed_beats=Beat(3, 4),
-                 annotations=['tie']),
+                 tie=constants.TIE),
             Note(order=2, position=position, duration=Beat(1, 4), elapsed_beats=Beat(1, 1)),
         ]
 

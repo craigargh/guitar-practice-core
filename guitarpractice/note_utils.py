@@ -3,6 +3,8 @@ from itertools import groupby
 from operator import attrgetter
 from typing import List, Dict
 
+from guitarpractice import constants
+from guitarpractice.constants import TIE
 from guitarpractice.models import Note, Beat
 
 
@@ -58,7 +60,7 @@ def apply_new_chord_rhythms(normalised_beats_per_chord):
                 )
 
                 if not first_beat_in_tie and not beat.rest:
-                    new_note.annotations.append('tie')
+                    new_note.tie = constants.TIE
 
                 all_notes.append(new_note)
 

@@ -1,6 +1,7 @@
 from typing import List
 
-from guitarpractice.models import Sequence, Beat, Note
+from guitarpractice import constants
+from guitarpractice.models import Sequence, Note
 from guitarpractice.note_utils import group_notes, normalise_note_durations
 
 
@@ -69,8 +70,11 @@ def vextab_note_string(notes: List[Note]) -> str:
             note_el = f':{duration} ##'
         else:
             duration_string = f':{duration}'
-            if 'tie' in note.annotations:
-                duration_string = f'T:{duration}:'
+            if note.tie:
+                tie_map = {
+                    constants.TIE: 'T'
+                }
+                duration_string = f'{tie_map[note.tie]}:{duration}:'
 
             note_el = f"{duration_string} {note.position.fret}/{note.position.string}"
     else:

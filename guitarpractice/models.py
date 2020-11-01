@@ -128,6 +128,7 @@ class Note:
     elapsed_beats: Beat
     order: int
     annotations: List[str] = field(default_factory=list)
+    tie: str = None
 
 
 @dataclass()
