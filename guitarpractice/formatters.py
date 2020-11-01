@@ -61,6 +61,10 @@ def vextab_duration(note: Note) -> str:
 
 
 def vextab_note_string(notes: List[Note]) -> str:
+    tie_map = {
+        constants.TIE: 'T'
+    }
+
     duration = vextab_duration(notes[0])
 
     if len(notes) == 1:
@@ -71,9 +75,6 @@ def vextab_note_string(notes: List[Note]) -> str:
         else:
             duration_string = f':{duration}'
             if note.tie:
-                tie_map = {
-                    constants.TIE: 'T'
-                }
                 duration_string = f'{tie_map[note.tie]}:{duration}:'
 
             note_el = f"{duration_string} {note.position.fret}/{note.position.string}"
