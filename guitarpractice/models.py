@@ -46,12 +46,16 @@ class Beat:
 
         result = self.to_fraction() + other.to_fraction()
 
-        return Beat.from_fraction(result)
+        beat = Beat.from_fraction(result)
+        beat.rest = self.rest
+
+        return beat
 
     def __sub__(self, other):
         as_fraction = self.to_fraction() - other.to_fraction()
 
         result = Beat.from_fraction(as_fraction)
+        result.rest = self.rest
 
         if result.duration < 0:
             raise ValueError('Beat duration cannot be negative')
@@ -81,29 +85,26 @@ class Beat:
 
         remainder = self
         even_beats = [
-            Beat(1, 1),
-            Beat(1, 2),
-            Beat(1, 4),
-            Beat(1, 8),
-            Beat(1, 16),
-            Beat(1, 32),
+            Beat(1, 1, rest=self.rest),
+            Beat(1, 2, rest=self.rest),
+            Beat(1, 4, rest=self.rest),
+            Beat(1, 8, rest=self.rest),
+            Beat(1, 16, rest=self.rest),
+            Beat(1, 32, rest=self.rest),
         ]
 
-        while remainder > Beat(1, 1):
-            remainder -= Beat(1, 1)
-            splits.append(Beat(1, 1))
+        while remainder > Beat(1, 1, rest=self.rest):
+            remainder -= Beat(1, 1, rest=self.rest)
+            splits.append(Beat(1, 1, rest=self.rest))
 
         for even_beat in even_beats:
             if even_beat <= remainder:
                 splits.append(even_beat)
                 remainder -= even_beat
 
-            if remainder == Beat(0, 1):
+            # breakpoint()
+            if remainder == Beat(0, 1, rest=self.rest):
                 break
-
-        if self.rest:
-            for split in splits:
-                split.rest = True
 
         return splits
 

@@ -8,7 +8,9 @@ def to_vextab(exercise: Sequence) -> str:
     """
     http://vexflow.com/vextab/tutorial.html
     """
-    elements = make_elements(exercise.notes)
+    split = normalise_note_durations(exercise.notes)
+
+    elements = make_elements(split)
     element_groups = split_staves(elements)
 
     staves = []
@@ -62,10 +64,15 @@ def vextab_note_string(notes: List[Note]) -> str:
 
     if len(notes) == 1:
         note = notes[0]
+
         if note.duration.rest:
             note_el = f':{duration} ##'
         else:
-            note_el = f":{duration} {note.position.fret}/{note.position.string}"
+            duration_string = f':{duration}'
+            if 'tie' in note.annotations:
+                duration_string = f'T:{duration}:'
+
+            note_el = f"{duration_string} {note.position.fret}/{note.position.string}"
     else:
         chord = [
             f'{note.position.fret}/{note.position.string}'

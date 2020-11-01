@@ -247,11 +247,10 @@ class TestVexTabFormatter(TestCase):
         rest = Beat(1, 4, rest=True)
 
         notes = [
-            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=2, position=position, duration=rest, elapsed_beats=Beat(2, 4)),
-            Note(order=3, position=position, duration=duration, elapsed_beats=Beat(3, 4)),
-            Note(order=4, position=position, duration=rest, elapsed_beats=Beat(4, 4)),
-
+            Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=position, duration=rest, elapsed_beats=Beat(2, 4)),
+            Note(order=2, position=position, duration=duration, elapsed_beats=Beat(3, 4)),
+            Note(order=3, position=position, duration=rest, elapsed_beats=Beat(4, 4)),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[position], category='scale')
@@ -349,7 +348,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :h 5/6 T:q:5/6 =:|'
+            'notes =|: :h 5/6 T:q: 5/6 =:|'
         )
 
         self.assertEqual(expected, vextab)

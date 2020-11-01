@@ -256,8 +256,14 @@ class TestBeat(TestCase):
         expected = [Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 1), Beat(1, 2)]
         self.assertEqual(expected, result)
 
-    def test_rests_can_be_split(self):
+    def test_odd_rests_can_be_split(self):
         duration = Beat(3, 4, rest=True)
         result = duration.tie_split()
 
         self.assertEqual([Beat(2, 4, rest=True), Beat(1, 4, rest=True)], result)
+
+    def test_even_rests_are_not_split(self):
+        duration = Beat(1, 4, rest=True)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 4, rest=True)], result)
