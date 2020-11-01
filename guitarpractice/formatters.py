@@ -1,19 +1,31 @@
-from itertools import groupby
-from operator import attrgetter
 from typing import List
 
 from guitarpractice.models import Sequence, Beat, Note
+from guitarpractice.note_utils import group_notes
 
 
 def to_vextab(exercise: Sequence) -> str:
     """
     http://vexflow.com/vextab/tutorial.html
     """
-    elements = ['=|:']
+    elements = make_elements(exercise.notes)
+    element_groups = split_staves(elements)
 
-    sorted_notes = sorted(exercise.notes, key=attrgetter('order'))
-    note_groups = groupby(sorted_notes, key=attrgetter('order'))
-    note_groups = {k: list(v) for k, v in note_groups}
+    staves = []
+    for element_group in element_groups:
+        tab = " ".join(element_group)
+        tabstave = (
+            f'tabstave notation=false\n'
+            f'notes {tab}'
+        )
+        staves.append(tabstave)
+
+    return "\n\n".join(staves)
+
+
+def make_elements(notes):
+    elements = ['=|:']
+    note_groups = group_notes(notes)
 
     for group_key in sorted(note_groups.keys()):
         note_group = note_groups[group_key]
@@ -29,18 +41,7 @@ def to_vextab(exercise: Sequence) -> str:
     else:
         elements.append('=:|')
 
-    element_groups = split_staves(elements)
-
-    staves = []
-    for elements in element_groups:
-        tab = " ".join(elements)
-        tabstave = (
-            f'tabstave notation=false\n'
-            f'notes {tab}'
-        )
-        staves.append(tabstave)
-
-    return "\n\n".join(staves)
+    return elements
 
 
 def vextab_duration(note: Note) -> str:

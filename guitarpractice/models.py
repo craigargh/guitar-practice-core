@@ -119,7 +119,7 @@ class Note:
     duration: Beat
     elapsed_beats: Beat
     order: int
-    annotations: List[Annotation] = field(default_factory=list)
+    annotations: List[str] = field(default_factory=list)
 
 
 @dataclass()
@@ -127,5 +127,4 @@ class Sequence:
     notes: List[Note]
     shapes: List[GuitarShape]
 
-    def normalised_note_durations(self) -> List[Note]:
-        return self.notes
+
