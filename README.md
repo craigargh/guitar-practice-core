@@ -15,7 +15,8 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Format odd beats for vextab using tie_split()~~
 - ~~Fix chords in normalise_note_durations()~~
 - ~~Import chord and scale shapes from legacy project~~
-- Make a plan of exercises 
+- ~~Make a plan of exercises~~ 
+- Fix tests
 - Add tests for eq etc. for rest beats
 - Allow ending to be filled with either last note or rests
 - Ties and annotations (e.g. hammer-ons, pull-offs, palm muting, pick direction)
@@ -24,9 +25,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - Add triplets to vextab and tie_split()
 - Implement remaining pick patterns
 - Implement rhythm generator
-- Add rhythm to sequencer
 - Implement shape shifters
-- Add shape shifters to sequencer
 
 ## Exercises
 
