@@ -14,14 +14,18 @@ def group_notes(notes) -> Dict[str, List[Note]]:
 def normalise_note_durations(notes: List[Note]) -> List[Note]:
     notes = sorted(notes, key=attrgetter('order'))
 
-    elapsed_beats = Beat(0, 0)
+    elapsed_beats = Beat(0, 1)
     count = 0
 
     normalised_notes = []
 
     for note in notes:
+        new_bar = (elapsed_beats + Beat(1, 1)).division == 1
+
         first_note = True
         normalised_durations = note.duration.tie_split()
+        if not new_bar:
+            normalised_durations.reverse()
 
         for duration in normalised_durations:
             elapsed_beats += duration

@@ -87,6 +87,23 @@ class TestNormaliseNoteDurations(TestCase):
 
         self.assertEqual(expected, result)
 
+    def test_split_beats_are_in_ascending_order_if_not_at_start_of_bar(self):
+        position = FretPosition(string=3, fret=1)
+        notes = [
+            Note(order=0, position=position, duration=Beat(1), elapsed_beats=Beat(1)),
+            Note(order=1, position=position, duration=Beat(3), elapsed_beats=Beat(4)),
+        ]
+
+        result = normalise_note_durations(notes)
+
+        expected = [
+            Note(order=0, position=position, duration=Beat(1, 4), elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=position, duration=Beat(1, 4), elapsed_beats=Beat(2, 4)),
+            Note(order=2, position=position, duration=Beat(2, 4), elapsed_beats=Beat(1, 1), annotations=['tie']),
+        ]
+
+        self.assertEqual(expected, result)
+
     @skip
     def test_odd_length_quarter_note_chord_is_split(self):
         position = FretPosition(string=3, fret=1)
