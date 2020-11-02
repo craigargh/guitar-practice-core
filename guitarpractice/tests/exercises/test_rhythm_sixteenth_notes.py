@@ -43,4 +43,26 @@ class TestRhythmSixteenthNotesLevelOne(TestCase):
 
 class TestRhythmSixteenthNotesLevelTwo(TestCase):
     def test_sequence_has_16th_note_rhythm(self):
-        self.fail('Write the tests')
+        random.seed(2)
+        sequence = rhythm_sixteenth_notes(variation='level-2')
+
+        sixteenth_beat = Beat(duration=1, division=16)
+
+        for beat in sequence.notes:
+            self.assertEqual(sixteenth_beat, beat.duration)
+
+    def test_random_string_number_is_between_1_and_6(self):
+        for _ in range(1000):
+            sequence = rhythm_sixteenth_notes(variation='level-2')
+
+            for note in sequence.notes:
+                self.assertLessEqual(note.position.string, 6)
+                self.assertGreaterEqual(note.position.string, 1)
+
+    def test_random_fret_number_is_between_0_and_12(self):
+        for _ in range(1000):
+            sequence = rhythm_sixteenth_notes(variation='level-2')
+
+            for note in sequence.notes:
+                self.assertLessEqual(note.position.fret, 12)
+                self.assertGreaterEqual(note.position.fret, 0)
