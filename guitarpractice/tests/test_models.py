@@ -276,3 +276,9 @@ class TestBeat(TestCase):
 
     def test_new_bar_returns_true_when_division_is_end_beat(self):
         self.assertTrue(Beat(4, 4).is_new_bar())
+
+    def test_rest_beats_are_equal(self):
+        self.assertEqual(Beat(1, rest=True), Beat(1, rest=True))
+
+    def test_rest_and_non_rest_beats_are_not_equal(self):
+        self.assertNotEqual(Beat(1, rest=True), Beat(1, rest=False))
