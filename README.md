@@ -17,7 +17,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Import chord and scale shapes from legacy project~~
 - ~~Make a plan of exercises~~ 
 - ~~Fix tests~~
-- Ties and annotations (e.g. hammer-ons, pull-offs, palm muting, pick direction)
+- ~~Ties and annotations (e.g. hammer-ons, pull-offs, palm muting, pick direction)~~
 - Allow ending to be filled with either last note or rests
 - Split pickpatterns into smaller modules
 - Add metadata to sequences (e.g. tuning, exercise title, bpm, time) 
