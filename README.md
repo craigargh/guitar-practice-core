@@ -20,6 +20,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Ties and annotations (e.g. hammer-ons, pull-offs, palm muting, pick direction)~~
 - Allow ending to be filled with either last note or rests
 - Split pickpatterns into smaller modules
+- Add vibrato and strong vibrato
 - Add metadata to sequences (e.g. tuning, exercise title, bpm, time) 
 - Add triplets to vextab and tie_split()
 - Implement remaining pick patterns
