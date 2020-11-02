@@ -4,7 +4,6 @@ from operator import attrgetter
 from typing import List, Dict
 
 from guitarpractice import constants
-from guitarpractice.constants import TIE
 from guitarpractice.models import Note, Beat
 
 
@@ -55,8 +54,12 @@ def apply_new_chord_rhythms(normalised_beats_per_chord):
 
             for note in chord:
                 new_note = Note(
-                    position=note.position, duration=beat, elapsed_beats=elapsed_beats, order=count,
-                    annotations=deepcopy(note.annotations)
+                    position=note.position,
+                    duration=beat,
+                    elapsed_beats=elapsed_beats,
+                    order=count,
+                    annotations=deepcopy(note.annotations),
+                    tie=note.tie,
                 )
 
                 if not first_beat_in_tie and not beat.rest:

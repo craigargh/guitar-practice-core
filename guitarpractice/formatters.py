@@ -79,7 +79,11 @@ def format_note_element(note: Note) -> str:
         if note.tie:
             duration_string = f'{tie_map(note.tie)}:{duration}:'
 
-        note_el = f"{duration_string} {note.position.fret}/{note.position.string}"
+        annotation_string = ''
+        if note.annotations:
+            annotation_string = format_annotations(note.annotations)
+
+        note_el = f"{duration_string} {note.position.fret}/{note.position.string}{annotation_string}"
 
     return note_el
 
@@ -98,14 +102,34 @@ def format_chord_elements(notes: List[Note]) -> str:
     else:
         tie_element = ""
 
-    return f":{duration} {tie_element}({chord_join})"
+    annotation_element = ""
+    if annotations := set(annotation for note in notes for annotation in note.annotations):
+        annotation_element = format_annotations(annotations)
+
+    return f":{duration} {tie_element}({chord_join}){annotation_element}"
 
 
 def tie_map(key: str) -> str:
     tie_mapping = {
-        constants.TIE: 'T'
+        constants.TIE: 'T',
+        constants.HAMMER_ON: 'h',
+        constants.PULL_OFF: 'p',
+        constants.SLIDE: 's',
+        constants.BEND: 'b',
+        constants.TAP: 't',
     }
     return tie_mapping.get(key)
+
+
+def format_annotations(annotations: List[str]) -> str:
+    annotation_map = {
+        constants.PALM_MUTE: 'PM',
+    }
+    annotation_string = "".join([
+        f' ${annotation_map[annotation]}$'
+        for annotation in annotations
+    ])
+    return annotation_string
 
 
 def split_staves(elements: List[str]) -> List[List[str]]:

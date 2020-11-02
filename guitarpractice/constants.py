@@ -1,1 +1,7 @@
 TIE = 'tie'
+HAMMER_ON = 'hammer_on'
+PULL_OFF = 'pull_off'
+SLIDE = 'slide'
+BEND = 'bend'
+TAP = 'tap'
+PALM_MUTE = 'palm_mute'

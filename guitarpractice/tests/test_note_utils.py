@@ -126,3 +126,20 @@ class TestNormaliseNoteDurations(TestCase):
         ]
 
         self.assertEqual(expected, result)
+
+    def test_hammer_on_tie_is_kept_on_first_note(self):
+        position = FretPosition(string=3, fret=1)
+        notes = [
+            Note(order=0, position=position, duration=Beat(3), elapsed_beats=Beat(3), tie=constants.HAMMER_ON),
+            Note(order=1, position=position, duration=Beat(1), elapsed_beats=Beat(4)),
+        ]
+
+        result = normalise_note_durations(notes)
+
+        expected = [
+            Note(order=0, position=position, duration=Beat(1, 2), elapsed_beats=Beat(1, 2), tie=constants.HAMMER_ON),
+            Note(order=1, position=position, duration=Beat(1, 4), elapsed_beats=Beat(3, 4), tie=constants.TIE),
+            Note(order=2, position=position, duration=Beat(1, 4), elapsed_beats=Beat(1, 1)),
+        ]
+
+        self.assertEqual(expected, result)

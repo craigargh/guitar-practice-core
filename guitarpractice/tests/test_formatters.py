@@ -1,5 +1,6 @@
 from unittest import TestCase, skip
 
+from guitarpractice.constants import HAMMER_ON, PULL_OFF, SLIDE, BEND, TAP, PALM_MUTE
 from guitarpractice.formatters import to_vextab
 from guitarpractice.models import Sequence, Note, FretPosition, Beat, GuitarShape
 
@@ -337,7 +338,7 @@ class TestVexTabFormatter(TestCase):
         duration = Beat(3, 4)
 
         notes = [
-            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(3, 4)),
+            Note(order=0, position=position, duration=duration, elapsed_beats=Beat(3, 4)),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[position], category='scale')
@@ -370,6 +371,280 @@ class TestVexTabFormatter(TestCase):
         expected = (
             'tabstave notation=false\n'
             'notes =|: :q (12/5.12/4) :8 T(12/5.12/4) =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_hammer_ons_are_added_to_tab(self):
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 8)
+
+        notes = [
+            Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=HAMMER_ON),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :8 5/6 h:8: 5/6 =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_pull_offs_are_added_to_tab(self):
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 8)
+
+        notes = [
+            Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=PULL_OFF),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :8 5/6 p:8: 5/6 =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_slides_are_added_to_tab(self):
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 8)
+
+        notes = [
+            Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=SLIDE),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :8 5/6 s:8: 5/6 =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_bends_are_added_to_tab(self):
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 8)
+
+        notes = [
+            Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=BEND),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :8 5/6 b:8: 5/6 =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_taps_are_added_to_tab(self):
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 8)
+
+        notes = [
+            Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=TAP),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :8 5/6 t:8: 5/6 =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_palm_mutes_are_added_to_tab_as_text(self):
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 8)
+
+        notes = [
+            Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4), annotations=[PALM_MUTE]),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), annotations=[PALM_MUTE]),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :8 5/6 $PM$ :8 5/6 $PM$ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_chords_can_have_hammer_ons(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=HAMMER_ON),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=HAMMER_ON),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q (12/5.12/4) :q h(14/5.14/4) =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_chords_can_have_pull_offs(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=PULL_OFF),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=PULL_OFF),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q (12/5.12/4) :q p(14/5.14/4) =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_chords_can_have_slides(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=SLIDE),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=SLIDE),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q (12/5.12/4) :q s(14/5.14/4) =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_chords_can_have_bends(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=BEND),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=BEND),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q (12/5.12/4) :q b(14/5.14/4) =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_chords_can_have_taps(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=TAP),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=TAP),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q (12/5.12/4) :q t(14/5.14/4) =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_chords_can_have_palm_mute(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[PALM_MUTE]),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[PALM_MUTE]),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[PALM_MUTE]),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[PALM_MUTE]),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q (12/5.12/4) $PM$ :q (14/5.14/4) $PM$ =:|'
         )
 
         self.assertEqual(expected, vextab)
