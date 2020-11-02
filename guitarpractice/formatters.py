@@ -104,7 +104,7 @@ def format_chord_elements(notes: List[Note]) -> str:
 
     annotation_element = ""
     if annotations := set(annotation for note in notes for annotation in note.annotations):
-        annotation_element = format_annotations(annotations)
+        annotation_element = format_annotations(sorted(annotations))
 
     return f":{duration} {tie_element}({chord_join}){annotation_element}"
 
@@ -124,6 +124,8 @@ def tie_map(key: str) -> str:
 def format_annotations(annotations: List[str]) -> str:
     annotation_map = {
         constants.PALM_MUTE: 'PM',
+        constants.DOWN_PICK: '.a|/top.',
+        constants.UP_PICK: '.am/top.',
     }
     annotation_string = "".join([
         f' ${annotation_map[annotation]}$'

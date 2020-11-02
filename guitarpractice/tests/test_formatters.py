@@ -1,6 +1,6 @@
 from unittest import TestCase, skip
 
-from guitarpractice.constants import HAMMER_ON, PULL_OFF, SLIDE, BEND, TAP, PALM_MUTE
+from guitarpractice.constants import HAMMER_ON, PULL_OFF, SLIDE, BEND, TAP, PALM_MUTE, DOWN_PICK, UP_PICK
 from guitarpractice.formatters import to_vextab
 from guitarpractice.models import Sequence, Note, FretPosition, Beat, GuitarShape
 
@@ -645,6 +645,156 @@ class TestVexTabFormatter(TestCase):
         expected = (
             'tabstave notation=false\n'
             'notes =|: :q (12/5.12/4) $PM$ :q (14/5.14/4) $PM$ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_down_pick_is_added_to_chord_tab(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[DOWN_PICK]),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[DOWN_PICK]),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[DOWN_PICK]),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[DOWN_PICK]),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q (12/5.12/4) $.a|/top.$ :q (14/5.14/4) $.a|/top.$ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_up_pick_is_added_to_chord_tab(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[UP_PICK]),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[UP_PICK]),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[UP_PICK]),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[UP_PICK]),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q (12/5.12/4) $.am/top.$ :q (14/5.14/4) $.am/top.$ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_can_palm_mute_and_down_pick_on_chord_tab(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[DOWN_PICK, PALM_MUTE]),
+            Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[DOWN_PICK, PALM_MUTE]),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[DOWN_PICK, PALM_MUTE]),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[DOWN_PICK, PALM_MUTE]),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q (12/5.12/4) $.a|/top.$ $PM$ :q (14/5.14/4) $.a|/top.$ $PM$ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_down_pick_is_added_to_tabs(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[DOWN_PICK]),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[DOWN_PICK]),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q 12/5 $.a|/top.$ :q 14/5 $.a|/top.$ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_up_pick_is_added_to_tabs(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[UP_PICK]),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[UP_PICK]),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q 12/5 $.am/top.$ :q 14/5 $.am/top.$ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_can_palm_mute_and_down_pick_on_tabs(self):
+        duration = Beat(1, 4)
+
+        notes = [
+            Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4),
+                 annotations=[DOWN_PICK, PALM_MUTE]),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4),
+                 annotations=[DOWN_PICK, PALM_MUTE]),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :q 12/5 $.a|/top.$ $PM$ :q 14/5 $.a|/top.$ $PM$ =:|'
         )
 
         self.assertEqual(expected, vextab)
