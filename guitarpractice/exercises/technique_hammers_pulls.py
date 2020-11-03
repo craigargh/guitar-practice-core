@@ -43,6 +43,15 @@ from guitarpractice.sequencer import make_sequence
 
 
 def technique_hammers_pulls(variation: str = None) -> Sequence:
+    variation_map = {
+        'level-1': level_one,
+        'level-2': level_two,
+    }
+    variation_function = variation_map[variation]
+    return variation_function()
+
+
+def level_one():
     base_fret = random.randrange(1, 9)
     second_fret = base_fret + random.randrange(1, 4)
     string = random.randrange(1, 7)
@@ -80,4 +89,43 @@ def technique_hammers_pulls(variation: str = None) -> Sequence:
         rhythm=rhythm,
         pick_pattern=combo['pick_pattern'],
         annotators=combo['annotators'],
+    )
+
+
+def level_two():
+    combos = [
+        {
+            'positions': [single_string_shape(positions_length=4)],
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 4)],
+            'pick_pattern': partial(desc, length=8),
+        }
+    ]
+
+    combo = random.choice(combos)
+    return make_sequence(**combo)
+
+
+def single_string_shape(positions_length):
+    positions_length -= 1
+
+    string = random.randrange(1, 7)
+    base_fret = random.randrange(1, 9)
+    frets = [base_fret]
+
+    fret_offsets = [1, 2, 3]
+    random.shuffle(fret_offsets)
+
+    for _ in range(positions_length):
+        frets.append(fret_offsets.pop() + base_fret)
+
+    positions = [
+        FretPosition(fret, string)
+        for fret in frets
+    ]
+
+    return GuitarShape(
+        positions=positions,
+        category='scale',
+        name='Single string shape'
     )
