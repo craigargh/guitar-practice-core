@@ -33,6 +33,7 @@ https://www.youtube.com/watch?v=Gtx8PGK4Aac
 
 
 '''
+import random
 from functools import partial
 
 from guitarpractice.annotators import hammer_on_asc
@@ -42,9 +43,13 @@ from guitarpractice.sequencer import make_sequence
 
 
 def technique_hammers_pulls(variation: str = None) -> Sequence:
+    base_fret = random.randrange(1, 9)
+    second_fret = base_fret + random.randrange(1, 4)
+    string = random.randrange(1, 7)
+
     positions = [
-        FretPosition(5, 6),
-        FretPosition(7, 6),
+        FretPosition(base_fret, string),
+        FretPosition(second_fret, string),
     ]
     shape = GuitarShape(category='scale', name='Single string notes', positions=positions)
     rhythm = [Beat(1, 8)]
