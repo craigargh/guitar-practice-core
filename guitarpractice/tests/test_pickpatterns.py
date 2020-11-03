@@ -243,6 +243,26 @@ class TestAscAndDesc(TestCase):
         self.assertEqual([FretPosition(string=1, fret=2)], pattern[2])
         self.assertEqual([FretPosition(string=2, fret=3)], pattern[3])
 
+    def test_single_string_extended_twice_pattern_repeats_pattern_fully(self):
+        positions = [
+            FretPosition(5, 6),
+            FretPosition(7, 6),
+            FretPosition(8, 6),
+        ]
+        shape = GuitarShape('single string shape', 'scale', positions=positions)
+
+        pattern = pickpatterns.asc_and_desc(shape, length=8)
+
+        self.assertEqual(8, len(pattern))
+        self.assertEqual([FretPosition(fret=5, string=6)], pattern[0])
+        self.assertEqual([FretPosition(fret=7, string=6)], pattern[1])
+        self.assertEqual([FretPosition(fret=8, string=6)], pattern[2])
+        self.assertEqual([FretPosition(fret=7, string=6)], pattern[3])
+        self.assertEqual([FretPosition(fret=5, string=6)], pattern[4])
+        self.assertEqual([FretPosition(fret=7, string=6)], pattern[5])
+        self.assertEqual([FretPosition(fret=8, string=6)], pattern[6])
+        self.assertEqual([FretPosition(fret=7, string=6)], pattern[7])
+
     def test_uneven_shortened_pattern_uses_first_notes_from_asc_and_desc(self):
         chord, positions = get_chord_and_positions()
 
@@ -282,11 +302,11 @@ class TestAscAndDesc(TestCase):
         self.assertEqual([FretPosition(string=3, fret=2)], pattern[1])
         self.assertEqual([FretPosition(string=2, fret=3)], pattern[2])
         self.assertEqual([FretPosition(string=1, fret=2)], pattern[3])
-        self.assertEqual([FretPosition(string=1, fret=2)], pattern[4])
-        self.assertEqual([FretPosition(string=1, fret=2)], pattern[5])
+        self.assertEqual([FretPosition(string=2, fret=3)], pattern[4])
+        self.assertEqual([FretPosition(string=3, fret=2)], pattern[5])
         self.assertEqual([FretPosition(string=2, fret=3)], pattern[6])
-        self.assertEqual([FretPosition(string=3, fret=2)], pattern[7])
-        self.assertEqual([FretPosition(string=4, fret=0)], pattern[8])
+        self.assertEqual([FretPosition(string=1, fret=2)], pattern[7])
+        self.assertEqual([FretPosition(string=2, fret=3)], pattern[8])
 
     def test_length_of_one_returns_first_position(self):
         chord, positions = get_chord_and_positions()

@@ -227,7 +227,10 @@ def sequential_patterns(shape: GuitarShape, pick_pattern_1: Callable, pick_patte
         shape_2 = shape
 
     pattern_1_length, pattern_2_length = calculate_divided_pattern_length(length, len(shape.positions))
-    return pick_pattern_1(shape, length=pattern_1_length) + pick_pattern_2(shape_2, length=pattern_2_length)
+
+    both_patterns = pick_pattern_1(shape, length=pattern_1_length) + pick_pattern_2(shape_2, length=pattern_2_length)
+
+    return adjust_length(both_patterns, length)
 
 
 def calculate_divided_pattern_length(total_length, positions_length):
@@ -235,6 +238,9 @@ def calculate_divided_pattern_length(total_length, positions_length):
         half_length = math.ceil(total_length / 2)
     else:
         half_length = total_length
+
+    if half_length and positions_length < half_length:
+        half_length = math.ceil(half_length / 2)
 
     pattern_1_length = half_length
     pattern_2_length = half_length
@@ -283,6 +289,9 @@ def shorten(positions, length, shorten_from_end):
 
 
 def lengthen(positions, length):
+    if length is None:
+        return positions
+
     number_of_full_repeats = length // len(positions)
     partial_repeat_positions = length % len(positions)
 
