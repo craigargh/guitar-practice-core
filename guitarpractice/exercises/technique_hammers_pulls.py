@@ -44,8 +44,8 @@ from guitarpractice.sequencer import make_sequence
 
 def technique_hammers_pulls(variation: str = None) -> Sequence:
     variation_map = {
-        'level-one': level_one,
-        'level-two': level_two,
+        'level-1': level_one,
+        'level-2': level_two,
     }
     variation_function = variation_map[variation]
     return variation_function()

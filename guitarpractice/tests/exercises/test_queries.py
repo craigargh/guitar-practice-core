@@ -27,7 +27,8 @@ class TestListExercises(TestCase):
                 'hammers-and-pulls': {
                     'title': 'Hammer-ons and Pull-offs',
                     'variations': [
-                        {'id': 'level-one', 'title': 'Level 1'},
+                        {'id': 'level-1', 'title': 'Level 1'},
+                        {'id': 'level-2', 'title': 'Level 2'},
                     ],
                 }
             }
