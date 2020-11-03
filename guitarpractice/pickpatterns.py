@@ -41,7 +41,7 @@ def asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPositi
     positions_can_repeat_fully_twice = length and shape_asc_and_desc_length == length / 2
 
     if positions_can_repeat_fully_twice:
-        pattern = sequential_patterns(shape, asc, desc, length=length / 2)
+        pattern = sequential_patterns(shape, asc, desc, length=int(length / 2))
         return adjust_length(pattern, length)
 
     return sequential_patterns(shape, asc, desc, length=length)
