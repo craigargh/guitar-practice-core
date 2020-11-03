@@ -12,10 +12,10 @@ Level two:
 - Pull-offs between multiple notes on a single string
 - Pull-offs between two notes on multiple strings
 - Hammer-ons and pull-offs between multiple notes on a single string
-- Hammer-ons and pull-offs between two notes on multiple strings
+- Two note hammers/pulls but faster (16th note)
 
 Level three:
-- Hammers-ons and/or pull-offs on a single string, but faster rhythm (e.g. 8th or 16th notes)
+- Hammers-ons and/or pull-offs on a single string, but faster rhythm (16th notes)
 - Hammer-ons ascending a scale
 - Pull-offs descending a scale
 - Hammer-ons and pull-offs ascending and descending a scale
@@ -129,6 +129,18 @@ def level_two():
             'annotators': [pull_off_desc],
             'rhythm': [Beat(1, 8)],
             'pick_pattern': partial(desc, length=8),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=2)],
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(asc, length=16),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=2)],
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(desc, length=16),
         },
     ]
 
