@@ -115,8 +115,8 @@ def level_two():
         {
             'shapes': [single_string_shape(positions_length=3)],
             'annotators': [hammer_on_asc, pull_off_desc],
-            'rhythm': [Beat(1, 8)],
-            'pick_pattern': partial(asc_and_desc, length=8),
+            'rhythm': [Beat(1, 4)],
+            'pick_pattern': partial(asc_and_desc, length=4),
         },
     ]
 
