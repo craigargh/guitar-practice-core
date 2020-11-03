@@ -52,7 +52,7 @@ class TestRhythmSixteenthNotesLevelTwo(TestCase):
             self.assertEqual(sixteenth_beat, beat.duration)
 
     def test_random_string_number_is_between_1_and_6(self):
-        for _ in range(1000):
+        for _ in range(100):
             sequence = rhythm_sixteenth_notes(variation='level-2')
 
             for note in sequence.notes:
@@ -60,7 +60,7 @@ class TestRhythmSixteenthNotesLevelTwo(TestCase):
                 self.assertGreaterEqual(note.position.string, 1)
 
     def test_random_fret_number_is_between_0_and_12(self):
-        for _ in range(1000):
+        for _ in range(100):
             sequence = rhythm_sixteenth_notes(variation='level-2')
 
             for note in sequence.notes:

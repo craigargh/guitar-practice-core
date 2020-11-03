@@ -18,7 +18,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Make a plan of exercises~~ 
 - ~~Fix tests~~
 - ~~Ties and annotations (e.g. hammer-ons, pull-offs, palm muting, pick direction)~~
-- Add tests for hammer_on_asc
+- ~~Add tests for hammer_on_asc~~
 - Allow ending to be filled with either last note or rests
 - Split pickpatterns into smaller modules
 - Add vibrato and strong vibrato
