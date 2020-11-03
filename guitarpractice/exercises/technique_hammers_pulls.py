@@ -38,7 +38,7 @@ from functools import partial
 
 from guitarpractice.annotators import hammer_on_asc, pull_off_desc
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
-from guitarpractice.pickpatterns import asc
+from guitarpractice.pickpatterns import asc, desc
 from guitarpractice.sequencer import make_sequence
 
 
@@ -53,16 +53,31 @@ def technique_hammers_pulls(variation: str = None) -> Sequence:
     ]
     shape = GuitarShape(category='scale', name='Single string notes', positions=positions)
     rhythm = [Beat(1, 8)]
-    pick_pattern = partial(asc, length=8)
 
-    annotators = random.choice([
-        [hammer_on_asc],
-        [hammer_on_asc, pull_off_desc]
-    ])
+    combos = [
+        {
+            'annotators': [hammer_on_asc],
+            'pick_pattern': partial(asc, length=8)
+        },
+        {
+            'annotators': [pull_off_desc],
+            'pick_pattern': partial(desc, length=8)
+        },
+        {
+            'annotators': [hammer_on_asc, pull_off_desc],
+            'pick_pattern': partial(asc, length=8)
+        },
+        {
+            'annotators': [pull_off_desc, hammer_on_asc],
+            'pick_pattern': partial(desc, length=8)
+        },
+    ]
+
+    combo = random.choice(combos)
 
     return make_sequence(
         shapes=[shape],
         rhythm=rhythm,
-        pick_pattern=pick_pattern,
-        annotators=annotators,
+        pick_pattern=combo['pick_pattern'],
+        annotators=combo['annotators'],
     )
