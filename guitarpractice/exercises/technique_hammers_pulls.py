@@ -38,7 +38,7 @@ from functools import partial
 
 from guitarpractice.annotators import hammer_on_asc, pull_off_desc
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
-from guitarpractice.pickpatterns import asc, desc
+from guitarpractice.pickpatterns import asc, desc, alternating_bass_asc_and_desc, asc_and_desc
 from guitarpractice.sequencer import make_sequence
 
 
@@ -97,9 +97,27 @@ def level_two():
         {
             'shapes': [single_string_shape(positions_length=4)],
             'annotators': [hammer_on_asc],
-            'rhythm': [Beat(1, 4)],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(asc, length=8),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 8)],
             'pick_pattern': partial(desc, length=8),
-        }
+        },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [hammer_on_asc, pull_off_desc],
+            'rhythm': [Beat(1, 4)],
+            'pick_pattern': partial(alternating_bass_asc_and_desc, length=8),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=3)],
+            'annotators': [hammer_on_asc, pull_off_desc],
+            'rhythm': [Beat(1, 4)],
+            'pick_pattern': partial(asc_and_desc, length=8),
+        },
     ]
 
     combo = random.choice(combos)
