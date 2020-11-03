@@ -95,7 +95,7 @@ def level_one():
 def level_two():
     combos = [
         {
-            'positions': [single_string_shape(positions_length=4)],
+            'shapes': [single_string_shape(positions_length=4)],
             'annotators': [hammer_on_asc],
             'rhythm': [Beat(1, 4)],
             'pick_pattern': partial(desc, length=8),
