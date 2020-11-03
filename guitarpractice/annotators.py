@@ -1,6 +1,6 @@
 from typing import List
 
-from guitarpractice.constants import HAMMER_ON
+from guitarpractice.constants import HAMMER_ON, PULL_OFF
 from guitarpractice.models import GuitarShape, Note, Annotation
 
 
@@ -9,6 +9,17 @@ def hammer_on_asc(notes: List[Note]) -> List[Note]:
     for note in notes:
         if prev_note and note.position > prev_note.position and note.position.string == note.position.string:
             note.tie = HAMMER_ON
+
+        prev_note = note
+
+    return notes
+
+
+def pull_off_desc(notes: List[Note]) -> List[Note]:
+    prev_note = None
+    for note in notes:
+        if prev_note and note.position < prev_note.position and note.position.string == note.position.string:
+            note.tie = PULL_OFF
 
         prev_note = note
 

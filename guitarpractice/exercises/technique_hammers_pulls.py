@@ -36,7 +36,7 @@ https://www.youtube.com/watch?v=Gtx8PGK4Aac
 import random
 from functools import partial
 
-from guitarpractice.annotators import hammer_on_asc
+from guitarpractice.annotators import hammer_on_asc, pull_off_desc
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
 from guitarpractice.pickpatterns import asc
 from guitarpractice.sequencer import make_sequence
@@ -55,9 +55,14 @@ def technique_hammers_pulls(variation: str = None) -> Sequence:
     rhythm = [Beat(1, 8)]
     pick_pattern = partial(asc, length=8)
 
+    annotators = random.choice([
+        [hammer_on_asc],
+        [hammer_on_asc, pull_off_desc]
+    ])
+
     return make_sequence(
         shapes=[shape],
         rhythm=rhythm,
         pick_pattern=pick_pattern,
-        annotators=[hammer_on_asc]
+        annotators=annotators,
     )
