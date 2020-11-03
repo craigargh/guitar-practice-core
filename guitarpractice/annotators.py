@@ -7,7 +7,7 @@ from guitarpractice.models import GuitarShape, Note, Annotation
 def hammer_on_asc(notes: List[Note]) -> List[Note]:
     prev_note = None
     for note in notes:
-        if prev_note and note.position > prev_note.position and note.position.string == note.position.string:
+        if prev_note and note.position > prev_note.position and note.position.string == prev_note.position.string:
             note.tie = HAMMER_ON
 
         prev_note = note
@@ -18,7 +18,7 @@ def hammer_on_asc(notes: List[Note]) -> List[Note]:
 def pull_off_desc(notes: List[Note]) -> List[Note]:
     prev_note = None
     for note in notes:
-        if prev_note and note.position < prev_note.position and note.position.string == note.position.string:
+        if prev_note and note.position < prev_note.position and note.position.string == prev_note.position.string:
             note.tie = PULL_OFF
 
         prev_note = note
