@@ -40,8 +40,8 @@ def _exercise_map():
             'hammers-and-pulls': {
                 'title': 'Hammer-ons and Pull-offs',
                 'variations': [
-                    {'id': 'level-one', 'title': 'Level 1'},
-                    {'id': 'level-two', 'title': 'Level 2'},
+                    {'id': 'level-1', 'title': 'Level 1'},
+                    {'id': 'level-2', 'title': 'Level 2'},
                 ],
                 'callable': technique_hammers_pulls
             }
