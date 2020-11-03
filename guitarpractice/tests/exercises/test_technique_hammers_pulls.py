@@ -22,7 +22,7 @@ class TestHammersAndPulls(TestCase):
         self.assertEqual(8, len(result.notes))
         self.assertTrue(all(Beat(1, 8) == note.duration for note in result.notes))
 
-    def test_level_two_can_have_eighteenth_notes(self):
+    def test_level_two_can_have_sixteenth_notes(self):
         random.seed(3)
 
         result = technique_hammers_pulls(variation='level-2')
