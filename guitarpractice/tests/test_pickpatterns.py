@@ -302,11 +302,11 @@ class TestAscAndDesc(TestCase):
         self.assertEqual([FretPosition(string=3, fret=2)], pattern[1])
         self.assertEqual([FretPosition(string=2, fret=3)], pattern[2])
         self.assertEqual([FretPosition(string=1, fret=2)], pattern[3])
-        self.assertEqual([FretPosition(string=2, fret=3)], pattern[4])
-        self.assertEqual([FretPosition(string=3, fret=2)], pattern[5])
+        self.assertEqual([FretPosition(string=1, fret=2)], pattern[4])
+        self.assertEqual([FretPosition(string=1, fret=2)], pattern[5])
         self.assertEqual([FretPosition(string=2, fret=3)], pattern[6])
-        self.assertEqual([FretPosition(string=1, fret=2)], pattern[7])
-        self.assertEqual([FretPosition(string=2, fret=3)], pattern[8])
+        self.assertEqual([FretPosition(string=3, fret=2)], pattern[7])
+        self.assertEqual([FretPosition(string=4, fret=0)], pattern[8])
 
     def test_length_of_one_returns_first_position(self):
         chord, positions = get_chord_and_positions()

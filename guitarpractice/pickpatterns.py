@@ -37,6 +37,13 @@ def desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
 
 
 def asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+    shape_asc_and_desc_length = (len(shape.positions) - 1) * 2
+    positions_can_repeat_fully_twice = length and shape_asc_and_desc_length == length / 2
+
+    if positions_can_repeat_fully_twice:
+        pattern = sequential_patterns(shape, asc, desc, length=length / 2)
+        return adjust_length(pattern, length)
+
     return sequential_patterns(shape, asc, desc, length=length)
 
 
@@ -239,8 +246,6 @@ def calculate_divided_pattern_length(total_length, positions_length):
     else:
         half_length = total_length
 
-    if half_length and positions_length < half_length:
-        half_length = math.ceil(half_length / 2)
 
     pattern_1_length = half_length
     pattern_2_length = half_length
