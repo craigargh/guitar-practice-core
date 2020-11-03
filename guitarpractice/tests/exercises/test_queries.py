@@ -21,7 +21,15 @@ class TestListExercises(TestCase):
                     'title': 'Scale Shapes',
                     'variations': [
                         {'id': 'c-major-pentatonic', 'title': 'C Major Pentatonic'},
-                        {'id': 'c-major', 'title': 'C Major'}]}
+                        {'id': 'c-major', 'title': 'C Major'}
+                    ]
+                },
+                'hammers-and-pulls': {
+                    'title': 'Hammer-ons and Pull-offs',
+                    'variations': [
+                        {'id': 'level-one', 'title': 'Level 1'},
+                    ],
+                }
             }
         }
 

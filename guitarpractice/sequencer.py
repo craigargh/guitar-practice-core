@@ -20,6 +20,11 @@ def make_sequence(
         rhythm = [Beat(duration=1)] * len(pattern)
 
     notes = apply_rhythm(pattern, rhythm)
+
+    if annotators:
+        for annotator in annotators:
+            notes = annotator(notes)
+
     notes = fill_remaining_bar_with_rests(notes)
 
     return Sequence(notes=notes, shapes=shapes)
