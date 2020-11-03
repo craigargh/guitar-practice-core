@@ -118,6 +118,18 @@ def level_two():
             'rhythm': [Beat(1, 8)],
             'pick_pattern': partial(asc_and_desc, length=8),
         },
+        {
+            'shapes': [two_string_repeated_shape()],
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(asc, length=8),
+        },
+        {
+            'shapes': [two_string_repeated_shape()],
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(desc, length=8),
+        },
     ]
 
     combo = random.choice(combos)
@@ -147,3 +159,19 @@ def single_string_shape(positions_length):
         category='scale',
         name='Single string shape'
     )
+
+
+def two_string_repeated_shape():
+    shape = single_string_shape(2)
+
+    new_positions = [
+        FretPosition(
+            fret=position.fret,
+            string=position.string - 1 if position.string != 1 else 2
+        )
+        for position in shape.positions
+    ]
+
+    shape.positions.extend(new_positions)
+
+    return shape
