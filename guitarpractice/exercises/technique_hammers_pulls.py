@@ -33,3 +33,20 @@ https://www.youtube.com/watch?v=Gtx8PGK4Aac
 
 
 '''
+from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
+from guitarpractice.sequencer import make_sequence
+
+
+def technique_hammers_pulls(variation: str = None) -> Sequence:
+    positions = [
+        FretPosition(5, 6),
+        FretPosition(7, 6),
+    ]
+    shape = GuitarShape(category='scale', name='Single string notes', positions=positions)
+    rhythm = [Beat(1, 8)]
+
+    return make_sequence(
+        shapes=[shape],
+        rhythm=rhythm,
+
+    )

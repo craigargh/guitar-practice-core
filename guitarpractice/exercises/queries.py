@@ -1,6 +1,7 @@
 from guitarpractice.models import Sequence
 from .rhythm_sixteenth_notes import rhythm_sixteenth_notes
 from .scale_shapes import scale_shapes
+from .technique_hammers_pulls import technique_hammers_pulls
 
 
 def list_exercises() -> dict:
@@ -36,6 +37,13 @@ def _exercise_map():
                 ],
                 'callable': scale_shapes
             },
+            'hammers-and-pulls': {
+                'title': 'Hammer-ons and Pull-offs',
+                'variations': [
+                    {'id': 'level-one', 'title': 'Level 1'},
+                ],
+                'callable': technique_hammers_pulls
+            }
         }
     }
 
