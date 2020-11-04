@@ -182,21 +182,21 @@ def level_three():
             'annotators': [hammer_on_asc, pull_off_desc],
             'rhythm': [Beat(1, 8)],
             'pick_pattern': partial(asc_and_desc),
-            'shape_shifters': partial(shift_vertically, lowest_fret=random.randrange(1, 8)),
+            'shape_shifters': [partial(shift_vertically, lowest_fret=random.randrange(1, 8))],
         },
         {
             'shapes': [random.choice(c_major_pentatonic_modes())],
             'annotators': [hammer_on_asc],
             'rhythm': [Beat(1, 8)],
             'pick_pattern': partial(asc),
-            'shape_shifters': partial(shift_vertically, lowest_fret=random.randrange(1, 8)),
+            'shape_shifters': [partial(shift_vertically, lowest_fret=random.randrange(1, 8))],
         },
         {
             'shapes': [random.choice(c_major_pentatonic_modes())],
             'annotators': [pull_off_desc],
             'rhythm': [Beat(1, 8)],
             'pick_pattern': partial(desc),
-            'shape_shifters': partial(shift_vertically, lowest_fret=random.randrange(1, 8)),
+            'shape_shifters': [partial(shift_vertically, lowest_fret=random.randrange(1, 8))],
         },
     ]
 
