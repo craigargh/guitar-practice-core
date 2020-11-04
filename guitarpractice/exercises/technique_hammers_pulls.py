@@ -172,7 +172,7 @@ def level_three():
             'pick_pattern': partial(alternating_bass_asc_and_desc, length=16),
         },
         {
-            'shapes': [single_string_shape(positions_length=3)],
+            'shapes': [single_string_shape(positions_length=4)],
             'annotators': [hammer_on_asc, pull_off_desc],
             'rhythm': [Beat(1, 16)],
             'pick_pattern': partial(asc_and_desc, length=16),
