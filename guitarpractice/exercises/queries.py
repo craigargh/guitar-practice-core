@@ -29,6 +29,15 @@ def _exercise_map():
                 ],
                 'callable': rhythm_sixteenth_notes
             },
+            'hammers-and-pulls': {
+                'title': 'Hammer-ons and Pull-offs',
+                'variations': [
+                    {'id': 'level-1', 'title': 'Level 1'},
+                    {'id': 'level-2', 'title': 'Level 2'},
+                    {'id': 'level-3', 'title': 'Level 3'},
+                ],
+                'callable': technique_hammers_pulls
+            },
             'scale-shapes': {
                 'title': 'Scale Shapes',
                 'variations': [
@@ -37,13 +46,5 @@ def _exercise_map():
                 ],
                 'callable': scale_shapes
             },
-            'hammers-and-pulls': {
-                'title': 'Hammer-ons and Pull-offs',
-                'variations': [
-                    {'id': 'level-1', 'title': 'Level 1'},
-                    {'id': 'level-2', 'title': 'Level 2'},
-                ],
-                'callable': technique_hammers_pulls
-            }
         }
     }
