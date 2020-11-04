@@ -98,24 +98,24 @@ def level_one():
 
 def level_two():
     combos = [
-        # {
-        #     'shapes': [single_string_shape(positions_length=4)],
-        #     'annotators': [hammer_on_asc],
-        #     'rhythm': [Beat(1, 8)],
-        #     'pick_pattern': partial(asc, length=8),
-        # },
-        # {
-        #     'shapes': [single_string_shape(positions_length=4)],
-        #     'annotators': [pull_off_desc],
-        #     'rhythm': [Beat(1, 8)],
-        #     'pick_pattern': partial(desc, length=8),
-        # },
-        # {
-        #     'shapes': [single_string_shape(positions_length=4)],
-        #     'annotators': [hammer_on_asc, pull_off_desc],
-        #     'rhythm': [Beat(1, 8)],
-        #     'pick_pattern': partial(alternating_bass_asc_and_desc, length=8),
-        # },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(asc, length=8),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(desc, length=8),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [hammer_on_asc, pull_off_desc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(alternating_bass_asc_and_desc, length=8),
+        },
         {
             'shapes': [single_string_shape(positions_length=3)],
             'annotators': [hammer_on_asc, pull_off_desc],
@@ -123,30 +123,30 @@ def level_two():
             'pick_pattern': partial(asc_and_desc, length=4),
             'ending': fill_remaining_with_repeated_patterns,
         },
-        # {
-        #     'shapes': [two_string_repeated_shape()],
-        #     'annotators': [hammer_on_asc],
-        #     'rhythm': [Beat(1, 8)],
-        #     'pick_pattern': partial(asc, length=8),
-        # },
-        # {
-        #     'shapes': [two_string_repeated_shape()],
-        #     'annotators': [pull_off_desc],
-        #     'rhythm': [Beat(1, 8)],
-        #     'pick_pattern': partial(desc, length=8),
-        # },
-        # {
-        #     'shapes': [single_string_shape(positions_length=2)],
-        #     'annotators': [hammer_on_asc],
-        #     'rhythm': [Beat(1, 16)],
-        #     'pick_pattern': partial(asc, length=16),
-        # },
-        # {
-        #     'shapes': [single_string_shape(positions_length=2)],
-        #     'annotators': [pull_off_desc],
-        #     'rhythm': [Beat(1, 16)],
-        #     'pick_pattern': partial(desc, length=16),
-        # },
+        {
+            'shapes': [two_string_repeated_shape()],
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(asc, length=8),
+        },
+        {
+            'shapes': [two_string_repeated_shape()],
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(desc, length=8),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=2)],
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(asc, length=16),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=2)],
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(desc, length=16),
+        },
     ]
 
     combo = random.choice(combos)
@@ -155,24 +155,24 @@ def level_two():
 
 def level_three():
     combos = [
-        # {
-        #     'shapes': [single_string_shape(positions_length=4)],
-        #     'annotators': [hammer_on_asc],
-        #     'rhythm': [Beat(1, 16)],
-        #     'pick_pattern': partial(asc, length=16),
-        # },
-        # {
-        #     'shapes': [single_string_shape(positions_length=4)],
-        #     'annotators': [pull_off_desc],
-        #     'rhythm': [Beat(1, 16)],
-        #     'pick_pattern': partial(desc, length=16),
-        # },
-        # {
-        #     'shapes': [single_string_shape(positions_length=4)],
-        #     'annotators': [hammer_on_asc, pull_off_desc],
-        #     'rhythm': [Beat(1, 16)],
-        #     'pick_pattern': partial(alternating_bass_asc_and_desc, length=16),
-        # },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(asc, length=16),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(desc, length=16),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [hammer_on_asc, pull_off_desc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(alternating_bass_asc_and_desc, length=16),
+        },
         {
             'shapes': [single_string_shape(positions_length=3)],
             'annotators': [hammer_on_asc, pull_off_desc],
@@ -180,27 +180,27 @@ def level_three():
             'pick_pattern': partial(asc_and_desc, length=4),
             'ending': fill_remaining_with_repeated_patterns,
         },
-        # {
-        #     'shapes': [random.choice(c_major_pentatonic_modes())],
-        #     'annotators': [hammer_on_asc, pull_off_desc],
-        #     'rhythm': [Beat(1, 8)],
-        #     'pick_pattern': partial(asc_and_desc),
-        #     'shape_shifters': [partial(shift_vertically, lowest_fret=random.randrange(1, 8))],
-        # },
-        # {
-        #     'shapes': [random.choice(c_major_pentatonic_modes())],
-        #     'annotators': [hammer_on_asc],
-        #     'rhythm': [Beat(1, 8)],
-        #     'pick_pattern': partial(asc),
-        #     'shape_shifters': [partial(shift_vertically, lowest_fret=random.randrange(1, 8))],
-        # },
-        # {
-        #     'shapes': [random.choice(c_major_pentatonic_modes())],
-        #     'annotators': [pull_off_desc],
-        #     'rhythm': [Beat(1, 8)],
-        #     'pick_pattern': partial(desc),
-        #     'shape_shifters': [partial(shift_vertically, lowest_fret=random.randrange(1, 8))],
-        # },
+        {
+            'shapes': [random.choice(c_major_pentatonic_modes())],
+            'annotators': [hammer_on_asc, pull_off_desc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(asc_and_desc),
+            'shape_shifters': [partial(shift_vertically, lowest_fret=random.randrange(1, 8))],
+        },
+        {
+            'shapes': [random.choice(c_major_pentatonic_modes())],
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(asc),
+            'shape_shifters': [partial(shift_vertically, lowest_fret=random.randrange(1, 8))],
+        },
+        {
+            'shapes': [random.choice(c_major_pentatonic_modes())],
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(desc),
+            'shape_shifters': [partial(shift_vertically, lowest_fret=random.randrange(1, 8))],
+        },
     ]
 
     combo = random.choice(combos)
