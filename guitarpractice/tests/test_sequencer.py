@@ -98,6 +98,12 @@ class TestSequencer(TestCase):
         self.assertEqual(expected_notes, sequence.notes)
         self.assertEqual([shape], sequence.shapes)
 
+    def test_can_apply_a_single_shape_shifter(self):
+        self.fail('write the test')
+
+    def test_can_apply_multiple_shape_shifters(self):
+        self.fail('write the test')
+
 
 def make_single_position_pattern(length: int):
     pattern = [

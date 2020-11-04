@@ -12,8 +12,19 @@ def make_sequence(
         annotators: List[Callable] = None,
         rhythm: List[Beat] = None,
 ) -> Sequence:
-    pattern = []
+    adjusted_shapes = []
+
     for shape in shapes:
+        adjusted_shape = shape
+
+        if shape_shifters:
+            for shape_shifter in shape_shifters:
+                adjusted_shape = shape_shifter(adjusted_shape)
+
+        adjusted_shapes.append(adjusted_shape)
+
+    pattern = []
+    for shape in adjusted_shapes:
         pattern.extend(pick_pattern(shape))
 
     if rhythm is None:
@@ -27,7 +38,7 @@ def make_sequence(
 
     notes = fill_remaining_bar_with_rests(notes)
 
-    return Sequence(notes=notes, shapes=shapes)
+    return Sequence(notes=notes, shapes=adjusted_shapes)
 
 
 def positions_generator(shapes: List[GuitarShape]) -> List[FretPosition]:
