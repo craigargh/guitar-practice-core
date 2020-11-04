@@ -1,6 +1,7 @@
 from itertools import cycle
 from typing import List, Callable
 
+from .endings import fill_remaining_bar_with_rests
 from .models import GuitarShape, Sequence, Note, FretPosition, Beat
 from .pickpatterns import asc
 
@@ -11,6 +12,7 @@ def make_sequence(
         pick_pattern: Callable = asc,
         annotators: List[Callable] = None,
         rhythm: List[Beat] = None,
+        ending: Callable = fill_remaining_bar_with_rests
 ) -> Sequence:
     adjusted_shapes = []
 
@@ -36,7 +38,7 @@ def make_sequence(
         for annotator in annotators:
             notes = annotator(notes)
 
-    notes = fill_remaining_bar_with_rests(notes)
+    notes = ending(notes)
 
     return Sequence(notes=notes, shapes=adjusted_shapes)
 
@@ -75,19 +77,3 @@ def apply_rhythm(pattern: List[List[FretPosition]], rhythm: List[Beat]) -> List[
         count += 1
 
     return notes
-
-
-def fill_remaining_bar_with_rests(notes: List[Note]) -> List[Note]:
-    last_beat = notes[-1].elapsed_beats
-    remaining_beat = last_beat.next_bar() - last_beat
-
-    if remaining_beat == Beat(0, 1):
-        return notes
-
-    remaining_beat.rest = True
-    order = notes[-1].order + 1
-    elapsed_beats = last_beat + remaining_beat
-
-    rest_note = Note(position=None, duration=remaining_beat, elapsed_beats=elapsed_beats, order=order)
-
-    return notes + [rest_note]
