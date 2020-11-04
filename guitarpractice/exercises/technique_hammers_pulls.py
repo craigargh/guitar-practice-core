@@ -40,12 +40,14 @@ from guitarpractice.annotators import hammer_on_asc, pull_off_desc
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
 from guitarpractice.pickpatterns import asc, desc, alternating_bass_asc_and_desc, asc_and_desc
 from guitarpractice.sequencer import make_sequence
+from guitarpractice.shapes.scale_collections import c_major_pentatonic_modes
 
 
 def technique_hammers_pulls(variation: str = None) -> Sequence:
     variation_map = {
         'level-1': level_one,
         'level-2': level_two,
+        'level-3': level_three,
     }
     variation_function = variation_map[variation]
     return variation_function()
@@ -141,6 +143,56 @@ def level_two():
             'annotators': [pull_off_desc],
             'rhythm': [Beat(1, 16)],
             'pick_pattern': partial(desc, length=16),
+        },
+    ]
+
+    combo = random.choice(combos)
+    return make_sequence(**combo)
+
+
+def level_three():
+    combos = [
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(asc, length=16),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(desc, length=16),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=4)],
+            'annotators': [hammer_on_asc, pull_off_desc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(alternating_bass_asc_and_desc, length=8),
+        },
+        {
+            'shapes': [single_string_shape(positions_length=3)],
+            'annotators': [hammer_on_asc, pull_off_desc],
+            'rhythm': [Beat(1, 16)],
+            'pick_pattern': partial(asc_and_desc, length=16),
+        },
+        {
+            'shapes': random.choice(c_major_pentatonic_modes()),
+            'annotators': [hammer_on_asc, pull_off_desc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(asc_and_desc),
+        },
+        {
+            'shapes': random.choice(c_major_pentatonic_modes()),
+            'annotators': [hammer_on_asc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(asc),
+        },
+        {
+            'shapes': random.choice(c_major_pentatonic_modes()),
+            'annotators': [pull_off_desc],
+            'rhythm': [Beat(1, 8)],
+            'pick_pattern': partial(desc),
         },
     ]
 
