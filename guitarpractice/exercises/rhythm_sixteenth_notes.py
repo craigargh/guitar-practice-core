@@ -2,7 +2,7 @@ import random
 from functools import partial
 
 from guitarpractice import pickpatterns
-from guitarpractice.exercises.scale_shapes import c_major_pentatonic, c_major
+from guitarpractice.shapes.scale_collections import c_major_modes, c_major_pentatonic_modes
 from guitarpractice.models import Sequence, FretPosition, GuitarShape, Beat
 from guitarpractice.sequencer import make_sequence
 from guitarpractice.pickpatterns import repeat_each_position
@@ -70,7 +70,7 @@ def level_two() -> Sequence:
 def level_three() -> Sequence:
     combos = [
         {
-            'shapes': [random.choice(c_major_pentatonic())],
+            'shapes': [random.choice(c_major_modes())],
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=4,
@@ -79,7 +79,7 @@ def level_three() -> Sequence:
             'rhythm': [Beat(duration=1, division=16)],
         },
         {
-            'shapes': [random.choice(c_major())],
+            'shapes': [random.choice(c_major_pentatonic_modes())],
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=4,
