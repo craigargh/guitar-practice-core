@@ -151,7 +151,7 @@ def single_string_chromatic_pattern():
         for fret in range(base_fret, base_fret + 4)
     ]
 
-    return positions
+    return GuitarShape('Chromatic shape', 'scale', positions=positions)
 
 """
 Exercise Ideas
