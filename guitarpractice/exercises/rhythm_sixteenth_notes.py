@@ -101,7 +101,8 @@ def level_three() -> Sequence:
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=2,
-                order=random.choice([partial(pickpatterns.alternating_bass_asc_and_desc, length=4)])
+                length=16,
+                order=pickpatterns.alternating_bass_asc_and_desc
             ),
             'rhythm': [Beat(duration=1, division=16)],
         },
@@ -176,3 +177,6 @@ Level 5:
 - Ascend one chromatic shape, descend another chromatic shape that is shifted up 1+ frets
 - Ascend and descend and chromatic shape
 """
+
+
+level_three()
