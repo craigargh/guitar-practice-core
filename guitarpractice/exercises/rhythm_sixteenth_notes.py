@@ -2,10 +2,10 @@ import random
 from functools import partial
 
 from guitarpractice import pickpatterns
-from guitarpractice.shapes.scale_collections import c_major_modes, c_major_pentatonic_modes
 from guitarpractice.models import Sequence, FretPosition, GuitarShape, Beat
-from guitarpractice.sequencer import make_sequence
 from guitarpractice.pickpatterns import repeat_each_position
+from guitarpractice.sequencer import make_sequence
+from guitarpractice.shapes.scale_collections import c_major_modes, c_major_pentatonic_modes
 
 
 def rhythm_sixteenth_notes(variation: str) -> Sequence:
@@ -69,21 +69,39 @@ def level_two() -> Sequence:
 
 def level_three() -> Sequence:
     combos = [
+        # {
+        #     'shapes': [random.choice(c_major_modes())],
+        #     'pick_pattern': partial(
+        #         repeat_each_position,
+        #         repeats=4,
+        #         order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
+        #     ),
+        #     'rhythm': [Beat(duration=1, division=16)],
+        # },
+        # {
+        #     'shapes': [random.choice(c_major_pentatonic_modes())],
+        #     'pick_pattern': partial(
+        #         repeat_each_position,
+        #         repeats=4,
+        #         order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
+        #     ),
+        #     'rhythm': [Beat(duration=1, division=16)],
+        # },
         {
-            'shapes': [random.choice(c_major_modes())],
+            'shapes': [single_string_chromatic_pattern()],
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=4,
-                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
             ),
             'rhythm': [Beat(duration=1, division=16)],
         },
         {
-            'shapes': [random.choice(c_major_pentatonic_modes())],
+            'shapes': [single_string_chromatic_pattern()],
             'pick_pattern': partial(
                 repeat_each_position,
-                repeats=4,
-                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
+                repeats=2,
+                order=random.choice([pickpatterns.bass_asc_and_desc])
             ),
             'rhythm': [Beat(duration=1, division=16)],
         },
@@ -124,6 +142,17 @@ def positions_on_adjacent_strings():
     return GuitarShape('Two notes on adjacent strings', 'scale', positions=positions)
 
 
+def single_string_chromatic_pattern():
+    base_string = random.randrange(1, 7)
+    base_fret = random.randrange(0, 8)
+
+    positions = [
+        FretPosition(string=base_string, fret=fret)
+        for fret in range(base_fret, base_fret + 4)
+    ]
+
+    return positions
+
 """
 Exercise Ideas
 
@@ -134,11 +163,9 @@ Level 2:
 
 
 Level 3:
-- Ascend and a three string scale or arpeggio, picking each note multiple times
-- Root + ascend and/or descend a two note arpeggio, picking each note multiple times
-- On a single string ascend one chromatic shape, descend another chromatic shape that is shifted up 1+ frets
-- On a single string Ascend and/or descend and chromatic shape
-- On a single string play four different notes in a bar, changing each beat (i.e. 4 x 16th notes)
+- Ascend and/or descend a scale or arpeggio, picking each note 4 times
+- Pick a four note chromatic pattern on a single string, repeating each note 4 times
+- Alternate between base note and positions in a chromatic pattern, repeating each note twice
 
 Level 4:
 - On multiple strings ascend one chromatic shape, descend another chromatic shape that is shifted up 1+ frets
