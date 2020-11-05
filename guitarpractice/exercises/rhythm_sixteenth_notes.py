@@ -101,7 +101,7 @@ def level_three() -> Sequence:
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=2,
-                order=random.choice([pickpatterns.alternating_bass_asc_and_desc, ])
+                order=random.choice([partial(pickpatterns.alternating_bass_asc_and_desc, length=8)])
             ),
             'rhythm': [Beat(duration=1, division=16)],
         },
