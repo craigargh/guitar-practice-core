@@ -74,7 +74,7 @@ def level_three() -> Sequence:
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=4,
-                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
             ),
             'rhythm': [Beat(duration=1, division=16)],
         },
@@ -83,7 +83,7 @@ def level_three() -> Sequence:
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=4,
-                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
             ),
             'rhythm': [Beat(duration=1, division=16)],
         },
