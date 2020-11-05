@@ -2,6 +2,7 @@ import random
 from functools import partial
 
 from guitarpractice import pickpatterns
+from guitarpractice.exercises.scale_shapes import c_major_pentatonic, c_major
 from guitarpractice.models import Sequence, FretPosition, GuitarShape, Beat
 from guitarpractice.sequencer import make_sequence
 from guitarpractice.pickpatterns import repeat_each_position
@@ -11,6 +12,7 @@ def rhythm_sixteenth_notes(variation: str) -> Sequence:
     variation_map = {
         'level-1': level_one,
         'level-2': level_two,
+        'level-3': level_three,
     }
     variation_function = variation_map[variation]
 
@@ -55,6 +57,32 @@ def level_two() -> Sequence:
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=16,
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+            ),
+            'rhythm': [Beat(duration=1, division=16)],
+        },
+    ]
+    combo = random.choice(combos)
+
+    return make_sequence(**combo)
+
+
+def level_three() -> Sequence:
+    combos = [
+        {
+            'shapes': random.choice(c_major_pentatonic()),
+            'pick_pattern': partial(
+                repeat_each_position,
+                repeats=4,
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+            ),
+            'rhythm': [Beat(duration=1, division=16)],
+        },
+        {
+            'shapes': random.choice(c_major()),
+            'pick_pattern': partial(
+                repeat_each_position,
+                repeats=4,
                 order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
             ),
             'rhythm': [Beat(duration=1, division=16)],
@@ -111,7 +139,6 @@ Level 3:
 - On a single string ascend one chromatic shape, descend another chromatic shape that is shifted up 1+ frets
 - On a single string Ascend and/or descend and chromatic shape
 - On a single string play four different notes in a bar, changing each beat (i.e. 4 x 16th notes)
-- Alternate between sixteenth notes, and triplets/gallops/eighth+rest/rest+eighth notes each beat
 
 Level 4:
 - On multiple strings ascend one chromatic shape, descend another chromatic shape that is shifted up 1+ frets
