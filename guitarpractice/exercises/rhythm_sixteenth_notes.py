@@ -177,6 +177,3 @@ Level 5:
 - Ascend and/or descend a scale or arpeggio, picking each note once
 - Pick a four note chromatic pattern on a single string, repeating each note once
 """
-
-
-level_three()
