@@ -70,7 +70,7 @@ def level_two() -> Sequence:
 def level_three() -> Sequence:
     combos = [
         {
-            'shapes': random.choice(c_major_pentatonic()),
+            'shapes': [random.choice(c_major_pentatonic())],
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=4,
@@ -79,7 +79,7 @@ def level_three() -> Sequence:
             'rhythm': [Beat(duration=1, division=16)],
         },
         {
-            'shapes': random.choice(c_major()),
+            'shapes': [random.choice(c_major())],
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=4,
