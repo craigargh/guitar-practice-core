@@ -1206,3 +1206,72 @@ class TestRepeatEachPosition(TestCase):
         ]
 
         self.assertEqual(expected_sequence, result)
+
+
+class TestRepeatWholePattern(TestCase):
+    def test_whole_pattern_is_repeated_twice_by_default(self):
+        chord, positions = get_chord_and_positions()
+        result = pickpatterns.repeat_whole_pattern(chord)
+
+        self.assertEqual(8, len(result))
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[1]], result[1])
+        self.assertEqual([positions[2]], result[2])
+        self.assertEqual([positions[3]], result[3])
+        self.assertEqual([positions[0]], result[4])
+        self.assertEqual([positions[1]], result[5])
+        self.assertEqual([positions[2]], result[6])
+        self.assertEqual([positions[3]], result[7])
+
+    def test_can_set_the_number_of_repeats(self):
+        chord, positions = get_chord_and_positions()
+        result = pickpatterns.repeat_whole_pattern(chord, repeats=4)
+
+        self.assertEqual(16, len(result))
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[1]], result[1])
+        self.assertEqual([positions[2]], result[2])
+        self.assertEqual([positions[3]], result[3])
+        self.assertEqual([positions[0]], result[4])
+        self.assertEqual([positions[1]], result[5])
+        self.assertEqual([positions[2]], result[6])
+        self.assertEqual([positions[3]], result[7])
+        self.assertEqual([positions[0]], result[8])
+        self.assertEqual([positions[1]], result[9])
+        self.assertEqual([positions[2]], result[10])
+        self.assertEqual([positions[3]], result[11])
+        self.assertEqual([positions[0]], result[12])
+        self.assertEqual([positions[1]], result[13])
+        self.assertEqual([positions[2]], result[14])
+        self.assertEqual([positions[3]], result[15])
+
+    def test_can_set_legnth_of_whole_pattern(self):
+        chord, positions = get_chord_and_positions()
+        result = pickpatterns.repeat_whole_pattern(chord, length=4)
+
+        self.assertEqual(4, len(result))
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[1]], result[1])
+        self.assertEqual([positions[0]], result[2])
+        self.assertEqual([positions[1]], result[3])
+
+    def test_repeated_pattern_length_is_length_divided_by_repeats(self):
+        chord, positions = get_chord_and_positions()
+        result = pickpatterns.repeat_whole_pattern(chord, length=4, repeats=4)
+
+        self.assertEqual(4, len(result))
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[0]], result[1])
+        self.assertEqual([positions[0]], result[2])
+        self.assertEqual([positions[0]], result[3])
+
+    def test_repeated_pattern_length_is_length_divided_by_repeats(self):
+        chord, positions = get_chord_and_positions()
+        result = pickpatterns.repeat_whole_pattern(chord, length=4, repeats=5)
+
+        self.assertEqual(5, len(result))
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[0]], result[1])
+        self.assertEqual([positions[0]], result[2])
+        self.assertEqual([positions[0]], result[3])
+        self.assertEqual([positions[0]], result[4])

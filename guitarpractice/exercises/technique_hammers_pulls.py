@@ -37,9 +37,8 @@ import random
 from functools import partial
 
 from guitarpractice.annotators import hammer_on_asc, pull_off_desc
-from guitarpractice.endings import fill_remaining_with_repeated_patterns
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
-from guitarpractice.pickpatterns import asc, desc, alternating_bass_asc_and_desc, asc_and_desc
+from guitarpractice.pickpatterns import asc, desc, alternating_bass_asc_and_desc, asc_and_desc, repeat_whole_pattern
 from guitarpractice.sequencer import make_sequence
 from guitarpractice.shapes.scale_collections import c_major_pentatonic_modes
 from guitarpractice.shapeshifters import shift_vertically
@@ -120,8 +119,7 @@ def level_two():
             'shapes': [single_string_shape(positions_length=3)],
             'annotators': [hammer_on_asc, pull_off_desc],
             'rhythm': [Beat(1, 8)],
-            'pick_pattern': partial(asc_and_desc, length=4),
-            'ending': fill_remaining_with_repeated_patterns,
+            'pick_pattern': partial(repeat_whole_pattern, order=asc_and_desc, length=16, repeats=4),
         },
         {
             'shapes': [two_string_repeated_shape()],

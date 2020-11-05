@@ -211,6 +211,21 @@ def repeat_each_position(shape: GuitarShape, length: int = None, repeats: int = 
     return new_positions
 
 
+def repeat_whole_pattern(shape: GuitarShape, length: int = None, repeats: int = 2, order: Callable = asc) -> List[
+    List[FretPosition]]:
+    if length:
+        adjusted_length = math.ceil(length / repeats)
+    else:
+        adjusted_length = None
+
+    pattern = order(shape, length=adjusted_length)
+    pattern = pattern * repeats
+
+    adjust_length(pattern, length=length)
+
+    return pattern
+
+
 def split_bass_position(shape: GuitarShape) -> Tuple[FretPosition, GuitarShape]:
     positions = sorted(shape.positions)
     bass_note = positions.pop(0)
@@ -245,7 +260,6 @@ def calculate_divided_pattern_length(total_length, positions_length):
         half_length = math.ceil(total_length / 2)
     else:
         half_length = total_length
-
 
     pattern_1_length = half_length
     pattern_2_length = half_length
