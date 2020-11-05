@@ -69,33 +69,33 @@ def level_two() -> Sequence:
 
 def level_three() -> Sequence:
     combos = [
-        # {
-        #     'shapes': [random.choice(c_major_modes())],
-        #     'pick_pattern': partial(
-        #         repeat_each_position,
-        #         repeats=4,
-        #         order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
-        #     ),
-        #     'rhythm': [Beat(duration=1, division=16)],
-        # },
-        # {
-        #     'shapes': [random.choice(c_major_pentatonic_modes())],
-        #     'pick_pattern': partial(
-        #         repeat_each_position,
-        #         repeats=4,
-        #         order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
-        #     ),
-        #     'rhythm': [Beat(duration=1, division=16)],
-        # },
-        # {
-        #     'shapes': [single_string_chromatic_pattern()],
-        #     'pick_pattern': partial(
-        #         repeat_each_position,
-        #         repeats=4,
-        #         order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
-        #     ),
-        #     'rhythm': [Beat(duration=1, division=16)],
-        # },
+        {
+            'shapes': [random.choice(c_major_modes())],
+            'pick_pattern': partial(
+                repeat_each_position,
+                repeats=4,
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
+            ),
+            'rhythm': [Beat(duration=1, division=16)],
+        },
+        {
+            'shapes': [random.choice(c_major_pentatonic_modes())],
+            'pick_pattern': partial(
+                repeat_each_position,
+                repeats=4,
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
+            ),
+            'rhythm': [Beat(duration=1, division=16)],
+        },
+        {
+            'shapes': [single_string_chromatic_pattern()],
+            'pick_pattern': partial(
+                repeat_each_position,
+                repeats=4,
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+            ),
+            'rhythm': [Beat(duration=1, division=16)],
+        },
         {
             'shapes': [single_string_chromatic_pattern()],
             'pick_pattern': partial(
