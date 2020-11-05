@@ -31,18 +31,29 @@ def level_one() -> Sequence:
 
 
 def level_two() -> Sequence:
-    shape = generate_single_string_shape(4)
+    combos = [
+        {
+            'shapes': [generate_single_string_shape(4)],
+            'pick_patterns': partial(
+                repeat_each_position,
+                repeats=16,
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+            ),
+            'rhythm': [Beat(duration=1, division=16)],
+        },
+        {
+            'shapes': [generate_single_string_shape(2)],
+            'pick_patterns': partial(
+                repeat_each_position,
+                repeats=8,
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+            ),
+            'rhythm': [Beat(duration=1, division=16)],
+        },
+    ]
+    combo = random.choice(combos)
 
-    order = random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
-    repeater = partial(repeat_each_position, repeats=16, order=order)
-
-    rhythm = [Beat(duration=1, division=16)]
-
-    return make_sequence(
-        shapes=[shape],
-        rhythm=rhythm,
-        pick_pattern=repeater,
-    )
+    return make_sequence(**combo)
 
 
 def generate_single_string_shape(positions_len: int) -> GuitarShape:
@@ -68,7 +79,7 @@ Level 2:
 - Play a whole bar of 16th notes before switching to another note on the same string, repeat for 4 bars/notes
 - Play two notes in a bar of 16th notes, switching every 2 beats
 - Play two notes on adjacent strings, switching every bar
-- Alternate between sixteenth notes, and quarter/eighth/rest notes each beat
+
 
 Level 3:
 - Ascend and a three string scale or arpeggio, picking each note multiple times
