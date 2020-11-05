@@ -119,7 +119,7 @@ def level_two():
             'shapes': [single_string_shape(positions_length=3)],
             'annotators': [down_pick_alternating_beats, hammer_on_asc, pull_off_desc],
             'rhythm': [Beat(1, 8)],
-            'pick_pattern': partial(repeat_whole_pattern, order=asc_and_desc, length=16, repeats=4),
+            'pick_pattern': partial(repeat_whole_pattern, order=asc_and_desc, length=8, repeats=4),
         },
         {
             'shapes': [two_string_repeated_shape()],
@@ -173,10 +173,9 @@ def level_three():
         },
         {
             'shapes': [single_string_shape(positions_length=3)],
-            'annotators': [hammer_on_asc, pull_off_desc],
+            'annotators': [down_pick_alternating_beats, hammer_on_asc, pull_off_desc],
             'rhythm': [Beat(1, 16)],
-            'pick_pattern': partial(asc_and_desc, length=4),
-            'ending': fill_remaining_with_repeated_patterns,
+            'pick_pattern': partial(repeat_whole_pattern, order=asc_and_desc, length=16, repeats=4),
         },
         {
             'shapes': [random.choice(c_major_pentatonic_modes())],
