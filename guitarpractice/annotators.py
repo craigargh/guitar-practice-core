@@ -41,6 +41,19 @@ def down_pick_on_the_beat(notes: List[Note]) -> List[Note]:
     return notes
 
 
+def down_pick_alternating_beats(notes: List[Note]) -> List[Note]:
+    prev_elapsed_beat = Beat(0, 1)
+
+    for note in notes:
+        beat_division = (prev_elapsed_beat + Beat(1, 1)).division
+        if beat_division == 2 or beat_division == 1:
+            note.annotations.append(DOWN_PICK)
+
+        prev_elapsed_beat = note.elapsed_beats
+
+    return notes
+
+
 def shape_name(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
     pass
 

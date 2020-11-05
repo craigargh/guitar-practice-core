@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from guitarpractice.annotators import hammer_on_asc, pull_off_desc, down_pick_on_the_beat
+from guitarpractice.annotators import hammer_on_asc, pull_off_desc, down_pick_on_the_beat, down_pick_alternating_beats
 from guitarpractice.constants import HAMMER_ON, PULL_OFF, DOWN_PICK, UP_PICK
 from guitarpractice.models import Note, FretPosition, Beat
 
@@ -167,6 +167,39 @@ class TestDownPickOnTheBeat(TestCase):
             Note(order=5, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(6, 8)),
             Note(order=6, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(7, 8),
                  annotations=[DOWN_PICK]),
+            Note(order=7, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(8, 8)),
+            Note(order=8, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(9, 8),
+                 annotations=[DOWN_PICK]),
+        ]
+
+        self.assertEqual(expected, result)
+
+class TestDownAlternatingBeats(TestCase):
+    def test_down_pick_annotation_is_added_to_evey_other_beat(self):
+        notes = [
+            Note(order=0, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(1, 8)),
+            Note(order=1, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(2, 8)),
+            Note(order=2, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(3, 8)),
+            Note(order=3, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(4, 8)),
+            Note(order=4, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(5, 8)),
+            Note(order=5, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(6, 8)),
+            Note(order=6, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(7, 8)),
+            Note(order=7, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(8, 8)),
+            Note(order=8, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(9, 8)),
+        ]
+
+        result = down_pick_alternating_beats(notes)
+
+        expected = [
+            Note(order=0, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(1, 8),
+                 annotations=[DOWN_PICK]),
+            Note(order=1, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(2, 8)),
+            Note(order=2, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(3, 8)),
+            Note(order=3, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(4, 8)),
+            Note(order=4, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(5, 8),
+                 annotations=[DOWN_PICK]),
+            Note(order=5, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(6, 8)),
+            Note(order=6, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(7, 8)),
             Note(order=7, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(8, 8)),
             Note(order=8, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(9, 8),
                  annotations=[DOWN_PICK]),
