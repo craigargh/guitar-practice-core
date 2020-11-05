@@ -34,7 +34,7 @@ def level_two() -> Sequence:
     combos = [
         {
             'shapes': [generate_single_string_shape(4)],
-            'pick_patterns': partial(
+            'pick_pattern': partial(
                 repeat_each_position,
                 repeats=16,
                 order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
@@ -43,9 +43,18 @@ def level_two() -> Sequence:
         },
         {
             'shapes': [generate_single_string_shape(2)],
-            'pick_patterns': partial(
+            'pick_pattern': partial(
                 repeat_each_position,
                 repeats=8,
+                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+            ),
+            'rhythm': [Beat(duration=1, division=16)],
+        },
+        {
+            'shapes': [positions_on_adjacent_strings()],
+            'pick_pattern': partial(
+                repeat_each_position,
+                repeats=16,
                 order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
             ),
             'rhythm': [Beat(duration=1, division=16)],
@@ -70,6 +79,21 @@ def generate_single_string_shape(positions_len: int) -> GuitarShape:
 
     shape = GuitarShape('Notes on a single string', 'scale', positions=positions)
     return shape
+
+
+def positions_on_adjacent_strings():
+    base_string = random.randrange(1, 6)
+    other_string = base_string + 1
+
+    base_fret = random.randrange(0, 8)
+    other_fret = max(0, base_fret + random.randrange(-3, 3))
+
+    positions = [
+        FretPosition(string=base_string, fret=base_fret),
+        FretPosition(string=other_string, fret=other_fret),
+    ]
+
+    return GuitarShape('Two notes on adjacent strings', 'scale', positions=positions)
 
 
 """
