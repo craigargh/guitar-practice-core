@@ -169,13 +169,13 @@ Level 3:
 - Alternate between base note and positions in a chromatic pattern, repeating each note twice
 
 Level 4:
-- On multiple strings ascend one chromatic shape, descend another chromatic shape that is shifted up 1+ frets
-- On a multiple strings  ascend and descend and chromatic shape
-- Large string skips between bars of 16th notes
+- Ascend and/or descend a scale or arpeggio, picking each note twice
+- Pick a four note chromatic pattern on a single string, repeating each note twice
+- Alternate between base note and positions in a chromatic pattern, repeating each note once
 
 Level 5:
-- Ascend one chromatic shape, descend another chromatic shape that is shifted up 1+ frets
-- Ascend and descend and chromatic shape
+- Ascend and/or descend a scale or arpeggio, picking each note once
+- Pick a four note chromatic pattern on a single string, repeating each note once
 """
 
 
