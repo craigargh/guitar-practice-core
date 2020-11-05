@@ -36,7 +36,7 @@ https://www.youtube.com/watch?v=Gtx8PGK4Aac
 import random
 from functools import partial
 
-from guitarpractice.annotators import hammer_on_asc, pull_off_desc
+from guitarpractice.annotators import hammer_on_asc, pull_off_desc, down_pick_on_the_beat
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
 from guitarpractice.pickpatterns import asc, desc, alternating_bass_asc_and_desc, asc_and_desc, repeat_whole_pattern
 from guitarpractice.sequencer import make_sequence
@@ -117,7 +117,7 @@ def level_two():
         },
         {
             'shapes': [single_string_shape(positions_length=3)],
-            'annotators': [hammer_on_asc, pull_off_desc],
+            'annotators': [down_pick_on_the_beat, hammer_on_asc, pull_off_desc],
             'rhythm': [Beat(1, 8)],
             'pick_pattern': partial(repeat_whole_pattern, order=asc_and_desc, length=16, repeats=4),
         },
