@@ -87,21 +87,21 @@ def level_three() -> Sequence:
         #     ),
         #     'rhythm': [Beat(duration=1, division=16)],
         # },
-        {
-            'shapes': [single_string_chromatic_pattern()],
-            'pick_pattern': partial(
-                repeat_each_position,
-                repeats=4,
-                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
-            ),
-            'rhythm': [Beat(duration=1, division=16)],
-        },
+        # {
+        #     'shapes': [single_string_chromatic_pattern()],
+        #     'pick_pattern': partial(
+        #         repeat_each_position,
+        #         repeats=4,
+        #         order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+        #     ),
+        #     'rhythm': [Beat(duration=1, division=16)],
+        # },
         {
             'shapes': [single_string_chromatic_pattern()],
             'pick_pattern': partial(
                 repeat_each_position,
                 repeats=2,
-                order=random.choice([partial(pickpatterns.alternating_bass_asc_and_desc, length=8)])
+                order=random.choice([partial(pickpatterns.alternating_bass_asc_and_desc, length=4)])
             ),
             'rhythm': [Beat(duration=1, division=16)],
         },
