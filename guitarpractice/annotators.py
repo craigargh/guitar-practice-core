@@ -33,7 +33,7 @@ def down_pick_on_the_beat(notes: List[Note]) -> List[Note]:
 
     for note in notes:
         beat_division = (prev_elapsed_beat + Beat(1, 1)).division
-        if beat_division == 4 or beat_division == 2 or prev_elapsed_beat == Beat(0, 1):
+        if beat_division == 4 or beat_division == 2 or beat_division == 1:
             note.annotations.append(DOWN_PICK)
 
         prev_elapsed_beat = note.elapsed_beats
