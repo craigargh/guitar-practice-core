@@ -1265,7 +1265,7 @@ class TestRepeatWholePattern(TestCase):
         self.assertEqual([positions[0]], result[2])
         self.assertEqual([positions[0]], result[3])
 
-    def test_repeated_pattern_length_is_length_divided_by_repeats(self):
+    def test_can_have_an_uneven_division_for_length_and_repeats(self):
         chord, positions = get_chord_and_positions()
         result = pickpatterns.repeat_whole_pattern(chord, length=4, repeats=5)
 
@@ -1275,3 +1275,6 @@ class TestRepeatWholePattern(TestCase):
         self.assertEqual([positions[0]], result[2])
         self.assertEqual([positions[0]], result[3])
         self.assertEqual([positions[0]], result[4])
+
+    def test_can_set_order_callable(self):
+        self.fail("Write the Test")

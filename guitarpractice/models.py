@@ -8,7 +8,7 @@ from typing import List, Union
 class FretPosition:
     fret: int
     string: int
-    finger: int = None
+    finger: Union[int, None] = None
     highlighted: bool = False
 
     def __gt__(self, other):
