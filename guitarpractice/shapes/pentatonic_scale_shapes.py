@@ -3,17 +3,17 @@ from guitarpractice.models import FretPosition, GuitarShape
 
 def c_major():
     positions = [
-        FretPosition(string=6, fret=8, finger=2),
+        FretPosition(string=6, fret=8, finger=2, highlighted=True),
         FretPosition(string=6, fret=10, finger=4),
         FretPosition(string=5, fret=7, finger=1),
         FretPosition(string=5, fret=10, finger=4),
         FretPosition(string=4, fret=7, finger=1),
-        FretPosition(string=4, fret=10, finger=4),
+        FretPosition(string=4, fret=10, finger=4, highlighted=True),
         FretPosition(string=3, fret=7, finger=1),
         FretPosition(string=3, fret=9, finger=3),
         FretPosition(string=2, fret=8, finger=2),
         FretPosition(string=2, fret=10, finger=4),
-        FretPosition(string=1, fret=8, finger=2),
+        FretPosition(string=1, fret=8, finger=2, highlighted=True),
     ]
 
     return GuitarShape('C', 'Major Pentatonic', positions)
