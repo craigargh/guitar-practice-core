@@ -116,8 +116,8 @@ def generate_single_string_shape(positions_len: int) -> GuitarShape:
     positions = []
     string_choice = random.choice([6, 6, 6, 5, 5, 4, 3, 2, 1])
 
-    lowest_fret = random.choice(list(range(0, 6)))
-    fret_options = [0] + list(range(lowest_fret, lowest_fret + 8))
+    lowest_fret = random.choice(list(range(0, 8)))
+    fret_options = [0] + list(range(lowest_fret, lowest_fret + 6))
     random.shuffle(fret_options)
 
     for _ in range(positions_len):
