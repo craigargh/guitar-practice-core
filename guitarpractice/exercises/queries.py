@@ -42,8 +42,8 @@ def _exercise_map():
             'scale-shapes': {
                 'title': 'Scale Shapes',
                 'variations': [
-                    {'id': 'c-major-pentatonic', 'title': 'C Major Pentatonic'},
-                    {'id': 'c-major', 'title': 'C Major'},
+                    {'id': 'major-pentatonic', 'title': 'Major Pentatonic Scale'},
+                    {'id': 'major', 'title': 'Major Scale'},
                 ],
                 'callable': scale_shapes
             },

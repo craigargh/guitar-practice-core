@@ -5,18 +5,19 @@ from guitarpractice import pickpatterns
 from guitarpractice.models import Sequence, Beat
 from guitarpractice.sequencer import make_sequence
 from guitarpractice.shapes.scale_collections import c_major_pentatonic_modes, c_major_modes
+from guitarpractice.shapeshifters import shift_vertically
 
 
 def scale_shapes(variation: str):
     variations = {
-        'c-major': c_major,
-        'c-major-pentatonic': c_major_pentatonic,
+        'major': major_scale,
+        'major-pentatonic': major_pentatonic_scale,
     }
     variation_function = variations[variation]
     return variation_function()
 
 
-def c_major_pentatonic() -> Sequence:
+def major_pentatonic_scale() -> Sequence:
     shape = random.choice(c_major_pentatonic_modes())
     pattern = random.choice([
         pickpatterns.asc,
@@ -29,11 +30,12 @@ def c_major_pentatonic() -> Sequence:
     return make_sequence(
         shapes=[shape],
         rhythm=rhythm,
-        pick_pattern=pattern
+        pick_pattern=pattern,
+        shape_shifters=[partial(shift_vertically, lowest_fret=1)]
     )
 
 
-def c_major() -> Sequence:
+def major_scale() -> Sequence:
     shape = random.choice(c_major_modes())
     pattern = random.choice([
         pickpatterns.asc,
@@ -46,5 +48,6 @@ def c_major() -> Sequence:
     return make_sequence(
         shapes=[shape],
         rhythm=rhythm,
-        pick_pattern=pattern
+        pick_pattern=pattern,
+        shape_shifters=[partial(shift_vertically, lowest_fret=1)],
     )
