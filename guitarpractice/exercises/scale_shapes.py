@@ -26,12 +26,13 @@ def major_pentatonic_scale() -> Sequence:
         partial(pickpatterns.alternating_bass_and_asc, length=10)
     ])
     rhythm = [Beat(duration=1, division=8)]
+    lowest_fret = random.randrange(1, 13)
 
     return make_sequence(
         shapes=[shape],
         rhythm=rhythm,
         pick_pattern=pattern,
-        shape_shifters=[partial(shift_vertically, lowest_fret=1)]
+        shape_shifters=[partial(shift_vertically, lowest_fret=lowest_fret)]
     )
 
 
@@ -44,10 +45,11 @@ def major_scale() -> Sequence:
         partial(pickpatterns.alternating_bass_and_asc, length=14)
     ])
     rhythm = [Beat(duration=1, division=8)]
+    lowest_fret = random.randrange(1, 13)
 
     return make_sequence(
         shapes=[shape],
         rhythm=rhythm,
         pick_pattern=pattern,
-        shape_shifters=[partial(shift_vertically, lowest_fret=1)],
+        shape_shifters=[partial(shift_vertically, lowest_fret=lowest_fret)],
     )
