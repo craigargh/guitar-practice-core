@@ -143,3 +143,21 @@ class TestNormaliseNoteDurations(TestCase):
         ]
 
         self.assertEqual(expected, result)
+
+    def test_normalise_note_durations_keeps_correct_duration_for_triplets(self):
+        position = FretPosition(string=3, fret=1)
+        notes = [
+            Note(order=0, position=position, duration=Beat(1, 12), elapsed_beats=Beat(1, 12)),
+            Note(order=1, position=position, duration=Beat(1, 12), elapsed_beats=Beat(2, 12)),
+            Note(order=2, position=position, duration=Beat(1, 12), elapsed_beats=Beat(3, 12)),
+        ]
+
+        result = normalise_note_durations(notes)
+
+        expected = [
+            Note(order=0, position=position, duration=Beat(1, 12), elapsed_beats=Beat(1, 12)),
+            Note(order=1, position=position, duration=Beat(1, 12), elapsed_beats=Beat(2, 12)),
+            Note(order=2, position=position, duration=Beat(1, 12), elapsed_beats=Beat(3, 12)),
+        ]
+
+        self.assertEqual(expected, result)

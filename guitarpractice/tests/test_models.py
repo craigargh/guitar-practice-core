@@ -185,6 +185,23 @@ class TestBeat(TestCase):
     def test_less_than_or_equal_for_same_beats(self):
         self.assertLessEqual(Beat(1, 1), Beat(1, 1))
 
+    def test_new_bar_returns_true_when_division_is_1(self):
+        self.assertTrue(Beat(2, 1).is_new_bar())
+
+    def test_new_bar_returns_true_when_division_is_not_end_beat(self):
+        self.assertFalse(Beat(2, 4).is_new_bar())
+
+    def test_new_bar_returns_true_when_division_is_end_beat(self):
+        self.assertTrue(Beat(4, 4).is_new_bar())
+
+    def test_rest_beats_are_equal(self):
+        self.assertEqual(Beat(1, rest=True), Beat(1, rest=True))
+
+    def test_rest_and_non_rest_beats_are_not_equal(self):
+        self.assertNotEqual(Beat(1, rest=True), Beat(1, rest=False))
+
+
+class TestBeatTieSplit(TestCase):
     def test_tie_split_breaks_down_quarter_notes(self):
         calculations = [
             (Beat(1, 4), [Beat(1, 4)]),
@@ -268,17 +285,50 @@ class TestBeat(TestCase):
 
         self.assertEqual([Beat(1, 4, rest=True)], result)
 
-    def test_new_bar_returns_true_when_division_is_1(self):
-        self.assertTrue(Beat(2, 1).is_new_bar())
+    def test_does_not_convert_half_note_triplets(self):
+        duration = Beat(1, 3)
+        result = duration.tie_split()
 
-    def test_new_bar_returns_true_when_division_is_not_end_beat(self):
-        self.assertFalse(Beat(2, 4).is_new_bar())
+        self.assertEqual([Beat(1, 3)], result)
 
-    def test_new_bar_returns_true_when_division_is_end_beat(self):
-        self.assertTrue(Beat(4, 4).is_new_bar())
+    def test_does_not_convert_quarter_note_triplets(self):
+        duration = Beat(1, 6)
+        result = duration.tie_split()
 
-    def test_rest_beats_are_equal(self):
-        self.assertEqual(Beat(1, rest=True), Beat(1, rest=True))
+        self.assertEqual([Beat(1, 6)], result)
 
-    def test_rest_and_non_rest_beats_are_not_equal(self):
-        self.assertNotEqual(Beat(1, rest=True), Beat(1, rest=False))
+    def test_does_not_convert_eighth_note_triplets(self):
+        duration = Beat(1, 12)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 12)], result)
+
+    def test_does_not_convert_sixteenth_note_triplets(self):
+        duration = Beat(1, 24)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 24)], result)
+
+    def test_does_convert_odd_half_note_triplets(self):
+        duration = Beat(2, 3)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 3), Beat(1, 3)], result)
+
+    def test_does_convert_odd_quarter_note_triplets(self):
+        duration = Beat(3, 6)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 3), Beat(1, 6)], result)
+
+    def test_does_convert_odd_eighth_note_triplets(self):
+        duration = Beat(3, 12)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 6), Beat(1, 12)], result)
+
+    def test_does_convert_odd_sixteenth_note_triplets(self):
+        duration = Beat(3, 24)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 12), Beat(1, 24)], result)

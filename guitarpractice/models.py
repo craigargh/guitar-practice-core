@@ -84,14 +84,24 @@ class Beat:
         splits = []
 
         remainder = self
-        even_beats = [
-            Beat(1, 1, rest=self.rest),
-            Beat(1, 2, rest=self.rest),
-            Beat(1, 4, rest=self.rest),
-            Beat(1, 8, rest=self.rest),
-            Beat(1, 16, rest=self.rest),
-            Beat(1, 32, rest=self.rest),
-        ]
+        if self.division % 3 == 0:
+            even_beats = [
+                Beat(1, 1, rest=self.rest),
+                Beat(1, 3, rest=self.rest),
+                Beat(1, 3, rest=self.rest),
+                Beat(1, 6, rest=self.rest),
+                Beat(1, 12, rest=self.rest),
+                Beat(1, 24, rest=self.rest),
+            ]
+        else:
+            even_beats = [
+                Beat(1, 1, rest=self.rest),
+                Beat(1, 2, rest=self.rest),
+                Beat(1, 4, rest=self.rest),
+                Beat(1, 8, rest=self.rest),
+                Beat(1, 16, rest=self.rest),
+                Beat(1, 32, rest=self.rest),
+            ]
 
         while remainder > Beat(1, 1, rest=self.rest):
             remainder -= Beat(1, 1, rest=self.rest)
@@ -102,7 +112,6 @@ class Beat:
                 splits.append(even_beat)
                 remainder -= even_beat
 
-            # breakpoint()
             if remainder == Beat(0, 1, rest=self.rest):
                 break
 
@@ -135,5 +144,3 @@ class Note:
 class Sequence:
     notes: List[Note]
     shapes: List[GuitarShape]
-
-

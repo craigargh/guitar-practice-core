@@ -294,7 +294,6 @@ class TestVexTabFormatter(TestCase):
         )
         self.assertEqual(expected, vextab)
 
-    @skip
     def test_half_note_triplets_are_marked_in_the_tab(self):
         position = FretPosition(string=6, fret=5)
         duration = Beat(1, 3)

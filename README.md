@@ -61,6 +61,7 @@ This is the list of exercise types that are planned to be implemented:
   - Sweep picking
   - Tapping
   - Pinched harmonics
+  - Tremolo picking
 - Scales
   - Scale mode shapes
     - Major
