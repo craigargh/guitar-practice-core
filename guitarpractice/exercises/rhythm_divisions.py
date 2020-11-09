@@ -50,7 +50,7 @@ DOUBLE_REST_TRIPLET_END = [Beat(1, 12), Beat(1, 12, rest=True), Beat(1, 12, rest
 def rhythm_divisions(variation: str = None) -> Sequence:
     variation_map = {
         'level-1': level_one,
-        # 'level-2': level_two,
+        'level-2': level_two,
         # 'level-3': level_three,
     }
     variation_function = variation_map[variation]
@@ -59,9 +59,6 @@ def rhythm_divisions(variation: str = None) -> Sequence:
 
 
 def level_one():
-    position = FretPosition(0, 6)
-    shape = GuitarShape('Open String', 'scale', positions=[position])
-
     rhythm_options = [
         QUARTER_BEAT,
         QUARTER_BEAT,
@@ -73,9 +70,111 @@ def level_one():
         QUARTER_REST,
     ]
 
+    return assorted_rhythm(rhythm_options, 4)
+
+
+def level_two():
+    combos = [
+        {
+            'beat_options': [
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                QUARTER_REST,
+            ],
+            'length': 8,
+        },
+        {
+            'beat_options': [
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                THREE_EIGHTH_NOTE_TRIPLETS,
+                THREE_EIGHTH_NOTE_TRIPLETS,
+                THREE_EIGHTH_NOTE_TRIPLETS,
+                QUARTER_REST,
+            ],
+            'length': 4,
+        },
+        {
+            'beat_options': [
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                FOUR_SIXTEENTH_BEATS,
+                FOUR_SIXTEENTH_BEATS,
+                FOUR_SIXTEENTH_BEATS,
+                FOUR_SIXTEENTH_BEATS,
+                QUARTER_REST,
+            ],
+            'length': 4,
+        },
+        {
+            'beat_options': [
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                GALLOP,
+                GALLOP,
+                GALLOP,
+                GALLOP,
+                QUARTER_REST,
+            ],
+            'length': 4,
+        },
+        {
+            'beat_options': [
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                REVERSE_GALLOP,
+                REVERSE_GALLOP,
+                REVERSE_GALLOP,
+                REVERSE_GALLOP,
+                QUARTER_REST,
+            ],
+            'length': 4,
+        },
+        {
+            'beat_options': [
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                SYNCOPATED_EIGHTH_BEAT,
+                SYNCOPATED_EIGHTH_BEAT,
+                SYNCOPATED_EIGHTH_BEAT,
+                SYNCOPATED_EIGHTH_BEAT,
+                QUARTER_REST,
+            ],
+            'length': 4,
+        },
+    ]
+
+    combo = random.choice(combos)
+    return assorted_rhythm(combo['beat_options'], combo['length'])
+
+
+def assorted_rhythm(rhythm_options, beat_count):
+    position = FretPosition(0, 6)
+    shape = GuitarShape('Open String', 'scale', positions=[position])
+
     rhythm_choices = [
         random.choice(rhythm_options)
-        for _ in range(4)
+        for _ in range(beat_count)
     ]
     rhythm = list(chain.from_iterable(rhythm_choices))
 
