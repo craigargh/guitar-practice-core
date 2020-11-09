@@ -17,8 +17,13 @@ def to_vextab(exercise: Sequence) -> str:
     staves = []
     for element_group in element_groups:
         tab = " ".join(element_group)
+
+        show_notation = 'false'
+        if '^3^' in tab:
+            show_notation = 'true'
+
         tabstave = (
-            f'tabstave notation=false\n'
+            f'tabstave notation={show_notation}\n'
             f'notes {tab}'
         )
         staves.append(tabstave)
@@ -30,11 +35,20 @@ def make_elements(notes):
     elements = ['=|:']
     note_groups = group_notes(notes)
 
+    triplet_count = 0
+
     for group_key in sorted(note_groups.keys()):
         note_group = note_groups[group_key]
 
         note_el = vextab_note_string(note_group)
         elements.append(note_el)
+
+        if note_group[0].duration.division % 3 == 0:
+            triplet_count += 1
+
+            if triplet_count == 3:
+                triplet_count = 0
+                elements.append('^3^')
 
         if note_group[0].elapsed_beats.is_new_bar():
             elements.append("|")
@@ -53,9 +67,19 @@ def vextab_duration(note: Note) -> str:
         duration_map = {
             1: 'w',
             2: 'h',
-            4: 'q'
+            3: 'h',
+            4: 'q',
+            6: 'q',
         }
         duration = duration_map[duration]
+
+    elif duration % 3 == 0:
+        triplet_duration_map = {
+            12: 8,
+            24: 16,
+            48: 32,
+        }
+        duration = triplet_duration_map[duration]
 
     return duration
 

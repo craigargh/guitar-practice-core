@@ -314,23 +314,115 @@ class TestVexTabFormatter(TestCase):
         vextab = to_vextab(sequence)
 
         expected = (
-            'tabstave notation=false\n'
+            'tabstave notation=true\n'
             'notes =|: :h 5/6 :h 5/6 :h 5/6 ^3^ | :h 5/6 :h 5/6 :h 5/6 ^3^ =:|'
         )
 
         self.assertEqual(expected, vextab)
 
     def test_quarter_note_triplets_are_marked_in_the_tab(self):
-        pass
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 6)
+
+        notes = [
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(1, 6)),
+            Note(order=2, position=position, duration=duration, elapsed_beats=Beat(2, 6)),
+            Note(order=3, position=position, duration=duration, elapsed_beats=Beat(3, 6)),
+            Note(order=4, position=position, duration=duration, elapsed_beats=Beat(4, 6)),
+            Note(order=5, position=position, duration=duration, elapsed_beats=Beat(5, 6)),
+            Note(order=6, position=position, duration=duration, elapsed_beats=Beat(6, 7)),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=true\n'
+            'notes =|: :q 5/6 :q 5/6 :q 5/6 ^3^ :q 5/6 :q 5/6 :q 5/6 ^3^ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
+
+    def test_eighth_note_triplets_are_marked_in_the_tab(self):
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 12)
+
+        notes = [
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(1, 12)),
+            Note(order=2, position=position, duration=duration, elapsed_beats=Beat(2, 12)),
+            Note(order=3, position=position, duration=duration, elapsed_beats=Beat(3, 12)),
+            Note(order=4, position=position, duration=duration, elapsed_beats=Beat(4, 12)),
+            Note(order=5, position=position, duration=duration, elapsed_beats=Beat(5, 12)),
+            Note(order=6, position=position, duration=duration, elapsed_beats=Beat(6, 12)),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=true\n'
+            'notes =|: :8 5/6 :8 5/6 :8 5/6 ^3^ :8 5/6 :8 5/6 :8 5/6 ^3^ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
 
     def test_sixteenth_note_triplets_are_marked_in_the_tab(self):
-        pass
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 24)
+
+        notes = [
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(1, 24)),
+            Note(order=2, position=position, duration=duration, elapsed_beats=Beat(2, 24)),
+            Note(order=3, position=position, duration=duration, elapsed_beats=Beat(3, 24)),
+            Note(order=4, position=position, duration=duration, elapsed_beats=Beat(4, 24)),
+            Note(order=5, position=position, duration=duration, elapsed_beats=Beat(5, 24)),
+            Note(order=6, position=position, duration=duration, elapsed_beats=Beat(6, 24)),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=true\n'
+            'notes =|: :16 5/6 :16 5/6 :16 5/6 ^3^ :16 5/6 :16 5/6 :16 5/6 ^3^ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
 
     def test_thirty_second_note_triplets_are_marked_in_the_tab(self):
-        pass
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 48)
 
-    def test_notation_is_true_when_tuplets_are_included_as_a_workaround(self):
-        pass
+        notes = [
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(1, 48)),
+            Note(order=2, position=position, duration=duration, elapsed_beats=Beat(2, 48)),
+            Note(order=3, position=position, duration=duration, elapsed_beats=Beat(3, 48)),
+            Note(order=4, position=position, duration=duration, elapsed_beats=Beat(4, 48)),
+            Note(order=5, position=position, duration=duration, elapsed_beats=Beat(5, 48)),
+            Note(order=6, position=position, duration=duration, elapsed_beats=Beat(6, 48)),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=true\n'
+            'notes =|: :32 5/6 :32 5/6 :32 5/6 ^3^ :32 5/6 :32 5/6 :32 5/6 ^3^ =:|'
+        )
+
+        self.assertEqual(expected, vextab)
 
     def test_odd_length_quarter_notes_are_split_with_tie(self):
         position = FretPosition(string=6, fret=5)

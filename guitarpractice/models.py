@@ -92,6 +92,7 @@ class Beat:
                 Beat(1, 6, rest=self.rest),
                 Beat(1, 12, rest=self.rest),
                 Beat(1, 24, rest=self.rest),
+                Beat(1, 48, rest=self.rest),
             ]
         else:
             even_beats = [
