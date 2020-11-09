@@ -22,12 +22,12 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Fix asc_and_desc pick patterns in hammer/pull exercises~~
 - ~~Add down-pick each whole beat to annotators + down hammer/pull if note has a pick annotation~~
 - ~~Change repeat sequence to pick_pattern high-order function~~
+- ~~Add triplets to vextab and tie_split()~~
 - Tests for each existing exercise combination
 - Allow ending to be filled with either last note or rests
 - Split pickpatterns into smaller modules
 - Add vibrato and strong vibrato
 - Add metadata to sequences (e.g. tuning, exercise title, bpm, time) 
-- Add triplets to vextab and tie_split()
 - Implement remaining pick patterns
 - Implement rhythm generator
 - Implement shape shifters
