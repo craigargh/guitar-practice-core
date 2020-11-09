@@ -72,10 +72,8 @@ def level_one():
         for _ in range(4)
     ]
     rhythm = list(chain.from_iterable(rhythm_choices))
-    repeater = partial(repeat_each_position, repeats=len(rhythm))
 
     return make_sequence(
         shapes=[shape],
         rhythm=rhythm,
-        pick_pattern=repeater,
     )
