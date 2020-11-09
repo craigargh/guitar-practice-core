@@ -309,6 +309,12 @@ class TestBeatTieSplit(TestCase):
 
         self.assertEqual([Beat(1, 24)], result)
 
+    def test_does_not_convert_thirty_second_note_triplets(self):
+        duration = Beat(1, 48)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 48)], result)
+
     def test_does_convert_odd_half_note_triplets(self):
         duration = Beat(2, 3)
         result = duration.tie_split()
@@ -332,3 +338,9 @@ class TestBeatTieSplit(TestCase):
         result = duration.tie_split()
 
         self.assertEqual([Beat(1, 12), Beat(1, 24)], result)
+
+    def test_does_convert_odd_thirty_second_note_triplets(self):
+        duration = Beat(3, 48)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 24), Beat(1, 48)], result)
