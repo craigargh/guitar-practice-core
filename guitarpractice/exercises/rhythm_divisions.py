@@ -79,7 +79,11 @@ def level_one():
     ]
     rhythm = list(chain.from_iterable(rhythm_choices))
 
+    picked_notes = [beat for beat in rhythm if not beat.rest]
+    repeater = partial(repeat_each_position, repeats=len(picked_notes))
+
     return make_sequence(
         shapes=[shape],
         rhythm=rhythm,
+        pick_pattern=repeater,
     )
