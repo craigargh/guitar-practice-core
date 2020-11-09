@@ -64,6 +64,12 @@ def level_one():
 
     rhythm_options = [
         QUARTER_BEAT,
+        QUARTER_BEAT,
+        QUARTER_BEAT,
+        QUARTER_BEAT,
+        DOUBLE_EIGHTH_BEAT,
+        DOUBLE_EIGHTH_BEAT,
+        DOUBLE_EIGHTH_BEAT,
         QUARTER_REST,
     ]
 
