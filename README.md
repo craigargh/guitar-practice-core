@@ -40,10 +40,10 @@ This is the list of exercise types that are planned to be implemented:
   - Power chords and Palm muting
   - Individual note rhythms (i.e. no power chords)
   - Riffs (based on real songs)
-  - Time signatures
 - Rhythm
   - Sixteenth notes
   - Rhythm divisions
+  - Time signatures
 - Lead
   - Licks
 - Left-hand technique:
