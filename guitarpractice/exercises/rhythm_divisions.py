@@ -59,7 +59,7 @@ def rhythm_divisions(variation: str = None) -> Sequence:
 
 
 def level_one():
-    position = FretPosition(6, 0)
+    position = FretPosition(0, 6)
     shape = GuitarShape('Open String', 'scale', positions=[position])
 
     rhythm_options = [
