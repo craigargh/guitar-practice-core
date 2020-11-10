@@ -41,6 +41,7 @@ SIX_SIXTEENTH_NOTE_TRIPLETS = [Beat(1, 24)] * 6
 TWELVE_THIRTY_SECOND_TRIPLETS = [Beat(1, 24)] * 12
 
 SWING = [Beat(1, 12), Beat(1, 12, tie=True), Beat(1, 12)]
+REVERSE_SWING = [Beat(1, 12), Beat(1, 12), Beat(1, 12, tie=True)]
 
 FIRST_REST_EIGHTH_TRIPLET = [Beat(1, 12, rest=True), Beat(1, 12), Beat(1, 12)]
 MIDDLE_REST_EIGHTH_TRIPLET = [Beat(1, 12), Beat(1, 12, rest=True), Beat(1, 12)]

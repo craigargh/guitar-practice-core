@@ -64,10 +64,12 @@ class Beat:
         return result
 
     def __eq__(self, other):
-        if self.division == other.division and self.duration == other.duration and self.rest == other.rest:
+        equal_tie_and_rest = self.rest == other.rest and self.tie == other.tie
+
+        if self.division == other.division and self.duration == other.duration and equal_tie_and_rest:
             return True
 
-        return self.duration * other.division == other.duration * self.division and self.rest == other.rest
+        return self.duration * other.division == other.duration * self.division and equal_tie_and_rest
 
     def __gt__(self, other):
         return self.to_fraction() > other.to_fraction()
@@ -87,34 +89,34 @@ class Beat:
         remainder = self
         if self.division % 3 == 0:
             even_beats = [
-                Beat(1, 1, rest=self.rest),
-                Beat(1, 3, rest=self.rest),
-                Beat(1, 3, rest=self.rest),
-                Beat(1, 6, rest=self.rest),
-                Beat(1, 12, rest=self.rest),
-                Beat(1, 24, rest=self.rest),
-                Beat(1, 48, rest=self.rest),
+                Beat(1, 1, rest=self.rest, tie=self.tie),
+                Beat(1, 3, rest=self.rest, tie=self.tie),
+                Beat(1, 3, rest=self.rest, tie=self.tie),
+                Beat(1, 6, rest=self.rest, tie=self.tie),
+                Beat(1, 12, rest=self.rest, tie=self.tie),
+                Beat(1, 24, rest=self.rest, tie=self.tie),
+                Beat(1, 48, rest=self.rest, tie=self.tie),
             ]
         else:
             even_beats = [
-                Beat(1, 1, rest=self.rest),
-                Beat(1, 2, rest=self.rest),
-                Beat(1, 4, rest=self.rest),
-                Beat(1, 8, rest=self.rest),
-                Beat(1, 16, rest=self.rest),
-                Beat(1, 32, rest=self.rest),
+                Beat(1, 1, rest=self.rest, tie=self.tie),
+                Beat(1, 2, rest=self.rest, tie=self.tie),
+                Beat(1, 4, rest=self.rest, tie=self.tie),
+                Beat(1, 8, rest=self.rest, tie=self.tie),
+                Beat(1, 16, rest=self.rest, tie=self.tie),
+                Beat(1, 32, rest=self.rest, tie=self.tie),
             ]
 
-        while remainder > Beat(1, 1, rest=self.rest):
-            remainder -= Beat(1, 1, rest=self.rest)
-            splits.append(Beat(1, 1, rest=self.rest))
+        while remainder > Beat(1, 1, rest=self.rest, tie=self.tie):
+            remainder -= Beat(1, 1, rest=self.rest, tie=self.tie)
+            splits.append(Beat(1, 1, rest=self.rest, tie=self.tie))
 
         for even_beat in even_beats:
             if even_beat <= remainder:
                 splits.append(even_beat)
                 remainder -= even_beat
 
-            if remainder == Beat(0, 1, rest=self.rest):
+            if remainder == Beat(0, 1, rest=self.rest, tie=self.tie):
                 break
 
         return splits
