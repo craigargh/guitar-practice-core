@@ -58,8 +58,8 @@ def _exercise_map():
                 ],
                 'callable': rhythm_divisions
             },
-            'rhythm-divisions': {
-                'title': 'Rhythm Divisions',
+            'pentatonic-licks': {
+                'title': 'Pentatonic Licks',
                 'variations': [
                     {'id': 'level-1', 'title': 'Level 1'},
                 ],
