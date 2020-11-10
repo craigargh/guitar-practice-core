@@ -130,6 +130,16 @@ class TestBeat(TestCase):
         with self.assertRaises(ValueError):
             Beat(duration=1, division=4) - Beat(duration=1, division=1)
 
+    def test_subtraction_retains_tie(self):
+        result = Beat(2, 4, tie=True) - Beat(1, 4)
+
+        self.assertEqual(Beat(1, 4, tie=True), result)
+
+    def test_subtraction_retains_rest(self):
+        result = Beat(2, 4, rest=True) - Beat(1, 4)
+
+        self.assertEqual(Beat(1, 4, rest=True), result)
+
     def test_next_bar_rounds_beat_up_to_the_nearest_whole_beat(self):
         calculations = [
             [Beat(duration=1, division=1), Beat(duration=1, division=1)],
