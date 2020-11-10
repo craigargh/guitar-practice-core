@@ -1,4 +1,5 @@
 from guitarpractice.models import Sequence
+from .pentatonic_licks import pentatonic_licks
 from .rhythm_divisions import rhythm_divisions
 from .rhythm_sixteenth_notes import rhythm_sixteenth_notes
 from .scale_shapes import scale_shapes
@@ -56,6 +57,13 @@ def _exercise_map():
                     # {'id': 'level-3', 'title': 'Level 3'},
                 ],
                 'callable': rhythm_divisions
+            },
+            'rhythm-divisions': {
+                'title': 'Rhythm Divisions',
+                'variations': [
+                    {'id': 'level-1', 'title': 'Level 1'},
+                ],
+                'callable': pentatonic_licks
             },
         }
     }
