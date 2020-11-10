@@ -32,6 +32,7 @@ class Beat:
     duration: int
     division: int = 4
     rest: bool = False
+    tie: bool = False
 
     @classmethod
     def from_fraction(cls, fraction):
@@ -138,7 +139,7 @@ class Note:
     elapsed_beats: Beat
     order: int
     annotations: List[str] = field(default_factory=list)
-    tie: str = None
+    slur: str = None
 
 
 @dataclass()

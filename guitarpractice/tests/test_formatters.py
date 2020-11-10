@@ -472,7 +472,7 @@ class TestVexTabFormatter(TestCase):
 
         notes = [
             Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=HAMMER_ON),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), slur=HAMMER_ON),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[position], category='scale')
@@ -494,7 +494,7 @@ class TestVexTabFormatter(TestCase):
 
         notes = [
             Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=PULL_OFF),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), slur=PULL_OFF),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[position], category='scale')
@@ -516,7 +516,7 @@ class TestVexTabFormatter(TestCase):
 
         notes = [
             Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=SLIDE),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), slur=SLIDE),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[position], category='scale')
@@ -538,7 +538,7 @@ class TestVexTabFormatter(TestCase):
 
         notes = [
             Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=BEND),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), slur=BEND),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[position], category='scale')
@@ -560,7 +560,7 @@ class TestVexTabFormatter(TestCase):
 
         notes = [
             Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), tie=TAP),
+            Note(order=1, position=position, duration=duration, elapsed_beats=Beat(2, 4), slur=TAP),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[position], category='scale')
@@ -604,8 +604,8 @@ class TestVexTabFormatter(TestCase):
         notes = [
             Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
             Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=HAMMER_ON),
-            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=HAMMER_ON),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), slur=HAMMER_ON),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), slur=HAMMER_ON),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[], category='scale')
@@ -627,8 +627,8 @@ class TestVexTabFormatter(TestCase):
         notes = [
             Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
             Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=PULL_OFF),
-            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=PULL_OFF),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), slur=PULL_OFF),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), slur=PULL_OFF),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[], category='scale')
@@ -650,8 +650,8 @@ class TestVexTabFormatter(TestCase):
         notes = [
             Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
             Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=SLIDE),
-            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=SLIDE),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), slur=SLIDE),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), slur=SLIDE),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[], category='scale')
@@ -673,8 +673,8 @@ class TestVexTabFormatter(TestCase):
         notes = [
             Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
             Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=BEND),
-            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=BEND),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), slur=BEND),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), slur=BEND),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[], category='scale')
@@ -696,8 +696,8 @@ class TestVexTabFormatter(TestCase):
         notes = [
             Note(order=0, position=FretPosition(12, 5), duration=duration, elapsed_beats=Beat(1, 4)),
             Note(order=0, position=FretPosition(12, 4), duration=duration, elapsed_beats=Beat(1, 4)),
-            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), tie=TAP),
-            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), tie=TAP),
+            Note(order=1, position=FretPosition(14, 5), duration=duration, elapsed_beats=Beat(2, 4), slur=TAP),
+            Note(order=1, position=FretPosition(14, 4), duration=duration, elapsed_beats=Beat(2, 4), slur=TAP),
         ]
         shapes = [
             GuitarShape(name='shape1', positions=[], category='scale')

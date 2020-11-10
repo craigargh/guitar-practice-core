@@ -9,7 +9,7 @@ def hammer_on_asc(notes: List[Note]) -> List[Note]:
     for note in notes:
         if prev_note and note.position > prev_note.position and note.position.string == prev_note.position.string:
             if not (UP_PICK in note.annotations or DOWN_PICK in note.annotations):
-                note.tie = HAMMER_ON
+                note.slur = HAMMER_ON
 
         prev_note = note
 
@@ -21,7 +21,7 @@ def pull_off_desc(notes: List[Note]) -> List[Note]:
     for note in notes:
         if prev_note and note.position < prev_note.position and note.position.string == prev_note.position.string:
             if not (UP_PICK in note.annotations or DOWN_PICK in note.annotations):
-                note.tie = PULL_OFF
+                note.slur = PULL_OFF
 
         prev_note = note
 

@@ -100,8 +100,8 @@ def format_note_element(note: Note) -> str:
         note_el = f':{duration} ##'
     else:
         duration_string = f':{duration}'
-        if note.tie:
-            duration_string = f'{tie_map(note.tie)}:{duration}:'
+        if note.duration.tie or note.slur:
+            duration_string = f'{slur_map(note)}:{duration}:'
 
         annotation_string = ''
         if note.annotations:
@@ -121,8 +121,8 @@ def format_chord_elements(notes: List[Note]) -> str:
     ]
     chord_join = ".".join(chord)
 
-    if tie := notes[0].tie:
-        tie_element = tie_map(tie)
+    if notes[0].slur or notes[0].duration.tie:
+        tie_element = slur_map(notes[0])
     else:
         tie_element = ""
 
@@ -133,16 +133,18 @@ def format_chord_elements(notes: List[Note]) -> str:
     return f":{duration} {tie_element}({chord_join}){annotation_element}"
 
 
-def tie_map(key: str) -> str:
+def slur_map(note: Note) -> str:
+    if note.duration.tie:
+        return 'T'
+
     tie_mapping = {
-        constants.TIE: 'T',
         constants.HAMMER_ON: 'h',
         constants.PULL_OFF: 'p',
         constants.SLIDE: 's',
         constants.BEND: 'b',
         constants.TAP: 't',
     }
-    return tie_mapping.get(key)
+    return tie_mapping.get(note.slur)
 
 
 def format_annotations(annotations: List[str]) -> str:

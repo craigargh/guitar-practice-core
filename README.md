@@ -23,6 +23,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Add down-pick each whole beat to annotators + down hammer/pull if note has a pick annotation~~
 - ~~Change repeat sequence to pick_pattern high-order function~~
 - ~~Add triplets to vextab and tie_split()~~
+- Move tie to Beat and rename tie on note to articulation 
 - Tests for each existing exercise combination
 - Allow ending to be filled with either last note or rests
 - Split pickpatterns into smaller modules

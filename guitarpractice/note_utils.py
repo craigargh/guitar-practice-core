@@ -59,11 +59,13 @@ def apply_new_chord_rhythms(normalised_beats_per_chord):
                     elapsed_beats=elapsed_beats,
                     order=count,
                     annotations=deepcopy(note.annotations),
-                    tie=note.tie,
                 )
 
+                if first_beat_in_tie:
+                    new_note.slur = note.slur
+
                 if not first_beat_in_tie and not beat.rest:
-                    new_note.tie = constants.TIE
+                    new_note.duration.tie = True
 
                 all_notes.append(new_note)
 

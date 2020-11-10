@@ -16,7 +16,7 @@ class TestHammerOnAsc(TestCase):
 
         expected = [
             Note(order=0, position=FretPosition(5, 6), duration=Beat(1), elapsed_beats=Beat(1)),
-            Note(order=1, position=FretPosition(7, 6), duration=Beat(1), elapsed_beats=Beat(2), tie=HAMMER_ON),
+            Note(order=1, position=FretPosition(7, 6), duration=Beat(1), elapsed_beats=Beat(2), slur=HAMMER_ON),
         ]
 
         self.assertEqual(expected, result)
@@ -82,7 +82,7 @@ class TestPullOffDesc(TestCase):
 
         expected = [
             Note(order=0, position=FretPosition(7, 6), duration=Beat(1), elapsed_beats=Beat(1)),
-            Note(order=1, position=FretPosition(5, 6), duration=Beat(1), elapsed_beats=Beat(2), tie=PULL_OFF),
+            Note(order=1, position=FretPosition(5, 6), duration=Beat(1), elapsed_beats=Beat(2), slur=PULL_OFF),
         ]
 
         self.assertEqual(expected, result)
