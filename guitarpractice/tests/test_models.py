@@ -350,3 +350,9 @@ class TestBeatTieSplit(TestCase):
         result = duration.tie_split()
 
         self.assertEqual([Beat(1, 4, tie=True)], result)
+
+    def test_existing_ties_are_retained_on_uneven_beats(self):
+        duration = Beat(2, 3, tie=True)
+        result = duration.tie_split()
+
+        self.assertEqual([Beat(1, 3, tie=True), Beat(1, 3, tie=True)], result)

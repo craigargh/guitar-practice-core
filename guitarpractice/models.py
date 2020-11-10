@@ -57,6 +57,7 @@ class Beat:
 
         result = Beat.from_fraction(as_fraction)
         result.rest = self.rest
+        result.tie = self.tie
 
         if result.duration < 0:
             raise ValueError('Beat duration cannot be negative')
