@@ -40,6 +40,8 @@ THREE_EIGHTH_NOTE_TRIPLETS = [Beat(1, 12)] * 3
 SIX_SIXTEENTH_NOTE_TRIPLETS = [Beat(1, 24)] * 6
 TWELVE_THIRTY_SECOND_TRIPLETS = [Beat(1, 24)] * 12
 
+SWING = [Beat(1, 12), Beat(1, 12, tie=True), Beat(1, 12)]
+
 FIRST_REST_EIGHTH_TRIPLET = [Beat(1, 12, rest=True), Beat(1, 12), Beat(1, 12)]
 MIDDLE_REST_EIGHTH_TRIPLET = [Beat(1, 12), Beat(1, 12, rest=True), Beat(1, 12)]
 LAST_REST_EIGHTH_TRIPLET = [Beat(1, 12), Beat(1, 12), Beat(1, 12, rest=True)]
@@ -164,6 +166,21 @@ def level_two():
             ],
             'length': 4,
         },
+        {
+            'beat_options': [
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                QUARTER_BEAT,
+                DOUBLE_EIGHTH_BEAT,
+                SWING,
+                SWING,
+                SWING,
+                SWING,
+                QUARTER_REST,
+            ],
+            'length': 4,
+        }
     ]
 
     combo = random.choice(combos)
