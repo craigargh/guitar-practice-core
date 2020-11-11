@@ -159,7 +159,7 @@ def lick_twelve():
 
 def lick_thirteen():
     return [
-        Note(order=0, position=None, duration=Beat(1, 8), elapsed_beats=Beat(1, 8)),
+        Note(order=0, position=None, duration=Beat(1, 8, rest=True), elapsed_beats=Beat(1, 8)),
         Note(order=1, position=FretPosition(5, 1), duration=Beat(1, 8), elapsed_beats=Beat(2, 8)),
         Note(order=2, position=FretPosition(8, 2), duration=Beat(1, 8), elapsed_beats=Beat(3, 8)),
         Note(order=3, position=FretPosition(5, 2), duration=Beat(1, 8), elapsed_beats=Beat(4, 8)),
@@ -172,7 +172,7 @@ def lick_thirteen():
 
 def lick_fourteen():
     return [
-        Note(order=0, position=None, duration=Beat(1, 8), elapsed_beats=Beat(1, 8)),
+        Note(order=0, position=None, duration=Beat(1, 8, rest=True), elapsed_beats=Beat(1, 8)),
         Note(order=1, position=FretPosition(7, 5), duration=Beat(1, 8), elapsed_beats=Beat(2, 8)),
         Note(order=2, position=FretPosition(5, 4), duration=Beat(1, 8), elapsed_beats=Beat(3, 8)),
         Note(order=3, position=FretPosition(7, 4), duration=Beat(1, 8), elapsed_beats=Beat(4, 8)),
