@@ -13,6 +13,10 @@ def basic_pentatonic_licks():
         lick_eight(),
         lick_nine(),
         lick_ten(),
+        lick_eleven(),
+        lick_twelve(),
+        lick_thirteen(),
+        lick_fourteen(),
     ]
 
 
@@ -138,4 +142,41 @@ def lick_eleven():
         Note(order=1, position=FretPosition(7, 5), duration=Beat(1, 8), elapsed_beats=Beat(2, 8)),
         Note(order=2, position=FretPosition(5, 4), duration=Beat(1, 4), elapsed_beats=Beat(2, 4)),
         Note(order=3, position=FretPosition(7, 4), duration=Beat(1, 2), elapsed_beats=Beat(4, 4)),
+    ]
+
+
+def lick_twelve():
+    return [
+        Note(order=0, position=FretPosition(7, 4), duration=Beat(1, 8), elapsed_beats=Beat(1, 8)),
+        Note(order=1, position=FretPosition(5, 4), duration=Beat(1, 8), elapsed_beats=Beat(2, 8)),
+        Note(order=2, position=FretPosition(7, 4), duration=Beat(1, 8), elapsed_beats=Beat(3, 8)),
+        Note(order=3, position=FretPosition(5, 3), duration=Beat(1, 8), elapsed_beats=Beat(4, 8)),
+        Note(order=4, position=FretPosition(7, 3), duration=Beat(1, 4), elapsed_beats=Beat(6, 8)),
+        Note(order=5, position=FretPosition(5, 3), duration=Beat(1, 8), elapsed_beats=Beat(7, 8)),
+        Note(order=6, position=FretPosition(7, 4), duration=Beat(1, 8), elapsed_beats=Beat(8, 8)),
+    ]
+
+
+def lick_thirteen():
+    return [
+        Note(order=0, position=None, duration=Beat(1, 8), elapsed_beats=Beat(1, 8)),
+        Note(order=1, position=FretPosition(5, 1), duration=Beat(1, 8), elapsed_beats=Beat(2, 8)),
+        Note(order=2, position=FretPosition(8, 2), duration=Beat(1, 8), elapsed_beats=Beat(3, 8)),
+        Note(order=3, position=FretPosition(5, 2), duration=Beat(1, 8), elapsed_beats=Beat(4, 8)),
+        Note(order=4, position=FretPosition(8, 2), duration=Beat(1, 8), elapsed_beats=Beat(5, 8)),
+        Note(order=5, position=FretPosition(5, 2), duration=Beat(1, 8), elapsed_beats=Beat(6, 8)),
+        Note(order=6, position=FretPosition(7, 3), duration=Beat(1, 8), elapsed_beats=Beat(7, 8)),
+        Note(order=7, position=FretPosition(5, 3), duration=Beat(1, 8), elapsed_beats=Beat(8, 8)),
+    ]
+
+
+def lick_fourteen():
+    return [
+        Note(order=0, position=None, duration=Beat(1, 8), elapsed_beats=Beat(1, 8)),
+        Note(order=1, position=FretPosition(7, 5), duration=Beat(1, 8), elapsed_beats=Beat(2, 8)),
+        Note(order=2, position=FretPosition(5, 4), duration=Beat(1, 8), elapsed_beats=Beat(3, 8)),
+        Note(order=3, position=FretPosition(7, 4), duration=Beat(1, 8), elapsed_beats=Beat(4, 8)),
+        Note(order=4, position=FretPosition(5, 3), duration=Beat(1, 8), elapsed_beats=Beat(5, 8)),
+        Note(order=5, position=FretPosition(7, 3), duration=Beat(1, 8), elapsed_beats=Beat(6, 8)),
+        Note(order=6, position=FretPosition(5, 3), duration=Beat(1, 4), elapsed_beats=Beat(8, 8)),
     ]
