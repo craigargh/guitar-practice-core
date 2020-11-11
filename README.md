@@ -48,7 +48,9 @@ This is the list of exercise types that are planned to be implemented:
   - Rhythm divisions
   - Time signatures
 - Lead
-  - Licks
+  - Pentatonic Licks
+  - Major Licks
+  - Chromatic Licks
 - Left-hand technique:
   - Hammer-ons, pull-offs and trills
   - Vibrato
