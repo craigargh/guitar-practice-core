@@ -141,7 +141,7 @@ def lick_eleven():
         Note(order=0, position=FretPosition(5, 5), duration=Beat(1, 8), elapsed_beats=Beat(1, 8)),
         Note(order=1, position=FretPosition(7, 5), duration=Beat(1, 8), elapsed_beats=Beat(2, 8)),
         Note(order=2, position=FretPosition(5, 4), duration=Beat(1, 4), elapsed_beats=Beat(2, 4)),
-        Note(order=3, position=FretPosition(7, 4), duration=Beat(2, 2), elapsed_beats=Beat(4, 4)),
+        Note(order=3, position=FretPosition(7, 4), duration=Beat(1, 2), elapsed_beats=Beat(4, 4)),
     ]
 
 
