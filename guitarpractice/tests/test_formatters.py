@@ -593,7 +593,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :8 5/6 $PM$ :8 5/6 $PM$ =:|'
+            'notes =|: :8 5/6 $.top.PM$ :8 5/6 $.top.PM$ =:|'
         )
 
         self.assertEqual(expected, vextab)
@@ -735,7 +735,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :q (12/5.12/4) $PM$ :q (14/5.14/4) $PM$ =:|'
+            'notes =|: :q (12/5.12/4) $.top.PM$ :q (14/5.14/4) $.top.PM$ =:|'
         )
 
         self.assertEqual(expected, vextab)
@@ -816,7 +816,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :q (12/5.12/4) $.a|/top.$ $PM$ :q (14/5.14/4) $.a|/top.$ $PM$ =:|'
+            'notes =|: :q (12/5.12/4) $.a|/top.$ $.top.PM$ :q (14/5.14/4) $.a|/top.$ $.top.PM$ =:|'
         )
 
         self.assertEqual(expected, vextab)
@@ -885,7 +885,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :q 12/5 $.a|/top.$ $PM$ :q 14/5 $.a|/top.$ $PM$ =:|'
+            'notes =|: :q 12/5 $.a|/top.$ $.top.PM$ :q 14/5 $.a|/top.$ $.top.PM$ =:|'
         )
 
         self.assertEqual(expected, vextab)

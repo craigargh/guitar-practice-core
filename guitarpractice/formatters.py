@@ -149,7 +149,7 @@ def slur_map(note: Note) -> str:
 
 def format_annotations(annotations: List[str]) -> str:
     annotation_map = {
-        constants.PALM_MUTE: 'PM',
+        constants.PALM_MUTE: '.top.PM',
         constants.DOWN_PICK: '.a|/top.',
         constants.UP_PICK: '.am/top.',
     }
