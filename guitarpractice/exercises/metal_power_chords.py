@@ -22,8 +22,6 @@ Level 1:
 
 0-0-c-c-0-0-c-c-
 
-0-c-c-0-0-c-c-0-
-
 0-c-c-c-0-c-c-c-
 
 --c-c-c---c-c-c-
@@ -34,6 +32,8 @@ c-c-c-c-c-c-c-c-
 same, but palm-mute root note of power chord instead of open E
 
 Level 2:
+
+0-c-c-0-0-c-c-0-
 
 0-c-c-0-c-c-0-0-
 
@@ -76,6 +76,7 @@ c-c-000-000-000-
 
 """
 import random
+from typing import List, Dict
 
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
 from guitarpractice.pickpatterns import chug
@@ -101,7 +102,32 @@ def open_string(string=6) -> GuitarShape:
 
 
 def metal_power_chords(variation: str) -> Sequence:
-    position_choices = [
+    return level_one()
+
+
+def level_one() -> Sequence:
+    position_choices = random.choice([
+        level_one_variation_one(),
+        level_one_variation_two(),
+    ])
+
+    rhythm = []
+    shapes = []
+
+    for _ in range(4):
+        position = random.choice(position_choices)
+        rhythm.extend(position['rhythm'])
+        shapes.extend(position['shapes'])
+
+    return make_sequence(
+        shapes=shapes,
+        rhythm=rhythm,
+        pick_pattern=chug,
+    )
+
+
+def level_one_variation_one() -> List[Dict]:
+    return [
         {
             'shapes': [
                 generate_power_chord()
@@ -122,16 +148,31 @@ def metal_power_chords(variation: str) -> Sequence:
         },
     ]
 
-    rhythm = []
-    shapes = []
 
-    for _ in range(4):
-        position = random.choice(position_choices)
-        rhythm.extend(position['rhythm'])
-        shapes.extend(position['shapes'])
+def level_one_variation_two() -> List[Dict]:
+    chord_root = random.randrange(0, 12)
+    second_chord_offset = random.randrange(-3, 3)
+    second_chord_root = min(max(0, chord_root + second_chord_offset), 12)
 
-    return make_sequence(
-        shapes=shapes,
-        rhythm=rhythm,
-        pick_pattern=chug,
-    )
+    return [
+        {
+            'shapes': [
+                generate_power_chord(fret=chord_root),
+                generate_power_chord(fret=second_chord_root),
+            ],
+            'rhythm': [
+                Beat(1, 8),
+                Beat(1, 8)
+            ],
+        },
+        {
+            'shapes': [
+                open_string(),
+                open_string(),
+            ],
+            'rhythm': [
+                Beat(1, 8),
+                Beat(1, 8),
+            ],
+        },
+    ]
