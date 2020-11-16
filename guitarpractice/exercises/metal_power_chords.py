@@ -22,12 +22,13 @@ Level 1:
 
 0-0-c-c-0-0-c-c-
 
+c-c-c-c-c-c-c-c-
+
 0-c-c-c-0-c-c-c-
 
 --c-c-c---c-c-c-
 0-------0-------
 
-c-c-c-c-c-c-c-c-
 
 same, but palm-mute root note of power chord instead of open E
 
@@ -76,14 +77,92 @@ c-c-000-000-000-
 
 """
 import random
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
 from guitarpractice.pickpatterns import chug
 from guitarpractice.sequencer import make_sequence
 
 
-def generate_power_chord(string=6, fret=None) -> GuitarShape:
+def metal_power_chords(variation: str) -> Sequence:
+    return level_one()
+
+
+def level_one() -> Sequence:
+    position_choices, position_count = random.choice([
+        level_one_variation_one(),
+        level_one_variation_two(),
+        level_one_variation_three(),
+    ])
+
+    rhythm = []
+    shapes = []
+
+    for _ in range(position_count):
+        position = random.choice(position_choices)
+        rhythm.extend(position['rhythm'])
+        shapes.extend(position['shapes'])
+
+    return make_sequence(
+        shapes=shapes,
+        rhythm=rhythm,
+        pick_pattern=chug,
+    )
+
+
+def level_one_variation_one() -> Tuple[List[Dict], int]:
+    choices = [
+        {
+            'shapes': [
+                power_chord()
+            ],
+            'rhythm': [
+                Beat(1, 4)
+            ],
+        },
+        eighth_chugs(),
+    ]
+
+    return choices, 4
+
+
+def level_one_variation_two() -> Tuple[List[Dict], int]:
+    choices = [
+        {
+            'shapes': [
+                power_chord_sequence(2)
+            ],
+            'rhythm': [
+                Beat(1, 8),
+                Beat(1, 8)
+            ],
+        },
+        eighth_chugs(),
+    ]
+
+    return choices, 4
+
+
+def level_one_variation_three() -> Tuple[List[Dict], int]:
+    choices = [
+        {
+            'shapes': [
+                open_string(),
+                *power_chord_sequence(3)
+            ],
+            'rhythm': [
+                Beat(1, 8),
+                Beat(1, 8),
+                Beat(1, 8),
+                Beat(1, 8),
+            ],
+        },
+    ]
+
+    return choices, 2
+
+
+def power_chord(string=6, fret=None) -> GuitarShape:
     if fret is None:
         fret = random.randrange(0, 12)
 
@@ -101,78 +180,35 @@ def open_string(string=6) -> GuitarShape:
     return GuitarShape('Open String', 'single note', positions)
 
 
-def metal_power_chords(variation: str) -> Sequence:
-    return level_one()
+def eighth_chugs() -> Dict:
+    return {
+        'shapes': [
+            open_string(),
+            open_string(),
+        ],
+        'rhythm': [
+            Beat(1, 8),
+            Beat(1, 8),
+        ],
+    }
 
 
-def level_one() -> Sequence:
-    position_choices = random.choice([
-        level_one_variation_one(),
-        level_one_variation_two(),
-    ])
+def power_chord_sequence(qty: int, root_fret: int = None, string: int = 6) -> List[GuitarShape]:
+    root_notes = []
 
-    rhythm = []
-    shapes = []
+    if root_fret is None:
+        root_fret = random.randrange(0, 12)
+    root_notes.append(root_fret)
 
-    for _ in range(4):
-        position = random.choice(position_choices)
-        rhythm.extend(position['rhythm'])
-        shapes.extend(position['shapes'])
+    for _ in range(qty - 1):
+        chord_offset = random.randrange(-3, 3)
+        chord_root = min(max(0, root_fret + chord_offset), 12)
 
-    return make_sequence(
-        shapes=shapes,
-        rhythm=rhythm,
-        pick_pattern=chug,
-    )
+        root_notes.append(chord_root)
 
-
-def level_one_variation_one() -> List[Dict]:
-    return [
-        {
-            'shapes': [
-                generate_power_chord()
-            ],
-            'rhythm': [
-                Beat(1, 4)
-            ],
-        },
-        {
-            'shapes': [
-                open_string(),
-                open_string(),
-            ],
-            'rhythm': [
-                Beat(1, 8),
-                Beat(1, 8),
-            ],
-        },
+    chords = [
+        power_chord(string=string, fret=root_position)
+        for root_position in root_notes
     ]
 
-
-def level_one_variation_two() -> List[Dict]:
-    chord_root = random.randrange(0, 12)
-    second_chord_offset = random.randrange(-3, 3)
-    second_chord_root = min(max(0, chord_root + second_chord_offset), 12)
-
-    return [
-        {
-            'shapes': [
-                generate_power_chord(fret=chord_root),
-                generate_power_chord(fret=second_chord_root),
-            ],
-            'rhythm': [
-                Beat(1, 8),
-                Beat(1, 8)
-            ],
-        },
-        {
-            'shapes': [
-                open_string(),
-                open_string(),
-            ],
-            'rhythm': [
-                Beat(1, 8),
-                Beat(1, 8),
-            ],
-        },
-    ]
+    return chords
