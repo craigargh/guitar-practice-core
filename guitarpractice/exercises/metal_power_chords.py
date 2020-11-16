@@ -77,7 +77,7 @@ c-c-000-000-000-
 
 """
 import random
-from typing import List, Dict, Tuple
+from typing import List, Dict
 
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
 from guitarpractice.pickpatterns import chug
@@ -89,17 +89,14 @@ def metal_power_chords(variation: str) -> Sequence:
 
 
 def level_one() -> Sequence:
-    position_choices, position_count = random.choice([
-        level_one_variation_one(),
-        level_one_variation_two(),
-        level_one_variation_three(),
-    ])
+    combos = level_one_combos()
+    combo = random.choice(combos)
 
     rhythm = []
     shapes = []
 
-    for _ in range(position_count):
-        position = random.choice(position_choices)
+    for _ in range(combo.get('repeats', 4)):
+        position = random.choice(combo.get('choices'))
         rhythm.extend(position['rhythm'])
         shapes.extend(position['shapes'])
 
@@ -110,54 +107,97 @@ def level_one() -> Sequence:
     )
 
 
-def level_one_variation_one() -> Tuple[List[Dict], int]:
-    choices = [
+def level_one_combos():
+    return [
         {
-            'shapes': [
-                power_chord()
+            'choices': [
+                {
+                    'shapes': [
+                        power_chord()
+                    ],
+                    'rhythm': [
+                        Beat(1, 4)
+                    ],
+                },
+                eighth_chugs(),
             ],
-            'rhythm': [
-                Beat(1, 4)
-            ],
+            'repeats': 4
         },
-        eighth_chugs(),
-    ]
-
-    return choices, 4
-
-
-def level_one_variation_two() -> Tuple[List[Dict], int]:
-    choices = [
         {
-            'shapes': power_chord_sequence(2),
-            'rhythm': [
-                Beat(1, 8),
-                Beat(1, 8)
+            'choices': [
+                {
+                    'shapes': power_chord_sequence(2),
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8)
+                    ],
+                },
+                eighth_chugs(),
             ],
+            'repeats': 4
         },
-        eighth_chugs(),
-    ]
-
-    return choices, 4
-
-
-def level_one_variation_three() -> Tuple[List[Dict], int]:
-    choices = [
         {
-            'shapes': [
-                open_string(),
-                *power_chord_sequence(3)
+            'choices': [
+                {
+                    'shapes': [
+                        open_string(),
+                        *power_chord_sequence(3)
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
             ],
-            'rhythm': [
-                Beat(1, 8),
-                Beat(1, 8),
-                Beat(1, 8),
-                Beat(1, 8),
+            'repeats': 2,
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        power_chord(string=5)
+                    ],
+                    'rhythm': [
+                        Beat(1, 4)
+                    ],
+                },
+                eighth_chugs(),
             ],
+            'repeats': 4
+        },
+        {
+            'choices': [
+                {
+                    'shapes': power_chord_sequence(2, string=5),
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8)
+                    ],
+                },
+                eighth_chugs(),
+            ],
+            'repeats': 4
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        open_string(),
+                        *power_chord_sequence(3, string=5)
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+            ],
+            'repeats': 2,
         },
     ]
-
-    return choices, 2
 
 
 def power_chord(string=6, fret=None) -> GuitarShape:
