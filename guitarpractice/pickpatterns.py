@@ -13,6 +13,9 @@ def strum(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
     return [shape.positions] * repeats
 
 
+chug = strum
+
+
 def asc(shape: GuitarShape, length: int = None, shorten_from_end=False) -> List[List[FretPosition]]:
     positions = sorted(shape.positions)
     positions = adjust_length(positions, length, shorten_from_end)

@@ -1,4 +1,5 @@
 from guitarpractice.models import Sequence
+from .metal_power_chords import metal_power_chords
 from .pentatonic_licks import pentatonic_licks
 from .rhythm_divisions import rhythm_divisions
 from .rhythm_sixteenth_notes import rhythm_sixteenth_notes
@@ -64,6 +65,13 @@ def _exercise_map():
                     {'id': 'level-1', 'title': 'Level 1'},
                 ],
                 'callable': pentatonic_licks
+            },
+            'metal-power-chords': {
+                'title': 'Metal Power Chords',
+                'variations': [
+                    {'id': 'level-1', 'title': 'Level 1'},
+                ],
+                'callable': metal_power_chords
             },
         }
     }
