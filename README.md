@@ -29,6 +29,8 @@ A package for generating practice exercises for guitar. The package uses a domai
 - Add vertical shifter to lick patterns
 - Add calculate_elapsed_beats function to lick exercises 
 - Tests for each existing exercise combination
+- Run test coverage report
+- Add missing tests
 - Allow ending to be filled with either last note or rests
 - Split pickpatterns into smaller modules
 - Add vibrato and strong vibrato
