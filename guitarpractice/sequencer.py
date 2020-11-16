@@ -41,8 +41,12 @@ def make_sequence(
 
     notes = ending(notes)
 
-    sorted_shapes = sorted(set(adjusted_shapes), key=attrgetter('name'))
-    return Sequence(notes=notes, shapes=list(sorted_shapes))
+    sorted_shapes = []
+    for shape in adjusted_shapes:
+        if shape not in sorted_shapes:
+            sorted_shapes.append(shape)
+
+    return Sequence(notes=notes, shapes=sorted_shapes)
 
 
 def positions_generator(shapes: List[GuitarShape]) -> List[FretPosition]:
