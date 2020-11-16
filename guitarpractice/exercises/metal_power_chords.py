@@ -129,9 +129,7 @@ def level_one_variation_one() -> Tuple[List[Dict], int]:
 def level_one_variation_two() -> Tuple[List[Dict], int]:
     choices = [
         {
-            'shapes': [
-                power_chord_sequence(2)
-            ],
+            'shapes': power_chord_sequence(2),
             'rhythm': [
                 Beat(1, 8),
                 Beat(1, 8)
