@@ -197,7 +197,89 @@ def level_one_combos():
             ],
             'repeats': 2,
         },
+        *level_one_power_chord_and_root_note_combos()
     ]
+
+
+def level_one_power_chord_and_root_note_combos():
+    chord, root_note = power_chord_and_root_note()
+    return [
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        chord
+                    ],
+                    'rhythm': [
+                        Beat(1, 4)
+                    ],
+                },
+                {
+                    'shapes': [
+                        root_note,
+                        root_note,
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+            ],
+            'repeats': 4
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        chord,
+                        chord,
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+                {
+                    'shapes': [
+                        root_note,
+                        root_note,
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+            ],
+            'repeats': 4
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        root_note,
+                        chord,
+                        chord,
+                        chord,
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+            ],
+            'repeats': 2
+        },
+    ]
+
+
+def power_chord_and_root_note():
+    chord = power_chord()
+    root_note = chord.positions[0]
+    root_note_shape = GuitarShape('Root note', 'note', positions=[root_note])
+
+    return chord, root_note_shape
 
 
 def power_chord(string=6, fret=None) -> GuitarShape:
