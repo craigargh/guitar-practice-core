@@ -1,7 +1,8 @@
 from unittest import TestCase
 
-from guitarpractice.annotators import hammer_on_asc, pull_off_desc, down_pick_on_the_beat, down_pick_alternating_beats
-from guitarpractice.constants import HAMMER_ON, PULL_OFF, DOWN_PICK, UP_PICK
+from guitarpractice.annotators import hammer_on_asc, pull_off_desc, down_pick_on_the_beat, down_pick_alternating_beats, \
+    palm_mute_open, palm_mute_single
+from guitarpractice.constants import HAMMER_ON, PULL_OFF, DOWN_PICK, UP_PICK, PALM_MUTE
 from guitarpractice.models import Note, FretPosition, Beat
 
 
@@ -174,6 +175,7 @@ class TestDownPickOnTheBeat(TestCase):
 
         self.assertEqual(expected, result)
 
+
 class TestDownAlternatingBeats(TestCase):
     def test_down_pick_annotation_is_added_to_evey_other_beat(self):
         notes = [
@@ -203,6 +205,150 @@ class TestDownAlternatingBeats(TestCase):
             Note(order=7, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(8, 8)),
             Note(order=8, position=FretPosition(string=5, fret=5), duration=Beat(1, 8), elapsed_beats=Beat(9, 8),
                  annotations=[DOWN_PICK]),
+        ]
+
+        self.assertEqual(expected, result)
+
+
+class TestPalmMuteOpen(TestCase):
+    def test_open_strings_are_palm_muted(self):
+        notes = [
+            Note(position=FretPosition(0, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=FretPosition(0, 5), duration=Beat(1), elapsed_beats=Beat(2), order=1),
+            Note(position=FretPosition(0, 4), duration=Beat(1), elapsed_beats=Beat(3), order=2),
+            Note(position=FretPosition(0, 3), duration=Beat(1), elapsed_beats=Beat(4), order=3),
+            Note(position=FretPosition(0, 2), duration=Beat(1), elapsed_beats=Beat(5), order=4),
+            Note(position=FretPosition(0, 1), duration=Beat(1), elapsed_beats=Beat(6), order=5),
+        ]
+
+        result = palm_mute_open(notes)
+
+        expected = [
+            Note(position=FretPosition(0, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 5), duration=Beat(1), elapsed_beats=Beat(2), order=1,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 4), duration=Beat(1), elapsed_beats=Beat(3), order=2,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 3), duration=Beat(1), elapsed_beats=Beat(4), order=3,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 2), duration=Beat(1), elapsed_beats=Beat(5), order=4,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 1), duration=Beat(1), elapsed_beats=Beat(6), order=5,
+                 annotations=[PALM_MUTE]),
+        ]
+
+        self.assertEqual(expected, result)
+
+    def test_single_notes_are_not_palm_muted(self):
+        notes = [
+            Note(position=FretPosition(1, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=FretPosition(2, 5), duration=Beat(1), elapsed_beats=Beat(2), order=1),
+            Note(position=FretPosition(3, 4), duration=Beat(1), elapsed_beats=Beat(3), order=2),
+            Note(position=FretPosition(4, 3), duration=Beat(1), elapsed_beats=Beat(4), order=3),
+            Note(position=FretPosition(5, 2), duration=Beat(1), elapsed_beats=Beat(5), order=4),
+            Note(position=FretPosition(6, 1), duration=Beat(1), elapsed_beats=Beat(6), order=5),
+        ]
+
+        result = palm_mute_open(notes)
+
+        expected = [
+            Note(position=FretPosition(1, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=FretPosition(2, 5), duration=Beat(1), elapsed_beats=Beat(2), order=1),
+            Note(position=FretPosition(3, 4), duration=Beat(1), elapsed_beats=Beat(3), order=2),
+            Note(position=FretPosition(4, 3), duration=Beat(1), elapsed_beats=Beat(4), order=3),
+            Note(position=FretPosition(5, 2), duration=Beat(1), elapsed_beats=Beat(5), order=4),
+            Note(position=FretPosition(6, 1), duration=Beat(1), elapsed_beats=Beat(6), order=5),
+        ]
+
+        self.assertEqual(expected, result)
+
+    def test_chords_are_not_palm_muted(self):
+        notes = [
+            Note(position=FretPosition(0, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=FretPosition(0, 5), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+        ]
+
+        result = palm_mute_open(notes)
+
+        expected = [
+            Note(position=FretPosition(0, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=FretPosition(0, 5), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+        ]
+
+        self.assertEqual(expected, result)
+
+
+class TestPalmMuteSingle(TestCase):
+    def test_open_strings_are_palm_muted(self):
+        notes = [
+            Note(position=FretPosition(0, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=FretPosition(0, 5), duration=Beat(1), elapsed_beats=Beat(2), order=1),
+            Note(position=FretPosition(0, 4), duration=Beat(1), elapsed_beats=Beat(3), order=2),
+            Note(position=FretPosition(0, 3), duration=Beat(1), elapsed_beats=Beat(4), order=3),
+            Note(position=FretPosition(0, 2), duration=Beat(1), elapsed_beats=Beat(5), order=4),
+            Note(position=FretPosition(0, 1), duration=Beat(1), elapsed_beats=Beat(6), order=5),
+        ]
+
+        result = palm_mute_single(notes)
+
+        expected = [
+            Note(position=FretPosition(0, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 5), duration=Beat(1), elapsed_beats=Beat(2), order=1,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 4), duration=Beat(1), elapsed_beats=Beat(3), order=2,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 3), duration=Beat(1), elapsed_beats=Beat(4), order=3,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 2), duration=Beat(1), elapsed_beats=Beat(5), order=4,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(0, 1), duration=Beat(1), elapsed_beats=Beat(6), order=5,
+                 annotations=[PALM_MUTE]),
+        ]
+
+        self.assertEqual(expected, result)
+
+    def test_single_notes_are_palm_muted(self):
+        notes = [
+            Note(position=FretPosition(1, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=FretPosition(2, 5), duration=Beat(1), elapsed_beats=Beat(2), order=1),
+            Note(position=FretPosition(3, 4), duration=Beat(1), elapsed_beats=Beat(3), order=2),
+            Note(position=FretPosition(4, 3), duration=Beat(1), elapsed_beats=Beat(4), order=3),
+            Note(position=FretPosition(5, 2), duration=Beat(1), elapsed_beats=Beat(5), order=4),
+            Note(position=FretPosition(6, 1), duration=Beat(1), elapsed_beats=Beat(6), order=5),
+        ]
+
+        result = palm_mute_single(notes)
+
+        expected = [
+            Note(position=FretPosition(1, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(2, 5), duration=Beat(1), elapsed_beats=Beat(2), order=1,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(3, 4), duration=Beat(1), elapsed_beats=Beat(3), order=2,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(4, 3), duration=Beat(1), elapsed_beats=Beat(4), order=3,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(5, 2), duration=Beat(1), elapsed_beats=Beat(5), order=4,
+                 annotations=[PALM_MUTE]),
+            Note(position=FretPosition(6, 1), duration=Beat(1), elapsed_beats=Beat(6), order=5,
+                 annotations=[PALM_MUTE]),
+        ]
+
+        self.assertEqual(expected, result)
+
+    def test_chords_are_not_palm_muted(self):
+        notes = [
+            Note(position=FretPosition(0, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=FretPosition(0, 5), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+        ]
+
+        result = palm_mute_single(notes)
+
+        expected = [
+            Note(position=FretPosition(0, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=FretPosition(0, 5), duration=Beat(1), elapsed_beats=Beat(1), order=0),
         ]
 
         self.assertEqual(expected, result)

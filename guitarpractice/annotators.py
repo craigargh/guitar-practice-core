@@ -1,7 +1,8 @@
 from typing import List
 
-from guitarpractice.constants import HAMMER_ON, PULL_OFF, DOWN_PICK, UP_PICK
+from guitarpractice.constants import HAMMER_ON, PULL_OFF, DOWN_PICK, UP_PICK, PALM_MUTE
 from guitarpractice.models import GuitarShape, Note, Annotation, Beat
+from guitarpractice.note_utils import group_notes
 
 
 def hammer_on_asc(notes: List[Note]) -> List[Note]:
@@ -50,6 +51,30 @@ def down_pick_alternating_beats(notes: List[Note]) -> List[Note]:
             note.annotations.append(DOWN_PICK)
 
         prev_elapsed_beat = note.elapsed_beats
+
+    return notes
+
+
+def palm_mute_open(notes: List[Note]):
+    groups = group_notes(notes)
+
+    for _, group in groups.items():
+        if len(group) == 1:
+            note = group[0]
+
+            if note.position.fret == 0:
+                note.annotations.append(PALM_MUTE)
+
+    return notes
+
+
+def palm_mute_single(notes: List[Note]):
+    groups = group_notes(notes)
+
+    for _, group in groups.items():
+        if len(group) == 1:
+            note = group[0]
+            note.annotations.append(PALM_MUTE)
 
     return notes
 

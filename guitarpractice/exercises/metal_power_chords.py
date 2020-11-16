@@ -79,6 +79,7 @@ c-c-000-000-000-
 import random
 from typing import List, Dict
 
+from guitarpractice.annotators import palm_mute_single
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
 from guitarpractice.pickpatterns import chug
 from guitarpractice.sequencer import make_sequence
@@ -104,6 +105,7 @@ def level_one() -> Sequence:
         shapes=shapes,
         rhythm=rhythm,
         pick_pattern=chug,
+        annotators=[palm_mute_single]
     )
 
 
