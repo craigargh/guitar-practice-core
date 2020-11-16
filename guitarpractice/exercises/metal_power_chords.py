@@ -157,6 +157,25 @@ def level_one_combos():
             'choices': [
                 {
                     'shapes': [
+                        open_string(),
+                        open_string(),
+                        open_string(),
+                        power_chord(),
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+            ],
+            'repeats': 2,
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
                         power_chord(string=5)
                     ],
                     'rhythm': [
@@ -186,6 +205,25 @@ def level_one_combos():
                     'shapes': [
                         open_string(),
                         *power_chord_sequence(3, string=5)
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+            ],
+            'repeats': 2,
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        open_string(),
+                        open_string(),
+                        open_string(),
+                        power_chord(string=5)
                     ],
                     'rhythm': [
                         Beat(1, 8),
