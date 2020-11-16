@@ -26,6 +26,9 @@ class GuitarShape:
     frets_movable: bool = False
     strings_movable: bool = False
 
+    def __hash__(self):
+        return hash(str(self))
+
 
 @dataclass()
 class Beat:

@@ -1,4 +1,5 @@
 from itertools import cycle
+from operator import attrgetter
 from typing import List, Callable
 
 from .endings import fill_remaining_bar_with_rests
@@ -40,7 +41,8 @@ def make_sequence(
 
     notes = ending(notes)
 
-    return Sequence(notes=notes, shapes=adjusted_shapes)
+    sorted_shapes = sorted(set(adjusted_shapes), key=attrgetter('name'))
+    return Sequence(notes=notes, shapes=list(sorted_shapes))
 
 
 def positions_generator(shapes: List[GuitarShape]) -> List[FretPosition]:

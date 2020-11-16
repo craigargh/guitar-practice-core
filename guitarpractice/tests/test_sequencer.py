@@ -104,6 +104,20 @@ class TestSequencer(TestCase):
     def test_can_apply_multiple_shape_shifters(self):
         self.fail('write the test')
 
+    def test_shapes_are_not_duplicated(self):
+        positions = [
+            FretPosition(fret=0, string=6)
+        ]
+
+        shape_1 = GuitarShape('open string', 'note', positions=positions)
+        shape_2 = GuitarShape('open string', 'note', positions=positions)
+
+        sequence = make_sequence(shapes=[shape_1, shape_2])
+        
+        self.assertEqual(len(sequence.shapes), 1)
+        self.assertEqual(sequence.shapes[0], shape_1)
+        self.assertEqual(sequence.shapes[0], shape_2)
+
 
 def make_single_position_pattern(length: int):
     pattern = [
