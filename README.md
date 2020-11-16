@@ -24,8 +24,6 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Change repeat sequence to pick_pattern high-order function~~
 - ~~Add triplets to vextab and tie_split()~~
 - ~~Move tie to Beat and rename tie on note to articulation~~
-- ~~Remove duplicate shapes from diagram~~
-- Add palm muting to power chords exercise
 - Add vertical shifter to lick patterns
 - Add calculate_elapsed_beats function to lick exercises 
 - Tests for each existing exercise combination
