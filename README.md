@@ -48,6 +48,7 @@ This is the list of exercise types that are planned to be implemented:
 - Rhythm
   - Sixteenth notes
   - Rhythm divisions
+  - Gallop and reverse gallop speed
   - Time signatures
 - Lead
   - Pentatonic Licks
