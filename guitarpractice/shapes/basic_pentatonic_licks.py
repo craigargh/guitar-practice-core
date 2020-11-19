@@ -188,12 +188,11 @@ def lick_gundam_stardust_one():
     return [
         Note(order=0, position=FretPosition(5, 2), duration=Beat(3, 8), elapsed_beats=Beat(2, 4)),
         Note(order=1, position=FretPosition(7, 3), duration=Beat(5, 8), elapsed_beats=Beat(4, 4)),
-        Note(order=2, position=FretPosition(7, 3), duration=Beat(3, 8, tie=True), elapsed_beats=Beat(6, 4)),
+        Note(order=2, position=FretPosition(7, 3), duration=Beat(2, 4, tie=True), elapsed_beats=Beat(6, 4)),
         Note(order=3, position=FretPosition(7, 3), duration=Beat(1, 4), elapsed_beats=Beat(7, 4)),
         Note(order=4, position=FretPosition(5, 2), duration=Beat(1, 4), elapsed_beats=Beat(8, 4)),
-        Note(order=5, position=FretPosition(7, 3), duration=Beat(1, 8), elapsed_beats=Beat(19, 8)),
-        Note(order=6, position=FretPosition(7, 3), duration=Beat(2, 8, tie=True), elapsed_beats=Beat(19, 8)),
-        Note(order=7, position=FretPosition(5, 3), duration=Beat(6, 8), elapsed_beats=Beat(12, 4)),
+        Note(order=5, position=FretPosition(7, 3), duration=Beat(3, 8), elapsed_beats=Beat(19, 8)),
+        Note(order=6, position=FretPosition(5, 3), duration=Beat(5, 8), elapsed_beats=Beat(12, 4)),
     ]
 
 
@@ -201,9 +200,8 @@ def lick_gundam_stardust_two():
     return [
         Note(order=0, position=FretPosition(5, 2), duration=Beat(3, 8), elapsed_beats=Beat(2, 4)),
         Note(order=1, position=FretPosition(7, 3), duration=Beat(5, 8), elapsed_beats=Beat(4, 4)),
-        Note(order=2, position=FretPosition(7, 3), duration=Beat(3, 8, tie=True), elapsed_beats=Beat(6, 4)),
+        Note(order=2, position=FretPosition(7, 3), duration=Beat(2, 4, tie=True), elapsed_beats=Beat(6, 4)),
         Note(order=3, position=FretPosition(5, 2), duration=Beat(1, 4), elapsed_beats=Beat(7, 4)),
         Note(order=4, position=FretPosition(8, 2), duration=Beat(1, 4), elapsed_beats=Beat(8, 4)),
-        Note(order=5, position=FretPosition(5, 1), duration=Beat(1, 4), elapsed_beats=Beat(19, 8)),
-        Note(order=6, position=FretPosition(5, 1), duration=Beat(4, 4, tie=True), elapsed_beats=Beat(19, 8)),
+        Note(order=5, position=FretPosition(5, 1), duration=Beat(4, 4), elapsed_beats=Beat(19, 8)),
     ]
