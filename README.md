@@ -46,9 +46,9 @@ This is the list of exercise types that are planned to be implemented:
   - Individual note rhythms (i.e. no power chords)
   - Riffs (based on real songs)
 - Rhythm
-  - Sixteenth notes
-  - Rhythm divisions
-  - Gallop and reverse gallop speed
+  - Single beat rhythm divisions
+  - Sixteenth notes (speed)
+  - Sixteenth notes (variations) / Gallop and reverse gallop speed
   - Time signatures
 - Lead
   - Pentatonic Licks
