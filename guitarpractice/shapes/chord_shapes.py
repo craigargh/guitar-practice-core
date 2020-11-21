@@ -136,7 +136,7 @@ def f_major_add_9() -> GuitarShape:
         FretPosition(string=4, fret=3, finger=3, highlighted=True),
         FretPosition(string=3, fret=2, finger=2),
         FretPosition(string=2, fret=1, finger=1),
-        FretPosition(string=1, fret=3, finger=4, highlighted=True),
+        FretPosition(string=1, fret=3, finger=4),
     ]
 
     return GuitarShape('F Major add 9', 'chord', positions)

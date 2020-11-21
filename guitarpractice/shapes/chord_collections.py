@@ -6,6 +6,8 @@ from guitarpractice.shapes import chord_shapes
 """
 major scale nine chords
 Cmaj9-Dm9-Em7b9-Fmaj9-G9-Am9-Bm7b9b5
+
+https://io9.gizmodo.com/a-chart-of-the-most-commonly-used-keys-shows-our-actual-1703086174
 """
 
 
