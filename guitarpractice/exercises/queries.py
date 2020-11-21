@@ -86,6 +86,7 @@ def _exercise_map():
                 'title': 'Chord Arpeggios',
                 'variations': [
                     {'id': 'level-1', 'title': 'Level 1'},
+                    {'id': 'level-2', 'title': 'Level 2'},
                 ],
                 'callable': chord_arpeggios
             },
