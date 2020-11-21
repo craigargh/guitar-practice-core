@@ -23,8 +23,6 @@ def level_one():
         pickpatterns.asc,
         pickpatterns.asc_and_desc,
         pickpatterns.bass_and_asc,
-        pickpatterns.bass_asc_and_desc,
-
     ]
     order = random.choice(order_choices)
     notes_per_arpeggio = random.choice([4, 6, 8])
