@@ -1292,3 +1292,61 @@ class TestRepeatWholePattern(TestCase):
         self.assertEqual([positions[2]], result[5])
         self.assertEqual([positions[1]], result[6])
         self.assertEqual([positions[0]], result[7])
+
+
+class TestFixedPattern(TestCase):
+    def test_pattern_is_required(self):
+        chord, _ = get_chord_and_positions()
+
+        with self.assertRaises(ValueError):
+            pickpatterns.fixed_string_pattern(chord)
+
+    def test_pattern_determines_order(self):
+        pattern = ['r', '1', '2', '3']
+        chord, positions = get_chord_and_positions()
+
+        result = pickpatterns.fixed_string_pattern(chord, pattern=pattern)
+
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[3]], result[1])
+        self.assertEqual([positions[2]], result[2])
+        self.assertEqual([positions[1]], result[3])
+
+    def test_invalid_strings_are_replaced_with_lowest_note(self):
+        pattern = ['6', '5']
+        chord, positions = get_chord_and_positions()
+
+        result = pickpatterns.fixed_string_pattern(chord, pattern=pattern)
+
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[0]], result[1])
+
+    def test_string_a_returns_second_note_in_pattern(self):
+        pattern = ['a']
+        chord, positions = get_chord_and_positions()
+
+        result = pickpatterns.fixed_string_pattern(chord, pattern=pattern)
+
+        self.assertEqual([positions[1]], result[0])
+
+    def test_can_shorten_pattern_length(self):
+        pattern = ['r', '1', '2', '3']
+        chord, positions = get_chord_and_positions()
+
+        result = pickpatterns.fixed_string_pattern(chord, pattern=pattern, length=3)
+
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[3]], result[1])
+        self.assertEqual([positions[2]], result[2])
+
+    def test_can_increase_pattern_length(self):
+        pattern = ['r', '1', '2', '3']
+        chord, positions = get_chord_and_positions()
+
+        result = pickpatterns.fixed_string_pattern(chord, pattern=pattern, length=5)
+
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[3]], result[1])
+        self.assertEqual([positions[2]], result[2])
+        self.assertEqual([positions[1]], result[3])
+        self.assertEqual([positions[1]], result[4])

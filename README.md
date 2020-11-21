@@ -24,8 +24,8 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Change repeat sequence to pick_pattern high-order function~~
 - ~~Add triplets to vextab and tie_split()~~
 - ~~Move tie to Beat and rename tie on note to articulation~~
-- Fix bass_and_ pickpatterns for chord arpeggios
 - Add fixed_pattern pick pattern https://github.com/craigargh/guitarPractice/blob/master/guitarPractice/guitar_shapes/pick_patterns.py
+- Fix bass_and_ pickpatterns for chord arpeggios
 - Add vertical shifter to lick patterns
 - Add calculate_elapsed_beats function to lick exercises 
 - Tests for each existing exercise combination

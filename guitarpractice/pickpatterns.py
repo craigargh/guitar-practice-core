@@ -194,6 +194,38 @@ def alternating_bass_and_each_randomly(shape: GuitarShape, length: int = None) -
     pass
 
 
+def fixed_string_pattern(shape: GuitarShape, length: int = None, pattern: List[str] = None) -> List[List[FretPosition]]:
+    if pattern is None:
+        raise ValueError('pattern must be set')
+
+    positions = sorted(shape.positions)
+
+    required_strings = [
+        string
+        for string in pattern
+        if string != 'r'
+    ]
+
+    string_map = {
+        'r': positions[0],
+        'a': positions[1],
+    }
+
+    for string in required_strings:
+        for position in positions:
+            if str(position.string) == string:
+                string_map[string] = position
+
+    pick_pattern = [
+        [string_map.get(string, positions[0])]
+        for string in pattern
+    ]
+
+    pick_pattern = adjust_length(pick_pattern, length=length)
+
+    return pick_pattern
+
+
 def repeat_each_position(shape: GuitarShape, length: int = None, repeats: int = 2, order: Callable = asc) -> List[
     List[FretPosition]]:
     """

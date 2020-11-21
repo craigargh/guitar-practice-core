@@ -10,7 +10,7 @@ from guitarpractice.shapes.chord_collections import c_major_scale_triad_chords
 def chord_arpeggios(variation) -> Sequence:
     variation_map = {
         'level-1': level_one,
-        # 'level-2': level_two,
+        'level-2': level_two,
         # 'level-3': level_three,
     }
     variation_function = variation_map[variation]
@@ -34,3 +34,45 @@ def level_one():
         pick_pattern=pick_pattern,
         shape_labels=True,
     )
+
+
+def level_two():
+    return level_two_variation_one()
+
+
+def level_two_variation_one():
+    preset_pattern = random.choice(set_pick_pattern_choices_1())
+
+    chords = random.sample(c_major_scale_triad_chords(), 2)
+    pick_pattern = partial(pickpatterns.fixed_string_pattern, pattern=preset_pattern)
+
+    return make_sequence(
+        shapes=chords,
+        pick_pattern=pick_pattern,
+        shape_labels=True,
+    )
+
+
+def set_pick_pattern_choices_1():
+    return [
+        ['r', '1', '2', '1', '2', '1', '2', '1'],
+        ['r', '3', '2', '1', 'r', '3', '2', '1'],
+        ['r', '3', '1', '2', 'r', '3', '1', '2'],
+        ['r', '2', '1', '3', 'r', '2', '1', '3'],
+        ['r', '2', '3', '1', 'r', '2', '3', '1'],
+        ['r', '1', '2', '3', 'r', '1', '2', '3'],
+        ['r', '1', '3', '2', 'r', '1', '3', '2'],
+    ]
+
+
+def set_pick_pattern_choices_2():
+    return [
+        ['r', '2', '1', '3', 'a', '2', '1', '3'],
+        ['r', '3', '2', '1', 'a', '3', '2', '1'],
+        ['r', '1', '2', '3', 'a', '1', '2', '3'],
+        ['r', '2', '3', '1', 'a', '2', '3', '1'],
+        ['r', '1', '3', '2', 'a', '1', '3', '2'],
+        ['r', '1', 'a', '2', 'r', '1', 'a', '2'],
+        ['r', '1', '2', '1', 'a', '1', '2', '1'],
+        ['r', '2', 'a', '1', 'r', '2', 'a', '1'],
+    ]
