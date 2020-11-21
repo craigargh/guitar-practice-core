@@ -1,5 +1,5 @@
 from guitarpractice.models import Sequence
-from . import chord_arpeggios
+from .chord_arpeggios import chord_arpeggios
 from .chord_changes import chord_changes
 from .metal_power_chords import metal_power_chords
 from .pentatonic_licks import pentatonic_licks

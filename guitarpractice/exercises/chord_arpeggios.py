@@ -2,15 +2,12 @@ import random
 from functools import partial
 
 from guitarpractice import pickpatterns
-from guitarpractice.annotators import shape_name
 from guitarpractice.models import Sequence
-from guitarpractice.pickpatterns import strum
 from guitarpractice.sequencer import make_sequence
-from guitarpractice.shapes.chord_collections import c_major_scale_triad_chords, c_major_scale_seven_chords, \
-    c_major_scale_add_9_chords
+from guitarpractice.shapes.chord_collections import c_major_scale_triad_chords
 
 
-def chord_changes(variation) -> Sequence:
+def chord_arpeggios(variation) -> Sequence:
     variation_map = {
         'level-1': level_one,
         # 'level-2': level_two,
