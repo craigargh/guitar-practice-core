@@ -5,7 +5,7 @@ from guitarpractice.models import GuitarShape, Note, Annotation, Beat
 from guitarpractice.note_utils import group_notes
 
 
-def hammer_on_asc(notes: List[Note]) -> List[Note]:
+def hammer_on_asc(notes: List[Note], shapes: List[GuitarShape]) -> List[Note]:
     prev_note = None
     for note in notes:
         if prev_note and note.position > prev_note.position and note.position.string == prev_note.position.string:
@@ -17,7 +17,7 @@ def hammer_on_asc(notes: List[Note]) -> List[Note]:
     return notes
 
 
-def pull_off_desc(notes: List[Note]) -> List[Note]:
+def pull_off_desc(notes: List[Note], shapes: List[GuitarShape]) -> List[Note]:
     prev_note = None
     for note in notes:
         if prev_note and note.position < prev_note.position and note.position.string == prev_note.position.string:
@@ -29,7 +29,7 @@ def pull_off_desc(notes: List[Note]) -> List[Note]:
     return notes
 
 
-def down_pick_on_the_beat(notes: List[Note]) -> List[Note]:
+def down_pick_on_the_beat(notes: List[Note], shapes: List[GuitarShape]) -> List[Note]:
     prev_elapsed_beat = Beat(0, 1)
 
     for note in notes:
@@ -42,7 +42,7 @@ def down_pick_on_the_beat(notes: List[Note]) -> List[Note]:
     return notes
 
 
-def down_pick_alternating_beats(notes: List[Note]) -> List[Note]:
+def down_pick_alternating_beats(notes: List[Note], shapes: List[GuitarShape]) -> List[Note]:
     prev_elapsed_beat = Beat(0, 1)
 
     for note in notes:
@@ -55,7 +55,7 @@ def down_pick_alternating_beats(notes: List[Note]) -> List[Note]:
     return notes
 
 
-def palm_mute_open(notes: List[Note]):
+def palm_mute_open(notes: List[Note], shapes: List[GuitarShape]):
     groups = group_notes(notes)
 
     for _, group in groups.items():
@@ -68,7 +68,7 @@ def palm_mute_open(notes: List[Note]):
     return notes
 
 
-def palm_mute_single(notes: List[Note]):
+def palm_mute_single(notes: List[Note], shapes: List[GuitarShape]):
     groups = group_notes(notes)
 
     for _, group in groups.items():
@@ -79,41 +79,22 @@ def palm_mute_single(notes: List[Note]):
     return notes
 
 
-def shape_name(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
+def shape_name(notes: List[Note], shapes: List[GuitarShape]) -> List[Annotation]:
+    groups = group_notes(notes)
+    prev_label = ""
 
+    for group in groups.values():
+        group_positions = [
+            note.position
+            for note in group
+        ]
 
-def hammer_on(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
+        for shape in shapes:
+            if group_positions == shape.positions:
+                if shape.short_name != prev_label:
+                    for note in group:
+                        note.annotations.append('label:' + shape.short_name)
+                    prev_label = shape.short_name
+                break
 
-
-def pull_off(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
-
-
-def slide_up(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
-
-
-def slide_down(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
-
-
-def bend_up(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
-
-
-def bend_down(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
-
-
-def vibrato(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
-
-
-def palm_mute(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
-
-
-def finger_pick(shapes: List[GuitarShape], shapes_lengths: List[int], pattern: List[Note]) -> List[Annotation]:
-    pass
+    return notes

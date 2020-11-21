@@ -38,7 +38,7 @@ def make_sequence(
 
     if annotators:
         for annotator in annotators:
-            notes = annotator(notes)
+            notes = annotator(notes, shapes)
 
     notes = ending(notes)
 
