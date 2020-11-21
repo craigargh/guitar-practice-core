@@ -10,7 +10,7 @@ def c_major() -> GuitarShape:
         FretPosition(string=1, fret=0)
     ]
 
-    return GuitarShape('C Major', 'chord', positions)
+    return GuitarShape('C Major', 'chord', positions, short_name='C')
 
 
 def c_major_seven() -> GuitarShape:
@@ -45,7 +45,7 @@ def d_minor() -> GuitarShape:
         FretPosition(string=1, fret=1, finger=1)
     ]
 
-    return GuitarShape('D Minor', 'chord', positions)
+    return GuitarShape('D Minor', 'chord', positions, short_name='Dm')
 
 
 def d_minor_seven() -> GuitarShape:
@@ -80,7 +80,7 @@ def e_minor() -> GuitarShape:
         FretPosition(string=1, fret=0, highlighted=True),
     ]
 
-    return GuitarShape('E Minor', 'chord', positions)
+    return GuitarShape('E Minor', 'chord', positions, short_name='Em')
 
 
 def e_minor_seven() -> GuitarShape:
@@ -117,7 +117,7 @@ def f_major() -> GuitarShape:
         FretPosition(string=1, fret=1, finger=1, highlighted=True),
     ]
 
-    return GuitarShape('F Major', 'chord', positions)
+    return GuitarShape('F Major', 'chord', positions, short_name='F')
 
 
 def f_major_seven() -> GuitarShape:
@@ -152,7 +152,7 @@ def g_major() -> GuitarShape:
         FretPosition(string=1, fret=3, finger=3, highlighted=True),
     ]
 
-    return GuitarShape('G Major', 'chord', positions)
+    return GuitarShape('G Major', 'chord', positions, short_name='G')
 
 
 def g_seven() -> GuitarShape:
@@ -190,7 +190,7 @@ def a_minor() -> GuitarShape:
         FretPosition(string=1, fret=0, highlighted=True)
     ]
 
-    return GuitarShape('A Minor', 'chord', positions)
+    return GuitarShape('A Minor', 'chord', positions, short_name='Am')
 
 
 def a_minor_seven() -> GuitarShape:
@@ -225,7 +225,7 @@ def b_diminished() -> GuitarShape:
         FretPosition(string=1, fret=1, finger=1),
     ]
 
-    return GuitarShape('B Diminished', 'chord', positions)
+    return GuitarShape('B Diminished', 'chord', positions, short_name='Bdim')
 
 
 def b_minor_seven_flat_five() -> GuitarShape:
