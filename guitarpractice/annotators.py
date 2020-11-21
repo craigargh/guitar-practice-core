@@ -91,7 +91,7 @@ def shape_name(notes: List[Note], shapes: List[GuitarShape]) -> List[Annotation]
 
         for shape in shapes:
             if group_positions == shape.positions:
-                if shape.short_name != prev_label:
+                if shape.short_name and shape.short_name != prev_label:
                     for note in group:
                         note.annotations.append('label:' + shape.short_name)
                     prev_label = shape.short_name

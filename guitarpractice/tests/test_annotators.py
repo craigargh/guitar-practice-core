@@ -476,3 +476,25 @@ class TestShapeName(TestCase):
         ]
 
         self.assertEqual(expected, result)
+
+    def test_shape_name_is_not_added_if_short_name_is_none(self):
+        positions = [
+            FretPosition(0, 6),
+            FretPosition(2, 5),
+        ]
+        notes = [
+            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0),
+        ]
+        shapes = [
+            GuitarShape(category='chord', name='E5 Power Chord', positions=positions)
+        ]
+
+        result = shape_name(notes, shapes)
+
+        expected = [
+            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0),
+            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0),
+        ]
+
+        self.assertEqual(expected, result)
