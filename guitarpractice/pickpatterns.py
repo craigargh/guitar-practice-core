@@ -226,6 +226,10 @@ def fixed_string_pattern(shape: GuitarShape, length: int = None, pattern: List[s
     return pick_pattern
 
 
+def fixed_order_pattern(shape: GuitarShape, length: int = None, pattern: List[str] = None) -> List[List[FretPosition]]:
+    pass
+
+
 def repeat_each_position(shape: GuitarShape, length: int = None, repeats: int = 2, order: Callable = asc) -> List[
     List[FretPosition]]:
     """
