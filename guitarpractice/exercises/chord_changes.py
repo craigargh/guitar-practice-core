@@ -14,4 +14,5 @@ def chord_changes(variation) -> Sequence:
     return make_sequence(
         shapes=chords,
         pick_pattern=pick_pattern,
+        shape_labels=True,
     )
