@@ -152,3 +152,4 @@ class Note:
 class Sequence:
     notes: List[Note]
     shapes: List[GuitarShape]
+    shape_labels: bool = False

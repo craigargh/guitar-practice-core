@@ -13,7 +13,8 @@ def make_sequence(
         pick_pattern: Callable = asc,
         annotators: List[Callable] = None,
         rhythm: List[Beat] = None,
-        ending: Callable = fill_remaining_bar_with_rests
+        ending: Callable = fill_remaining_bar_with_rests,
+        shape_labels: bool = False,
 ) -> Sequence:
     adjusted_shapes = []
 
@@ -46,7 +47,7 @@ def make_sequence(
         if shape not in sorted_shapes:
             sorted_shapes.append(shape)
 
-    return Sequence(notes=notes, shapes=sorted_shapes)
+    return Sequence(notes=notes, shapes=sorted_shapes, shape_labels=shape_labels)
 
 
 def positions_generator(shapes: List[GuitarShape]) -> List[FretPosition]:

@@ -113,10 +113,21 @@ class TestSequencer(TestCase):
         shape_2 = GuitarShape('open string', 'note', positions=positions)
 
         sequence = make_sequence(shapes=[shape_1, shape_2])
-        
+
         self.assertEqual(len(sequence.shapes), 1)
         self.assertEqual(sequence.shapes[0], shape_1)
         self.assertEqual(sequence.shapes[0], shape_2)
+
+    def test_show_shape_labels_sets_shape_labels_to_true(self):
+        positions = [
+            FretPosition(fret=0, string=6)
+        ]
+
+        shape = GuitarShape('open string', 'note', positions=positions)
+
+        sequence = make_sequence(shapes=[shape], shape_labels=True)
+
+        self.assertTrue(sequence.shape_labels)
 
 
 def make_single_position_pattern(length: int):
