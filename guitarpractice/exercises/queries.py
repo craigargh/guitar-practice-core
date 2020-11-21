@@ -74,7 +74,7 @@ def _exercise_map():
                 ],
                 'callable': metal_power_chords
             }, 'chord-changes': {
-                'title': 'Metal Power Chords',
+                'title': 'Chord Changes',
                 'variations': [
                     {'id': 'level-1', 'title': 'Level 1'},
                 ],
