@@ -11,7 +11,7 @@ def chord_arpeggios(variation) -> Sequence:
     variation_map = {
         'level-1': level_one,
         'level-2': level_two,
-        # 'level-3': level_three,
+        'level-3': level_three,
     }
     variation_function = variation_map[variation]
 
@@ -41,7 +41,7 @@ def level_two():
 
 
 def level_two_variation_one():
-    preset_pattern = random.choice(set_pick_pattern_choices_1())
+    preset_pattern = random.choice(level_two_fixed_patterns())
 
     chords = random.sample(c_major_scale_triad_chords(), 2)
     pick_pattern = partial(pickpatterns.fixed_string_pattern, pattern=preset_pattern)
@@ -53,7 +53,24 @@ def level_two_variation_one():
     )
 
 
-def set_pick_pattern_choices_1():
+def level_three():
+    return level_three_variation_one()
+
+
+def level_three_variation_one():
+    preset_pattern = random.choice(level_three_fixed_patterns())
+
+    chords = random.sample(c_major_scale_triad_chords(), 2)
+    pick_pattern = partial(pickpatterns.fixed_string_pattern, pattern=preset_pattern)
+
+    return make_sequence(
+        shapes=chords,
+        pick_pattern=pick_pattern,
+        shape_labels=True,
+    )
+
+
+def level_two_fixed_patterns():
     return [
         ['r', '1', '2', '1', '2', '1', '2', '1'],
         ['r', '3', '2', '1', 'r', '3', '2', '1'],
@@ -65,7 +82,7 @@ def set_pick_pattern_choices_1():
     ]
 
 
-def set_pick_pattern_choices_2():
+def level_three_fixed_patterns():
     return [
         ['r', '2', '1', '3', 'a', '2', '1', '3'],
         ['r', '3', '2', '1', 'a', '3', '2', '1'],
