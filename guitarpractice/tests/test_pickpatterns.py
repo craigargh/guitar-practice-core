@@ -1,5 +1,5 @@
 import random
-from unittest import TestCase
+from unittest import TestCase, skip
 
 from guitarpractice import pickpatterns
 from guitarpractice.models import FretPosition, GuitarShape
@@ -317,6 +317,7 @@ class TestAscAndDesc(TestCase):
         self.assertEqual([FretPosition(string=4, fret=0)], pattern[0])
 
 
+@skip
 class TestBassAndAsc(TestCase):
     def test_positions_are_returned_in_ascending_order(self):
         chord, positions = get_chord_and_positions()
@@ -386,6 +387,7 @@ class TestBassAndAsc(TestCase):
         self.assertEqual([positions[0]], pattern[0])
 
 
+@skip
 class TestBassAndDesc(TestCase):
     def test_pattern_is_returned_bass_note_then_desc_order(self):
         chord, positions = get_chord_and_positions()
@@ -430,6 +432,7 @@ class TestBassAndDesc(TestCase):
         self.assertEqual([positions[0]], pattern[0])
 
 
+@skip
 class TestBassAscAndDesc(TestCase):
     def test_pattern_is_returned_bass_note_then_asc_and_desc_order(self):
         chord, positions = get_chord_and_positions()
@@ -1277,4 +1280,15 @@ class TestRepeatWholePattern(TestCase):
         self.assertEqual([positions[0]], result[4])
 
     def test_can_set_order_callable(self):
-        self.fail("Write the Test")
+        chord, positions = get_chord_and_positions()
+        result = pickpatterns.repeat_whole_pattern(chord, order=pickpatterns.desc)
+
+        self.assertEqual(8, len(result))
+        self.assertEqual([positions[3]], result[0])
+        self.assertEqual([positions[2]], result[1])
+        self.assertEqual([positions[1]], result[2])
+        self.assertEqual([positions[0]], result[3])
+        self.assertEqual([positions[3]], result[4])
+        self.assertEqual([positions[2]], result[5])
+        self.assertEqual([positions[1]], result[6])
+        self.assertEqual([positions[0]], result[7])

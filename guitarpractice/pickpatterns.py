@@ -55,31 +55,33 @@ def asc_and_desc_top_strings(shape: GuitarShape, length: int = None) -> List[Lis
     return sequential_patterns(shape, asc_func, desc, length=length, cut_pattern_2_top_note=True)
 
 
-def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    asc_func = partial(asc, shorten_from_end=True)
-    return bass_and_pattern(shape, length, asc_func)
-
-
-def bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    return bass_and_pattern(shape, length, desc)
-
-
-def bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
-    return bass_and_pattern(shape, length, asc_and_desc_top_strings)
-
-
-def bass_and_pattern(shape: GuitarShape, length: int, pick_pattern: Callable) -> List[List[FretPosition]]:
-    bass_position, split_shape = split_bass_position(shape)
-
-    if length == 1:
-        return [[bass_position]]
-
-    if length is not None:
-        length -= 1
-
-    pattern = pick_pattern(split_shape, length=length)
-
-    return [[bass_position]] + pattern
+# Do not work correctly
+#
+# def bass_and_asc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+#     asc_func = partial(asc, shorten_from_end=True)
+#     return bass_and_pattern(shape, length, asc_func)
+#
+#
+# def bass_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+#     return bass_and_pattern(shape, length, desc)
+#
+#
+# def bass_asc_and_desc(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
+#     return bass_and_pattern(shape, length, asc_and_desc_top_strings)
+#
+#
+# def bass_and_pattern(shape: GuitarShape, length: int, pick_pattern: Callable) -> List[List[FretPosition]]:
+#     bass_position, split_shape = split_bass_position(shape)
+#
+#     if length == 1:
+#         return [[bass_position]]
+#
+#     if length is not None:
+#         length -= 1
+#
+#     pattern = pick_pattern(split_shape, length=length)
+#
+#     return [[bass_position]] + pattern
 
 
 def bass_and_strum(shape: GuitarShape, length: int = None) -> List[List[FretPosition]]:
