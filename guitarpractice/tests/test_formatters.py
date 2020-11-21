@@ -889,3 +889,24 @@ class TestVexTabFormatter(TestCase):
         )
 
         self.assertEqual(expected, vextab)
+
+    def test_label_annotations_are_added(self):
+        position = FretPosition(string=6, fret=5)
+        duration = Beat(1, 8)
+
+        notes = [
+            Note(order=0, position=position, duration=duration, elapsed_beats=Beat(1, 4), annotations=['label:A']),
+        ]
+        shapes = [
+            GuitarShape(name='shape1', positions=[position], category='scale')
+        ]
+        sequence = Sequence(notes=notes, shapes=shapes)
+
+        vextab = to_vextab(sequence)
+
+        expected = (
+            'tabstave notation=false\n'
+            'notes =|: :8 5/6 $.top.A$ =:|'
+        )
+
+        self.assertEqual(expected, vextab)

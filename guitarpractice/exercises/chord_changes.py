@@ -1,6 +1,7 @@
 import random
 from functools import partial
 
+from guitarpractice.annotators import shape_name
 from guitarpractice.models import Sequence
 from guitarpractice.pickpatterns import strum
 from guitarpractice.sequencer import make_sequence
@@ -15,4 +16,5 @@ def chord_changes(variation) -> Sequence:
         shapes=chords,
         pick_pattern=pick_pattern,
         shape_labels=True,
+        annotators=[shape_name]
     )

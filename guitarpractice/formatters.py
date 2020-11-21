@@ -153,10 +153,19 @@ def format_annotations(annotations: List[str]) -> str:
         constants.DOWN_PICK: '.a|/top.',
         constants.UP_PICK: '.am/top.',
     }
-    annotation_string = "".join([
+    annotation_list = [
         f' ${annotation_map[annotation]}$'
         for annotation in annotations
-    ])
+        if 'label:' not in annotation
+    ]
+
+    for annotation in annotations:
+        if 'label:' in annotation:
+            label = annotation.replace('label:', '')
+            annotation_list.append(f' $.top.{label}$')
+
+    annotation_string = "".join(annotation_list)
+
     return annotation_string
 
 
