@@ -3,7 +3,7 @@ from functools import partial
 
 from guitarpractice.annotators import shape_name
 from guitarpractice.models import Sequence
-from guitarpractice.pickpatterns import strum
+from guitarpractice.pickpatterns import strum, bass_and_strum
 from guitarpractice.sequencer import make_sequence
 from guitarpractice.shapes.chord_collections import c_major_scale_triad_chords, c_major_scale_seven_chords, \
     c_major_scale_add_9_chords
@@ -37,7 +37,9 @@ def level_two():
         level_two_chords_variation_one(),
         level_two_chords_variation_two(),
     ])
-    pick_pattern = partial(strum, length=4)
+    order = random.choice([bass_and_strum, strum, strum, strum])
+
+    pick_pattern = partial(order, length=4)
 
     return make_sequence(
         shapes=chords,
