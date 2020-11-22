@@ -26,8 +26,10 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Move tie to Beat and rename tie on note to articulation~~
 - ~~Add fixed_pattern pick pattern~~
 - ~~Change shape_name to be part of make_sequence and get it to work with arpeggios and scales~~
+- Change symbol for down strokes to the correct symbol
 - Fix bass_and_ pickpatterns for chord arpeggios
 - Add vertical shifter to lick patterns
+- Make a riff generator and a fill generator (should they be made as separate sequences then combined?)
 - Add calculate_elapsed_beats function to lick exercises 
 - Tests for each existing exercise combination
 - Run test coverage report
