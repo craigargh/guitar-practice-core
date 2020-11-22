@@ -16,7 +16,7 @@ def c_major():
         FretPosition(string=1, fret=8, finger=2, highlighted=True),
     ]
 
-    return GuitarShape('C', 'Major Pentatonic', positions)
+    return GuitarShape('Major Pentatonic (1st Position)', 'scale', positions)
 
 
 def d_dorian():
@@ -34,7 +34,7 @@ def d_dorian():
         FretPosition(string=1, fret=10, finger=1),
     ]
 
-    return GuitarShape('D', 'Dorian Pentatonic', positions)
+    return GuitarShape('Dorian Pentatonic (2nd Position)', 'scale', positions)
 
 
 def e_phrygian():
@@ -52,7 +52,7 @@ def e_phrygian():
         FretPosition(string=1, fret=12, finger=1),
     ]
 
-    return GuitarShape('E', 'Phrygian Pentatonic', positions)
+    return GuitarShape('Phrygian Pentatonic (3rd Position)', 'scale', positions)
 
 
 def g_mixolydian():
@@ -70,7 +70,7 @@ def g_mixolydian():
         FretPosition(string=1, fret=3, finger=2),
     ]
 
-    return GuitarShape('G', 'Mixolydian Pentatonic', positions)
+    return GuitarShape('Mixolydian Pentatonic (4th Position)', 'scale', positions)
 
 
 def a_minor():
@@ -88,4 +88,4 @@ def a_minor():
         FretPosition(string=1, fret=5, finger=1),
     ]
 
-    return GuitarShape('A', 'Minor Pentatonic', positions)
+    return GuitarShape('Minor Pentatonic (5th Position)', 'scale', positions)
