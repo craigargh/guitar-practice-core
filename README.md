@@ -82,6 +82,7 @@ This is the list of exercise types that are planned to be implemented (✓=start
     - Harmonic minor
     - Melodic minor
     - etc.
+  - Alternate between two or more shapes
   - Three notes per string scales
   - All shapes of a scale played in sequence
   - Arpeggios
