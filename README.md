@@ -74,15 +74,16 @@ This is the list of exercise types that are planned to be implemented (✓=start
   - Pinched harmonics
   - Tremolo picking
 - Scales
-  - Scale mode shapes
+  - Scale/mode shapes
     - Major (✓)
     - Pentatonic (✓)
-    - 3 notes per string of major and pentatonic
     - Blues
     - Natural minor
     - Harmonic minor
     - Melodic minor
     - etc.
+  - Three notes per string scales
+  - All shapes of a scale played in sequence
   - Arpeggios
 - Chords
   - Chord progressions (✓)
