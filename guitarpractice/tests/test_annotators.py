@@ -1,9 +1,9 @@
 from unittest import TestCase
 
 from guitarpractice.annotators import hammer_on_asc, pull_off_desc, down_pick_on_the_beat, down_pick_alternating_beats, \
-    palm_mute_open, palm_mute_single, shape_name
+    palm_mute_open, palm_mute_single
 from guitarpractice.constants import HAMMER_ON, PULL_OFF, DOWN_PICK, UP_PICK, PALM_MUTE
-from guitarpractice.models import Note, FretPosition, Beat, GuitarShape
+from guitarpractice.models import Note, FretPosition, Beat
 
 
 class TestHammerOnAsc(TestCase):
@@ -349,152 +349,6 @@ class TestPalmMuteSingle(TestCase):
         expected = [
             Note(position=FretPosition(0, 6), duration=Beat(1), elapsed_beats=Beat(1), order=0),
             Note(position=FretPosition(0, 5), duration=Beat(1), elapsed_beats=Beat(1), order=0),
-        ]
-
-        self.assertEqual(expected, result)
-
-
-class TestShapeName(TestCase):
-    def test_shape_name_is_added_to_annotations(self):
-        positions = [
-            FretPosition(0, 6),
-            FretPosition(2, 5),
-        ]
-        notes = [
-            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-        ]
-        shapes = [
-            GuitarShape(category='chord', name='E5 Power Chord', positions=positions, short_name='E5')
-        ]
-
-        result = shape_name(notes, shapes)
-
-        expected = [
-            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0, annotations=['label:E5']),
-            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0, annotations=['label:E5']),
-        ]
-
-        self.assertEqual(expected, result)
-
-    def test_repeated_shapes_are_not_labeled(self):
-        positions = [
-            FretPosition(0, 6),
-            FretPosition(2, 5),
-        ]
-        notes = [
-            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(2), order=1),
-            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(2), order=1),
-        ]
-        shapes = [
-            GuitarShape(category='chord', name='E5 Power Chord', positions=positions, short_name='E5')
-        ]
-
-        result = shape_name(notes, shapes)
-
-        expected = [
-            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0, annotations=['label:E5']),
-            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0, annotations=['label:E5']),
-            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(2), order=1),
-            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(2), order=1),
-        ]
-
-        self.assertEqual(expected, result)
-
-    def test_chord_changes_are_labeled(self):
-        shapes = [
-            GuitarShape(category='chord', name='E5 Power Chord', short_name='E5', positions=[
-                FretPosition(0, 6),
-                FretPosition(2, 5),
-            ]),
-            GuitarShape(category='chord', name='F5 Power Chord', short_name='F5', positions=[
-                FretPosition(1, 6),
-                FretPosition(3, 5),
-            ]),
-        ]
-
-        notes = [
-            Note(position=shapes[0].positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-            Note(position=shapes[0].positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-            Note(position=shapes[1].positions[0], duration=Beat(1), elapsed_beats=Beat(2), order=1),
-            Note(position=shapes[1].positions[1], duration=Beat(1), elapsed_beats=Beat(2), order=1),
-        ]
-
-        result = shape_name(notes, shapes)
-
-        expected = [
-            Note(position=shapes[0].positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0,
-                 annotations=['label:E5']),
-            Note(position=shapes[0].positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0,
-                 annotations=['label:E5']),
-            Note(position=shapes[1].positions[0], duration=Beat(1), elapsed_beats=Beat(2), order=1,
-                 annotations=['label:F5']),
-            Note(position=shapes[1].positions[1], duration=Beat(1), elapsed_beats=Beat(2), order=1,
-                 annotations=['label:F5']),
-        ]
-
-        self.assertEqual(expected, result)
-
-    def test_repeated_chords_are_labelled_after_chord_change(self):
-        shapes = [
-            GuitarShape(category='chord', name='E5 Power Chord', short_name='E5', positions=[
-                FretPosition(0, 6),
-                FretPosition(2, 5),
-            ]),
-            GuitarShape(category='chord', name='F5 Power Chord', short_name='F5', positions=[
-                FretPosition(1, 6),
-                FretPosition(3, 5),
-            ]),
-        ]
-
-        notes = [
-            Note(position=shapes[0].positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-            Note(position=shapes[0].positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-            Note(position=shapes[1].positions[0], duration=Beat(1), elapsed_beats=Beat(2), order=1),
-            Note(position=shapes[1].positions[1], duration=Beat(1), elapsed_beats=Beat(2), order=1),
-            Note(position=shapes[0].positions[0], duration=Beat(1), elapsed_beats=Beat(3), order=2),
-            Note(position=shapes[0].positions[1], duration=Beat(1), elapsed_beats=Beat(3), order=2),
-        ]
-
-        result = shape_name(notes, shapes)
-
-        expected = [
-            Note(position=shapes[0].positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0,
-                 annotations=['label:E5']),
-            Note(position=shapes[0].positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0,
-                 annotations=['label:E5']),
-            Note(position=shapes[1].positions[0], duration=Beat(1), elapsed_beats=Beat(2), order=1,
-                 annotations=['label:F5']),
-            Note(position=shapes[1].positions[1], duration=Beat(1), elapsed_beats=Beat(2), order=1,
-                 annotations=['label:F5']),
-            Note(position=shapes[0].positions[0], duration=Beat(1), elapsed_beats=Beat(3), order=2,
-                 annotations=['label:E5']),
-            Note(position=shapes[0].positions[1], duration=Beat(1), elapsed_beats=Beat(3), order=2,
-                 annotations=['label:E5']),
-        ]
-
-        self.assertEqual(expected, result)
-
-    def test_shape_name_is_not_added_if_short_name_is_none(self):
-        positions = [
-            FretPosition(0, 6),
-            FretPosition(2, 5),
-        ]
-        notes = [
-            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-        ]
-        shapes = [
-            GuitarShape(category='chord', name='E5 Power Chord', positions=positions)
-        ]
-
-        result = shape_name(notes, shapes)
-
-        expected = [
-            Note(position=positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0),
-            Note(position=positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0),
         ]
 
         self.assertEqual(expected, result)

@@ -77,24 +77,3 @@ def palm_mute_single(notes: List[Note], shapes: List[GuitarShape]):
             note.annotations.append(PALM_MUTE)
 
     return notes
-
-
-def shape_name(notes: List[Note], shapes: List[GuitarShape]) -> List[Annotation]:
-    groups = group_notes(notes)
-    prev_label = ""
-
-    for group in groups.values():
-        group_positions = [
-            note.position
-            for note in group
-        ]
-
-        for shape in shapes:
-            if group_positions == shape.positions:
-                if shape.short_name and shape.short_name != prev_label:
-                    for note in group:
-                        note.annotations.append('label:' + shape.short_name)
-                    prev_label = shape.short_name
-                break
-
-    return notes

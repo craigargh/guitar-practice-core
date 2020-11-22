@@ -1,7 +1,6 @@
 import random
 from functools import partial
 
-from guitarpractice.annotators import shape_name
 from guitarpractice.models import Sequence
 from guitarpractice.pickpatterns import strum, bass_and_strum
 from guitarpractice.sequencer import make_sequence
@@ -28,7 +27,7 @@ def level_one():
         shapes=chords,
         pick_pattern=pick_pattern,
         shape_labels=True,
-        annotators=[shape_name]
+        tab_labels=True,
     )
 
 

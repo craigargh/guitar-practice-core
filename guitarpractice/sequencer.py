@@ -15,6 +15,7 @@ def make_sequence(
         rhythm: List[Beat] = None,
         ending: Callable = fill_remaining_bar_with_rests,
         shape_labels: bool = False,
+        tab_labels: bool = False,
 ) -> Sequence:
     adjusted_shapes = []
 
@@ -28,13 +29,22 @@ def make_sequence(
         adjusted_shapes.append(adjusted_shape)
 
     pattern = []
+    label_map = {}
     for shape in adjusted_shapes:
+        if tab_labels:
+            index = len(pattern)
+            label = shape.short_name
+            label_map[index] = label
+
         pattern.extend(pick_pattern(shape))
 
     if rhythm is None:
         rhythm = [Beat(duration=1)] * len(pattern)
 
     notes = apply_rhythm(pattern, rhythm)
+
+    if tab_labels:
+        notes = apply_tab_labels(notes, label_map)
 
     if annotators:
         for annotator in annotators:
@@ -82,5 +92,26 @@ def apply_rhythm(pattern: List[List[FretPosition]], rhythm: List[Beat]) -> List[
             notes.append(note)
 
         count += 1
+
+    return notes
+
+
+def apply_tab_labels(notes, label_map):
+    prev_label = ""
+
+    for index, label in label_map.items():
+        if label == prev_label or label is None:
+            continue
+
+        rest_count = 0
+        for note in notes:
+            if note.duration.rest:
+                rest_count += 1
+                continue
+
+            if note.order == index + rest_count:
+                note.annotations.append(f'label:{label}')
+
+        prev_label = label
 
     return notes

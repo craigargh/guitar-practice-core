@@ -1,5 +1,6 @@
 from unittest import TestCase
 
+from guitarpractice import pickpatterns
 from guitarpractice.models import FretPosition, GuitarShape, Note, Beat
 from guitarpractice.sequencer import make_sequence, apply_rhythm
 
@@ -355,3 +356,181 @@ class TestApplyRhythm(TestCase):
         self.assertEqual(Note(position=None, duration=Beat(1, rest=True), order=1, elapsed_beats=Beat(2)), notes[1])
         self.assertEqual(Note(position=None, duration=Beat(1, rest=True), order=2, elapsed_beats=Beat(3)), notes[2])
         self.assertEqual(Note(position=pattern[1][0], duration=Beat(1), order=3, elapsed_beats=Beat(4)), notes[3])
+
+
+class TestLabelTabShapes(TestCase):
+    def test_shape_name_is_added_to_annotations(self):
+        positions = [
+            FretPosition(0, 6),
+            FretPosition(2, 5),
+        ]
+        shapes = [
+            GuitarShape(category='chord', name='E5 Power Chord', positions=positions, short_name='E5')
+        ]
+
+        sequence = make_sequence(shapes, pick_pattern=pickpatterns.strum, tab_labels=True, rhythm=[Beat(4)])
+
+        expected_notes = [
+            Note(position=positions[0], duration=Beat(4), elapsed_beats=Beat(1, 1), order=0, annotations=['label:E5']),
+            Note(position=positions[1], duration=Beat(4), elapsed_beats=Beat(1, 1), order=0, annotations=['label:E5']),
+        ]
+
+        self.assertEqual(expected_notes, sequence.notes)
+        self.assertEqual(shapes, sequence.shapes)
+
+    def test_repeated_shapes_are_not_labeled(self):
+        positions = [
+            FretPosition(0, 6),
+            FretPosition(2, 5),
+        ]
+        shapes = [
+            GuitarShape(category='chord', name='E5 Power Chord', positions=positions, short_name='E5'),
+            GuitarShape(category='chord', name='E5 Power Chord', positions=positions, short_name='E5'),
+        ]
+
+        result = make_sequence(shapes, pick_pattern=pickpatterns.strum, tab_labels=True, rhythm=[Beat(2)])
+
+        expected = [
+            Note(position=positions[0], duration=Beat(2), elapsed_beats=Beat(1, 2), order=0, annotations=['label:E5']),
+            Note(position=positions[1], duration=Beat(2), elapsed_beats=Beat(1, 2), order=0, annotations=['label:E5']),
+            Note(position=positions[0], duration=Beat(2), elapsed_beats=Beat(1, 1), order=1),
+            Note(position=positions[1], duration=Beat(2), elapsed_beats=Beat(1, 1), order=1),
+        ]
+
+        self.assertEqual(expected, result.notes)
+
+    def test_chord_changes_are_labeled(self):
+        shapes = [
+            GuitarShape(category='chord', name='E5 Power Chord', short_name='E5', positions=[
+                FretPosition(0, 6),
+                FretPosition(2, 5),
+            ]),
+            GuitarShape(category='chord', name='F5 Power Chord', short_name='F5', positions=[
+                FretPosition(1, 6),
+                FretPosition(3, 5),
+            ]),
+        ]
+
+        result = make_sequence(shapes, pick_pattern=pickpatterns.strum, tab_labels=True, rhythm=[Beat(2)])
+
+        expected = [
+            Note(position=shapes[0].positions[0], duration=Beat(2), elapsed_beats=Beat(1, 2), order=0,
+                 annotations=['label:E5']),
+            Note(position=shapes[0].positions[1], duration=Beat(2), elapsed_beats=Beat(1, 2), order=0,
+                 annotations=['label:E5']),
+            Note(position=shapes[1].positions[0], duration=Beat(2), elapsed_beats=Beat(1, 1), order=1,
+                 annotations=['label:F5']),
+            Note(position=shapes[1].positions[1], duration=Beat(2), elapsed_beats=Beat(1, 1), order=1,
+                 annotations=['label:F5']),
+        ]
+
+        self.assertEqual(expected, result.notes)
+
+    def test_repeated_chords_are_labelled_after_chord_change(self):
+        shapes = [
+            GuitarShape(category='chord', name='E5 Power Chord', short_name='E5', positions=[
+                FretPosition(0, 6),
+                FretPosition(2, 5),
+            ]),
+            GuitarShape(category='chord', name='F5 Power Chord', short_name='F5', positions=[
+                FretPosition(1, 6),
+                FretPosition(3, 5),
+            ]),
+            GuitarShape(category='chord', name='E5 Power Chord', short_name='E5', positions=[
+                FretPosition(0, 6),
+                FretPosition(2, 5),
+            ]),
+        ]
+        rhythm = [Beat(1), Beat(1), Beat(2)]
+
+        result = make_sequence(shapes, pick_pattern=pickpatterns.strum, tab_labels=True, rhythm=rhythm)
+
+        expected = [
+            Note(position=shapes[0].positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0,
+                 annotations=['label:E5']),
+            Note(position=shapes[0].positions[1], duration=Beat(1), elapsed_beats=Beat(1), order=0,
+                 annotations=['label:E5']),
+            Note(position=shapes[1].positions[0], duration=Beat(1), elapsed_beats=Beat(1, 2), order=1,
+                 annotations=['label:F5']),
+            Note(position=shapes[1].positions[1], duration=Beat(1), elapsed_beats=Beat(1, 2), order=1,
+                 annotations=['label:F5']),
+            Note(position=shapes[0].positions[0], duration=Beat(2), elapsed_beats=Beat(1, 1), order=2,
+                 annotations=['label:E5']),
+            Note(position=shapes[0].positions[1], duration=Beat(2), elapsed_beats=Beat(1, 1), order=2,
+                 annotations=['label:E5']),
+        ]
+
+        self.assertEqual(expected, result.notes)
+
+    def test_shape_name_is_not_added_if_short_name_is_none(self):
+        positions = [
+            FretPosition(0, 6),
+            FretPosition(2, 5),
+        ]
+        shapes = [
+            GuitarShape(category='chord', name='E5 Power Chord', positions=positions)
+        ]
+
+        result = make_sequence(shapes, pick_pattern=pickpatterns.strum, tab_labels=True, rhythm=[Beat(4)])
+
+        expected = [
+            Note(position=positions[0], duration=Beat(4), elapsed_beats=Beat(1, 1), order=0),
+            Note(position=positions[1], duration=Beat(4), elapsed_beats=Beat(1, 1), order=0),
+        ]
+
+        self.assertEqual(expected, result.notes)
+
+    def test_rests_are_ignored_when_labelling(self):
+        shapes = [
+            GuitarShape(category='chord', name='E5 Power Chord', short_name='E5', positions=[
+                FretPosition(0, 6),
+                FretPosition(2, 5),
+            ]),
+            GuitarShape(category='chord', name='F5 Power Chord', short_name='F5', positions=[
+                FretPosition(1, 6),
+                FretPosition(3, 5),
+            ]),
+        ]
+
+        rhythm = [Beat(2), Beat(1, rest=True), Beat(1)]
+
+        result = make_sequence(shapes, pick_pattern=pickpatterns.strum, tab_labels=True, rhythm=rhythm)
+
+        expected = [
+            Note(position=shapes[0].positions[0], duration=Beat(2), elapsed_beats=Beat(1, 2), order=0,
+                 annotations=['label:E5']),
+            Note(position=shapes[0].positions[1], duration=Beat(2), elapsed_beats=Beat(1, 2), order=0,
+                 annotations=['label:E5']),
+            Note(position=None, duration=Beat(1, rest=True), elapsed_beats=Beat(3), order=1),
+            Note(position=shapes[1].positions[0], duration=Beat(1), elapsed_beats=Beat(1, 1), order=2,
+                 annotations=['label:F5']),
+            Note(position=shapes[1].positions[1], duration=Beat(1), elapsed_beats=Beat(1, 1), order=2,
+                 annotations=['label:F5']),
+        ]
+
+        self.assertEqual(expected, result.notes)
+
+    def test_can_label_arpeggios(self):
+        shapes = [
+            GuitarShape(category='chord', name='E5 Power Chord', short_name='E5', positions=[
+                FretPosition(0, 6),
+                FretPosition(2, 5),
+            ]),
+            GuitarShape(category='chord', name='F5 Power Chord', short_name='F5', positions=[
+                FretPosition(1, 6),
+                FretPosition(3, 5),
+            ]),
+        ]
+
+        result = make_sequence(shapes, tab_labels=True, rhythm=[Beat(1)])
+
+        expected = [
+            Note(position=shapes[0].positions[0], duration=Beat(1), elapsed_beats=Beat(1), order=0,
+                 annotations=['label:E5']),
+            Note(position=shapes[0].positions[1], duration=Beat(1), elapsed_beats=Beat(1, 2), order=1),
+            Note(position=shapes[1].positions[0], duration=Beat(1), elapsed_beats=Beat(3), order=2,
+                 annotations=['label:F5']),
+            Note(position=shapes[1].positions[1], duration=Beat(1), elapsed_beats=Beat(1, 1), order=3),
+        ]
+
+        self.assertEqual(expected, result.notes)

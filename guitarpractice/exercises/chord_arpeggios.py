@@ -33,6 +33,7 @@ def level_one():
         shapes=chords,
         pick_pattern=pick_pattern,
         shape_labels=True,
+        tab_labels=True,
     )
 
 

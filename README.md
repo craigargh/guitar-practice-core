@@ -25,7 +25,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Add triplets to vextab and tie_split()~~
 - ~~Move tie to Beat and rename tie on note to articulation~~
 - ~~Add fixed_pattern pick pattern~~
-- Change shape_name to be part of make_sequence and get it to work with arpeggios and scales
+- ~~Change shape_name to be part of make_sequence and get it to work with arpeggios and scales~~
 - Fix bass_and_ pickpatterns for chord arpeggios
 - Add vertical shifter to lick patterns
 - Add calculate_elapsed_beats function to lick exercises 
