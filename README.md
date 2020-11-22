@@ -42,23 +42,23 @@ A package for generating practice exercises for guitar. The package uses a domai
 
 ## Exercises
 
-This is the list of exercise types that are planned to be implemented:
+This is the list of exercise types that are planned to be implemented (✓=started implementing):
 
 - Metal Rhythm
-  - Power chords and Palm muting
+  - Power chords and Palm muting (✓)
   - Individual note rhythms (i.e. no power chords)
   - Riffs (based on real songs)
 - Rhythm
-  - Single beat rhythm divisions
-  - Sixteenth notes (speed)
-  - Sixteenth notes (variations) / Gallop and reverse gallop speed
+  - Single beat rhythm divisions (✓)
+  - Sixteenth notes speed (✓)
+  - Sixteenth notes variations / Gallop and reverse gallop speed
   - Time signatures
 - Lead
-  - Pentatonic Licks
+  - Pentatonic Licks (✓)
   - Major Licks
   - Chromatic Licks
 - Left-hand technique:
-  - Hammer-ons, pull-offs and trills
+  - Hammer-ons, pull-offs and trills (✓)
   - Vibrato
   - Slides
   - Bends
@@ -75,8 +75,9 @@ This is the list of exercise types that are planned to be implemented:
   - Tremolo picking
 - Scales
   - Scale mode shapes
-    - Major
-    - Pentatonic
+    - Major (✓)
+    - Pentatonic (✓)
+    - 3 notes per string of major and pentatonic
     - Blues
     - Natural minor
     - Harmonic minor
@@ -84,29 +85,5 @@ This is the list of exercise types that are planned to be implemented:
     - etc.
   - Arpeggios
 - Chords
-  - Chord progressions
-  - Chord Arpeggios
-
-
-## Features
-
-The following types of exercises will be available from this package, each with varying levels of difficulty:
-- Procedurally generated practice sequences (in progress):
-  - Scales
-  - Chords
-  - Rhythm
-  - Arpeggios
-  - Finger Picking
-  - Lead phrases
-  - Riffs
-  - Stretches
-  - Co-ordination
-  - Speed
-- Memory and repetition (show a sequence, then hide it and try to repeat it)
-- Fret/note matching
-- Interval identification
-  - Pairs of notes
-  - Chords
-  - Scales
-  - Arpeggios
- 
+  - Chord progressions (✓)
+  - Chord Arpeggios (✓)
