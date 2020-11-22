@@ -32,7 +32,8 @@ def major_pentatonic_scale() -> Sequence:
         shapes=[shape],
         rhythm=rhythm,
         pick_pattern=pattern,
-        shape_shifters=[partial(shift_vertically, lowest_fret=lowest_fret)]
+        shape_shifters=[partial(shift_vertically, lowest_fret=lowest_fret)],
+        shape_labels=True,
     )
 
 
@@ -52,4 +53,5 @@ def major_scale() -> Sequence:
         rhythm=rhythm,
         pick_pattern=pattern,
         shape_shifters=[partial(shift_vertically, lowest_fret=lowest_fret)],
+        shape_labels=True,
     )
