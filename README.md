@@ -39,6 +39,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - Implement remaining pick patterns
 - Implement rhythm generator
 - Implement shape shifters
+- Add categories to index page
 
 ## Exercises
 
