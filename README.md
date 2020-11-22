@@ -49,8 +49,9 @@ This is the list of exercise types that are planned to be implemented (✓=start
 
 - Metal Rhythm
   - Power chords and Palm muting (✓)
-  - Riffs and fills (individual notes)
-  - Riffs (based on real songs)
+  - Individual note riffs
+  - Fills
+  - Riffs and fills (inc. power chords)
 - Rhythm
   - Single beat rhythm divisions (✓)
   - Sixteenth notes speed (✓)
