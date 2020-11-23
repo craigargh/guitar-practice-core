@@ -1350,3 +1350,56 @@ class TestFixedPattern(TestCase):
         self.assertEqual([positions[2]], result[2])
         self.assertEqual([positions[1]], result[3])
         self.assertEqual([positions[1]], result[4])
+
+
+class TestFixedOrderPattern(TestCase):
+    def test_pattern_is_required(self):
+        scale, _ = get_scale_and_positions()
+
+        with self.assertRaises(ValueError):
+            pickpatterns.fixed_order_pattern(scale)
+
+    def test_pattern_determines_order(self):
+        scale, positions = get_scale_and_positions()
+        pattern = [1, 3, 2, 4]
+
+        result = pickpatterns.fixed_order_pattern(scale, pattern=pattern)
+
+        self.assertEqual(4, len(result))
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[2]], result[1])
+        self.assertEqual([positions[1]], result[2])
+        self.assertEqual([positions[3]], result[3])
+
+    def test_positions_outside_of_range_are_replaced_with_highest_note(self):
+        scale, positions = get_scale_and_positions()
+        pattern = [20]
+
+        result = pickpatterns.fixed_order_pattern(scale, pattern=pattern)
+
+        self.assertEqual(1, len(result))
+        self.assertEqual([positions[5]], result[0])
+
+    def test_can_shorten_pattern_length(self):
+        scale, positions = get_scale_and_positions()
+        pattern = [1, 3, 2, 4]
+
+        result = pickpatterns.fixed_order_pattern(scale, pattern=pattern, length=3)
+
+        self.assertEqual(3, len(result))
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[2]], result[1])
+        self.assertEqual([positions[1]], result[2])
+
+    def test_can_increase_pattern_length(self):
+        scale, positions = get_scale_and_positions()
+        pattern = [1, 3, 2, 4]
+
+        result = pickpatterns.fixed_order_pattern(scale, pattern=pattern, length=5)
+
+        self.assertEqual(5, len(result))
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[2]], result[1])
+        self.assertEqual([positions[1]], result[2])
+        self.assertEqual([positions[3]], result[3])
+        self.assertEqual([positions[3]], result[4])

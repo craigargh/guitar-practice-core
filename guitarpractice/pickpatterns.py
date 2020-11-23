@@ -222,12 +222,23 @@ def fixed_string_pattern(shape: GuitarShape, length: int = None, pattern: List[s
     ]
 
     pick_pattern = adjust_length(pick_pattern, length=length)
-
     return pick_pattern
 
 
 def fixed_order_pattern(shape: GuitarShape, length: int = None, pattern: List[str] = None) -> List[List[FretPosition]]:
-    pass
+    if pattern is None:
+        raise ValueError('pattern must be set')
+
+    positions = sorted(shape.positions)
+    default_position = positions[-1]
+
+    pick_pattern = [
+        [positions[location - 1] if location <= len(positions) else default_position]
+        for location in pattern
+    ]
+
+    pick_pattern = adjust_length(pick_pattern, length=length)
+    return pick_pattern
 
 
 def repeat_each_position(shape: GuitarShape, length: int = None, repeats: int = 2, order: Callable = asc) -> List[
