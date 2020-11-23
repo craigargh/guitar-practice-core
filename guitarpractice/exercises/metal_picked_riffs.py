@@ -110,6 +110,9 @@ def level_two():
     ]
     shape = random.choice(shape_choices)
 
+    reverse_gallop = [Beat(1, 16), Beat(1, 16), Beat(1, 8)]
+    two_eighths = [Beat(1, 8), Beat(1, 8)]
+
     combos = [
         {
             'preset_patterns': level_one_picked_metal_patterns(length=8),
@@ -146,6 +149,30 @@ def level_two():
             'notes_per_bit': 2,
             'length': 16,
         },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 2,
+            'in_between_beats': 0,
+            'notes_per_bit': 4,
+            'length': 8,
+            'rhythm': [*reverse_gallop, *reverse_gallop, *two_eighths, *two_eighths],
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 1,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
+            'length': 8,
+            'rhythm': [*reverse_gallop, *two_eighths],
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
+            'length': 8,
+            'rhythm': [*two_eighths, *reverse_gallop],
+        },
     ]
     combo = random.choice(combos)
 
@@ -161,7 +188,10 @@ def level_two():
         notes_per_bit=combo['notes_per_bit'],
     )
 
-    rhythm = [Beat(1, 8)]
+    if combo.get('rhytym'):
+        rhythm = combo.get('rhythm')
+    else:
+        rhythm = [Beat(1, 8)]
 
     return make_sequence(
         [shape],
