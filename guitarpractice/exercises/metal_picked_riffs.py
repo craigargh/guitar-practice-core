@@ -154,24 +154,27 @@ def level_two():
             'preceding_beats': 2,
             'in_between_beats': 0,
             'notes_per_bit': 4,
-            'length': 8,
+            'length': 10,
             'rhythm': [*reverse_gallop, *reverse_gallop, *two_eighths, *two_eighths],
+            'notes_per_chug': 3,
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
             'preceding_beats': 1,
             'in_between_beats': 1,
             'notes_per_bit': 2,
-            'length': 8,
+            'length': 10,
             'rhythm': [*reverse_gallop, *two_eighths],
+            'notes_per_chug': 3,
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
             'preceding_beats': 0,
             'in_between_beats': 1,
             'notes_per_bit': 2,
-            'length': 8,
+            'length': 10,
             'rhythm': [*two_eighths, *reverse_gallop],
+            'notes_per_chug': 3,
         },
     ]
     combo = random.choice(combos)
@@ -186,9 +189,10 @@ def level_two():
         preceding_beats=combo['preceding_beats'],
         in_between_beats=combo['in_between_beats'],
         notes_per_bit=combo['notes_per_bit'],
+        notes_per_chug=combo.get('notes_per_chug', 2),
     )
 
-    if combo.get('rhytym'):
+    if combo.get('rhythm'):
         rhythm = combo.get('rhythm')
     else:
         rhythm = [Beat(1, 8)]
