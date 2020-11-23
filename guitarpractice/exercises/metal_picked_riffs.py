@@ -222,7 +222,7 @@ def level_three():
             'preceding_beats': 0,
             'in_between_beats': 2,
             'notes_per_bit': 4,
-            'length': 10,
+            'length': 12,
             'rhythm': [*two_eighths, *two_eighths, *sixteenth_notes, *sixteenth_notes],
             'notes_per_chug': 4,
         },
