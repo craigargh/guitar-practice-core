@@ -42,7 +42,7 @@ def metal_picked_riffs(variation=None):
     ]
     combo = random.choice(combos)
 
-    preset_pattern = random.choice(combo['preset_pattern'])
+    preset_pattern = random.choice(combo['preset_patterns'])
     pick_pattern = partial(fixed_order_pattern, pattern=preset_pattern)
 
     chug_pattern = partial(
