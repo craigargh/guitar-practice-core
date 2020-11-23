@@ -26,6 +26,17 @@ def metal_picked_riffs(variation=None):
     triplet chugs
 
     """
+    variation_map = {
+        'level-1': level_one,
+        'level-2': level_two,
+        # 'level-3': level_three,
+    }
+    variation_function = variation_map[variation]
+
+    return variation_function()
+
+
+def level_one():
     shape_choices = [
         major_scale_shapes.c_ionian(),
         major_scale_shapes.a_aeolian(),
@@ -67,6 +78,73 @@ def metal_picked_riffs(variation=None):
             'in_between_beats': 1,
             'notes_per_bit': 2,
             'length': 8,
+        },
+    ]
+    combo = random.choice(combos)
+
+    preset_pattern = random.choice(combo['preset_patterns'])
+    pick_pattern = partial(fixed_order_pattern, pattern=preset_pattern)
+
+    chug_pattern = partial(
+        chug,
+        length=combo['length'],
+        order=pick_pattern,
+        preceding_beats=combo['preceding_beats'],
+        in_between_beats=combo['in_between_beats'],
+        notes_per_bit=combo['notes_per_bit'],
+    )
+
+    rhythm = [Beat(1, 8)]
+
+    return make_sequence(
+        [shape],
+        pick_pattern=chug_pattern,
+        rhythm=rhythm,
+    )
+
+
+def level_two():
+    shape_choices = [
+        major_scale_shapes.c_ionian(),
+        major_scale_shapes.a_aeolian(),
+    ]
+    shape = random.choice(shape_choices)
+
+    combos = [
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preceding_beats': 4,
+            'in_between_beats': 0,
+            'notes_per_bit': 8,
+            'length': 16,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preceding_beats': 0,
+            'in_between_beats': 0.5,
+            'notes_per_bit': 1,
+            'length': 16,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preceding_beats': 0.5,
+            'in_between_beats': 0.5,
+            'notes_per_bit': 1,
+            'length': 16,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preceding_beats': 1,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
+            'length': 16,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preceding_beats': 0,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
+            'length': 16,
         },
     ]
     combo = random.choice(combos)
