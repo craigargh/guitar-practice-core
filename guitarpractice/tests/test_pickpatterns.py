@@ -1403,3 +1403,63 @@ class TestFixedOrderPattern(TestCase):
         self.assertEqual([positions[1]], result[2])
         self.assertEqual([positions[3]], result[3])
         self.assertEqual([positions[3]], result[4])
+
+
+class TestFixedChugPattern(TestCase):
+    def test_pattern_must_be_set(self):
+        scale, positions = get_scale_and_positions()
+        with self.assertRaises(ValueError):
+            pickpatterns.fixed_chug_pattern(scale, note_order=pickpatterns.asc)
+
+    def test_note_order_must_be_set(self):
+        scale, positions = get_scale_and_positions()
+        with self.assertRaises(ValueError):
+            pickpatterns.fixed_chug_pattern(scale, pattern=['c'])
+
+    def test_c_value_adds_a_chug_to_the_pattern(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.fixed_chug_pattern(scale, pattern=['c'], note_order=pickpatterns.asc)
+
+        self.assertEqual([FretPosition(fret=0, string=6)], result[0])
+
+    def test_n_value_adds_a_note_to_the_pattern(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.fixed_chug_pattern(scale, pattern=['n', 'n', 'n', 'n'], note_order=pickpatterns.asc)
+
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([positions[1]], result[1])
+        self.assertEqual([positions[2]], result[2])
+        self.assertEqual([positions[3]], result[3])
+
+    def test_can_combine_notes_and_chugs(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.fixed_chug_pattern(scale, pattern=['n', 'c', 'n', 'c'], note_order=pickpatterns.asc)
+
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([FretPosition(0, 6)], result[1])
+        self.assertEqual([positions[1]], result[2])
+        self.assertEqual([FretPosition(0, 6)], result[3])
+
+    def test_chug_pattern_is_repeated_when_length_is_set(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.fixed_chug_pattern(scale, pattern=['n', 'c'], note_order=pickpatterns.asc, length=4)
+
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([FretPosition(0, 6)], result[1])
+        self.assertEqual([positions[1]], result[2])
+        self.assertEqual([FretPosition(0, 6)], result[3])
+
+    def test_can_shorten_pattern(self):
+        scale, positions = get_scale_and_positions()
+
+        result = pickpatterns.fixed_chug_pattern(scale, pattern=['n', 'c', 'n', 'c'], note_order=pickpatterns.asc,
+                                                 length=3)
+
+        self.assertEqual(3, len(result))
+        self.assertEqual([positions[0]], result[0])
+        self.assertEqual([FretPosition(0, 6)], result[1])
+        self.assertEqual([positions[1]], result[2])

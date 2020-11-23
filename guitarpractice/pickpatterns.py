@@ -1,6 +1,7 @@
 import math
 import random
 from functools import partial
+from itertools import cycle
 from typing import List, Callable, Tuple
 
 from guitarpractice.models import GuitarShape, FretPosition
@@ -238,6 +239,33 @@ def fixed_order_pattern(shape: GuitarShape, length: int = None, pattern: List[st
     ]
 
     pick_pattern = adjust_length(pick_pattern, length=length)
+    return pick_pattern
+
+
+def fixed_chug_pattern(shape: GuitarShape, length: int = None, pattern: List[str] = None,
+                       note_order: Callable = None) -> List[List[FretPosition]]:
+    if note_order is None:
+        raise ValueError('note_order must be set')
+
+    if pattern is None:
+        raise ValueError('pattern must be set')
+
+    if length is None:
+        length = len(pattern)
+
+    notes_pick_pattern = cycle(note_order(shape))
+    pattern_cycle = cycle(pattern)
+
+    pick_pattern = []
+
+    while len(pick_pattern) < length:
+        item = next(pattern_cycle)
+        if item == 'c':
+            pick_pattern.append([FretPosition(string=6, fret=0)])
+
+        elif item == 'n':
+            pick_pattern.append(next(notes_pick_pattern))
+
     return pick_pattern
 
 
