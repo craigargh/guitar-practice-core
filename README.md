@@ -31,6 +31,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Refactor chug into fixed_chug_pattern ('*c'=x number of chugs, '*n'=x number of notes)~~
 - ~~Move chug to pickpatterns and add tests~~
 - Add chromatic scale shape and include in metal picked riffs
+- Add single string scale shapes for strings 5 and 6 + include in metal picked riffs
 - Add more picked_metal_patterns
 - Fix bass_and_ pickpatterns for chord arpeggios
 - Add vertical shifter to lick patterns
