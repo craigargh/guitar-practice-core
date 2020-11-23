@@ -762,7 +762,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :q (12/5.12/4) $.a|/top.$ :q (14/5.14/4) $.a|/top.$ =:|'
+            'notes =|: :q (12/5.12/4) $.am/top.$ :q (14/5.14/4) $.am/top.$ =:|'
         )
 
         self.assertEqual(expected, vextab)
@@ -789,7 +789,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :q (12/5.12/4) $.am/top.$ :q (14/5.14/4) $.am/top.$ =:|'
+            'notes =|: :q (12/5.12/4) $.a|/top.$ :q (14/5.14/4) $.a|/top.$ =:|'
         )
 
         self.assertEqual(expected, vextab)
@@ -816,7 +816,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :q (12/5.12/4) $.a|/top.$ $.top.pm$ :q (14/5.14/4) $.a|/top.$ $.top.pm$ =:|'
+            'notes =|: :q (12/5.12/4) $.am/top.$ $.top.pm$ :q (14/5.14/4) $.am/top.$ $.top.pm$ =:|'
         )
 
         self.assertEqual(expected, vextab)
@@ -839,7 +839,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :q 12/5 $.a|/top.$ :q 14/5 $.a|/top.$ =:|'
+            'notes =|: :q 12/5 $.am/top.$ :q 14/5 $.am/top.$ =:|'
         )
 
         self.assertEqual(expected, vextab)
@@ -862,7 +862,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :q 12/5 $.am/top.$ :q 14/5 $.am/top.$ =:|'
+            'notes =|: :q 12/5 $.a|/top.$ :q 14/5 $.a|/top.$ =:|'
         )
 
         self.assertEqual(expected, vextab)
@@ -885,7 +885,7 @@ class TestVexTabFormatter(TestCase):
 
         expected = (
             'tabstave notation=false\n'
-            'notes =|: :q 12/5 $.a|/top.$ $.top.pm$ :q 14/5 $.a|/top.$ $.top.pm$ =:|'
+            'notes =|: :q 12/5 $.am/top.$ $.top.pm$ :q 14/5 $.am/top.$ $.top.pm$ =:|'
         )
 
         self.assertEqual(expected, vextab)
