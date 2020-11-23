@@ -37,18 +37,35 @@ def metal_picked_riffs(variation=None):
             'preset_patterns': level_one_picked_metal_patterns(length=4),
             'preceding_beats': 2,
             'in_between_beats': 0,
+            'notes_per_bit': 4,
             'length': 8,
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
             'preceding_beats': 0,
             'in_between_beats': 0.5,
+            'notes_per_bit': 1,
             'length': 8,
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
             'preceding_beats': 0.5,
             'in_between_beats': 0.5,
+            'notes_per_bit': 1,
+            'length': 8,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 1,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
+            'length': 8,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
             'length': 8,
         },
     ]
@@ -63,6 +80,7 @@ def metal_picked_riffs(variation=None):
         order=pick_pattern,
         preceding_beats=combo['preceding_beats'],
         in_between_beats=combo['in_between_beats'],
+        notes_per_bit=combo['notes_per_bit'],
     )
 
     rhythm = [Beat(1, 8)]
@@ -75,15 +93,21 @@ def metal_picked_riffs(variation=None):
 
 
 def chug(shape: GuitarShape, length: int = None, order: callable = None, preceding_beats=0, in_between_beats=0,
-         notes_per_chug=2):
+         notes_per_bit=1, notes_per_chug=2):
     pick_pattern = order(shape)
     chug_position = [FretPosition(fret=0, string=6)]
 
     if in_between_beats > 0:
         new_pattern = []
+
+        note_count = 0
         for item in pick_pattern:
             new_pattern.append(item)
-            new_pattern.extend([chug_position] * int(notes_per_chug * in_between_beats))
+            note_count += 1
+
+            if note_count == notes_per_bit:
+                new_pattern.extend([chug_position] * int(notes_per_chug * in_between_beats))
+                note_count = 0
 
         pick_pattern = new_pattern
 
