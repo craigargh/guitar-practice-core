@@ -80,6 +80,20 @@ def level_two():
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preceding_beats': 4,
+            'in_between_beats': 4,
+            'notes_per_bit': 4,
+            'length': 16,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preceding_beats': 0,
+            'in_between_beats': 4,
+            'notes_per_bit': 4,
+            'length': 16,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=8),
             'preceding_beats': 0,
             'in_between_beats': 0.5,
             'notes_per_bit': 1,
