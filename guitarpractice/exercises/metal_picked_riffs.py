@@ -209,13 +209,13 @@ def level_three():
             'preset_patterns': level_one_picked_metal_patterns(length=4),
             'length': 28,
             'rhythm': [*two_eighths, *sixteenth_notes, *sixteenth_notes, *sixteenth_notes],
-            'chug_pattern': [*two_notes, *sixteenth_chug, *sixteenth_chug, *sixteenth_notes],
+            'chug_pattern': [*two_notes, *sixteenth_chug, *sixteenth_chug, *sixteenth_chug],
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
             'length': 28,
             'rhythm': [*sixteenth_notes, *sixteenth_notes, *sixteenth_notes, *two_eighths],
-            'chug_pattern': [*sixteenth_notes, *sixteenth_notes, *sixteenth_notes, *two_notes],
+            'chug_pattern': [*sixteenth_chug, *sixteenth_chug, *sixteenth_chug, *two_notes],
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
