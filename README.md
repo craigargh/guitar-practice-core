@@ -29,6 +29,7 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Change symbol for down strokes to the correct symbol~~
 - ~~Make a riff generator and a fill generator~~
 - Move chug to pickpatterns and add tests
+- Add chromatic scale shape and include in metal picked riffs
 - Fix bass_and_ pickpatterns for chord arpeggios
 - Add vertical shifter to lick patterns
 - Add calculate_elapsed_beats function to lick exercises 
