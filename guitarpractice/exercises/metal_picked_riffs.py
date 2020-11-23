@@ -7,7 +7,7 @@ from guitarpractice.shapes import major_scale_shapes
 from guitarpractice.shapes.fixed_order_patterns import level_one_picked_metal_patterns
 
 
-def metal_picked_riffs():
+def metal_picked_riffs(variation=None):
     shape_choices = [
         major_scale_shapes.c_ionian(),
         major_scale_shapes.a_aeolian(),
