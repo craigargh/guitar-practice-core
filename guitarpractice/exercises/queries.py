@@ -1,6 +1,7 @@
 from guitarpractice.models import Sequence
 from .chord_arpeggios import chord_arpeggios
 from .chord_changes import chord_changes
+from .metal_picked_riffs import metal_picked_riffs
 from .metal_power_chords import metal_power_chords
 from .pentatonic_licks import pentatonic_licks
 from .rhythm_divisions import rhythm_divisions
@@ -90,6 +91,13 @@ def _exercise_map():
                     {'id': 'level-3', 'title': 'Level 3'},
                 ],
                 'callable': chord_arpeggios
+            },
+            'metal-picked-riffs': {
+                'title': 'Metal Picked Riffs',
+                'variations': [
+                    {'id': 'level-1', 'title': 'Level 1'},
+                ],
+                'callable': metal_picked_riffs
             },
         }
     }
