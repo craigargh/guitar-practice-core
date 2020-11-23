@@ -38,7 +38,19 @@ def metal_picked_riffs(variation=None):
             'preceding_beats': 2,
             'in_between_beats': 0,
             'length': 8,
-        }
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0,
+            'in_between_beats': 0.5,
+            'length': 8,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0.5,
+            'in_between_beats': 0.5,
+            'length': 8,
+        },
     ]
     combo = random.choice(combos)
 
