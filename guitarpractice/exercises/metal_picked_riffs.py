@@ -2,8 +2,8 @@ import random
 from functools import partial
 
 from guitarpractice.annotators import palm_mute_open
-from guitarpractice.models import Beat, GuitarShape, FretPosition
-from guitarpractice.pickpatterns import fixed_order_pattern, adjust_length
+from guitarpractice.models import Beat
+from guitarpractice.pickpatterns import fixed_order_pattern, fixed_chug_pattern
 from guitarpractice.sequencer import make_sequence
 from guitarpractice.shapes import major_scale_shapes
 from guitarpractice.shapes.fixed_order_patterns import level_one_picked_metal_patterns
@@ -25,45 +25,33 @@ def level_one():
     combos = [
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
-            'preceding_beats': 2,
-            'in_between_beats': 0,
-            'notes_per_bit': 4,
             'length': 8,
+            'chug_pattern': ['c', 'c', 'c', 'c', 'n', 'n', 'n', 'n']
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
-            'preceding_beats': 0,
-            'in_between_beats': 2,
-            'notes_per_bit': 4,
             'length': 8,
+            'chug_pattern': ['n', 'n', 'n', 'n', 'c', 'c', 'c', 'c']
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
-            'preceding_beats': 0,
-            'in_between_beats': 0.5,
-            'notes_per_bit': 1,
             'length': 8,
+            'chug_pattern': ['n', 'c']
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
-            'preceding_beats': 0.5,
-            'in_between_beats': 0.5,
-            'notes_per_bit': 1,
             'length': 8,
+            'chug_pattern': ['c', 'n']
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
-            'preceding_beats': 1,
-            'in_between_beats': 1,
-            'notes_per_bit': 2,
             'length': 8,
+            'chug_pattern': ['n', 'n', 'c', 'c']
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
-            'preceding_beats': 0,
-            'in_between_beats': 1,
-            'notes_per_bit': 2,
             'length': 8,
+            'chug_pattern': ['c', 'c', 'n', 'n']
         },
     ]
     return build_sequence_from_combo(combos)
@@ -346,13 +334,10 @@ def build_sequence_from_combo(combos):
     pick_pattern = partial(fixed_order_pattern, pattern=preset_pattern)
 
     chug_pattern = partial(
-        chug,
+        fixed_chug_pattern,
         length=combo['length'],
         order=pick_pattern,
-        preceding_beats=combo['preceding_beats'],
-        in_between_beats=combo['in_between_beats'],
-        notes_per_bit=combo['notes_per_bit'],
-        notes_per_chug=combo.get('notes_per_chug', 2),
+        pattern=combo['chug_pattern']
     )
 
     if combo.get('rhythm'):
@@ -369,29 +354,3 @@ def build_sequence_from_combo(combos):
         annotators=[palm_mute_open],
         shape_shifters=[shape_shifter],
     )
-
-
-def chug(shape: GuitarShape, length: int = None, order: callable = None, preceding_beats=0, in_between_beats=0,
-         notes_per_bit=1, notes_per_chug=2):
-    pick_pattern = order(shape)
-    chug_position = [FretPosition(fret=0, string=6)]
-
-    if in_between_beats > 0:
-        new_pattern = []
-
-        note_count = 0
-        for item in pick_pattern:
-            new_pattern.append(item)
-            note_count += 1
-
-            if note_count == notes_per_bit:
-                new_pattern.extend([chug_position] * int(notes_per_chug * in_between_beats))
-                note_count = 0
-
-        pick_pattern = new_pattern
-
-    if preceding_beats > 0:
-        pick_pattern = ([chug_position] * int(preceding_beats * notes_per_chug)) + pick_pattern
-
-    pick_pattern = adjust_length(pick_pattern, length=length)
-    return pick_pattern
