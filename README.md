@@ -28,8 +28,8 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Change shape_name to be part of make_sequence and get it to work with arpeggios and scales~~
 - ~~Change symbol for down strokes to the correct symbol~~
 - ~~Make a riff generator and a fill generator~~
-- Refactor chug into fixed_chug_pattern ('*c'=x number of chugs, '*n'=x number of notes)
-- Move chug to pickpatterns and add tests
+- ~~Refactor chug into fixed_chug_pattern ('*c'=x number of chugs, '*n'=x number of notes)~~
+- ~~Move chug to pickpatterns and add tests~~
 - Add chromatic scale shape and include in metal picked riffs
 - Fix bass_and_ pickpatterns for chord arpeggios
 - Add vertical shifter to lick patterns
