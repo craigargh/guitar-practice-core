@@ -10,23 +10,6 @@ from guitarpractice.shapes.fixed_order_patterns import level_one_picked_metal_pa
 
 
 def metal_picked_riffs(variation=None):
-    """
-    0-0-0-0-n-n-n-n-
-
-    n-n-0-0-0-0-0-0-|n-n-0-0-0-0-0-0-
-    n-0-0-0-n-0-0-0-|n-0-0-0-n-0-0-0-
-    n-0-n-0-n-0-n-0-
-
-
-
-    n-n-n-n-n-n-n-n-
-    n-0-n-0-n-0-n-0-|n-0-n-0-n-0-n-0-
-    0-n-0-n-0-n-0-n-|0-n-0-n-0-n-0-n-
-    n-n-0-0-n-n-0-0-|n-n-0-0-n-n-0-0-
-
-    triplet chugs
-
-    """
     variation_map = {
         'level-1': level_one,
         'level-2': level_two,
@@ -38,12 +21,6 @@ def metal_picked_riffs(variation=None):
 
 
 def level_one():
-    shape_choices = [
-        major_scale_shapes.c_ionian(),
-        major_scale_shapes.a_aeolian(),
-    ]
-    shape = random.choice(shape_choices)
-
     combos = [
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
@@ -81,37 +58,10 @@ def level_one():
             'length': 8,
         },
     ]
-    combo = random.choice(combos)
-
-    preset_pattern = random.choice(combo['preset_patterns'])
-    pick_pattern = partial(fixed_order_pattern, pattern=preset_pattern)
-
-    chug_pattern = partial(
-        chug,
-        length=combo['length'],
-        order=pick_pattern,
-        preceding_beats=combo['preceding_beats'],
-        in_between_beats=combo['in_between_beats'],
-        notes_per_bit=combo['notes_per_bit'],
-    )
-
-    rhythm = [Beat(1, 8)]
-
-    return make_sequence(
-        [shape],
-        pick_pattern=chug_pattern,
-        rhythm=rhythm,
-        annotators=[palm_mute_open],
-    )
+    return build_sequence_from_combo(combos)
 
 
 def level_two():
-    shape_choices = [
-        major_scale_shapes.c_ionian(),
-        major_scale_shapes.a_aeolian(),
-    ]
-    shape = random.choice(shape_choices)
-
     reverse_gallop = [Beat(1, 16), Beat(1, 16), Beat(1, 8)]
     gallop = [Beat(1, 8), Beat(1, 16), Beat(1, 16)]
     two_eighths = [Beat(1, 8), Beat(1, 8)]
@@ -235,6 +185,17 @@ def level_two():
             'notes_per_chug': 4,
         },
     ]
+
+    return build_sequence_from_combo(combos)
+
+
+def build_sequence_from_combo(combos):
+    shape_choices = [
+        major_scale_shapes.c_ionian(),
+        major_scale_shapes.a_aeolian(),
+    ]
+    shape = random.choice(shape_choices)
+
     combo = random.choice(combos)
 
     preset_pattern = random.choice(combo['preset_patterns'])
