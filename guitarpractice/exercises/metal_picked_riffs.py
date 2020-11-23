@@ -65,7 +65,7 @@ def metal_picked_riffs(variation=None):
 def chug(shape: GuitarShape, length: int = None, order: callable = None, preceding_beats=0, in_between_beats=0,
          notes_per_chug=2):
     pick_pattern = order(shape)
-    chug_position = [FretPosition(6, 0)]
+    chug_position = [FretPosition(fret=0, string=6)]
 
     if in_between_beats > 0:
         new_pattern = []
