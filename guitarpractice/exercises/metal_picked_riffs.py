@@ -336,7 +336,7 @@ def build_sequence_from_combo(combos):
     chug_pattern = partial(
         fixed_chug_pattern,
         length=combo['length'],
-        order=pick_pattern,
+        note_order=pick_pattern,
         pattern=combo['chug_pattern']
     )
 
