@@ -7,6 +7,7 @@ from guitarpractice.pickpatterns import fixed_order_pattern, adjust_length
 from guitarpractice.sequencer import make_sequence
 from guitarpractice.shapes import major_scale_shapes
 from guitarpractice.shapes.fixed_order_patterns import level_one_picked_metal_patterns
+from guitarpractice.shapeshifters import shift_vertically
 
 
 def metal_picked_riffs(variation=None):
@@ -216,11 +217,14 @@ def build_sequence_from_combo(combos):
     else:
         rhythm = [Beat(1, 8)]
 
+    shape_shifter = partial(shift_vertically, lowest_fret=random.randrange(1, 7))
+
     return make_sequence(
         [shape],
         pick_pattern=chug_pattern,
         rhythm=rhythm,
         annotators=[palm_mute_open],
+        shape_shifters=[shape_shifter],
     )
 
 
