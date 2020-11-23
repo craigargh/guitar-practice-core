@@ -111,7 +111,9 @@ def level_two():
     shape = random.choice(shape_choices)
 
     reverse_gallop = [Beat(1, 16), Beat(1, 16), Beat(1, 8)]
+    gallop = [Beat(1, 8), Beat(1, 16), Beat(1, 16)]
     two_eighths = [Beat(1, 8), Beat(1, 8)]
+    sixteenth_notes = [Beat(1, 16), Beat(1, 16), Beat(1, 16), Beat(1, 16)]
 
     combos = [
         {
@@ -175,6 +177,60 @@ def level_two():
             'length': 10,
             'rhythm': [*two_eighths, *reverse_gallop],
             'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 2,
+            'in_between_beats': 0,
+            'notes_per_bit': 4,
+            'length': 10,
+            'rhythm': [*gallop, *gallop, *two_eighths, *two_eighths],
+            'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 1,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
+            'length': 10,
+            'rhythm': [*gallop, *two_eighths],
+            'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
+            'length': 10,
+            'rhythm': [*two_eighths, *gallop],
+            'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 2,
+            'in_between_beats': 0,
+            'notes_per_bit': 4,
+            'length': 12,
+            'rhythm': [*sixteenth_notes, *sixteenth_notes, *two_eighths, *two_eighths],
+            'notes_per_chug': 4,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 1,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
+            'length': 12,
+            'rhythm': [*sixteenth_notes, *two_eighths],
+            'notes_per_chug': 4,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0,
+            'in_between_beats': 1,
+            'notes_per_bit': 2,
+            'length': 12,
+            'rhythm': [*two_eighths, *sixteenth_notes],
+            'notes_per_chug': 4,
         },
     ]
     combo = random.choice(combos)
