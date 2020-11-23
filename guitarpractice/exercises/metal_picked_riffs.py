@@ -6,7 +6,7 @@ from guitarpractice.models import Beat
 from guitarpractice.pickpatterns import fixed_order_pattern, fixed_chug_pattern
 from guitarpractice.sequencer import make_sequence
 from guitarpractice.shapes import major_scale_shapes
-from guitarpractice.shapes.fixed_order_patterns import level_one_picked_metal_patterns
+from guitarpractice.shapes.fixed_order_patterns import picked_metal_patterns
 from guitarpractice.shapeshifters import shift_vertically
 
 
@@ -24,32 +24,32 @@ def metal_picked_riffs(variation=None):
 def level_one():
     combos = [
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 8,
             'chug_pattern': ['c', 'c', 'c', 'c', 'n', 'n', 'n', 'n']
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 8,
             'chug_pattern': ['n', 'n', 'n', 'n', 'c', 'c', 'c', 'c']
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 8,
             'chug_pattern': ['n', 'c']
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 8,
             'chug_pattern': ['c', 'n']
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 8,
             'chug_pattern': ['n', 'n', 'c', 'c']
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 8,
             'chug_pattern': ['c', 'c', 'n', 'n']
         },
@@ -60,42 +60,42 @@ def level_one():
 def level_two():
     combos = [
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preset_patterns': picked_metal_patterns(length=8),
             'length': 16,
             'chug_pattern': ['c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preset_patterns': picked_metal_patterns(length=8),
             'length': 16,
             'chug_pattern': ['c', 'c', 'c', 'c', 'n', 'n', 'n', 'n'],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preset_patterns': picked_metal_patterns(length=8),
             'length': 16,
             'chug_pattern': ['n', 'n', 'n', 'n', 'c', 'c', 'c', 'c'],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preset_patterns': picked_metal_patterns(length=8),
             'length': 16,
             'chug_pattern': ['n', 'n', 'n', 'n', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'n', 'n', 'n', 'n'],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preset_patterns': picked_metal_patterns(length=8),
             'length': 16,
             'chug_pattern': ['n', 'c'],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preset_patterns': picked_metal_patterns(length=8),
             'length': 16,
             'chug_pattern': ['c', 'n'],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preset_patterns': picked_metal_patterns(length=8),
             'length': 16,
             'chug_pattern': ['c', 'c', 'n', 'n'],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=8),
+            'preset_patterns': picked_metal_patterns(length=8),
             'length': 16,
             'chug_pattern': ['n', 'n', 'c', 'c'],
         },
@@ -116,127 +116,127 @@ def level_three():
 
     combos = [
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'rhythm': [*reverse_gallop, *reverse_gallop, *two_eighths, *two_eighths],
             'chug_pattern': [*gallop_chug, *gallop_chug, *two_notes, *two_notes],
             'length': 10,
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'rhythm': [*two_eighths, *two_eighths, *reverse_gallop, *reverse_gallop],
             'chug_pattern': [*two_notes, *two_notes, *gallop_chug, *gallop_chug],
             'length': 10,
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 10,
             'rhythm': [*reverse_gallop, *two_eighths, *two_eighths, *reverse_gallop],
             'chug_pattern': [*gallop_chug, *two_notes, *two_notes, *gallop_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 10,
             'rhythm': [*reverse_gallop, *two_eighths],
             'chug_pattern': [*gallop_chug, *two_notes],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 10,
             'rhythm': [*two_eighths, *reverse_gallop],
             'chug_pattern': [*two_notes, *gallop_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 10,
             'rhythm': [*gallop, *gallop, *two_eighths, *two_eighths],
             'chug_pattern': [*gallop_chug, *gallop_chug, *two_notes, *two_notes],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 10,
             'rhythm': [*two_eighths, *two_eighths, *gallop, *gallop],
             'chug_pattern': [*two_notes, *two_notes, *gallop_chug, *gallop_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 10,
             'rhythm': [*gallop, *two_eighths, *two_eighths, *gallop],
             'chug_pattern': [*gallop_chug, *two_notes, *two_notes, *gallop_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 10,
             'rhythm': [*gallop, *two_eighths],
             'chug_pattern': [*gallop_chug, *two_notes],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 10,
             'rhythm': [*two_eighths, *gallop],
             'chug_pattern': [*two_notes, *gallop_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 12,
             'rhythm': [*sixteenth_notes, *sixteenth_notes, *two_eighths, *two_eighths],
             'chug_pattern': [*sixteenth_chug, *sixteenth_chug, *two_notes, *two_notes],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 12,
             'rhythm': [*two_eighths, *two_eighths, *sixteenth_notes, *sixteenth_notes],
             'chug_pattern': [*two_notes, *two_notes, *sixteenth_chug, *sixteenth_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 12,
             'rhythm': [*sixteenth_notes, *two_eighths, *two_eighths, *sixteenth_notes],
             'chug_pattern': [*sixteenth_chug, *two_notes, *two_notes, *sixteenth_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 12,
             'rhythm': [*sixteenth_notes, *two_eighths],
             'chug_pattern': [*sixteenth_chug, *two_notes],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 12,
             'rhythm': [*two_eighths, *sixteenth_notes],
             'chug_pattern': [*two_notes, *sixteenth_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 28,
             'rhythm': [*two_eighths, *sixteenth_notes, *sixteenth_notes, *sixteenth_notes],
             'chug_pattern': [*two_notes, *sixteenth_chug, *sixteenth_chug, *sixteenth_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 28,
             'rhythm': [*sixteenth_notes, *sixteenth_notes, *sixteenth_notes, *two_eighths],
             'chug_pattern': [*sixteenth_chug, *sixteenth_chug, *sixteenth_chug, *two_notes],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 22,
             'rhythm': [*two_eighths, *reverse_gallop, *reverse_gallop, *reverse_gallop],
             'chug_pattern': [*two_notes, *gallop_chug, *gallop_chug, *gallop_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 22,
             'rhythm': [*reverse_gallop, *reverse_gallop, *reverse_gallop, *two_eighths],
             'chug_pattern': [*gallop_chug, *gallop_chug, *gallop_chug, *two_notes],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 22,
             'rhythm': [*two_eighths, *reverse_gallop, *reverse_gallop, *reverse_gallop],
             'chug_pattern': [*two_notes, *gallop_chug, *gallop_chug, *gallop_chug],
         },
         {
-            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preset_patterns': picked_metal_patterns(length=4),
             'length': 22,
             'rhythm': [*gallop, *gallop, *gallop, *two_eighths],
             'chug_pattern': [*gallop_chug, *gallop_chug, *gallop_chug, *two_notes],

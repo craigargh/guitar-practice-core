@@ -1,4 +1,4 @@
-def level_one_picked_metal_patterns(length=None):
+def picked_metal_patterns(length=None):
     patterns = [
         [2, 3, 2, 1],
         [1, 3, 2, 1],
