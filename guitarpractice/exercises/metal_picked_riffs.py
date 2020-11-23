@@ -83,7 +83,7 @@ def chug(shape: GuitarShape, length: int = None, order: callable = None, precedi
         new_pattern = []
         for item in pick_pattern:
             new_pattern.append(item)
-            new_pattern.append([chug_position] * int(notes_per_chug * in_between_beats))
+            new_pattern.extend([chug_position] * int(notes_per_chug * in_between_beats))
 
         pick_pattern = new_pattern
 
