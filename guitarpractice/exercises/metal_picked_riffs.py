@@ -1,6 +1,7 @@
 import random
 from functools import partial
 
+from guitarpractice.annotators import palm_mute_open
 from guitarpractice.models import Beat, GuitarShape, FretPosition
 from guitarpractice.pickpatterns import fixed_order_pattern, adjust_length
 from guitarpractice.sequencer import make_sequence
@@ -100,6 +101,7 @@ def level_one():
         [shape],
         pick_pattern=chug_pattern,
         rhythm=rhythm,
+        annotators=[palm_mute_open],
     )
 
 
@@ -257,6 +259,7 @@ def level_two():
         [shape],
         pick_pattern=chug_pattern,
         rhythm=rhythm,
+        annotators=[palm_mute_open],
     )
 
 
