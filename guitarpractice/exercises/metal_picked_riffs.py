@@ -14,7 +14,7 @@ def metal_picked_riffs(variation=None):
     variation_map = {
         'level-1': level_one,
         'level-2': level_two,
-        # 'level-3': level_three,
+        'level-3': level_three,
     }
     variation_function = variation_map[variation]
 
@@ -27,6 +27,13 @@ def level_one():
             'preset_patterns': level_one_picked_metal_patterns(length=4),
             'preceding_beats': 2,
             'in_between_beats': 0,
+            'notes_per_bit': 4,
+            'length': 8,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0,
+            'in_between_beats': 2,
             'notes_per_bit': 4,
             'length': 8,
         },
@@ -63,11 +70,6 @@ def level_one():
 
 
 def level_two():
-    reverse_gallop = [Beat(1, 16), Beat(1, 16), Beat(1, 8)]
-    gallop = [Beat(1, 8), Beat(1, 16), Beat(1, 16)]
-    two_eighths = [Beat(1, 8), Beat(1, 8)]
-    sixteenth_notes = [Beat(1, 16), Beat(1, 16), Beat(1, 16), Beat(1, 16)]
-
     combos = [
         {
             'preset_patterns': level_one_picked_metal_patterns(length=8),
@@ -104,6 +106,18 @@ def level_two():
             'notes_per_bit': 2,
             'length': 16,
         },
+    ]
+
+    return build_sequence_from_combo(combos)
+
+
+def level_three():
+    reverse_gallop = [Beat(1, 16), Beat(1, 16), Beat(1, 8)]
+    gallop = [Beat(1, 8), Beat(1, 16), Beat(1, 16)]
+    two_eighths = [Beat(1, 8), Beat(1, 8)]
+    sixteenth_notes = [Beat(1, 16), Beat(1, 16), Beat(1, 16), Beat(1, 16)]
+
+    combos = [
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
             'preceding_beats': 2,
@@ -111,6 +125,24 @@ def level_two():
             'notes_per_bit': 4,
             'length': 10,
             'rhythm': [*reverse_gallop, *reverse_gallop, *two_eighths, *two_eighths],
+            'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0,
+            'in_between_beats': 2,
+            'notes_per_bit': 4,
+            'length': 10,
+            'rhythm': [*two_eighths, *two_eighths, *reverse_gallop, *reverse_gallop],
+            'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 1,
+            'in_between_beats': 1,
+            'notes_per_bit': 4,
+            'length': 10,
+            'rhythm': [*reverse_gallop, *two_eighths, *two_eighths, *reverse_gallop],
             'notes_per_chug': 3,
         },
         {
@@ -142,6 +174,24 @@ def level_two():
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0,
+            'in_between_beats': 2,
+            'notes_per_bit': 4,
+            'length': 10,
+            'rhythm': [*two_eighths, *two_eighths, *gallop, *gallop],
+            'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 1,
+            'in_between_beats': 1,
+            'notes_per_bit': 4,
+            'length': 10,
+            'rhythm': [*gallop, *two_eighths, *two_eighths, *gallop],
+            'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
             'preceding_beats': 1,
             'in_between_beats': 1,
             'notes_per_bit': 2,
@@ -169,6 +219,24 @@ def level_two():
         },
         {
             'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 0,
+            'in_between_beats': 2,
+            'notes_per_bit': 4,
+            'length': 10,
+            'rhythm': [*two_eighths, *two_eighths, *sixteenth_notes, *sixteenth_notes],
+            'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
+            'preceding_beats': 1,
+            'in_between_beats': 1,
+            'notes_per_bit': 4,
+            'length': 10,
+            'rhythm': [*sixteenth_notes, *two_eighths, *two_eighths, *sixteenth_notes],
+            'notes_per_chug': 3,
+        },
+        {
+            'preset_patterns': level_one_picked_metal_patterns(length=4),
             'preceding_beats': 1,
             'in_between_beats': 1,
             'notes_per_bit': 2,
@@ -184,7 +252,7 @@ def level_two():
             'length': 12,
             'rhythm': [*two_eighths, *sixteenth_notes],
             'notes_per_chug': 4,
-        },
+        }
     ]
 
     return build_sequence_from_combo(combos)
