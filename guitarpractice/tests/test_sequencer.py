@@ -1,3 +1,4 @@
+from functools import partial
 from unittest import TestCase
 
 from guitarpractice import pickpatterns
@@ -129,6 +130,20 @@ class TestSequencer(TestCase):
         sequence = make_sequence(shapes=[shape], shape_labels=True)
 
         self.assertTrue(sequence.shape_labels)
+
+    def test_recalculate_shape_only_displays_positions_that_are_used(self):
+        positions = [
+            FretPosition(fret=0, string=6),
+            FretPosition(fret=1, string=6)
+        ]
+
+        shape = GuitarShape('two notes', 'note', positions=positions)
+        pick_pattern = partial(pickpatterns.asc, length=1)
+
+        sequence = make_sequence(shapes=[shape], pick_pattern=pick_pattern, recalculate_shape=True)
+
+        self.assertEqual(1, len(sequence.shapes[0].positions))
+        self.assertEqual(positions[0], sequence.shapes[0].positions[0])
 
 
 def make_single_position_pattern(length: int):

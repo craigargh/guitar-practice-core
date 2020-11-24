@@ -16,6 +16,7 @@ def make_sequence(
         ending: Callable = fill_remaining_bar_with_rests,
         shape_labels: bool = False,
         tab_labels: bool = False,
+        recalculate_shape: bool = False,
 ) -> Sequence:
     adjusted_shapes = []
 
@@ -53,9 +54,14 @@ def make_sequence(
     notes = ending(notes)
 
     sorted_shapes = []
-    for shape in adjusted_shapes:
-        if shape not in sorted_shapes:
-            sorted_shapes.append(shape)
+    if not recalculate_shape:
+        for shape in adjusted_shapes:
+            if shape not in sorted_shapes:
+                sorted_shapes.append(shape)
+    else:
+        positions = [note.position for note in notes if note.position is not None]
+        shape = GuitarShape('Shape', 'shape', positions=positions)
+        sorted_shapes.append(shape)
 
     return Sequence(notes=notes, shapes=sorted_shapes, shape_labels=shape_labels)
 

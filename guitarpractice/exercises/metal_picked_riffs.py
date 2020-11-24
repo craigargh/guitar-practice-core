@@ -309,4 +309,5 @@ def build_sequence_from_combo(combos):
         rhythm=rhythm,
         annotators=[palm_mute_open],
         shape_shifters=[shape_shifter],
+        recalculate_shape=True,
     )
