@@ -5,7 +5,7 @@ from guitarpractice.annotators import palm_mute_open
 from guitarpractice.models import Beat
 from guitarpractice.pickpatterns import fixed_order_pattern, fixed_chug_pattern
 from guitarpractice.sequencer import make_sequence
-from guitarpractice.shapes import major_scale_shapes, chromatic_shapes, single_string_scales
+from guitarpractice.shapes import major_scale_shapes, chromatic_shapes, single_string_scales, scale_collections
 from guitarpractice.shapes.fixed_order_patterns import picked_metal_patterns
 from guitarpractice.shapeshifters import shift_vertically
 
@@ -248,8 +248,8 @@ def level_three():
 
 def build_sequence_from_combo(combos):
     shape_choices = [
-        major_scale_shapes.c_ionian(),
-        major_scale_shapes.a_aeolian(),
+        *scale_collections.c_major_modes(),
+        *scale_collections.c_major_pentatonic_modes(),
         chromatic_shapes.chromatic_4_notes_per_string(),
         chromatic_shapes.chromatic_5_notes_per_string(),
         single_string_scales.chromatic_string_6(),
