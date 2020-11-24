@@ -296,7 +296,12 @@ def build_sequence_from_combo(combos):
     else:
         rhythm = [Beat(1, 8)]
 
-    shape_shifter = partial(shift_vertically, lowest_fret=random.randrange(1, 7))
+    if max([position.fret for position in shape.positions]) > 10:
+        highest_min_fret = 5
+    else:
+        highest_min_fret = 7
+
+    shape_shifter = partial(shift_vertically, lowest_fret=random.randrange(1, highest_min_fret))
 
     return make_sequence(
         [shape],
