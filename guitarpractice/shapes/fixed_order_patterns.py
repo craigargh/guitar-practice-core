@@ -1,7 +1,10 @@
+from itertools import product
+
+
 def picked_metal_patterns(length=None):
     patterns = [
-        [2, 3, 2, 1],
-        [1, 3, 2, 1],
+        *four_contiguous_position_patterns(),
+
         [6, 4, 3, 1],
 
         [3, 4, 5, 4, 3, 2, 2, 1],
@@ -24,3 +27,15 @@ def picked_metal_patterns(length=None):
         ]
 
     return patterns
+
+
+def four_contiguous_position_patterns():
+    """
+     All variations of four contiguous note pick patterns where each note can only repeat twice at most
+     with no two notes repeating twice each
+    """
+    return [
+        sequence
+        for sequence in product(range(1, 5), repeat=4)
+        if len(set(sequence)) == 3 or len(set(sequence)) == 4
+    ]

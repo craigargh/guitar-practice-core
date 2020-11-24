@@ -5,7 +5,7 @@ from guitarpractice.annotators import palm_mute_open
 from guitarpractice.models import Beat
 from guitarpractice.pickpatterns import fixed_order_pattern, fixed_chug_pattern
 from guitarpractice.sequencer import make_sequence
-from guitarpractice.shapes import major_scale_shapes
+from guitarpractice.shapes import major_scale_shapes, chromatic_shapes, single_string_scales
 from guitarpractice.shapes.fixed_order_patterns import picked_metal_patterns
 from guitarpractice.shapeshifters import shift_vertically
 
@@ -250,6 +250,32 @@ def build_sequence_from_combo(combos):
     shape_choices = [
         major_scale_shapes.c_ionian(),
         major_scale_shapes.a_aeolian(),
+        chromatic_shapes.chromatic_4_notes_per_string(),
+        chromatic_shapes.chromatic_5_notes_per_string(),
+        single_string_scales.chromatic_string_6(),
+        single_string_scales.major_pentatonic_string_6(),
+        single_string_scales.major_string_6(),
+        single_string_scales.mixolydian_string_6(),
+        single_string_scales.lydian_string_6(),
+        single_string_scales.phrygian_dominant_string_6(),
+        single_string_scales.minor_pentatonic_string_6(),
+        single_string_scales.minor_blues_string_6(),
+        single_string_scales.natural_minor_string_6(),
+        single_string_scales.harmonic_minor_string_6(),
+        single_string_scales.melodic_minor_string_6(),
+        single_string_scales.dorian_string_6(),
+        single_string_scales.chromatic_string_5(),
+        single_string_scales.major_pentatonic_string_5(),
+        single_string_scales.major_string_5(),
+        single_string_scales.mixolydian_string_5(),
+        single_string_scales.lydian_string_5(),
+        single_string_scales.phrygian_dominant_string_5(),
+        single_string_scales.minor_pentatonic_string_5(),
+        single_string_scales.minor_blues_string_5(),
+        single_string_scales.natural_minor_string_5(),
+        single_string_scales.harmonic_minor_string_5(),
+        single_string_scales.melodic_minor_string_5(),
+        single_string_scales.dorian_string_5(),
     ]
     shape = random.choice(shape_choices)
 
