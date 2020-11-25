@@ -45,35 +45,21 @@ def _exercise_map():
                 ],
                 'callable': technique_hammers_pulls
             },
-            'scale-shapes': {
-                'title': 'Scale Shapes',
-                'variations': [
-                    {'id': 'major-pentatonic', 'title': 'Major Pentatonic Scale'},
-                    {'id': 'major', 'title': 'Major Scale'},
-                ],
-                'callable': scale_shapes
-            },
-            'rhythm-divisions': {
-                'title': 'Rhythm Divisions',
-                'variations': [
-                    {'id': 'level-1', 'title': 'Level 1'},
-                    {'id': 'level-2', 'title': 'Level 2'},
-                ],
-                'callable': rhythm_divisions
-            },
-            'pentatonic-licks': {
-                'title': 'Pentatonic Licks',
-                'variations': [
-                    {'id': 'level-1', 'title': 'Level 1'},
-                ],
-                'callable': pentatonic_licks
-            },
             'metal-power-chords': {
                 'title': 'Metal Power Chords',
                 'variations': [
                     {'id': 'level-1', 'title': 'Level 1'},
                 ],
                 'callable': metal_power_chords
+            },
+            'metal-picked-riffs': {
+                'title': 'Metal Picked Riffs',
+                'variations': [
+                    {'id': 'level-1', 'title': 'Level 1'},
+                    {'id': 'level-2', 'title': 'Level 2'},
+                    {'id': 'level-3', 'title': 'Level 3'},
+                ],
+                'callable': metal_picked_riffs
             },
             'chord-changes': {
                 'title': 'Chord Changes',
@@ -92,14 +78,28 @@ def _exercise_map():
                 ],
                 'callable': chord_arpeggios
             },
-            'metal-picked-riffs': {
-                'title': 'Metal Picked Riffs',
+            'pentatonic-licks': {
+                'title': 'Pentatonic Licks',
+                'variations': [
+                    {'id': 'level-1', 'title': 'Level 1'},
+                ],
+                'callable': pentatonic_licks
+            },
+            'scale-shapes': {
+                'title': 'Scale Shapes',
+                'variations': [
+                    {'id': 'major-pentatonic', 'title': 'Major Pentatonic Scale'},
+                    {'id': 'major', 'title': 'Major Scale'},
+                ],
+                'callable': scale_shapes
+            },
+            'rhythm-divisions': {
+                'title': 'Rhythm Divisions',
                 'variations': [
                     {'id': 'level-1', 'title': 'Level 1'},
                     {'id': 'level-2', 'title': 'Level 2'},
-                    {'id': 'level-3', 'title': 'Level 3'},
                 ],
-                'callable': metal_picked_riffs
+                'callable': rhythm_divisions
             },
         }
     }
