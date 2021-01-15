@@ -33,6 +33,13 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Add chromatic scale shape and include in metal picked riffs~~
 - ~~Add single string scale shapes for strings 5 and 6 + include in metal picked riffs~~
 - Add more picked_metal_patterns
+  - Add diminished seventh arpeggios to available note choices
+  - Half/whole scale
+  - Whole/half scale
+- Watch Meshuggah riff breakdown videos
+  - Note choices for picked metal patterns
+  - Note choices for 16th note picking
+  - Rhythms? Might be too complicated
 - Fix bass_and_ pickpatterns for chord arpeggios
 - Add vertical shifter to lick patterns
 - Add calculate_elapsed_beats function to lick exercises 
