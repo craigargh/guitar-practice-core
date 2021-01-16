@@ -34,8 +34,11 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Add single string scale shapes for strings 5 and 6 + include in metal picked riffs~~
 - Add more picked_metal_patterns
   - Add diminished seventh arpeggios to available note choices
+  - Augmented arpeggio
   - Half/whole scale
   - Whole/half scale
+  - Contrary motion riffs for level 3 (https://www.youtube.com/watch?v=VwmNCwsclrI)
+  - Arpeggios with single note octave displacement (e.g. second note is moved up an octave)
 - Watch Meshuggah riff breakdown videos
   - Note choices for picked metal patterns
   - Note choices for 16th note picking
