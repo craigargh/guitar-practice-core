@@ -128,6 +128,11 @@ def level_three() -> Sequence:
 
     return make_sequence(**combo)
 
+"""
+Level 4 ideas:
+- 16th note arpeggios like in Ora Pro Nobis by Behemoth
+"""
+
 
 def generate_single_string_shape(positions_len: int) -> GuitarShape:
     positions = []
