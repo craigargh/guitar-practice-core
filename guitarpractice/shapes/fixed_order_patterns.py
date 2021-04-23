@@ -1,3 +1,4 @@
+import random
 from itertools import product
 
 
@@ -40,3 +41,11 @@ def four_contiguous_position_patterns():
         for sequence in product(range(1, 5), repeat=4)
         if len(set(sequence)) == 3 or len(set(sequence)) == 4
     ]
+
+
+def sixteenth_note_patterns():
+    patterns = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0],
+    ]
+
+    return patterns

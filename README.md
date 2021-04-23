@@ -32,6 +32,14 @@ A package for generating practice exercises for guitar. The package uses a domai
 - ~~Move chug to pickpatterns and add tests~~
 - ~~Add chromatic scale shape and include in metal picked riffs~~
 - ~~Add single string scale shapes for strings 5 and 6 + include in metal picked riffs~~
+- Analyse songs for power chord riffs and 16th note patterns and develop exercises
+  - Slayer
+  - Power Trip
+  - Behemoth
+  - Trivium
+- Slower power chord progressions for levels 1-2
+- Analyse songs for arpeggios and develop exercises
+  - Behemoth
 - Add more picked_metal_patterns
   - Add diminished seventh arpeggios to available note choices
   - Augmented arpeggio

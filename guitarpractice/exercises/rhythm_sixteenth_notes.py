@@ -3,8 +3,9 @@ from functools import partial
 
 from guitarpractice import pickpatterns
 from guitarpractice.models import Sequence, FretPosition, GuitarShape, Beat
-from guitarpractice.pickpatterns import repeat_each_position
+from guitarpractice.pickpatterns import repeat_each_position, fixed_order_pattern
 from guitarpractice.sequencer import make_sequence
+from guitarpractice.shapes.fixed_order_patterns import sixteenth_note_patterns
 from guitarpractice.shapes.scale_collections import c_major_modes, c_major_pentatonic_modes
 
 
@@ -69,40 +70,48 @@ def level_two() -> Sequence:
 
 def level_three() -> Sequence:
     combos = [
+        # {
+        #     'shapes': [random.choice(c_major_modes())],
+        #     'pick_pattern': partial(
+        #         repeat_each_position,
+        #         repeats=4,
+        #         order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
+        #     ),
+        #     'rhythm': [Beat(duration=1, division=16)],
+        # },
+        # {
+        #     'shapes': [random.choice(c_major_pentatonic_modes())],
+        #     'pick_pattern': partial(
+        #         repeat_each_position,
+        #         repeats=4,
+        #         order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
+        #     ),
+        #     'rhythm': [Beat(duration=1, division=16)],
+        # },
+        # {
+        #     'shapes': [single_string_chromatic_pattern()],
+        #     'pick_pattern': partial(
+        #         repeat_each_position,
+        #         repeats=4,
+        #         order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
+        #     ),
+        #     'rhythm': [Beat(duration=1, division=16)],
+        # },
+        # {
+        #     'shapes': [single_string_chromatic_pattern()],
+        #     'pick_pattern': partial(
+        #         repeat_each_position,
+        #         repeats=2,
+        #         length=16,
+        #         order=pickpatterns.alternating_bass_asc_and_desc
+        #     ),
+        #     'rhythm': [Beat(duration=1, division=16)],
+        # },
         {
-            'shapes': [random.choice(c_major_modes())],
+            'shapes': [generate_single_string_shape(2)],
             'pick_pattern': partial(
-                repeat_each_position,
-                repeats=4,
-                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
-            ),
-            'rhythm': [Beat(duration=1, division=16)],
-        },
-        {
-            'shapes': [random.choice(c_major_pentatonic_modes())],
-            'pick_pattern': partial(
-                repeat_each_position,
-                repeats=4,
-                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.asc_and_desc])
-            ),
-            'rhythm': [Beat(duration=1, division=16)],
-        },
-        {
-            'shapes': [single_string_chromatic_pattern()],
-            'pick_pattern': partial(
-                repeat_each_position,
-                repeats=4,
-                order=random.choice([pickpatterns.asc, pickpatterns.desc, pickpatterns.randomly])
-            ),
-            'rhythm': [Beat(duration=1, division=16)],
-        },
-        {
-            'shapes': [single_string_chromatic_pattern()],
-            'pick_pattern': partial(
-                repeat_each_position,
-                repeats=2,
-                length=16,
-                order=pickpatterns.alternating_bass_asc_and_desc
+                fixed_order_pattern,
+                pattern=random.choice(sixteenth_note_patterns())
             ),
             'rhythm': [Beat(duration=1, division=16)],
         },
