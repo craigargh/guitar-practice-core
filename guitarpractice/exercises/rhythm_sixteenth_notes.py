@@ -115,6 +115,14 @@ def level_three() -> Sequence:
             ),
             'rhythm': [Beat(duration=1, division=16)],
         },
+        {
+            'shapes': [positions_on_adjacent_strings()],
+            'pick_pattern': partial(
+                fixed_order_pattern,
+                pattern=random.choice(sixteenth_note_patterns())
+            ),
+            'rhythm': [Beat(duration=1, division=16)],
+        },
     ]
     combo = random.choice(combos)
 
