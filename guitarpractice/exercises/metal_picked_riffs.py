@@ -101,7 +101,7 @@ def level_two():
         # },
         {
             'preset_patterns': picked_metal_patterns(length=7),
-            'length': 16,
+            'length': 14,
             'chug_pattern': ['c', 'c', 'n', 'c', 'n', 'c', 'n', 'c', 'n', 'c', 'n', 'c', 'n', 'n'],
             'rhythm': [
                 Beat(1, 8), Beat(1, 8), Beat(1, 8), Beat(1, 8), Beat(1, 8), Beat(1, 8), Beat(1, 8), Beat(1, 8),
