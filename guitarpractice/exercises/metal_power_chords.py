@@ -98,9 +98,6 @@ def metal_power_chords(variation: str) -> Sequence:
 
 
 def level_one() -> Sequence:
-    shapes = [power_chord()]
-    rhythm = [Beat(4, 4)]
-
     return build_sequence_from_combo(level_one_combos())
 
 
@@ -143,17 +140,13 @@ def level_one_combos():
         {
             'choices': [
                 {
-                    'shapes': [
-                        repeated_power_chord(2)
-                    ],
+                    'shapes': repeated_power_chord(2),
                     'rhythm': [
                         Beat(1, 4),
                     ],
                 },
                 {
-                    'shapes': [
-                        repeated_power_chord(2)
-                    ],
+                    'shapes': repeated_power_chord(2),
                     'rhythm': [
                         Beat(1, 4)
                     ],
