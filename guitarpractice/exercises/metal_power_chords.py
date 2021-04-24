@@ -155,8 +155,7 @@ def level_one_combos():
             'choices': [
                 {
                     'shapes': [
-                        power_chord(),
-                        *repeated_power_chord(2)
+                        single_and_repeated_power_chords(2)
                     ],
                     'rhythm': [
                         Beat(1, 2),
@@ -444,4 +443,15 @@ def repeated_power_chord(repeats: int, root_fret: int = None, string: int = 6) -
     return [
         power_chord(string=string, fret=root_fret)
         for _ in range(repeats)
+    ]
+
+
+def single_and_repeated_power_chords(repeats: int):
+    single_chord = power_chord()
+    fret = single_chord.positions[0].fret + random.randrange(-4, 4)
+    fret = max(0, fret)
+
+    return [
+        single_chord,
+        *repeated_power_chord(repeats, fret=fret)
     ]
