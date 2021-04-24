@@ -128,20 +128,33 @@ def level_one_combos():
         {
             'choices': [
                 {
-                    'shapes': [
-                        open_string(),
-                        *power_chord_sequence(3)
-                    ],
+                    'shapes': repeated_power_chord(2),
                     'rhythm': [
                         Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
+                        Beat(1, 8)
                     ],
                 },
+                eighth_chugs(),
             ],
-            'repeats': 2,
+            'repeats': 4
         },
+        # {
+        #     'choices': [
+        #         {
+        #             'shapes': [
+        #                 open_string(),
+        #                 *power_chord_sequence(3)
+        #             ],
+        #             'rhythm': [
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #             ],
+        #         },
+        #     ],
+        #     'repeats': 2,
+        # },
         # {
         #     'choices': [
         #         {
@@ -318,6 +331,7 @@ def level_two_combos():
         },
     ]
 
+
 def power_chord_and_root_note():
     chord = power_chord()
     root_note = chord.positions[0]
@@ -376,3 +390,13 @@ def power_chord_sequence(qty: int, root_fret: int = None, string: int = 6) -> Li
     ]
 
     return chords
+
+
+def repeated_power_chord(repeats: int, root_fret: int = None, string: int = 6) -> List[GuitarShape]:
+    if root_fret is None:
+        root_fret = random.randrange(0, 12)
+
+    return [
+        power_chord(string=string, fret=root_fret)
+        for _ in repeats
+    ]
