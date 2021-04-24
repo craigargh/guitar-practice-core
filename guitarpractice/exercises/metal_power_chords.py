@@ -398,5 +398,5 @@ def repeated_power_chord(repeats: int, root_fret: int = None, string: int = 6) -
 
     return [
         power_chord(string=string, fret=root_fret)
-        for _ in repeats
+        for _ in range(repeats)
     ]
