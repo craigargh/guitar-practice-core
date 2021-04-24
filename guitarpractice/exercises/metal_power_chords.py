@@ -125,119 +125,119 @@ def level_one_combos():
             ],
             'repeats': 4
         },
-        {
-            'choices': [
-                {
-                    'shapes': power_chord_sequence(2),
-                    'rhythm': [
-                        Beat(1, 8),
-                        Beat(1, 8)
-                    ],
-                },
-                eighth_chugs(),
-            ],
-            'repeats': 4
-        },
-        {
-            'choices': [
-                {
-                    'shapes': [
-                        open_string(),
-                        *power_chord_sequence(3)
-                    ],
-                    'rhythm': [
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                    ],
-                },
-            ],
-            'repeats': 2,
-        },
-        {
-            'choices': [
-                {
-                    'shapes': [
-                        open_string(),
-                        open_string(),
-                        open_string(),
-                        power_chord(),
-                    ],
-                    'rhythm': [
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                    ],
-                },
-            ],
-            'repeats': 2,
-        },
-        {
-            'choices': [
-                {
-                    'shapes': [
-                        power_chord(string=5)
-                    ],
-                    'rhythm': [
-                        Beat(1, 4)
-                    ],
-                },
-                eighth_chugs(),
-            ],
-            'repeats': 4
-        },
-        {
-            'choices': [
-                {
-                    'shapes': power_chord_sequence(2, string=5),
-                    'rhythm': [
-                        Beat(1, 8),
-                        Beat(1, 8)
-                    ],
-                },
-                eighth_chugs(),
-            ],
-            'repeats': 4
-        },
-        {
-            'choices': [
-                {
-                    'shapes': [
-                        open_string(),
-                        *power_chord_sequence(3, string=5)
-                    ],
-                    'rhythm': [
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                    ],
-                },
-            ],
-            'repeats': 2,
-        },
-        {
-            'choices': [
-                {
-                    'shapes': [
-                        open_string(),
-                        open_string(),
-                        open_string(),
-                        power_chord(string=5)
-                    ],
-                    'rhythm': [
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                    ],
-                },
-            ],
-            'repeats': 2,
-        },
-        *level_one_power_chord_and_root_note_combos()
+        # {
+        #     'choices': [
+        #         {
+        #             'shapes': power_chord_sequence(2),
+        #             'rhythm': [
+        #                 Beat(1, 8),
+        #                 Beat(1, 8)
+        #             ],
+        #         },
+        #         eighth_chugs(),
+        #     ],
+        #     'repeats': 4
+        # },
+        # {
+        #     'choices': [
+        #         {
+        #             'shapes': [
+        #                 open_string(),
+        #                 *power_chord_sequence(3)
+        #             ],
+        #             'rhythm': [
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #             ],
+        #         },
+        #     ],
+        #     'repeats': 2,
+        # },
+        # {
+        #     'choices': [
+        #         {
+        #             'shapes': [
+        #                 open_string(),
+        #                 open_string(),
+        #                 open_string(),
+        #                 power_chord(),
+        #             ],
+        #             'rhythm': [
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #             ],
+        #         },
+        #     ],
+        #     'repeats': 2,
+        # },
+        # {
+        #     'choices': [
+        #         {
+        #             'shapes': [
+        #                 power_chord(string=5)
+        #             ],
+        #             'rhythm': [
+        #                 Beat(1, 4)
+        #             ],
+        #         },
+        #         eighth_chugs(),
+        #     ],
+        #     'repeats': 4
+        # },
+        # {
+        #     'choices': [
+        #         {
+        #             'shapes': power_chord_sequence(2, string=5),
+        #             'rhythm': [
+        #                 Beat(1, 8),
+        #                 Beat(1, 8)
+        #             ],
+        #         },
+        #         eighth_chugs(),
+        #     ],
+        #     'repeats': 4
+        # },
+        # {
+        #     'choices': [
+        #         {
+        #             'shapes': [
+        #                 open_string(),
+        #                 *power_chord_sequence(3, string=5)
+        #             ],
+        #             'rhythm': [
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #             ],
+        #         },
+        #     ],
+        #     'repeats': 2,
+        # },
+        # {
+        #     'choices': [
+        #         {
+        #             'shapes': [
+        #                 open_string(),
+        #                 open_string(),
+        #                 open_string(),
+        #                 power_chord(string=5)
+        #             ],
+        #             'rhythm': [
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #                 Beat(1, 8),
+        #             ],
+        #         },
+        #     ],
+        #     'repeats': 2,
+        # },
+        # *level_one_power_chord_and_root_note_combos()
     ]
 
 
