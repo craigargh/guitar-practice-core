@@ -453,5 +453,5 @@ def single_and_repeated_power_chords(repeats: int):
 
     return [
         single_chord,
-        *repeated_power_chord(repeats, fret=fret)
+        *repeated_power_chord(repeats, root_fret=fret)
     ]
