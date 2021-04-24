@@ -101,15 +101,33 @@ def level_one() -> Sequence:
     shapes = [power_chord()]
     rhythm = [Beat(4, 4)]
 
-    return make_sequence(
-        shapes=shapes,
-        rhythm=rhythm,
-        pick_pattern=strum,
-    )
+    return build_sequence_from_combo(level_one_combos())
+
+
+def level_one_combos():
+    return [
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        power_chord()
+                    ],
+                    'rhythm': [
+                        Beat(1, 4)
+                    ],
+                },
+                eighth_chugs(),
+            ],
+            'repeats': 4
+        },
+    ]
 
 
 def level_two() -> Sequence:
-    combos = level_two_combos()
+    return build_sequence_from_combo(level_two_combos())
+
+
+def build_sequence_from_combo(combos):
     combo = random.choice(combos)
 
     rhythm = []
