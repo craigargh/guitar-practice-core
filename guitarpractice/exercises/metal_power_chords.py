@@ -154,9 +154,7 @@ def level_one_combos():
         {
             'choices': [
                 {
-                    'shapes': [
-                        single_and_repeated_power_chords(2)
-                    ],
+                    'shapes': single_and_repeated_power_chords(2),
                     'rhythm': [
                         Beat(1, 2),
                         Beat(1, 4),
