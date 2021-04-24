@@ -111,33 +111,33 @@ def level_one() -> Sequence:
 
 def level_one_combos():
     return [
-        {
-            'choices': [
-                {
-                    'shapes': [
-                        power_chord()
-                    ],
-                    'rhythm': [
-                        Beat(1, 4)
-                    ],
-                },
-                eighth_chugs(),
-            ],
-            'repeats': 4
-        },
         # {
         #     'choices': [
         #         {
-        #             'shapes': power_chord_sequence(2),
+        #             'shapes': [
+        #                 power_chord()
+        #             ],
         #             'rhythm': [
-        #                 Beat(1, 8),
-        #                 Beat(1, 8)
+        #                 Beat(1, 4)
         #             ],
         #         },
         #         eighth_chugs(),
         #     ],
         #     'repeats': 4
         # },
+        {
+            'choices': [
+                {
+                    'shapes': power_chord_sequence(2),
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8)
+                    ],
+                },
+                eighth_chugs(),
+            ],
+            'repeats': 4
+        },
         # {
         #     'choices': [
         #         {
