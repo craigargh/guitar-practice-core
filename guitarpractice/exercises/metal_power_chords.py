@@ -125,36 +125,36 @@ def level_one_combos():
         #     ],
         #     'repeats': 4
         # },
-        {
-            'choices': [
-                {
-                    'shapes': repeated_power_chord(2),
-                    'rhythm': [
-                        Beat(1, 8),
-                        Beat(1, 8)
-                    ],
-                },
-                eighth_chugs(),
-            ],
-            'repeats': 4
-        },
         # {
         #     'choices': [
         #         {
-        #             'shapes': [
-        #                 open_string(),
-        #                 *power_chord_sequence(3)
-        #             ],
+        #             'shapes': repeated_power_chord(2),
         #             'rhythm': [
         #                 Beat(1, 8),
-        #                 Beat(1, 8),
-        #                 Beat(1, 8),
-        #                 Beat(1, 8),
+        #                 Beat(1, 8)
         #             ],
         #         },
+        #         eighth_chugs(),
         #     ],
-        #     'repeats': 2,
+        #     'repeats': 4
         # },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        open_string(),
+                        *repeated_power_chord(3)
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+            ],
+            'repeats': 2,
+        },
         # {
         #     'choices': [
         #         {
@@ -328,6 +328,23 @@ def level_two_combos():
                 eighth_chugs(),
             ],
             'repeats': 4
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        open_string(),
+                        *power_chord_sequence(3)
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+            ],
+            'repeats': 2,
         },
     ]
 
