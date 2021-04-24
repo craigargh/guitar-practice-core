@@ -84,12 +84,28 @@ from typing import List, Dict, Callable
 
 from guitarpractice.annotators import palm_mute_single
 from guitarpractice.models import Sequence, GuitarShape, FretPosition, Beat
-from guitarpractice.pickpatterns import chug
+from guitarpractice.pickpatterns import chug, strum
 from guitarpractice.sequencer import make_sequence
 
 
 def metal_power_chords(variation: str) -> Sequence:
-    return level_two()
+    variation_map = {
+        'level-1': level_one,
+        'level-2': level_two,
+    }
+
+    return variation_map[variation]()
+
+
+def level_one() -> Sequence:
+    shapes = [power_chord()]
+    rhythm = [Beat(4, 4)]
+
+    return make_sequence(
+        shapes=shapes,
+        rhythm=rhythm,
+        pick_pattern=strum,
+    )
 
 
 def level_two() -> Sequence:
