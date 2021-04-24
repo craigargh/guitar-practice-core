@@ -138,31 +138,12 @@ def level_one_combos():
         #     ],
         #     'repeats': 4
         # },
-        {
-            'choices': [
-                {
-                    'shapes': [
-                        open_string(),
-                        *repeated_power_chord(3)
-                    ],
-                    'rhythm': [
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                        Beat(1, 8),
-                    ],
-                },
-            ],
-            'repeats': 2,
-        },
         # {
         #     'choices': [
         #         {
         #             'shapes': [
         #                 open_string(),
-        #                 open_string(),
-        #                 open_string(),
-        #                 power_chord(),
+        #                 *repeated_power_chord(3)
         #             ],
         #             'rhythm': [
         #                 Beat(1, 8),
@@ -174,6 +155,25 @@ def level_one_combos():
         #     ],
         #     'repeats': 2,
         # },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        open_string(),
+                        open_string(),
+                        open_string(),
+                        power_chord(),
+                    ],
+                    'rhythm': [
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                        Beat(1, 8),
+                    ],
+                },
+            ],
+            'repeats': 2,
+        },
         # {
         #     'choices': [
         #         {
