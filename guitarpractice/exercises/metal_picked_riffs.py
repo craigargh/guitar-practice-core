@@ -59,46 +59,46 @@ def level_one():
 
 def level_two():
     combos = [
-        # {
-        #     'preset_patterns': picked_metal_patterns(length=8),
-        #     'length': 16,
-        #     'chug_pattern': ['c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'],
-        # },
-        # {
-        #     'preset_patterns': picked_metal_patterns(length=8),
-        #     'length': 16,
-        #     'chug_pattern': ['c', 'c', 'c', 'c', 'n', 'n', 'n', 'n'],
-        # },
-        # {
-        #     'preset_patterns': picked_metal_patterns(length=8),
-        #     'length': 16,
-        #     'chug_pattern': ['n', 'n', 'n', 'n', 'c', 'c', 'c', 'c'],
-        # },
-        # {
-        #     'preset_patterns': picked_metal_patterns(length=8),
-        #     'length': 16,
-        #     'chug_pattern': ['n', 'n', 'n', 'n', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'n', 'n', 'n', 'n'],
-        # },
-        # {
-        #     'preset_patterns': picked_metal_patterns(length=8),
-        #     'length': 16,
-        #     'chug_pattern': ['n', 'c'],
-        # },
-        # {
-        #     'preset_patterns': picked_metal_patterns(length=8),
-        #     'length': 16,
-        #     'chug_pattern': ['c', 'n'],
-        # },
-        # {
-        #     'preset_patterns': picked_metal_patterns(length=8),
-        #     'length': 16,
-        #     'chug_pattern': ['c', 'c', 'n', 'n'],
-        # },
-        # {
-        #     'preset_patterns': picked_metal_patterns(length=8),
-        #     'length': 16,
-        #     'chug_pattern': ['n', 'n', 'c', 'c'],
-        # },
+        {
+            'preset_patterns': picked_metal_patterns(length=8),
+            'length': 16,
+            'chug_pattern': ['c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'n', 'n', 'n', 'n', 'n', 'n', 'n', 'n'],
+        },
+        {
+            'preset_patterns': picked_metal_patterns(length=8),
+            'length': 16,
+            'chug_pattern': ['c', 'c', 'c', 'c', 'n', 'n', 'n', 'n'],
+        },
+        {
+            'preset_patterns': picked_metal_patterns(length=8),
+            'length': 16,
+            'chug_pattern': ['n', 'n', 'n', 'n', 'c', 'c', 'c', 'c'],
+        },
+        {
+            'preset_patterns': picked_metal_patterns(length=8),
+            'length': 16,
+            'chug_pattern': ['n', 'n', 'n', 'n', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'n', 'n', 'n', 'n'],
+        },
+        {
+            'preset_patterns': picked_metal_patterns(length=8),
+            'length': 16,
+            'chug_pattern': ['n', 'c'],
+        },
+        {
+            'preset_patterns': picked_metal_patterns(length=8),
+            'length': 16,
+            'chug_pattern': ['c', 'n'],
+        },
+        {
+            'preset_patterns': picked_metal_patterns(length=8),
+            'length': 16,
+            'chug_pattern': ['c', 'c', 'n', 'n'],
+        },
+        {
+            'preset_patterns': picked_metal_patterns(length=8),
+            'length': 16,
+            'chug_pattern': ['n', 'n', 'c', 'c'],
+        },
         {
             'preset_patterns': picked_metal_patterns(length=7),
             'length': 14,
