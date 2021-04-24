@@ -103,54 +103,54 @@ def level_one() -> Sequence:
 
 def level_one_combos():
     return [
-        # {
-        #     'choices': [
-        #         {
-        #             'shapes': [
-        #                 power_chord()
-        #             ],
-        #             'rhythm': [
-        #                 Beat(1, 4)
-        #             ],
-        #         },
-        #     ],
-        #     'repeats': 4
-        # },
-        # {
-        #     'choices': [
-        #         {
-        #             'shapes': [
-        #                 power_chord()
-        #             ],
-        #             'rhythm': [
-        #                 Beat(4, 4)
-        #             ],
-        #         },
-        #         {
-        #             'shapes': [
-        #                 power_chord()
-        #             ],
-        #             'rhythm': [
-        #                 Beat(4, 4)
-        #             ],
-        #         },
-        #     ],
-        #     'repeats': 2,
-        # },
-        # {
-        #     'choices': [
-        #         {
-        #             'shapes': [
-        #                 *repeated_power_chord(2),
-        #                 *repeated_power_chord(2)
-        #             ],
-        #             'rhythm': [
-        #                 Beat(1, 4),
-        #             ],
-        #         },
-        #     ],
-        #     'repeats': 1,
-        # },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        power_chord()
+                    ],
+                    'rhythm': [
+                        Beat(1, 4)
+                    ],
+                },
+            ],
+            'repeats': 4
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        power_chord()
+                    ],
+                    'rhythm': [
+                        Beat(4, 4)
+                    ],
+                },
+                {
+                    'shapes': [
+                        power_chord()
+                    ],
+                    'rhythm': [
+                        Beat(4, 4)
+                    ],
+                },
+            ],
+            'repeats': 2,
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        *repeated_power_chord(2),
+                        *repeated_power_chord(2)
+                    ],
+                    'rhythm': [
+                        Beat(1, 4),
+                    ],
+                },
+            ],
+            'repeats': 1,
+        },
         {
             'choices': [
                 {
@@ -165,7 +165,7 @@ def level_one_combos():
                     ],
                 },
             ],
-            'repeats': 1,
+            'repeats': 2,
         },
     ]
 
