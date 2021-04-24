@@ -129,6 +129,35 @@ def level_one_combos():
                         Beat(4, 4)
                     ],
                 },
+                {
+                    'shapes': [
+                        power_chord()
+                    ],
+                    'rhythm': [
+                        Beat(4, 4)
+                    ],
+                },
+            ],
+            'repeats': 2,
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        repeated_power_chord(2)
+                    ],
+                    'rhythm': [
+                        Beat(1, 4),
+                    ],
+                },
+                {
+                    'shapes': [
+                        repeated_power_chord(2)
+                    ],
+                    'rhythm': [
+                        Beat(1, 4)
+                    ],
+                },
             ],
             'repeats': 2,
         },
