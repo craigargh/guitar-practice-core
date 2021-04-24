@@ -174,24 +174,24 @@ def level_one_combos():
         #     ],
         #     'repeats': 2,
         # },
-        {
-            'choices': [
-                {
-                    'shapes': [
-                        power_chord(string=5)
-                    ],
-                    'rhythm': [
-                        Beat(1, 4)
-                    ],
-                },
-                eighth_chugs(),
-            ],
-            'repeats': 4
-        },
         # {
         #     'choices': [
         #         {
-        #             'shapes': power_chord_sequence(2, string=5),
+        #             'shapes': [
+        #                 power_chord(string=5)
+        #             ],
+        #             'rhythm': [
+        #                 Beat(1, 4)
+        #             ],
+        #         },
+        #         eighth_chugs(),
+        #     ],
+        #     'repeats': 4
+        # },
+        # {
+        #     'choices': [
+        #         {
+        #             'shapes': repeated_power_chord(2, string=5),
         #             'rhythm': [
         #                 Beat(1, 8),
         #                 Beat(1, 8)
@@ -206,7 +206,7 @@ def level_one_combos():
         #         {
         #             'shapes': [
         #                 open_string(),
-        #                 *power_chord_sequence(3, string=5)
+        #                 *repeated_power_chord(3, string=5)
         #             ],
         #             'rhythm': [
         #                 Beat(1, 8),
@@ -237,7 +237,7 @@ def level_one_combos():
         #     ],
         #     'repeats': 2,
         # },
-        # *level_one_power_chord_and_root_note_combos()
+        *level_one_power_chord_and_root_note_combos()
     ]
 
 
