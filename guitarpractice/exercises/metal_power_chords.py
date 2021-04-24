@@ -116,9 +116,21 @@ def level_one_combos():
                         Beat(1, 4)
                     ],
                 },
-                eighth_chugs(),
             ],
             'repeats': 4
+        },
+        {
+            'choices': [
+                {
+                    'shapes': [
+                        power_chord()
+                    ],
+                    'rhythm': [
+                        Beat(4, 4)
+                    ],
+                },
+            ],
+            'repeats': 2,
         },
     ]
 
