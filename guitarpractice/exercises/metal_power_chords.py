@@ -164,6 +164,19 @@ def level_one_combos():
             ],
             'repeats': 2,
         },
+        {
+            'choices': [
+                {
+                    'shapes': single_and_repeated_power_chords(2),
+                    'rhythm': [
+                        Beat(1, 1),
+                        Beat(1, 2),
+                        Beat(1, 2),
+                    ],
+                },
+            ],
+            'repeats': 1,
+        },
     ]
 
 
