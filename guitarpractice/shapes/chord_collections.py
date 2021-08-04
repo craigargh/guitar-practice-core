@@ -1,7 +1,7 @@
 from typing import List
 
 from guitarpractice.models import GuitarShape
-from guitarpractice.shapes import chord_shapes
+from guitarpractice.shapes import chord_shapes, open_chords_shapes
 from guitarpractice.shapes import movable_chord_shapes
 
 """
@@ -56,4 +56,14 @@ def movable_chords() -> List[GuitarShape]:
         movable_chord_shapes.movable_major_root_4_var_2(),
         movable_chord_shapes.movable_major_root_3_var_1(),
         movable_chord_shapes.movable_major_root_2_var_1(),
+    ]
+
+
+def open_chords() -> List[GuitarShape]:
+    return [
+        open_chords_shapes.open_major_root_6_var_1(),
+        open_chords_shapes.open_major_root_6_var_2(),
+        open_chords_shapes.open_major_root_5_var_1(),
+        open_chords_shapes.open_major_root_5_var_2(),
+        open_chords_shapes.open_major_root_4_var_1(),
     ]
