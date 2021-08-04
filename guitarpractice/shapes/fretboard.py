@@ -39,7 +39,10 @@ def make_fretboard(tuning: Tuning) -> dict:
     return fretboard
 
 
-def get_note(position: FretPosition, tuning: Tuning):
+def get_note(position: FretPosition, tuning: Tuning = None):
+    if tuning is None:
+        tuning = Tuning('E', 'standard')
+
     fretboard = make_fretboard(tuning)
     note_string = position.string
     fret = position.fret

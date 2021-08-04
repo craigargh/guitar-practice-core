@@ -1,6 +1,6 @@
 from guitarpractice.models import GuitarShape
 from guitarpractice.shapes.chord_collections import movable_chords, open_chords
-from guitarpractice.shapes.fretboard import note_positions
+from guitarpractice.shapes.fretboard import note_positions, get_note
 from guitarpractice.shapeshifters import shift_vertically
 
 
@@ -9,7 +9,7 @@ def list_open_chords(root: str, tonality: str):
     matching_shapes = [
         chord
         for chord in all_chords
-        if get_root_position(chord) == root
+        if get_note(get_root_position(chord)) == root
         if chord.tonality == tonality
     ]
 
