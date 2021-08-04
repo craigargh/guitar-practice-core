@@ -66,4 +66,8 @@ def open_chords() -> List[GuitarShape]:
         open_chords_shapes.open_major_root_5_var_1(),
         open_chords_shapes.open_major_root_5_var_2(),
         open_chords_shapes.open_major_root_4_var_1(),
+        open_chords_shapes.open_minor_root_6_var_1(),
+        open_chords_shapes.open_minor_root_6_var_2(),
+        open_chords_shapes.open_minor_root_5_var_1(),
+        open_chords_shapes.open_minor_root_4_var_1(),
     ]
