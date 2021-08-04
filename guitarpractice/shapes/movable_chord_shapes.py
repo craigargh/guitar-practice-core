@@ -28,8 +28,8 @@ def movable_major_root_5_var_1() -> GuitarShape:
 
 def movable_major_root_4_var_1() -> GuitarShape:
     positions = [
-        FretPosition(string=4, fret=8, finger=3, highlighted=True),
-        FretPosition(string=3, fret=7, finger=2),
+        FretPosition(string=4, fret=7, finger=3, highlighted=True),
+        FretPosition(string=3, fret=6, finger=2),
         FretPosition(string=2, fret=5, finger=1),
         FretPosition(string=1, fret=5, finger=1, highlighted=True),
     ]
