@@ -47,7 +47,10 @@ def get_note(position: FretPosition, tuning: Tuning):
     return fretboard[note_string][fret]
 
 
-def note_positions(note: str, tuning: Tuning) -> List[FretPosition]:
+def note_positions(note: str, tuning: Tuning = None) -> List[FretPosition]:
+    if tuning is None:
+        tuning = Tuning('E', 'standard')
+
     fretboard = make_fretboard(tuning)
     return [
         FretPosition(fret=fret, string=guitar_string)

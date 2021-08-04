@@ -26,6 +26,7 @@ class GuitarShape:
     frets_movable: bool = False
     strings_movable: bool = False
     short_name: str = None
+    tonality: str = None
 
     def __hash__(self):
         return hash(str(self))

@@ -248,3 +248,6 @@ def b_diminished_flat_9() -> GuitarShape:
     ]
 
     return GuitarShape('B Diminished flat 9', 'chord', positions, short_name='Bdimb9')
+
+
+
